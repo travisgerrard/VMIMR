@@ -1,6 +1,8 @@
 const jwt = require('jwt-simple');
-const User = require('../models/user');
+const mongoose = require('mongoose');
 const keys = require('../config/keys');
+
+const User = mongoose.model('users');
 
 function tokenForUser(user) {
   const timestamp = new Date().getTime();

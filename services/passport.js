@@ -1,9 +1,11 @@
 const passport = require('passport');
-const User = require('../models/user');
 const keys = require('../config/keys');
+const mongoose = require('mongoose');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
+
+const User = mongoose.model('users');
 
 // Create local strategy
 const localOptions = { usernameField: 'email' };

@@ -1,21 +1,24 @@
 // Main starting point of the application
 const express = require('express');
+const mongoose = require('mongoose');
 const http = require('http');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const keys = require('./config/keys');
-const app = express();
-const router = require('./router');
-const mongoose = require('mongoose');
+require('./models/user');
+require('./models/condition');
+require('./services/passport');
 
-// DB Setup
 mongoose.connect(keys.mongoURI);
-mongoose.Promise = global.Promise;
+
+const app = express();
 
 // App Setup
 app.use(morgan('combined')); // Logs incoming requires
-app.use(bodyParser.json({ type: '*/*' }));
-router(app);
+app.use(bodyParser.json());
+
+require('./routes/authRoutes')(app);
+require('./routes/conditionRoutes')(app);
 
 // To make it so react is fallback for paths in app
 if (process.env.NODE_ENV === 'production') {
