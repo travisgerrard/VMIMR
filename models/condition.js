@@ -4,10 +4,22 @@ const { Schema } = mongoose;
 const conditionSchema = new Schema({
   catagory: String,
   name: String,
-  selected: [ {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    isSelected: Boolean
-  }],
+  selected: [
+    {
+      user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      isSelected: Boolean
+    }
+  ],
+  post: [
+    {
+      _creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      preceptor: String,
+      date: String,
+      whatWasLearned: String,
+      postHidden: Boolean
+    }
+  ],
+  hidden: Boolean,
   _creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 

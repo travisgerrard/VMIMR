@@ -7,11 +7,6 @@ class Header extends Component {
     if (this.props.authenticated) {
       // show sign out
       return [
-        <li>
-          <Link to="/search">
-            <i class="material-icons">search</i>
-          </Link>
-        </li>,
         <li key="4">
           <Link to="/rotations">Rotations</Link>
         </li>,
@@ -39,7 +34,7 @@ class Header extends Component {
 
   render() {
     return (
-      <nav>
+      <nav className="color green">
         <Link to="/">VM:IMR</Link>
         <ul className="right">{this.renderLinks()}</ul>
       </nav>
