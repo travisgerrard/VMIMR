@@ -7,6 +7,7 @@ import Signup from './auth/Signup';
 import Signout from './auth/Signout';
 import Feature from './Feature';
 import RequireAuth from './auth/require_authentication';
+import Conditions from './conditions/ConditionTopLevelView';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signout" component={Signout} />
           <Route exact path="/feature" component={RequireAuth(Feature)} />
+          <Route exact path="/conditions" component={RequireAuth(Conditions)} />
         </div>
       </BrowserRouter>
     );

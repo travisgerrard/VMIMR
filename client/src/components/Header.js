@@ -40,7 +40,7 @@ class Header extends Component {
   render() {
     return (
       <nav>
-        <Link to="/">Redux Auth</Link>
+        <Link to="/">VM:IMR</Link>
         <ul className="right">{this.renderLinks()}</ul>
       </nav>
     );
