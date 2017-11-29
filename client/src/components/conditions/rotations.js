@@ -20,7 +20,7 @@ export default [
     amReportReq: false,
     noonReportReq: false,
     exact: true,
-    path: '/nights',
+    path: '/conditions/nights',
     sidebar: () => <div>nights</div>,
     main: () => <h2>Nights</h2>
   },
@@ -29,237 +29,237 @@ export default [
     amReportReq: false,
     noonReportReq: false,
     exact: true,
-    path: '/ccu'
+    path: '/conditions/ccu'
   },
   {
     name: 'Leadership in QI Pathway',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/qi'
+    path: '/conditions/qi'
   },
   {
     name: 'Allergy & Immunology ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/allergy'
+    path: '/conditions/allergy'
   },
   {
     name: 'Anesthesia',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/anesthesia'
+    path: '/conditions/anesthesia'
   },
   {
     name: 'Away rotation ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/away'
+    path: '/conditions/away'
   },
   {
     name: 'Cardiology',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/cardiology'
+    path: '/conditions/cardiology'
   },
   {
     name: 'Dermatology ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/dermatology'
+    path: '/conditions/dermatology'
   },
   {
     name: 'Endocrinology ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/endocrinology'
+    path: '/conditions/endocrinology'
   },
   {
     name: 'ENT',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/ent'
+    path: '/conditions/ent'
   },
   {
     name: 'Gastroenterology ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/gi'
+    path: '/conditions/gi'
   },
   {
     name: 'GIM ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/gim'
+    path: '/conditions/gim'
   },
   {
     name: 'Primary Care PGY2 and/or PGY3',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/primarycare'
+    path: '/conditions/primarycare'
   },
   {
     name: 'Geriatrics',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/geriatrics'
+    path: '/conditions/geriatrics'
   },
   {
     name: 'Gynecology / Women’s Health',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/gyn'
+    path: '/conditions/gyn'
   },
   {
     name: 'Hematology/Oncology',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/hemeonc'
+    path: '/conditions/hemeonc'
   },
   {
     name: 'Infectious Disease ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/infectiousd'
+    path: '/conditions/infectiousdisease'
   },
   {
     name: 'Nephrology  ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/nephro'
+    path: '/conditions/nephro'
   },
   {
     name: 'Neurology ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/neuro'
+    path: '/conditions/neuro'
   },
   {
     name: 'Ophthalmology',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/ophtho'
+    path: '/conditions/ophtho'
   },
   {
     name: 'O/P General Surgery',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/surgery'
+    path: '/conditions/surgery'
   },
   {
     name: 'O/P Urology',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/urology'
+    path: '/conditions/urology'
   },
   {
     name: 'Musculoskeletal',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/msk'
+    path: '/conditions/msk'
   },
   {
     name: 'Palliative Care',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/palliative'
+    path: '/conditions/palliative'
   },
   {
     name: 'Pathology',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/path'
+    path: '/conditions/path'
   },
   {
     name: 'Ultrasound Procedures',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/procedures'
+    path: '/conditions/procedures'
   },
   {
     name: 'Psychiatry - IP',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/psych'
+    path: '/conditions/psych'
   },
   {
     name: 'Pulmonary Medicine ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/puml'
+    path: '/conditions/pulm'
   },
   {
     name: 'Rheumatology ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/rheum'
+    path: '/conditions/rheum'
   },
   {
     name: 'Scholarly Project',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/scholarly'
+    path: '/conditions/scholarly'
   },
   {
     name: 'Special Request',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/specialreq'
+    path: '/conditions/specialreq'
   },
   {
     name: 'Swing- Hospital',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/swing'
+    path: '/conditions/swing'
   },
   {
     name: 'Float – Hospital',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/float'
+    path: '/conditions/float'
   },
   {
     name: 'Systems-Based Practice ',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/'
+    path: '/conditions/sbp'
   },
   {
     name: 'Hyperbaric Medicine',
     amReportReq: true,
     noonReportReq: true,
     exact: true,
-    path: '/hyperbarics'
+    path: '/conditions/hyperbarics'
   }
 ];

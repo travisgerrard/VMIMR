@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import * as actions from '../../actions';
 import rotations from './rotations';
+import RotationConditionOverview from './rotation/RotationConditionOverview';
 
 class ConditionTopLevelView extends Component {
   componentWillMount() {
@@ -57,7 +58,9 @@ class ConditionTopLevelView extends Component {
                   key={index}
                   path={route.path}
                   exact={route.exact}
-                  component={route.main}
+                  render={props => (
+                    <RotationConditionOverview {...props} title={route.name} />
+                  )}
                 />
               ))}
             </div>
