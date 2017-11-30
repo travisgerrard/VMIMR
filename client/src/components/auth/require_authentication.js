@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 export default function(ComposedComponent) {
   class Authentication extends Component {
     componentWillMount() {
-      console.log(this.props.authenticated);
       if (!this.props.authenticated) {
         this.props.history.push('/');
       }
