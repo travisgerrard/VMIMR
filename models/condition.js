@@ -20,6 +20,7 @@ const conditionSchema = new Schema({
     }
   ],
   hidden: Boolean,
+  dateCreated: Date,
   _creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
