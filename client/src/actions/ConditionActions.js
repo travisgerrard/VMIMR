@@ -11,14 +11,16 @@ export const fetchConditionMessage = () => async dispatch => {
   });
 };
 
-export const addCondition = (title, rotation) => async dispatch => {
+export const addCondition = (rotation, condition) => async dispatch => {
+  console.log(rotation, condition);
+
   const res = await axios.post(
     '/api/condition',
+    { rotation, condition },
     {
       headers: { authorization: localStorage.getItem('token') }
-    },
-    { title, rotation }
+    }
   );
-
-  dispatch({ type: ADD_CONDITION, payload: res.data });
+  console.log(res.data);
+  //  dispatch({ type: ADD_CONDITION, payload: res.data });
 };

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions';
 
 class RotationConditionInput extends Component {
   state = {
@@ -6,7 +8,7 @@ class RotationConditionInput extends Component {
   };
 
   render() {
-    const { title } = this.props;
+    const { title, dbname } = this.props;
     return (
       <div>
         <input
@@ -26,7 +28,7 @@ class RotationConditionInput extends Component {
           className="green btn-flat white-text"
           style={{ margin: '0 25px' }}
           onClick={value =>
-            console.log(`${title} - ${this.state.conditionToAdd}`)
+            this.props.addCondition(dbname, this.state.conditionToAdd)
           }
         >
           Add
@@ -36,4 +38,4 @@ class RotationConditionInput extends Component {
   }
 }
 
-export default RotationConditionInput;
+export default connect(null, actions)(RotationConditionInput);

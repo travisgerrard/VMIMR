@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const conditionSchema = new Schema({
-  catagory: String,
+  catagoryTag: [{ type: String }],
   name: String,
   selected: [
     {

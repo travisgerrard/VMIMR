@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 
 export default [
   {
@@ -6,6 +6,7 @@ export default [
     amReportReq: false,
     noonReportReq: true,
     dbname: 'all',
+    exact: true,
     path: '/conditions/all'
   },
   {
@@ -13,6 +14,7 @@ export default [
     amReportReq: false,
     noonReportReq: true,
     dbname: 'wards',
+    exact: true,
     path: '/conditions/wards'
   },
   {

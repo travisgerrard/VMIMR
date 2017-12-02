@@ -59,7 +59,11 @@ class ConditionTopLevelView extends Component {
                   path={route.path}
                   exact={route.exact}
                   render={props => (
-                    <RotationConditionOverview {...props} title={route.name} />
+                    <RotationConditionOverview
+                      {...props}
+                      title={route.name}
+                      dbname={route.dbname}
+                    />
                   )}
                 />
               ))}

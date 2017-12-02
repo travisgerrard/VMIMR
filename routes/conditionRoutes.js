@@ -9,4 +9,10 @@ module.exports = app => {
     console.log(req.user);
     res.send({ message: 'This is the Conditions message' });
   });
+
+  app.post('/api/condition', requireAuth, function(req, res) {
+    console.log(req.body);
+    console.log(req.user);
+    res.send({ message: 'Got request' });
+  });
 };
