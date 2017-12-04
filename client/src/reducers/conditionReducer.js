@@ -1,9 +1,9 @@
-import { FETCH_CONDITION_MESSAGE, ADD_CONDITION } from '../actions/types';
+import { ADD_CONDITION, FETCH_ALL_CONDITIONS } from '../actions/types';
 
 export default function(state = {}, action) {
   switch (action.type) {
-    case FETCH_CONDITION_MESSAGE:
-      return { ...state, message: action.payload };
+    case FETCH_ALL_CONDITIONS:
+      return { ...state, [action.payload.prop]: action.payload.value };
     case ADD_CONDITION:
       return { ...state, condition: action.payload };
     default:

@@ -1,13 +1,18 @@
 import axios from 'axios';
-import { FETCH_CONDITION_MESSAGE, ADD_CONDITION } from './types';
+import {
+  FETCH_CONDITION_MESSAGE,
+  ADD_CONDITION,
+  FETCH_ALL_CONDITIONS
+} from './types';
 
-export const fetchConditionMessage = () => async dispatch => {
-  const res = await axios.get('/api/conditions', {
+export const fetchAllConditions = () => async dispatch => {
+  const res = await (axios.get('/api/condition'),
+  {
     headers: { authorization: localStorage.getItem('token') }
   });
   dispatch({
-    type: FETCH_CONDITION_MESSAGE,
-    payload: res.data.message
+    type: FETCH_ALL_CONDITIONS,
+    payload: res.data
   });
 };
 
