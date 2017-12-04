@@ -10,9 +10,25 @@ module.exports = app => {
     res.send({ message: 'This is the Conditions message' });
   });
 
-  app.post('/api/condition', requireAuth, function(req, res) {
+  app.post('/api/condition', requireAuth, async (req, res) => {
     console.log(req.body);
     console.log(req.user);
-    res.send({ message: 'Got request' });
+
+    const { condition, rotation } = req.body;
+
+    const conditionNew = new Condition({
+      catagoryTag: rotation,
+      condition,
+      _creator: req.user.id,
+      dateCreated: Date.now()
+    });
+
+    try {
+      await conditionNew.save();
+
+      res.send(conditionNew);
+    } catch (err) {
+      res.status(422).send(err);
+    }
   });
 };

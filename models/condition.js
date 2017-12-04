@@ -3,11 +3,11 @@ const { Schema } = mongoose;
 
 const conditionSchema = new Schema({
   catagoryTag: [{ type: String }],
-  name: String,
+  condition: String,
   selected: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-      isSelected: Boolean
+      isSelected: { type: Boolean, default: false }
     }
   ],
   post: [
@@ -16,10 +16,10 @@ const conditionSchema = new Schema({
       preceptor: String,
       date: String,
       whatWasLearned: String,
-      postHidden: Boolean
+      postHidden: { type: Boolean, default: false }
     }
   ],
-  hidden: Boolean,
+  hidden: { type: Boolean, default: false },
   dateCreated: Date,
   _creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
