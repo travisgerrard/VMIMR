@@ -6,5 +6,5 @@ import conditionReducer from './conditionReducer';
 export default combineReducers({
   form: reduxForm,
   auth: authReducer,
-  condition: conditionReducer
+  conditions: conditionReducer
 });

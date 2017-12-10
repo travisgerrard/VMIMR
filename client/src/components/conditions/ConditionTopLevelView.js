@@ -2,13 +2,13 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import * as actions from '../../actions';
 import rotations from './rotations';
 import RotationConditionOverview from './rotation/RotationConditionOverview';
+import * as actions from '../../actions';
 
 class ConditionTopLevelView extends Component {
   componentWillMount() {
-    this.props.fetchConditionMessage();
+    this.props.fetchAllConditions();
   }
 
   renderSideBar() {
@@ -75,8 +75,4 @@ class ConditionTopLevelView extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { conditionMessage: state.condition.message };
-}
-
-export default connect(mapStateToProps, actions)(ConditionTopLevelView);
+export default connect(null, actions)(ConditionTopLevelView);

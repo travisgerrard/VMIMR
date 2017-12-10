@@ -7,6 +7,13 @@ class RotationConditionInput extends Component {
     conditionToAdd: ''
   };
 
+  addClicked = () => {
+    this.props.addCondition(this.props.dbname, this.state.conditionToAdd);
+    this.setState({
+      conditionToAdd: ''
+    });
+  };
+
   render() {
     const { title, dbname } = this.props;
     return (
@@ -27,9 +34,7 @@ class RotationConditionInput extends Component {
         <button
           className="green btn-flat white-text"
           style={{ margin: '0 25px' }}
-          onClick={value =>
-            this.props.addCondition(dbname, this.state.conditionToAdd)
-          }
+          onClick={this.addClicked}
         >
           Add
         </button>

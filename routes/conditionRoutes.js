@@ -5,15 +5,16 @@ const requireAuth = passport.authenticate('jwt', { session: false });
 const Condition = mongoose.model('conditions');
 
 module.exports = app => {
-  app.get('/api/conditions', requireAuth, function(req, res) {
-    console.log(req.user);
-    res.send({ message: 'This is the Conditions message' });
+  app.get('/api/condition/', requireAuth, async (req, res) => {
+    try {
+      const conditions = await Condition.find({ _creator: req.user.id });
+      res.send(conditions);
+    } catch (err) {
+      res.status(422).send(err);
+    }
   });
 
   app.post('/api/condition', requireAuth, async (req, res) => {
-    console.log(req.body);
-    console.log(req.user);
-
     const { condition, rotation } = req.body;
 
     const conditionNew = new Condition({
