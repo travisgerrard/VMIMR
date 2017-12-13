@@ -4,3 +4,6 @@ export const AUTH_ERROR = 'auth_error';
 export const FETCH_MESSAGE = 'fetch_message';
 export const FETCH_ALL_CONDITIONS = 'fetch_all_condition';
 export const ADD_CONDITION = 'add_condition';
+export const ADD_CONDITION_SUCCESS = 'add_condition_success';
+export const ADD_CONDITION_FAIL = 'add_condition_fail';
+export const CLEAR_ERROR = 'clear_error';

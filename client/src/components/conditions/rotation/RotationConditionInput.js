@@ -7,6 +7,10 @@ class RotationConditionInput extends Component {
     conditionToAdd: ''
   };
 
+  componentWillMount() {
+    this.props.clearError();
+  }
+
   addClicked = () => {
     this.props.addCondition(this.props.dbname, this.state.conditionToAdd);
     this.setState({
@@ -14,8 +18,44 @@ class RotationConditionInput extends Component {
     });
   };
 
+  renderAddButton = () => {
+    if (this.props.conditions.loadingAddCondition) {
+      return (
+        <button
+          className="green btn-flat white-text"
+          style={{ margin: '0 25px' }}
+        >
+          <div className="preloader-wrapper small active">
+            <div className="spinner-layer spinner-yellow-only">
+              <div className="circle-clipper left">
+                <div className="circle" />
+              </div>
+              <div className="gap-patch">
+                <div className="circle" />
+              </div>
+              <div className="circle-clipper right">
+                <div className="circle" />
+              </div>
+            </div>
+          </div>
+        </button>
+      );
+    }
+
+    return (
+      <button
+        className="green btn-flat white-text"
+        style={{ margin: '0 25px' }}
+        onClick={this.addClicked}
+      >
+        Add
+        <i className="material-icons right">add_box</i>
+      </button>
+    );
+  };
+
   render() {
-    const { title, dbname } = this.props;
+    const { title } = this.props;
     return (
       <div>
         <input
@@ -31,16 +71,17 @@ class RotationConditionInput extends Component {
           }
           placeholder={`Add condition to ${title}`}
         />
-        <button
-          className="green btn-flat white-text"
-          style={{ margin: '0 25px' }}
-          onClick={this.addClicked}
-        >
-          Add
-        </button>
+        {this.renderAddButton()}
+        <div className="red-text" style={{ marginBottom: '20px' }}>
+          {this.props.conditions.error}
+        </div>
       </div>
     );
   }
 }
 
-export default connect(null, actions)(RotationConditionInput);
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps, actions)(RotationConditionInput);
