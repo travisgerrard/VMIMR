@@ -19,30 +19,32 @@ module.exports = app => {
   });
 
   app.post('/api/condition', requireAuth, async (req, res) => {
-    const { condition, rotation } = req.body;
+    const { condition, tags, seenWith, date, whatWasLearned } = req.body;
 
-    const conditionExists = await Condition.findOne({
-      _creator: req.user.id,
-      condition
-    });
+    console.log(req.body);
 
-    if (conditionExists == null) {
-      const conditionNew = new Condition({
-        catagoryTag: rotation,
-        condition,
-        _creator: req.user.id,
-        dateCreated: Date.now()
-      });
-
-      try {
-        await conditionNew.save();
-
-        res.send(conditionNew);
-      } catch (err) {
-        res.status(422).send(err);
-      }
-    } else {
-      res.status(422).send({ error: 'This condition already exists' });
-    }
+    res.send({ message: 'Thanks!' });
+    // const conditionExists = await Condition.findOne({
+    //   condition
+    // });
+    //
+    // if (conditionExists == null) {
+    //   const conditionNew = new Condition({
+    //     catagoryTag: rotation,
+    //     condition,
+    //     _creator: req.user.id,
+    //     dateCreated: Date.now()
+    //   });
+    //
+    //   try {
+    //     await conditionNew.save();
+    //
+    //     res.send(conditionNew);
+    //   } catch (err) {
+    //     res.status(422).send(err);
+    //   }
+    // } else {
+    //   res.status(422).send({ error: 'This condition already exists' });
+    // }
   });
 };

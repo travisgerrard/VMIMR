@@ -20,7 +20,7 @@ class App extends Component {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signout" component={Signout} />
           <Route exact path="/feature" component={RequireAuth(Feature)} />
-          <Route exact path="/conditions" component={RequireAuth(Conditions)} />
+          <Route path="/conditions" component={RequireAuth(Conditions)} />
         </div>
       </BrowserRouter>
     );

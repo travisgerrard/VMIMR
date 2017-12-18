@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
+import ConditionCardEdit from './ConditionCardEdit';
 
 class RotationConditionInput extends Component {
   state = {
@@ -54,6 +55,15 @@ class RotationConditionInput extends Component {
     );
   };
 
+  handleKeyPress = e => {
+    console.log(e.key);
+    if (e.keyCode === 'Enter') {
+      {
+        this.addClicked();
+      }
+    }
+  };
+
   render() {
     const { title } = this.props;
     return (
@@ -64,6 +74,7 @@ class RotationConditionInput extends Component {
           id={title}
           type="text"
           value={this.state.conditionToAdd}
+          onKeyPress={this.handleKeyPress}
           onChange={input =>
             this.setState({
               conditionToAdd: input.target.value
@@ -75,6 +86,7 @@ class RotationConditionInput extends Component {
         <div className="red-text" style={{ marginBottom: '20px' }}>
           {this.props.conditions.error}
         </div>
+        <ConditionCardEdit />
       </div>
     );
   }

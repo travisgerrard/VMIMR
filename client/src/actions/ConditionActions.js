@@ -17,11 +17,11 @@ export const fetchAllConditions = () => async dispatch => {
   });
 };
 
-export const addCondition = (rotation, condition) => async dispatch => {
+export const addCondition = props => async dispatch => {
   dispatch({ type: ADD_CONDITION });
 
   try {
-    const res = await axios.post('/api/condition', { rotation, condition });
+    const res = await axios.post('/api/condition', props);
     dispatch({ type: ADD_CONDITION_SUCCESS, payload: res.data });
   } catch (err) {
     console.log(err.response.data.error);
