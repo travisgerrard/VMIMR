@@ -58,9 +58,7 @@ class RotationConditionInput extends Component {
   handleKeyPress = e => {
     console.log(e.key);
     if (e.keyCode === 'Enter') {
-      {
-        this.addClicked();
-      }
+      this.addClicked();
     }
   };
 

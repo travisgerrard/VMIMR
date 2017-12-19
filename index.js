@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const keys = require('./config/keys');
 require('./models/user');
 require('./models/condition');
+require('./models/conditionLearning');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);

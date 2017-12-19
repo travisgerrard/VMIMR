@@ -33,9 +33,12 @@ class ConditionCardView extends Component {
     this.props.addCondition({
       condition: this.state.conditionToAdd,
       tags: this.state.tags,
-      seenWith: this.state.seenWith,
-      date: this.state.date,
-      whatWasLearned: this.state.whatWasLearned
+      learning: {
+        seenWith: this.state.seenWith,
+        tag: this.state.tags,
+        date: this.state.date,
+        whatWasLearned: this.state.whatWasLearned
+      }
     });
   };
 

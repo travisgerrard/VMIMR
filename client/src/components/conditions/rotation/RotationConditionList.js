@@ -6,11 +6,11 @@ import ConditionCardView from './ConditionCardView';
 class RotationConditionList extends Component {
   listOfConditions() {
     const conditions = this.props.conditions;
-    return _.map(conditions, ({ catagoryTag, condition }) => {
-      if (_.indexOf(catagoryTag, this.props.dbname) >= 0) {
+    return _.map(conditions, condition => {
+      if (_.indexOf(condition.tags, this.props.dbname) >= 0) {
         return (
-          <div key={condition} style={{ cursor: 'pointer' }}>
-            <ConditionCardView />
+          <div key={condition.condition}>
+            <ConditionCardView condition={condition} />
           </div>
         );
       }
