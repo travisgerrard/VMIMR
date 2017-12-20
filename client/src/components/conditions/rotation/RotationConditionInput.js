@@ -5,7 +5,8 @@ import ConditionCardEdit from './ConditionCardEdit';
 
 class RotationConditionInput extends Component {
   state = {
-    conditionToAdd: ''
+    conditionToAdd: '',
+    showAddCard: false
   };
 
   componentWillMount() {
@@ -13,10 +14,21 @@ class RotationConditionInput extends Component {
   }
 
   addClicked = () => {
-    this.props.addCondition(this.props.dbname, this.state.conditionToAdd);
     this.setState({
-      conditionToAdd: ''
+      showAddCard: true
     });
+  };
+
+  hideAddCard = () => {
+    this.setState({
+      showAddCard: false
+    });
+  };
+
+  shouldShowAddCard = () => {
+    if (this.state.showAddCard) {
+      return <ConditionCardEdit hideCard={this.hideAddCard} />;
+    }
   };
 
   renderAddButton = () => {
@@ -84,7 +96,8 @@ class RotationConditionInput extends Component {
         <div className="red-text" style={{ marginBottom: '20px' }}>
           {this.props.conditions.error}
         </div>
-        <ConditionCardEdit />
+        {this.shouldShowAddCard()}
+        <br />
       </div>
     );
   }

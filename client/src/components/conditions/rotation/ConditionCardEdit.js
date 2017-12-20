@@ -5,7 +5,9 @@ import {
   Input,
   Dropdown,
   Form,
-  TextArea
+  TextArea,
+  Icon,
+  Image
 } from 'semantic-ui-react';
 import rotations from '../rotations';
 import moment from 'moment';
@@ -56,6 +58,14 @@ class ConditionCardView extends Component {
               })
             }
           />
+          <Image floated="right">
+            <Icon
+              name="remove"
+              color="grey"
+              style={{ cursor: 'pointer' }}
+              onClick={this.props.hideCard}
+            />
+          </Image>
           <Dropdown
             placeholder="Tags"
             fluid
