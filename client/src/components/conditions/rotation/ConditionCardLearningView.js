@@ -7,7 +7,9 @@ const ConditionCardLearningView = ({ seenWith, dateField, whatWasLearned }) => {
       <Card.Meta>
         Seen With: {seenWith} on {dateField}
       </Card.Meta>
-      <Card.Description>{whatWasLearned}</Card.Description>
+      <Card.Description>
+        <span style={{ whiteSpace: 'pre-line' }}>{whatWasLearned}</span>
+      </Card.Description>
     </Card.Content>
   );
 };

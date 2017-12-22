@@ -4,7 +4,14 @@ import {
   FETCH_ALL_CONDITIONS,
   ADD_CONDITION_SUCCESS,
   ADD_CONDITION_FAIL,
-  CLEAR_ERROR
+  SET_ROTATION_SELECTED,
+  CLEAR_ERROR,
+  CLEAR_SEARCH_TERM,
+  CHANGE_SEARCH_TERM,
+  SHOW_ADD_BUTTON,
+  HIDE_ADD_BUTTON,
+  SHOW_ADD_CARD,
+  HIDE_ADD_CARD
 } from './types';
 
 axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
@@ -29,6 +36,34 @@ export const addCondition = props => async dispatch => {
   }
 };
 
+export const setRotationSelected = rotation => dispatch => {
+  dispatch({ type: SET_ROTATION_SELECTED, payload: rotation });
+};
+
 export const clearError = () => dispatch => {
   dispatch({ type: CLEAR_ERROR });
+};
+
+export const clearSearchTerm = () => dispatch => {
+  dispatch({ type: CLEAR_SEARCH_TERM });
+};
+
+export const showAddButton = () => dispatch => {
+  dispatch({ type: SHOW_ADD_BUTTON });
+};
+
+export const hideAddButton = () => dispatch => {
+  dispatch({ type: HIDE_ADD_BUTTON });
+};
+
+export const showAddCard = () => dispatch => {
+  dispatch({ type: SHOW_ADD_CARD });
+};
+
+export const hideAddCard = () => dispatch => {
+  dispatch({ type: HIDE_ADD_CARD });
+};
+
+export const changeSearchTerm = searchTerm => dispatch => {
+  dispatch({ type: CHANGE_SEARCH_TERM, payload: searchTerm });
 };

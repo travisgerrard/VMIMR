@@ -17,7 +17,7 @@ import * as actions from '../../../actions';
 
 class ConditionCardView extends Component {
   state = {
-    conditionToAdd: '',
+    conditionToAdd: this.props.conditions.searchTerm,
     tags: '',
     seenWith: '',
     date: moment().format('MM/DD/YY'),
@@ -127,4 +127,9 @@ class ConditionCardView extends Component {
     );
   }
 }
-export default connect(null, actions)(ConditionCardView);
+
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps, actions)(ConditionCardView);

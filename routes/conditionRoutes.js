@@ -62,8 +62,18 @@ module.exports = app => {
         conditionNew._learnings.push(conditionLearningNew._id);
         await conditionNew.save();
 
-        res.send(conditionNew, conditionLearningNew);
+        const conditionToSend = await Condition.findOne({ condition }).populate(
+          {
+            path: '_learnings',
+            match: { _creator: { $eq: req.user.id } }
+          }
+        );
+
+        console.log(conditionToSend);
+
+        res.send(conditionToSend);
       } catch (err) {
+        console.log('Sending this error...');
         res.status(422).send(err);
       }
     } else {

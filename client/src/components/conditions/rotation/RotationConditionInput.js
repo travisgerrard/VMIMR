@@ -2,97 +2,73 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import ConditionCardEdit from './ConditionCardEdit';
+import { Input } from 'semantic-ui-react';
 
 class RotationConditionInput extends Component {
-  state = {
-    conditionToAdd: '',
-    showAddCard: false
-  };
-
   componentWillMount() {
     this.props.clearError();
+    this.props.clearSearchTerm();
+    this.props.setRotationSelected(this.props.dbname);
   }
 
   addClicked = () => {
-    this.setState({
-      showAddCard: true
-    });
+    this.props.showAddCard();
   };
 
   hideAddCard = () => {
-    this.setState({
-      showAddCard: false
-    });
+    this.props.hideAddCard();
   };
 
   shouldShowAddCard = () => {
-    if (this.state.showAddCard) {
+    if (this.props.conditions.showAddCard) {
       return <ConditionCardEdit hideCard={this.hideAddCard} />;
     }
   };
 
-  renderAddButton = () => {
-    if (this.props.conditions.loadingAddCondition) {
+  renderInputButton = () => {
+    if (this.props.conditions.showAddButton) {
+      // <Button primary onClick={this.addClicked}>
+      //   Add
+      // </Button>
       return (
-        <button
-          className="green btn-flat white-text"
-          style={{ margin: '0 25px' }}
-        >
-          <div className="preloader-wrapper small active">
-            <div className="spinner-layer spinner-yellow-only">
-              <div className="circle-clipper left">
-                <div className="circle" />
-              </div>
-              <div className="gap-patch">
-                <div className="circle" />
-              </div>
-              <div className="circle-clipper right">
-                <div className="circle" />
-              </div>
-            </div>
-          </div>
-        </button>
+        <Input
+          action={{
+            color: 'teal',
+            labelPosition: 'right',
+            icon: 'add square',
+            content: 'Add',
+            onClick: this.addClicked
+          }}
+          placeholder="Search for condition"
+          size="large"
+          value={this.props.conditions.searchTerm}
+          onChange={(params, data) => {
+            this.searchBoxChanged(data.value);
+          }}
+        />
+      );
+    } else {
+      return (
+        <Input
+          placeholder="Search for condition"
+          size="large"
+          value={this.props.conditions.searchTerm}
+          onChange={(params, data) => {
+            this.searchBoxChanged(data.value);
+          }}
+        />
       );
     }
-
-    return (
-      <button
-        className="green btn-flat white-text"
-        style={{ margin: '0 25px' }}
-        onClick={this.addClicked}
-      >
-        Add
-        <i className="material-icons right">add_box</i>
-      </button>
-    );
   };
 
-  handleKeyPress = e => {
-    console.log(e.key);
-    if (e.keyCode === 'Enter') {
-      this.addClicked();
-    }
+  searchBoxChanged = inputBoxValue => {
+    this.props.changeSearchTerm(inputBoxValue);
   };
 
   render() {
-    const { title } = this.props;
     return (
       <div>
-        <input
-          style={{ width: '250px' }}
-          name={title}
-          id={title}
-          type="text"
-          value={this.state.conditionToAdd}
-          onKeyPress={this.handleKeyPress}
-          onChange={input =>
-            this.setState({
-              conditionToAdd: input.target.value
-            })
-          }
-          placeholder={`Add condition to ${title}`}
-        />
-        {this.renderAddButton()}
+        {this.renderInputButton()}
         <div className="red-text" style={{ marginBottom: '20px' }}>
           {this.props.conditions.error}
         </div>
