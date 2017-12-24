@@ -1,3 +1,4 @@
+// RotationConditionList
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
@@ -8,24 +9,15 @@ import { Card } from 'semantic-ui-react';
 
 class RotationConditionList extends Component {
   listOfConditions() {
-    // If there is a search term, map over filtered conditions
-    if (this.props.conditions.searchTerm === '') {
-      //console.log(this.props.conditions);
-      return _.map(this.props.conditions, condition => {
-        if (
-          _.indexOf(condition.tags, this.props.conditions.rotationSelected) >= 0
-        ) {
-          return (
-            <ConditionCardView condition={condition} key={condition._id} />
-          );
-        }
-      });
-    } else {
-      //console.log(this.props.conditions);
-      return _.map(this.props.conditions.filteredConditions, condition => {
-        return <ConditionCardView condition={condition} key={condition._id} />;
-      });
-    }
+    return _.map(this.props.conditions.filteredConditions, condition => {
+      return (
+        <ConditionCardView
+          condition={condition}
+          key={condition._id}
+          conditionId={condition._id}
+        />
+      );
+    });
   }
 
   render() {
@@ -34,6 +26,7 @@ class RotationConditionList extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state.conditions);
   return state;
 }
 

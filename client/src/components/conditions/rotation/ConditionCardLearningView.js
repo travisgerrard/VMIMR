@@ -1,9 +1,12 @@
 import React from 'react';
-import { Card } from 'semantic-ui-react';
+import { Card, Image, Icon } from 'semantic-ui-react';
 
 const ConditionCardLearningView = ({ seenWith, dateField, whatWasLearned }) => {
   return (
     <Card.Content>
+      <Image floated="right">
+        <Icon name="edit" color="grey" style={{ cursor: 'pointer' }} />
+      </Image>
       <Card.Meta>
         Seen With: {seenWith} on {dateField}
       </Card.Meta>

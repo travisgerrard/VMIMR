@@ -23,6 +23,40 @@ module.exports = app => {
     }
   });
 
+  app.post('/api/condition/learning', requireAuth, async (req, res) => {
+    const { seenWith, date, whatWasLearned, conditionId } = req.body;
+
+    console.log(conditionId);
+
+    const conditionLearningNew = new ConditionLearning({
+      whatWasLearned: whatWasLearned,
+      dateField: date,
+      seenWith: seenWith,
+      dateCreated: Date.now(),
+      dateUpdated: Date.now(),
+      _condition: conditionId,
+      _creator: req.user.id
+    });
+
+    await conditionLearningNew.save();
+
+    const conditionToAddLearning = await Condition.findOne({
+      _id: conditionId
+    });
+
+    conditionToAddLearning._learnings.push(conditionLearningNew._id);
+    await conditionToAddLearning.save();
+
+    const conditionToSend = await Condition.findOne({
+      _id: conditionId
+    }).populate({
+      path: '_learnings',
+      match: { _creator: { $eq: req.user.id } }
+    });
+
+    res.send(conditionToSend);
+  });
+
   app.post('/api/condition', requireAuth, async (req, res) => {
     const { condition, tags, learning } = req.body;
 
@@ -68,8 +102,6 @@ module.exports = app => {
             match: { _creator: { $eq: req.user.id } }
           }
         );
-
-        console.log(conditionToSend);
 
         res.send(conditionToSend);
       } catch (err) {

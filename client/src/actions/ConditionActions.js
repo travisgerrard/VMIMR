@@ -11,7 +11,8 @@ import {
   SHOW_ADD_BUTTON,
   HIDE_ADD_BUTTON,
   SHOW_ADD_CARD,
-  HIDE_ADD_CARD
+  HIDE_ADD_CARD,
+  ADD_LEARNING_TO_CONDITION
 } from './types';
 
 axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
@@ -33,6 +34,15 @@ export const addCondition = props => async dispatch => {
   } catch (err) {
     console.log(err.response.data.error);
     dispatch({ type: ADD_CONDITION_FAIL, payload: err.response.data.error });
+  }
+};
+
+export const addLearningToCondition = props => async dispatch => {
+  try {
+    const res = await axios.post('/api/condition/learning', props);
+    dispatch({ type: ADD_LEARNING_TO_CONDITION, payload: res.data });
+  } catch (err) {
+    console.log(err.response.data.error);
   }
 };
 

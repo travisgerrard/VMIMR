@@ -10,7 +10,8 @@ import {
   SHOW_ADD_BUTTON,
   HIDE_ADD_BUTTON,
   SHOW_ADD_CARD,
-  HIDE_ADD_CARD
+  HIDE_ADD_CARD,
+  ADD_LEARNING_TO_CONDITION
 } from '../actions/types';
 import _ from 'lodash';
 
@@ -24,16 +25,44 @@ const INITIAL_STATE = {
   filteredConditions: []
 };
 
+function theListOfConditionsToShow(searchTerm, state, addedObject) {
+  if (addedObject) {
+    state = { ...state, [addedObject._id]: addedObject };
+  }
+  var searchTermLowerCare = searchTerm.toLowerCase();
+  // Create filtered array that only contains objects that are
+  // 1. In the selected rotations
+  // 2. Match the searchTerm criteria
+  var arrayOfConditionsToShow = _.filter(state, condition => {
+    if (_.indexOf(condition.tags, state.rotationSelected) >= 0) {
+      return _.includes(condition.condition.toLowerCase(), searchTermLowerCare);
+    }
+  });
+
+  return arrayOfConditionsToShow;
+}
+
 export default function(state = INITIAL_STATE, action) {
+  var listOfConditionsToShow;
   switch (action.type) {
     case FETCH_ALL_CONDITIONS:
-      return { ...state, ...action.payload };
+      return {
+        ...state,
+        ...action.payload,
+        filteredConditions: _.values(action.payload)
+      };
     case ADD_CONDITION:
       return { ...state, loadingAddCondition: true };
     case ADD_CONDITION_SUCCESS:
+      listOfConditionsToShow = theListOfConditionsToShow(
+        '',
+        state,
+        action.payload
+      );
       return {
         ...state,
         [action.payload._id]: action.payload,
+        filteredConditions: listOfConditionsToShow,
         loadingAddCondition: false,
         error: '',
         showAddCard: false,
@@ -47,7 +76,15 @@ export default function(state = INITIAL_STATE, action) {
         error: action.payload
       };
     case SET_ROTATION_SELECTED:
-      return { ...state, rotationSelected: action.payload };
+      listOfConditionsToShow = theListOfConditionsToShow(state.searchTerm, {
+        ...state,
+        rotationSelected: action.payload
+      });
+      return {
+        ...state,
+        rotationSelected: action.payload,
+        filteredConditions: listOfConditionsToShow
+      };
     case CLEAR_ERROR:
       return { ...state, error: '' };
     case CLEAR_SEARCH_TERM:
@@ -57,50 +94,40 @@ export default function(state = INITIAL_STATE, action) {
     case HIDE_ADD_BUTTON:
       return { ...state, showAddbutton: false };
     case CHANGE_SEARCH_TERM:
-      // If there is a search term
-      if (action.payload !== '') {
-        var searchTermLowerCare = action.payload.toLowerCase();
-        // Create filtered array that only contains objects that are
-        // 1. In the selected rotations
-        // 2. Match the searchTerm criteria
-        var listOfConditionsToShow = _.filter(state, condition => {
-          if (_.indexOf(condition.tags, state.rotationSelected) >= 0) {
-            return _.includes(
-              condition.condition.toLowerCase(),
-              searchTermLowerCare
-            );
-          }
-        });
-        if (listOfConditionsToShow.length === 0) {
-          return {
-            ...state,
-            searchTerm: action.payload,
-            filteredConditions: listOfConditionsToShow,
-            showAddButton: true
-          };
-        } else {
-          return {
-            ...state,
-            searchTerm: action.payload,
-            filteredConditions: listOfConditionsToShow,
-            showAddButton: false,
-            showAddCard: false
-          };
-        }
+      const searchTerm = action.payload;
+      listOfConditionsToShow = theListOfConditionsToShow(searchTerm, state);
+      if (listOfConditionsToShow.length === 0) {
+        return {
+          ...state,
+          searchTerm: action.payload,
+          filteredConditions: listOfConditionsToShow,
+          showAddButton: true
+        };
+      } else {
+        return {
+          ...state,
+          searchTerm: action.payload,
+          filteredConditions: listOfConditionsToShow,
+          showAddButton: false,
+          showAddCard: false
+        };
       }
-      // If search term is blank return defaults
-      return {
-        ...state,
-        searchTerm: action.payload,
-        filteredConditions: [],
-        showAddButton: false,
-        showAddCard: false
-      };
     case SHOW_ADD_CARD:
       return { ...state, showAddCard: true };
     case HIDE_ADD_CARD:
       console.log('Should run');
       return { ...state, showAddCard: false };
+    case ADD_LEARNING_TO_CONDITION:
+      listOfConditionsToShow = theListOfConditionsToShow(
+        state.searchTerm,
+        state,
+        action.payload
+      );
+      return {
+        ...state,
+        [action.payload._id]: action.payload,
+        filteredConditions: listOfConditionsToShow
+      };
     default:
       return state;
   }

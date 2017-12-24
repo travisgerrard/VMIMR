@@ -14,3 +14,4 @@ export const SHOW_ADD_BUTTON = 'show_add_button';
 export const HIDE_ADD_BUTTON = 'hide_add_button';
 export const SHOW_ADD_CARD = 'show_add_card';
 export const HIDE_ADD_CARD = 'hide_add_card';
+export const ADD_LEARNING_TO_CONDITION = 'add_learning_to_condition';
