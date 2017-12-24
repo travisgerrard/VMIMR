@@ -45,7 +45,7 @@ module.exports = app => {
         }
       });
 
-      //Then pull the condition with its updated associated learning
+      //Then pull and send the condition with its updated associated learning
       conditionToSend = await Condition.findOne({
         _id: conditionId
       }).populate({
