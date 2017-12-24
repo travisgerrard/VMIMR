@@ -23,6 +23,40 @@ module.exports = app => {
     }
   });
 
+  app.delete(
+    '/api/condition/learning/:learningId',
+    requireAuth,
+    async (req, res) => {
+      var learningId = req.params.learningId;
+
+      //Load learning before deleting to find out what condition it's related to
+      var learningToUpdate = await ConditionLearning.findOne({
+        _id: learningId
+      });
+      const conditionId = learningToUpdate._condition;
+
+      //Now we delete the learning
+      await ConditionLearning.findByIdAndRemove(learningId, function(
+        err,
+        offer
+      ) {
+        if (err) {
+          throw err;
+        }
+      });
+
+      //Then pull the condition with its updated associated learning
+      conditionToSend = await Condition.findOne({
+        _id: conditionId
+      }).populate({
+        path: '_learnings',
+        match: { _creator: { $eq: req.user.id } }
+      });
+
+      res.send(conditionToSend);
+    }
+  );
+
   app.put('/api/condition/learning', requireAuth, async (req, res) => {
     const { seenWith, date, whatWasLearned, learningId } = req.body;
     console.log(learningId);

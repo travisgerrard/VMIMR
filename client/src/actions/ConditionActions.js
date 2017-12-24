@@ -13,7 +13,8 @@ import {
   SHOW_ADD_CARD,
   HIDE_ADD_CARD,
   ADD_LEARNING_TO_CONDITION,
-  UPDATE_LEARNING
+  UPDATE_LEARNING,
+  DELETE_LEARNING
 } from './types';
 
 axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
@@ -51,6 +52,15 @@ export const updateLearning = props => async dispatch => {
   try {
     const res = await axios.put('/api/condition/learning', props);
     dispatch({ type: UPDATE_LEARNING, payload: res.data });
+  } catch (err) {
+    console.log(err.response.data.error);
+  }
+};
+
+export const deleteLearning = props => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/condition/learning/${props}`);
+    dispatch({ type: DELETE_LEARNING, payload: res.data });
   } catch (err) {
     console.log(err.response.data.error);
   }

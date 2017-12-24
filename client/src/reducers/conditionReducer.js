@@ -12,7 +12,8 @@ import {
   SHOW_ADD_CARD,
   HIDE_ADD_CARD,
   ADD_LEARNING_TO_CONDITION,
-  UPDATE_LEARNING
+  UPDATE_LEARNING,
+  DELETE_LEARNING
 } from '../actions/types';
 import _ from 'lodash';
 
@@ -130,6 +131,17 @@ export default function(state = INITIAL_STATE, action) {
         filteredConditions: listOfConditionsToShow
       };
     case UPDATE_LEARNING:
+      listOfConditionsToShow = theListOfConditionsToShow(
+        state.searchTerm,
+        state,
+        action.payload
+      );
+      return {
+        ...state,
+        [action.payload._id]: action.payload,
+        filteredConditions: listOfConditionsToShow
+      };
+    case DELETE_LEARNING:
       listOfConditionsToShow = theListOfConditionsToShow(
         state.searchTerm,
         state,

@@ -36,6 +36,22 @@ class ConditionCardPostEdit extends Component {
     this.props.cancelLearning();
   };
 
+  deleteLearning = () => {
+    if (this.props.learningId) {
+      this.props.deleteLearning(this.props.learningId);
+    }
+  };
+
+  showDeleteButton = () => {
+    if (this.props.learningId) {
+      return (
+        <Button basic color="red" onClick={this.deleteLearning}>
+          Delete
+        </Button>
+      );
+    }
+  };
+
   render() {
     console.log(this.props.conditionId);
     return (
@@ -71,13 +87,14 @@ class ConditionCardPostEdit extends Component {
             }
           />
         </Form>
-        <div className="ui two buttons">
+        <div className="ui three buttons">
           <Button basic color="green" onClick={this.saveLearning}>
             Save
           </Button>
-          <Button basic color="red" onClick={this.cancelLearning}>
+          <Button basic color="grey" onClick={this.cancelLearning}>
             Cancel
           </Button>
+          {this.showDeleteButton()}
         </div>
       </Card.Content>
     );
