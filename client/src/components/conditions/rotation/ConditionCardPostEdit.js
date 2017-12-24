@@ -6,18 +6,30 @@ import * as actions from '../../../actions';
 
 class ConditionCardPostEdit extends Component {
   state = {
-    seenWith: '',
-    date: moment().format('MM/DD/YY'),
-    whatWasLearned: ''
+    seenWith: this.props.seenWith ? this.props.seenWith : '',
+    date: this.props.dateField
+      ? this.props.dateField
+      : moment().format('MM/DD/YY'),
+    whatWasLearned: this.props.whatWasLearned ? this.props.whatWasLearned : ''
   };
 
   saveLearning = () => {
-    this.props.addLearningToCondition({
-      seenWith: this.state.seenWith,
-      date: this.state.date,
-      whatWasLearned: this.state.whatWasLearned,
-      conditionId: this.props.conditionId
-    });
+    if (this.props.conditionId) {
+      this.props.addLearningToCondition({
+        seenWith: this.state.seenWith,
+        date: this.state.date,
+        whatWasLearned: this.state.whatWasLearned,
+        conditionId: this.props.conditionId
+      });
+    }
+    if (this.props.learningId) {
+      this.props.updateLearning({
+        seenWith: this.state.seenWith,
+        date: this.state.date,
+        whatWasLearned: this.state.whatWasLearned,
+        learningId: this.props.learningId
+      });
+    }
   };
 
   cancelLearning = () => {
@@ -25,6 +37,7 @@ class ConditionCardPostEdit extends Component {
   };
 
   render() {
+    console.log(this.props.conditionId);
     return (
       <Card.Content>
         <Input

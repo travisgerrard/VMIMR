@@ -26,7 +26,6 @@ class RotationConditionList extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.conditions);
   return state;
 }
 

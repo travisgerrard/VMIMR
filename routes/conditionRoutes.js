@@ -23,6 +23,35 @@ module.exports = app => {
     }
   });
 
+  app.put('/api/condition/learning', requireAuth, async (req, res) => {
+    const { seenWith, date, whatWasLearned, learningId } = req.body;
+    console.log(learningId);
+
+    var learningToUpdate = await ConditionLearning.findOneAndUpdate(
+      {
+        _id: learningId
+      },
+      {
+        $set: {
+          whatWasLearned: whatWasLearned,
+          dateField: date,
+          seenWith: seenWith
+        }
+      },
+      { new: true }
+    );
+    await learningToUpdate.save();
+
+    const conditionToSend = await Condition.findOne({
+      _id: learningToUpdate._condition
+    }).populate({
+      path: '_learnings',
+      match: { _creator: { $eq: req.user.id } }
+    });
+
+    res.send(conditionToSend);
+  });
+
   app.post('/api/condition/learning', requireAuth, async (req, res) => {
     const { seenWith, date, whatWasLearned, conditionId } = req.body;
 
@@ -40,7 +69,7 @@ module.exports = app => {
 
     await conditionLearningNew.save();
 
-    const conditionToAddLearning = await Condition.findOne({
+    var conditionToAddLearning = await Condition.findOne({
       _id: conditionId
     });
 

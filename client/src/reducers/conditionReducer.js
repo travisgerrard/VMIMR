@@ -11,7 +11,8 @@ import {
   HIDE_ADD_BUTTON,
   SHOW_ADD_CARD,
   HIDE_ADD_CARD,
-  ADD_LEARNING_TO_CONDITION
+  ADD_LEARNING_TO_CONDITION,
+  UPDATE_LEARNING
 } from '../actions/types';
 import _ from 'lodash';
 
@@ -118,6 +119,17 @@ export default function(state = INITIAL_STATE, action) {
       console.log('Should run');
       return { ...state, showAddCard: false };
     case ADD_LEARNING_TO_CONDITION:
+      listOfConditionsToShow = theListOfConditionsToShow(
+        state.searchTerm,
+        state,
+        action.payload
+      );
+      return {
+        ...state,
+        [action.payload._id]: action.payload,
+        filteredConditions: listOfConditionsToShow
+      };
+    case UPDATE_LEARNING:
       listOfConditionsToShow = theListOfConditionsToShow(
         state.searchTerm,
         state,

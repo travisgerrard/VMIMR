@@ -18,7 +18,13 @@ class ConditionCardView extends Component {
   conditionLearnings = () => {
     if (this.props.condition._learnings.length > 0) {
       return _.map(this.props.condition._learnings, learning => {
-        return <ConditionCardLearningView {...learning} key={learning._id} />;
+        return (
+          <ConditionCardLearningView
+            {...learning}
+            key={learning._id}
+            learningId={learning._id}
+          />
+        );
       });
     }
   };
