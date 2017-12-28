@@ -7,9 +7,9 @@ export const signinUser = ({ email, password, history }) => async dispatch => {
     const res = await axios.post('/api/signin', { email, password });
     // IF req good
     // - Update state to indicate authenticated
+    localStorage.setItem('token', res.data.token);
     dispatch({ type: AUTH_USER });
     // - Save the JWT token
-    localStorage.setItem('token', res.data.token);
     // - Redirect to the rout '/feature'
     history.push('/feature');
   } catch (err) {
