@@ -10,7 +10,7 @@ class Header extends Component {
       if (jwt_decode(localStorage.getItem('token')).admin) {
         return (
           <Menu.Item position="right">
-            <Link to="/users">Admin</Link>
+            <Link to="/users">Users</Link>
           </Menu.Item>
         );
       }
@@ -37,12 +37,12 @@ class Header extends Component {
     }
     //show sign in
     return [
-      <li key="signin">
+      <Menu.Item key="signin">
         <Link to="signin">Sign in</Link>
-      </li>,
-      <li key="signup">
+      </Menu.Item>,
+      <Menu.Item key="signup">
         <Link to="/signup">Sign up</Link>
-      </li>
+      </Menu.Item>
     ];
   }
 

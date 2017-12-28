@@ -9,6 +9,7 @@ import Feature from './Feature';
 import RequireAuth from './auth/require_authentication';
 import Conditions from './conditions/ConditionTopLevelView';
 import Rotations from './rotations/RotationTopLevelView';
+import ListOfAllUsers from './users/ListOfAllUsers';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
           <Route exact path="/feature" component={RequireAuth(Feature)} />
           <Route path="/conditions" component={RequireAuth(Conditions)} />
           <Route path="/rotations" component={RequireAuth(Rotations)} />
+          <Route path="/users" component={RequireAuth(ListOfAllUsers)} />
         </div>
       </BrowserRouter>
     );

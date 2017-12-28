@@ -2,9 +2,11 @@ import { combineReducers } from 'redux';
 import { reducer as reduxForm } from 'redux-form';
 import authReducer from './authReducer';
 import conditionReducer from './conditionReducer';
+import userReducer from './userReducer';
 
 export default combineReducers({
   form: reduxForm,
   auth: authReducer,
-  conditions: conditionReducer
+  conditions: conditionReducer,
+  users: userReducer
 });
