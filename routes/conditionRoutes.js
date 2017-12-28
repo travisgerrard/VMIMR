@@ -7,7 +7,6 @@ const ConditionLearning = mongoose.model('conditionLearnings');
 
 module.exports = app => {
   app.get('/api/condition/', requireAuth, async (req, res) => {
-    console.log(req.user.id);
     try {
       const conditionsArray = await Condition.find({}).populate({
         path: '_learnings',

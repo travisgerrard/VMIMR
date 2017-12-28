@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_ALL_USERS } from 'get_all_users';
+import { FETCH_ALL_USERS } from './types';
 
 axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
 
