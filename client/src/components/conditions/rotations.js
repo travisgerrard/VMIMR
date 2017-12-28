@@ -7,7 +7,7 @@ export default [
     noonReportReq: true,
     dbname: 'all',
     exact: true,
-    path: '/conditions/all'
+    path: '/all'
   },
   {
     name: 'Wards',
@@ -15,7 +15,7 @@ export default [
     noonReportReq: true,
     dbname: 'wards',
     exact: true,
-    path: '/conditions/wards'
+    path: '/wards'
   },
   {
     name: 'Nights',
@@ -23,7 +23,7 @@ export default [
     noonReportReq: false,
     dbname: 'nights',
     exact: true,
-    path: '/conditions/nights'
+    path: '/nights'
   },
   {
     name: 'CCU',
@@ -31,7 +31,7 @@ export default [
     noonReportReq: false,
     dbname: 'ccu',
     exact: true,
-    path: '/conditions/ccu'
+    path: '/ccu'
   },
   {
     name: 'Leadership in QI Pathway',
@@ -39,7 +39,7 @@ export default [
     noonReportReq: true,
     dbname: 'qi',
     exact: true,
-    path: '/conditions/qi'
+    path: '/qi'
   },
   {
     name: 'Allergy & Immunology ',
@@ -47,7 +47,7 @@ export default [
     noonReportReq: true,
     dbname: 'allergy',
     exact: true,
-    path: '/conditions/allergy'
+    path: '/allergy'
   },
   {
     name: 'Anesthesia',
@@ -55,7 +55,7 @@ export default [
     noonReportReq: true,
     dbname: 'anesthesia',
     exact: true,
-    path: '/conditions/anesthesia'
+    path: '/anesthesia'
   },
   {
     name: 'Away rotation ',
@@ -63,7 +63,7 @@ export default [
     noonReportReq: true,
     dbname: 'away',
     exact: true,
-    path: '/conditions/away'
+    path: '/away'
   },
   {
     name: 'Cardiology',
@@ -71,7 +71,7 @@ export default [
     noonReportReq: true,
     dbname: 'cardiology',
     exact: true,
-    path: '/conditions/cardiology'
+    path: '/cardiology'
   },
   {
     name: 'Dermatology ',
@@ -79,7 +79,7 @@ export default [
     noonReportReq: true,
     dbname: 'dermatology',
     exact: true,
-    path: '/conditions/dermatology'
+    path: '/dermatology'
   },
   {
     name: 'Endocrinology ',
@@ -87,7 +87,7 @@ export default [
     noonReportReq: true,
     dbname: 'endocrinology',
     exact: true,
-    path: '/conditions/endocrinology'
+    path: '/endocrinology'
   },
   {
     name: 'ENT',
@@ -95,7 +95,7 @@ export default [
     noonReportReq: true,
     dbname: 'ent',
     exact: true,
-    path: '/conditions/ent'
+    path: '/ent'
   },
   {
     name: 'Gastroenterology ',
@@ -103,7 +103,7 @@ export default [
     noonReportReq: true,
     dbname: 'gi',
     exact: true,
-    path: '/conditions/gi'
+    path: '/gi'
   },
   {
     name: 'GIM ',
@@ -111,7 +111,7 @@ export default [
     noonReportReq: true,
     dbname: 'gim',
     exact: true,
-    path: '/conditions/gim'
+    path: '/gim'
   },
   {
     name: 'Primary Care PGY2 and/or PGY3',
@@ -119,7 +119,7 @@ export default [
     noonReportReq: true,
     dbname: 'primarycare',
     exact: true,
-    path: '/conditions/primarycare'
+    path: '/primarycare'
   },
   {
     name: 'Geriatrics',
@@ -127,7 +127,7 @@ export default [
     noonReportReq: true,
     dbname: 'geriatrics',
     exact: true,
-    path: '/conditions/geriatrics'
+    path: '/geriatrics'
   },
   {
     name: 'Gynecology / Women’s Health',
@@ -135,7 +135,7 @@ export default [
     noonReportReq: true,
     dbname: 'gyn',
     exact: true,
-    path: '/conditions/gyn'
+    path: '/gyn'
   },
   {
     name: 'Hematology/Oncology',
@@ -143,7 +143,7 @@ export default [
     noonReportReq: true,
     dbname: 'hemeonc',
     exact: true,
-    path: '/conditions/hemeonc'
+    path: '/hemeonc'
   },
   {
     name: 'Infectious Disease ',
@@ -151,7 +151,7 @@ export default [
     noonReportReq: true,
     dbname: 'infectiousdisease',
     exact: true,
-    path: '/conditions/infectiousdisease'
+    path: '/infectiousdisease'
   },
   {
     name: 'Nephrology  ',
@@ -159,7 +159,7 @@ export default [
     noonReportReq: true,
     dbname: 'nephro',
     exact: true,
-    path: '/conditions/nephro'
+    path: '/nephro'
   },
   {
     name: 'Neurology ',
@@ -167,7 +167,7 @@ export default [
     noonReportReq: true,
     dbname: 'neuro',
     exact: true,
-    path: '/conditions/neuro'
+    path: '/neuro'
   },
   {
     name: 'Ophthalmology',
@@ -175,7 +175,7 @@ export default [
     noonReportReq: true,
     dbname: 'ophtho',
     exact: true,
-    path: '/conditions/ophtho'
+    path: '/ophtho'
   },
   {
     name: 'O/P General Surgery',
@@ -183,7 +183,7 @@ export default [
     noonReportReq: true,
     dbname: 'surgery',
     exact: true,
-    path: '/conditions/surgery'
+    path: '/surgery'
   },
   {
     name: 'O/P Urology',
@@ -191,7 +191,7 @@ export default [
     noonReportReq: true,
     dbname: 'urology',
     exact: true,
-    path: '/conditions/urology'
+    path: '/urology'
   },
   {
     name: 'Musculoskeletal',
@@ -199,7 +199,7 @@ export default [
     noonReportReq: true,
     dbname: 'msk',
     exact: true,
-    path: '/conditions/msk'
+    path: '/msk'
   },
   {
     name: 'Palliative Care',
@@ -207,7 +207,7 @@ export default [
     noonReportReq: true,
     dbname: 'palliative',
     exact: true,
-    path: '/conditions/palliative'
+    path: '/palliative'
   },
   {
     name: 'Pathology',
@@ -215,7 +215,7 @@ export default [
     noonReportReq: true,
     dbname: 'path',
     exact: true,
-    path: '/conditions/path'
+    path: '/path'
   },
   {
     name: 'Ultrasound Procedures',
@@ -223,7 +223,7 @@ export default [
     noonReportReq: true,
     dbname: 'procedures',
     exact: true,
-    path: '/conditions/procedures'
+    path: '/procedures'
   },
   {
     name: 'Psychiatry - IP',
@@ -231,7 +231,7 @@ export default [
     noonReportReq: true,
     dbname: 'psych',
     exact: true,
-    path: '/conditions/psych'
+    path: '/psych'
   },
   {
     name: 'Pulmonary Medicine ',
@@ -239,7 +239,7 @@ export default [
     noonReportReq: true,
     dbname: 'pulm',
     exact: true,
-    path: '/conditions/pulm'
+    path: '/pulm'
   },
   {
     name: 'Rheumatology ',
@@ -247,7 +247,7 @@ export default [
     noonReportReq: true,
     dbname: 'rheum',
     exact: true,
-    path: '/conditions/rheum'
+    path: '/rheum'
   },
   {
     name: 'Scholarly Project',
@@ -255,7 +255,7 @@ export default [
     noonReportReq: true,
     dbname: 'scholarly',
     exact: true,
-    path: '/conditions/scholarly'
+    path: '/scholarly'
   },
   {
     name: 'Special Request',
@@ -263,7 +263,7 @@ export default [
     noonReportReq: true,
     dbname: 'specialreq',
     exact: true,
-    path: '/conditions/specialreq'
+    path: '/specialreq'
   },
   {
     name: 'Swing- Hospital',
@@ -271,7 +271,7 @@ export default [
     noonReportReq: true,
     dbname: 'swing',
     exact: true,
-    path: '/conditions/swing'
+    path: '/swing'
   },
   {
     name: 'Float – Hospital',
@@ -279,7 +279,7 @@ export default [
     noonReportReq: true,
     dbname: 'float',
     exact: true,
-    path: '/conditions/float'
+    path: '/float'
   },
   {
     name: 'Systems-Based Practice ',
@@ -287,7 +287,7 @@ export default [
     noonReportReq: true,
     dbname: 'sbp',
     exact: true,
-    path: '/conditions/sbp'
+    path: '/sbp'
   },
   {
     name: 'Hyperbaric Medicine',
@@ -295,6 +295,6 @@ export default [
     noonReportReq: true,
     dbname: 'hyperbarics',
     exact: true,
-    path: '/conditions/hyperbarics'
+    path: '/hyperbarics'
   }
 ];

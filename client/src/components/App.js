@@ -8,6 +8,7 @@ import Signout from './auth/Signout';
 import Feature from './Feature';
 import RequireAuth from './auth/require_authentication';
 import Conditions from './conditions/ConditionTopLevelView';
+import Rotations from './rotations/RotationTopLevelView';
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
           <Route exact path="/signout" component={Signout} />
           <Route exact path="/feature" component={RequireAuth(Feature)} />
           <Route path="/conditions" component={RequireAuth(Conditions)} />
+          <Route path="/rotations" component={RequireAuth(Rotations)} />
         </div>
       </BrowserRouter>
     );

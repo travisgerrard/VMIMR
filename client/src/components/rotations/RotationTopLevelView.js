@@ -2,23 +2,21 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
-import rotations from './rotations';
-import RotationConditionOverview from './rotation/RotationConditionOverview';
+import rotations from '../conditions/rotations';
+import RotatationContentContainer from './RotatationContentContainer';
 import * as actions from '../../actions';
 
-class ConditionTopLevelView extends Component {
-  componentWillMount() {
-    this.props.fetchAllConditions();
-  }
-
+class RotationTopLevelView extends Component {
   renderSideBar() {
     var sorted = _.sortBy(rotations, 'name');
     return _.map(sorted, ({ path, name }) => {
-      return (
-        <li key={name}>
-          <Link to={`/conditions${path}`}>{name}</Link>
-        </li>
-      );
+      if (name !== 'All') {
+        return (
+          <li key={name}>
+            <Link to={`/rotations${path}`}>{name}</Link>
+          </li>
+        );
+      }
     });
   }
 
@@ -46,23 +44,23 @@ class ConditionTopLevelView extends Component {
               // more than multiple <Route>s.
               <Route
                 key={index}
-                path={`/conditions${route.path}`}
+                path={`/rotations${route.path}`}
                 exact={route.exact}
               />
             ))}
           </div>
 
           <div style={{ flex: 1, padding: '10px' }}>
-            <h2>Conditions</h2>
+            <h2>Rotation</h2>
             {rotations.map((route, index) => (
               // Render more <Route>s with the same paths as
               // above, but different components this time.
               <Route
                 key={index}
-                path={`/conditions${route.path}`}
+                path={`/rotations${route.path}`}
                 exact={route.exact}
                 render={props => (
-                  <RotationConditionOverview
+                  <RotatationContentContainer
                     {...props}
                     title={route.name}
                     dbname={route.dbname}
@@ -77,4 +75,4 @@ class ConditionTopLevelView extends Component {
   }
 }
 
-export default connect(null, actions)(ConditionTopLevelView);
+export default connect(null, actions)(RotationTopLevelView);

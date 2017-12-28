@@ -48,11 +48,26 @@ export default function(state = INITIAL_STATE, action) {
   var listOfConditionsToShow;
   switch (action.type) {
     case FETCH_ALL_CONDITIONS:
-      return {
-        ...state,
-        ...action.payload,
-        filteredConditions: _.values(action.payload)
-      };
+      //When linking to conditions
+      // The rotaiton selected occurs faster than server call
+      // As such need if statement below to factor in selected rotation
+      if (state.rotationSelected === '') {
+        return {
+          ...state,
+          ...action.payload,
+          filteredConditions: _.values(action.payload)
+        };
+      } else {
+        listOfConditionsToShow = theListOfConditionsToShow(state.searchTerm, {
+          ...state,
+          ...action.payload
+        });
+        return {
+          ...state,
+          ...action.payload,
+          filteredConditions: listOfConditionsToShow
+        };
+      }
     case ADD_CONDITION:
       return { ...state, loadingAddCondition: true };
     case ADD_CONDITION_SUCCESS:
@@ -117,7 +132,6 @@ export default function(state = INITIAL_STATE, action) {
     case SHOW_ADD_CARD:
       return { ...state, showAddCard: true };
     case HIDE_ADD_CARD:
-      console.log('Should run');
       return { ...state, showAddCard: false };
     case ADD_LEARNING_TO_CONDITION:
       listOfConditionsToShow = theListOfConditionsToShow(

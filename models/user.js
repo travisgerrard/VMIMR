@@ -4,8 +4,11 @@ const bcrypt = require('bcrypt-nodejs');
 
 // Define our model
 const userSchema = new Schema({
+  name: String,
+  username: { type: String, unique: true },
   email: { type: String, unique: true, lowercase: true },
-  password: String
+  password: String,
+  admin: { type: Boolean, default: false }
 });
 
 // On Save Hook, encrypt password
@@ -16,11 +19,15 @@ userSchema.pre('save', function(next) {
 
   // generate a salt then run callback
   bcrypt.genSalt(10, function(err, salt) {
-    if (err) { return next(err); }
+    if (err) {
+      return next(err);
+    }
 
     // hash {encrypt} our password using the salt
     bcrypt.hash(user.password, salt, null, function(err, hash) {
-      if (err) { return next(err); }
+      if (err) {
+        return next(err);
+      }
 
       // overwrite plan text password with encypted password
       user.password = hash;
@@ -31,11 +38,13 @@ userSchema.pre('save', function(next) {
 
 userSchema.methods.comparePassword = function(candidatePassword, callback) {
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-    if (err) { return callback(err); }
+    if (err) {
+      return callback(err);
+    }
 
     callback(null, isMatch);
   });
-}
+};
 
 // Create the model class
 const ModelClass = mongoose.model('users', userSchema);

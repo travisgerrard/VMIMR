@@ -1,0 +1,2366 @@
+[
+  {
+    "catagory": "Cardiology",
+    "name": "Ischemic heart disease"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Stable angina pectoris."
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Acute coronary syndrome"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Acute myocardial infarction - complications"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Right ventricular infarction"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Cardiogenic shock"
+  },
+  {
+    "catagory": "Cardiology",
+    "name":
+      "Mechanical complications: free wall rupture/ papillary muscle rupture/ VSD"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Other AMI complication (except arrhythmias/ and post MI"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "icarditis/ which is classified under headings below)"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Congestive heart failure from ischemic cardiomyopathy"
+  },
+  {
+    "catagory": "Cardiology",
+    "name":
+      "Evaluation of undiagnosed chest pain (i.e./ diagnostic possibility of ischemic heart disease)"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Valvular heart disease"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Aortic stenosis"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Aortic regurgitation"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Mitral regurgitation"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Mitral stenosis"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Prosthetic heart valve"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Myocardial disease"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Myocarditis"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Hypertrophic cardiomyopathy"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Restrictive cardiomyopathy"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Dilated cardiomyopathy"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Idiopathic cardiomyopathy"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Sarcoidosis and the heart"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Amyloidosis and the heart"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Alcoholic cardiomyopathy"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Peripartum cardiomyopathy"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Congestive heart failure from ischemic cardiomyopathy"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Cor pulmonale"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Management of congestive heart failure"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Vascular disease"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Peripheral arterial disease"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Acute arterial occlusion"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Chronic arterial ischemia"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Pulmonary vascular disease (also in Pulmonary)"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Pulmonary embolism"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Primary pulmonary hypertension"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Cor pulmonale"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Venous disease of the lower extremities"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Chronic venous insufficiency"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Deep venous thrombosis"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Superior vena cava syndrome"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Noncardiogenic syncope"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Neurocardiogenic syncope (vasovagal syncope)"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Situational syncope (e.g./ cough syncope/ micturition syncope)"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Orthostatic hypotension"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Pericardial disease"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Acute pericarditis"
+  },
+  {
+    "catagory": "Cardiology",
+    "name":
+      "Infections of the pericardial space (see also Infectious Disease section)"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Pericardial effusion without tamponade"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Cardiac tamponade"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Cardiac tamponade from neoplastic pericarditis"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Constrictive pericarditis"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Cardiac tumors"
+  },
+  {
+    "catagory": "Cardiology",
+    "name":
+      "Endocarditis and other cardiovascular infections (see also Infectious Diseases)"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Endocarditis"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Infections of the pericardial space"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Endocarditis prophylaxis"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Vascular disease"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Carotid artery disease"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Aorta"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Aortic dissection"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Thoracic aortic aneurysm"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Abdominal aortic aneurysm"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Disseminated atheroembolism (cholesterol emboli syndrome)"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Congenital heart disease"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Atrial septal defect and patent foramen ovale"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Ventricular septal defect"
+  },
+  {
+    "catagory": "Cardiology",
+    "name": "Pulmonic stenosis"
+  },
+
+  {
+    "catagory": "Endocrine",
+    "name": "Hyperthyroidism"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Graves' disease"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Graves' ophthalmopathy (classify as Ophthalmology)"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Multinodular goiter"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Thyroiditis"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hypothyroidism"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hashimoto's"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Other hypothyroidism"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Thyroid nodules and thyroid cancer"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Euthyroid sick syndrome"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Essential hypertension"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Primary aldosteronism and mineralocorticoid excess"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Renal artery stenosis"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Pheochromocytoma"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Cushing's disease"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hypercholesterolemia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hypertriglyceridemia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Polycystic ovary syndrome"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Other female infertility"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Amenorrhea"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Type 1 diabetes"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Type 2 diabetes"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Diabetes and pregnancy"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Complications of diabetes mellitus"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Diabetic ketoacidosis"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hyperosmolar coma"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Diabetic retinopathy"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Diabetic nephropathy"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Diabetic gastroparesis"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Diabetic neuropathy"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Diabetic foot"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hypercalcemia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Primary hyperparathyroidism"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Malignancy-associated hypercalcemia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Sarcoidosis and hypercalcemia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hypocalcemja (other than vitamin D deficiency)"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Osteoporosis"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Osteoporosis in women"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Osteoporosis in men"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Vitamin D deficiency and osteomalacia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Renal osteodystrophy"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hyperphosphatemia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hypophosphatemia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Paget's disease"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Obesity"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Primary aldosteronism and mineralocorticoid excess"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Adrenal insufficiency ."
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Pheochromocytoma"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Testes/Male reproductive health"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Male hypogonadism"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Male infertility"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Erectile dysfunction"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Pituitary tumors"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hyperprolactinemia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Acromegaly"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Cushing's disease"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hypopituitarism"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Posterior pituitary and water metabolism"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hypernatremia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Diabetes insipidus"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Diabetes insipidus from lithium"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Diabetes insipidus, not lithium"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hyponatemia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hypovolemic"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "SIADH"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Hypervolemic"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Carcinoid syndrome"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Malignancy-associated hypercalcemia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Ectopic ACTH from tumor"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "SIADH from tumor"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "lnsulinoma"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "VIP-secreting tumors (classify as Gastroenterology)"
+  },
+  {
+    "catagory": "Endocrine",
+    "name":
+      "Zollinger-Ellison syndrome (gastrinoma, classify as Gastroenterology)"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Glucagon-secreting tumors ."
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Polyglandular disorders"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Multiple endocrine neoplasia"
+  },
+  {
+    "catagory": "Endocrine",
+    "name": "Multiple endocrine hypofunction"
+  },
+  {
+    "catagory": "GI",
+    "name": "Esophageal disease"
+  },
+  {
+    "catagory": "GI",
+    "name": "Gastroesophageal reflux !@#"
+  },
+  {
+    "catagory": "GI",
+    "name": "Barrett's esophagus"
+  },
+  {
+    "catagory": "GI",
+    "name": "Esophageal carcinoma"
+  },
+  {
+    "catagory": "GI",
+    "name": "Esophageal motility disorders"
+  },
+  {
+    "catagory": "GI",
+    "name": "Achalasia"
+  },
+  {
+    "catagory": "GI",
+    "name": "Hypercontractile Esophagus (Jackhammer)"
+  },
+  {
+    "catagory": "GI",
+    "name": "Absent Peristalsis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Distal Esophageal Spasm"
+  },
+  {
+    "catagory": "GI",
+    "name": "Medication-induced esophageal disorder"
+  },
+  {
+    "catagory": "GI",
+    "name": "Esophageal diverticula"
+  },
+  {
+    "catagory": "GI",
+    "name": "Esophageal strictures or webs"
+  },
+  {
+    "catagory": "GI",
+    "name": "Gastroesophageal varices"
+  },
+  {
+    "catagory": "GI",
+    "name": "Infectious esophagitis (Candida, HSV, CMV)"
+  },
+  {
+    "catagory": "GI",
+    "name": " Mallory-Weiss syndrome"
+  },
+  {
+    "catagory": "GI",
+    "name": " Eosinophilic esophagitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Stomach Of duodenum"
+  },
+  {
+    "catagory": "GI",
+    "name": "Helicobacter pylori2. Peptic ulcer disease"
+  },
+  {
+    "catagory": "GI",
+    "name": "Gastritis and gastropathy"
+  },
+  {
+    "catagory": "GI",
+    "name": "Stomach cancer"
+  },
+  {
+    "catagory": "GI",
+    "name": "Non-ulcer dyspepsia"
+  },
+  {
+    "catagory": "GI",
+    "name": "MALT"
+  },
+  {
+    "catagory": "GI",
+    "name": "Gastroparesis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Small intestinal disease"
+  },
+  {
+    "catagory": "GI",
+    "name": "Celiac disease"
+  },
+  {
+    "catagory": "GI",
+    "name": "Bacterial overgrowth"
+  },
+  {
+    "catagory": "GI",
+    "name": "Short bowel syndrome"
+  },
+  {
+    "catagory": "GI",
+    "name": "Whipple's disease"
+  },
+  {
+    "catagory": "GI",
+    "name": "Mesenteric ischemia"
+  },
+  {
+    "catagory": "GI",
+    "name": "Crohn's disease and Crohn's colitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Gastroenteritis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Colonic and anorectal disease"
+  },
+  {
+    "catagory": "GI",
+    "name": "Colorectal cancer"
+  },
+  {
+    "catagory": "GI",
+    "name": "Colon polyposis syndrome"
+  },
+  {
+    "catagory": "GI",
+    "name": "Hereditary nonpolyposis colorectal cancer"
+  },
+  {
+    "catagory": "GI",
+    "name": "Familial adenomatous polyposis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Attenuated familial adenomatous polyposis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Screening for colorectal cancer"
+  },
+  {
+    "catagory": "GI",
+    "name": "Diverticular disease"
+  },
+  {
+    "catagory": "GI",
+    "name": "Ulcerative colitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Crohn’s colitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Irritable bowel syndrome"
+  },
+  {
+    "catagory": "GI",
+    "name": "Hemorrhoids and fissures"
+  },
+  {
+    "catagory": "GI",
+    "name": "C. difficile colitis"
+  },
+  {
+    "catagory": "GI",
+    "name": " Acute appendicitis"
+  },
+  {
+    "catagory": "GI",
+    "name": " Radiation colitis"
+  },
+  {
+    "catagory": "GI",
+    "name": " Microscopic colitis"
+  },
+  {
+    "catagory": "GI",
+    "name": " Ischemic colitis"
+  },
+  {
+    "catagory": "GI",
+    "name": " Fecal incontinence"
+  },
+  {
+    "catagory": "GI",
+    "name": " Diarrhea"
+  },
+  {
+    "catagory": "GI",
+    "name": " Constipation"
+  },
+  {
+    "catagory": "GI",
+    "name": "Pancreatic disease"
+  },
+  {
+    "catagory": "GI",
+    "name": "Acute pancreatitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Chronic pancreatitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Pancreatic carcinoma"
+  },
+  {
+    "catagory": "GI",
+    "name": "IPMN"
+  },
+  {
+    "catagory": "GI",
+    "name": "Infections of the pancreas, pancreatic abscess"
+  },
+  {
+    "catagory": "GI",
+    "name": "Endocrine tumors of the pancreas"
+  },
+  {
+    "catagory": "GI",
+    "name": "Zollinger-Ellison syndrome (gastrinoma)"
+  },
+  {
+    "catagory": "GI",
+    "name": "Glucagon-secreting tumor511i2006"
+  },
+  {
+    "catagory": "GI",
+    "name": "VIP-secretjng tumor"
+  },
+  {
+    "catagory": "GI",
+    "name": "Pancreatic cysts"
+  },
+  {
+    "catagory": "GI",
+    "name": "Pancreatic mass"
+  },
+  {
+    "catagory": "GI",
+    "name": "Autoimmune pancreatitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Biliary tract disease"
+  },
+  {
+    "catagory": "GI",
+    "name": "Cholelithiasis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Cholecystitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Choledocholithiasis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Cholangitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Sclerosing cholangitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Biliary cysts"
+  },
+  {
+    "catagory": "GI",
+    "name": "Liver disease"
+  },
+  {
+    "catagory": "GI",
+    "name": "Viral hepatitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Hepatitis A"
+  },
+  {
+    "catagory": "GI",
+    "name": "Hepatitis B"
+  },
+  {
+    "catagory": "GI",
+    "name": "Hepatitis C"
+  },
+  {
+    "catagory": "GI",
+    "name": "Other viral hepatitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Liver abscess"
+  },
+  {
+    "catagory": "GI",
+    "name": "Cirrhosis and portal hypertension"
+  },
+  {
+    "catagory": "GI",
+    "name": "Ascites"
+  },
+  {
+    "catagory": "GI",
+    "name": "Hepatic encephalopathy"
+  },
+  {
+    "catagory": "GI",
+    "name": "Hepatorenal syndrome"
+  },
+  {
+    "catagory": "GI",
+    "name": "Spontaneous bacterial peritonitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Vericeal bleeding"
+  },
+  {
+    "catagory": "GI",
+    "name": "Hepatopulmonary syndrome"
+  },
+  {
+    "catagory": "GI",
+    "name": "Drug-induced liver disease"
+  },
+  {
+    "catagory": "GI",
+    "name": "Cholestasis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Hemochromatosis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Fatty liver and nonalcoholic steatohepatits"
+  },
+  {
+    "catagory": "GI",
+    "name": "Alcoholic hepatitis"
+  },
+  {
+    "catagory": "GI",
+    "name": "Fulminant liver failure"
+  },
+  {
+    "catagory": "GI",
+    "name": "Acetaminophen and fulminant hepatic failure"
+  },
+  {
+    "catagory": "GI",
+    "name": " Hepatocellular carcinoma"
+  },
+  {
+    "catagory": "GI",
+    "name": " Autoimmune hepatitis"
+  },
+  {
+    "catagory": "GI",
+    "name": " Primary biliary cirrhosis"
+  },
+  {
+    "catagory": "GI",
+    "name": " Wilson's disease"
+  },
+  {
+    "catagory": "GI",
+    "name": " Hepatic masses"
+  },
+  {
+    "catagory": "GI",
+    "name": " Liver disease in pregnancy"
+  },
+  {
+    "catagory": "GI",
+    "name": " Hepatic-vein thrombosis (Budd-Chiari. syndrome)"
+  },
+  {
+    "catagory": "GI",
+    "name": " Gilbert's syndrome"
+  },
+  {
+    "catagory": "GI",
+    "name": "Gastrointestinal hemorrhage"
+  },
+  {
+    "catagory": "GI",
+    "name": "Undiagnosed upper gastrointestinal hemorrhage."
+  },
+  {
+    "catagory": "GI",
+    "name": "Undiagnosed lower gastrointestinal hemorrhage."
+  },
+  {
+    "catagory": "GI",
+    "name": "Gastrointestinal complications of HIV infection"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Lung cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Breast cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Neoplasms of the head and neck"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Thyroid nodules and thyroid cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Neoplasms of the head and neck (except thyroid cancer)"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Gastrointestinal or hepatic cancer. .'"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Esophageal carcinoma"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Stomach cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Colorectal cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Pancreatic: carcinoma (except pancreatic endocrine tumors)"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Hepatocellular carcinoma"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Urologic cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Renal cell carcinoma"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Bladder carcinoma"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Prostate carcinoma"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Testicular carcinoma/tumors"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Gynecologic cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Ovarian cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Endometrial cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Cervical cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "CNS tumors"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Brain tumors"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Spinal cord tumors and compression"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Carcinomatous meningitis"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Skin cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Squamous cell carcinoma of the skin"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Basal cell carcifloma of the skin"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Melanoma and nevi"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Mycosis fungoides"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Hematologic malignancies"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Chronic leukemias"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Chronic myelogenous leukemia"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Chronic lymphocytic leukemia"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Other chronic leukemia (hairy cell/ etc.)"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Acute leukemia"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Acute lymphocytic leukemia"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Acute myelogenous leukemia"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Non-Hodgkin's lymphoma"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Hodgkin's disease"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Plasma cell disorder"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Multiple myeloma"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Benign monoclonal gammopathy"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Waldenstrom:s macroglobulinemia"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Amyloidosis (AL and other variants)"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Amyloidosis and the heart (also in cardiovascular)"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Cancer prevention and screening"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Smoking cessation"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Screening for breast cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Screening for prostate cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Colon polyposis syndrome"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Screening for colorectal cancer (not polyposis syndromes)"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Screening for cervical cancer and other Pap smear"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Screening for other cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Diet and cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Management of malignant pain"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Cardiac tumors"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Bone tumors"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Soft tissue cancer"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Assorted endocrine tumors and endocrine manifestations of tumors"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Insulinoma"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "VIP-secreting tumors (dassify a;> GC.lstroenteroiogy) ~"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name":
+      "Zollinger Ellison syndrome (gastrinoma/ classify as Gastroenterology)"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Glucagon-Secreting tumors ."
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Carcinoid syndrome"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Malignancy-associated hypercalcemia"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Ectopic ACTH from tumor"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "SIADH from tumor"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Multiple endocrine neoplasia"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Oncologic complications of HIV infection"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Oncologic emergencies"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Superior vena cava syndrome"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Fever and neutropenia"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Brain tumors"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Spinal cord tumors and compression"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Cardiac tamponade from neoplastic pericarditis"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Tumor lysis syndrome"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Untoward effects of cancer chemotherapy"
+  },
+  {
+    "catagory": "HemeOnc",
+    "name": "Carcinoma of unknown primary"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Skin and soft tissue infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Dermatophytes"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Herpes Zoster/varicella"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Viral exanthems (other than varicella)"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Cellulitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Necrotizing soft tissue infections and gas gangrene"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Lymphadenitis and lymphangitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "CNS Infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Meningitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Viral Meningitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": ".Bacterial Meningitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Other Meningitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Brain Abscess"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Encephalitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Epidural Abscess"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Upper Respiratory tract infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Acute and Chronic sinusitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Otitis media and externa"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Common cold"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Pharyngitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Epiglottitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Deep infections in head and neck"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Eye infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Periorbital cellulitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Conjunctivitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Viral Conjunctivitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Bacterial Conjunctivitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Allergic Conjunctivitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Keratitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Endophthalmitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Chorioretinitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Orbital infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Lower respiratory tract infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Bronchitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Pneumonia"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Bacterial (not mycobacterial) Pneumonia"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Fungal Pneumonia"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Viral Pneumonia"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Ventilator associated Pneumonia"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Lung Abscess"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Tuberculosis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Screening and treating of latent TB"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Pulmonary TB"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Empyema"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Endocarditis and other cardiovascular infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Endocarditis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Diagnosis of Endocarditis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "prophylaxis for Endocarditis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Pericardial infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Hepatico-biliary Infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Viral Hepatitis – risk factors and testing for"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Hepatitis A"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Hepatitis B"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Hepatitis C"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Other Viral hepatitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Liver Abscess"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Cholecystitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Cholangitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Enteric Infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Esophagitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Candida"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Viral Candida"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Gastroenteritis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Viral Gastroenteritis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Bacterial and food-borne Gastroenteritis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Anti-biotic associated Gastroenteritis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Infections of pancreas and pancreatic abscess"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Intraabdominal abscess (other than liver or pancreas)"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "HIV and AIDS"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Transmission of HIV"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Laboratory Diagnosis and staging HIV and AIDS"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Common/Specific Opportunistic Infections HIV and AIDS"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "PCP pneumonia"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Candida esophagitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "PML/JC Virus"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Toxoplasmosis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "MAC"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Oral hairy Leukoplakia"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Kaposi’s Sarcoma"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Hematologic complications of HIV"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Lymphoma assciated with HIV and AIDS"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Neurologic complications of HIV"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Cryptococcal meningitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "AIDS dementia"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Ophthalmologic complications of HIV"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "CMV retinitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Pulmonary complications of HIV (not PCP or lobar pneumonia)"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Basic management principles of HIV/AIDS"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Common/First line HAART"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Prophylaxis for PCP, Toxo, and MAC"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Oncologic complications of HIV"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Rheumatologic complications of HIV"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Metabolic complications of HIV"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name":
+      "Routine testing/health maintenance for long-term follow-up of HIV patients"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Sexually Transmitted Diseases and Reproductive organ infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Urethritis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Genital Ulcers"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Male Genital Ulcers"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Female Genital Ulcers"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Vulvovaginitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Cervicitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Epididymitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Salpingitis and Pelvic Inflammatory Disease"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Syphillis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "HPV and anogenital warts"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Urinary Tract infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Asymptomatic bacteriuria"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Cystitis and Pyelonephritis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Perinephric Abscess"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Prostatitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Infectious Arthritis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Osteomyelitis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Bacteremia and Sepsis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Fever and Neutropenia"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "SIRS and Septic Shock"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Toxic shock syndrome"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Neuroleptic Malignant syndrome"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Rheumatic Fever"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Procedural and Device related infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Nosocomial Infections"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Infection control principles and isolation regulations"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Needle stick injury and postexposure prophylaxis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Immunizations"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Indications based on age and co-morbidities"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Prevention of infectious disease"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Immunization"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Endocarditis prophylaxis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Prevention of TB, treatment of latent TB"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Infection control/isolation"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Transmission of HIV"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Needlestick injury and postexposure prophylaxis"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Specific Causative Organisms"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Viral disease"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Prion disease"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Chlamydial diseases"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Mycoplasmal disease"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Rickettsioses and ehrlichioses"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Bacterial disease"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Gram-positive"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Gram-negative"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Anaerobic"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Mycobacterial and Non-pulmonary TB"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Mycoses"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Protozoal and Helminthic diseases"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Ectoparasites"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Antimicrobial Therapy"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Basic classes of antibiotics, specific antibiotics within classes"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Mechanism of action"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Use of laboratory antibiogram"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Common toxicities"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Targeted antibiotic therapy for specific organisms"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Epidemiology of antimicrobial resistance"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Indications for pre-operative and prophylactic antibiotics"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Public Health and Bioterrorism"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Global outbreaks"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Pandemic Flu"
+  },
+  {
+    "catagory": "Infectious Disease",
+    "name": "Most common biologic agents of bioterrorism"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Acute renal failure"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hypotension or shock·induced acute renal failure"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Toxic injury - renal failure"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Radiocontrast dye - renal failure"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Medication-induced renal failure"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Myeloma-associated renal failure"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Acute interstitial nephritis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Rhabdomyolysis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hepatorenal syndrome"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Disseminated atheroembolism (cholesterol emboli syndrome)"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Chronic renal failure (not specific disorders listed below)"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Renal dialysis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Renal transplantation"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Strategies to prevent progression of renal disease"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Glomerular disorders"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Systemic lupus erythematosus - glomerulonephritis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Minimal change disease"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Focal and segmenlal glomerular sclerosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Membranous glomerulonephritis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Membranoproliferative glomerulonephritis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hepatitis C"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "IgA nephropathy"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Goodpasture's syndrome"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "eGFR/true GFR discordance"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hypertension"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Essential hypertension"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Primary aldosteronism and mineralocorticoid excess"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Renal artery stenosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Water and electrolyte balance"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hypernatremia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Diabetes insipidus"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hyponatremia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hyponatremia from hypovolemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hyponatremia from SIADH"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "SIADH from tumor"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "SIADH from cause other than tumor"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hyponatremia from edematous disorders"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hypokalemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Drug-induced hypokalemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": " Mineralocortacoid excess"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Bartter's syndrome"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hypokalemia from vomiting or diarrhea"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hyperkalemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hyperkalemia from renal failure"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hyperkalemia from acidosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hyperkalemia from cell lysis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Drug-induced hyperkalemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Adrenal insufficiency"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hypercalcemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Primary hyperparathyroidism"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Malignancy-associated hypercalcemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Sarcoidosis and hypercalcemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hypocalcemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Vitamin D deficiency and osteomalacia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hyperphosphatemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hypophosphatemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Hypermagnesemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": " Hypomagnesemia"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": " Metabolic acidosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Elevated anion gap"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Diabetic ketoacidosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Lactic acidosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Normal anion gap metabolic acidosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Renal tubular acidosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Normal anion gap metabolic acidosis from diarrhea"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": " Metabolic alkalosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Bartter's syndrome"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Volume-depletion associated metabolic alkalosis ."
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Mineralocorticoid excess"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Respiratory acidosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Respiratory alkalosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Mixed acid-base disturbance"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Vasculitis and the kidney"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Leukocytoclastic vasculitis (see also Rheumatology)"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Henoch·Schoenlein purpura"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Antineutrophil cyloplasrnic antibody (ANCA}-associated vasculitis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Wegener's granulomatosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Microscopic polyangiitis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Other kidney disorders"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Renal vein thrombosis"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Obstructive uropathy"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "Diabetic nephropathy"
+  },
+  {
+    "catagory": "Nephrology",
+    "name":
+      "Cystic kidney disease (polycystic, medullary sponge, medullary cystic)"
+  },
+  {
+    "catagory": "Nephrology",
+    "name": "End of life nephrology/Questions of dialysis"
+  },
+  {
+    "catagory": "Urology",
+    "name":
+      "Genitourinary cancer (kidney cancer, bladder cancer, prostate cancer, testicular cancer, genital cancer)"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Erectile dysfunction"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Hypogonadism"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Scrotal pain, masses, swelling"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Nephrolithiasis (urinary stone disease)"
+  },
+  {
+    "catagory": "Urology",
+    "name": "BPH"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Prostatitis/Infection and inflammation of the urinary tract"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Hematuria"
+  },
+  {
+    "catagory": "Urology",
+    "name": "UTI"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Urinary incontinence/Overactive bladder"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Pelvic organ prolapse"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Bladder catheterization"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Ultrasound/bladder scan for assessment of post-void residual"
+  },
+  {
+    "catagory": "Urology",
+    "name": "CT scan abdomen and pelvis/CT IVP"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Urinalysis and urine culture"
+  },
+  {
+    "catagory": "Urology",
+    "name": "PSA (prostate specific antigen)"
+  },
+  {
+    "catagory": "Urology",
+    "name": "Prostate exam/scrotal exam"
+  },
+  {
+    "catagory": "Urology",
+    "name":
+      "AUA symptom score for assessment of lower urinary tract symptoms in men"
+  },
+  {
+    "catagory": "Urology",
+    "name":
+      "Female GU exam including cough stress test and POP-Q exam for pelvic organ prolapse"
+  }
+]

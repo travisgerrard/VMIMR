@@ -6,7 +6,10 @@ const User = mongoose.model('users');
 
 function tokenForUser(user) {
   const timestamp = new Date().getTime();
-  return jwt.encode({ sub: user.id, iat: timestamp }, keys.tokenKey);
+  return jwt.encode(
+    { sub: user.id, iat: timestamp, admin: user.admin },
+    keys.tokenKey
+  );
 }
 
 exports.signin = function(req, res, next) {
