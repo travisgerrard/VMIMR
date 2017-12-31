@@ -38,7 +38,7 @@ class Header extends Component {
     //show sign in
     return [
       <Menu.Item key="signin">
-        <Link to="signin">Sign in</Link>
+        <Link to="/signin">Sign in</Link>
       </Menu.Item>,
       <Menu.Item key="signup">
         <Link to="/signup">Sign up</Link>
@@ -48,7 +48,7 @@ class Header extends Component {
 
   render() {
     return (
-      <Menu color="green" inverted>
+      <Menu color="green" inverted stackable>
         <Menu.Item>
           <Link to="/">VM:IMR</Link>
         </Menu.Item>

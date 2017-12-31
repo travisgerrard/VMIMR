@@ -8,16 +8,16 @@ const LocalStrategy = require('passport-local');
 const User = mongoose.model('users');
 
 // Create local strategy
-const localOptions = { usernameField: 'email' };
+const localOptions = { usernameField: 'username' };
 const localLogin = new LocalStrategy(localOptions, function(
-  email,
+  username,
   password,
   done
 ) {
   // Verify this username and password, call done with user
   // if it is the correct username password
   // otherwise, call done with false
-  User.findOne({ email: email }, function(err, user) {
+  User.findOne({ username }, function(err, user) {
     if (err) {
       return done(err);
     }

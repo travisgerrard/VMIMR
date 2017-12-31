@@ -10,6 +10,7 @@ import RequireAuth from './auth/require_authentication';
 import Conditions from './conditions/ConditionTopLevelView';
 import Rotations from './rotations/RotationTopLevelView';
 import ListOfAllUsers from './users/ListOfAllUsers';
+import ModifyUser from './users/ModifyUser';
 
 class App extends Component {
   render() {
@@ -21,10 +22,15 @@ class App extends Component {
           <Route exact path="/signin" component={Signin} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signout" component={Signout} />
-          <Route exact path="/feature" component={RequireAuth(Feature)} />
           <Route path="/conditions" component={RequireAuth(Conditions)} />
           <Route path="/rotations" component={RequireAuth(Rotations)} />
-          <Route path="/users" component={RequireAuth(ListOfAllUsers)} />
+          <Route exact path="/users" component={RequireAuth(ListOfAllUsers)} />
+          <Route
+            exact
+            path={`/users/user/:id`}
+            component={RequireAuth(ModifyUser)}
+          />
+          <Route path={`/users/newUser`} component={RequireAuth(ModifyUser)} />
         </div>
       </BrowserRouter>
     );

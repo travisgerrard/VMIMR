@@ -18,3 +18,4 @@ export const ADD_LEARNING_TO_CONDITION = 'add_learning_to_condition';
 export const UPDATE_LEARNING = 'update_learning';
 export const DELETE_LEARNING = 'delete_learning';
 export const FETCH_ALL_USERS = 'fetch_all_users';
+export const SUBMIT_USER = 'submit_user';

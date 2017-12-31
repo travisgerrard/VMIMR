@@ -5,8 +5,9 @@ import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
 
 class Signin extends Component {
-  handleFormSubmit = ({ email, password }) => {
-    this.props.signinUser({ email, password, history: this.props.history });
+  handleFormSubmit = ({ username, password }) => {
+    console.log(username);
+    this.props.signinUser({ username, password, history: this.props.history });
   };
 
   renderAlert() {
@@ -24,13 +25,13 @@ class Signin extends Component {
       <div>
         <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
           <div>
-            <label>Email</label>
+            <label>Username</label>
             <div>
               <Field
-                name="email"
+                name="username"
                 component="input"
                 type="text"
-                placeholder="test@test.com"
+                placeholder="j12345"
               />
             </div>
           </div>

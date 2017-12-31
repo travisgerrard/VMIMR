@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { List } from 'semantic-ui-react';
+import { List, Container, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
 import _ from 'lodash';
 
@@ -11,13 +12,39 @@ class ListOfAllUsers extends Component {
 
   listOfUsers = () => {
     return _.map(this.props.users, user => {
-      console.log(user);
-      return <List.Item>{user.email}</List.Item>;
+      return (
+        <List.Item key={user._id}>
+          <List.Icon
+            name="user circle outline"
+            size="large"
+            verticalAlign="middle"
+          />
+          <List.Content>
+            <List.Header>
+              <Link to={`/users/user/${user._id}`}>{user.name}</Link>
+            </List.Header>
+            <List.Description as="a">{user.email}</List.Description>
+          </List.Content>
+        </List.Item>
+      );
     });
   };
 
   render() {
-    return <List>{this.listOfUsers()}</List>;
+    return (
+      <div>
+        <Container>
+          <List divided relaxed>
+            {this.listOfUsers()}
+          </List>
+          <Button color="green">
+            <Link to="/users/newUser" style={{ color: 'white' }}>
+              New User
+            </Link>
+          </Button>
+        </Container>
+      </div>
+    );
   }
 }
 

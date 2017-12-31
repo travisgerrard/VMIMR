@@ -7,7 +7,7 @@ const User = mongoose.model('users');
 function tokenForUser(user) {
   const timestamp = new Date().getTime();
   return jwt.encode(
-    { sub: user.id, iat: timestamp, admin: user.admin },
+    { sub: user.id, iat: timestamp, admin: user.admin, name: user.name },
     keys.tokenKey
   );
 }
