@@ -5,7 +5,6 @@ import Landing from './Landing';
 import Signin from './auth/Signin';
 import Signup from './auth/Signup';
 import Signout from './auth/Signout';
-import Feature from './Feature';
 import RequireAuth from './auth/require_authentication';
 import Conditions from './conditions/ConditionTopLevelView';
 import Rotations from './rotations/RotationTopLevelView';
