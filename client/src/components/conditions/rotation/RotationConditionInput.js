@@ -8,7 +8,6 @@ class RotationConditionInput extends Component {
   componentWillMount() {
     this.props.clearError();
     this.props.clearSearchTerm();
-    this.props.setRotationSelected(this.props.dbname);
   }
 
   addClicked = () => {

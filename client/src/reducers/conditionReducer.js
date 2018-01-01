@@ -24,20 +24,34 @@ const INITIAL_STATE = {
   showAddButton: false,
   showAddCard: false,
   rotationSelected: '',
-  filteredConditions: []
+  filteredConditions: [],
+  allConditions: {}
 };
 
 function theListOfConditionsToShow(searchTerm, state, addedObject) {
+  var { allConditions, rotationSelected } = state;
   if (addedObject) {
-    state = { ...state, [addedObject._id]: addedObject };
+    allConditions = { ...allConditions, [addedObject._id]: addedObject };
   }
-  var searchTermLowerCare = searchTerm.toLowerCase();
+
   // Create filtered array that only contains objects that are
   // 1. In the selected rotations
   // 2. Match the searchTerm criteria
-  var arrayOfConditionsToShow = _.filter(state, condition => {
-    if (_.indexOf(condition.tags, state.rotationSelected) >= 0) {
-      return _.includes(condition.condition.toLowerCase(), searchTermLowerCare);
+  var arrayOfConditionsToShow = _.filter(allConditions, condition => {
+    if (rotationSelected !== '') {
+      //A rotation is selected
+      if (_.indexOf(condition.tags, rotationSelected) >= 0) {
+        return _.includes(
+          condition.condition.toLowerCase(),
+          searchTerm.toLowerCase()
+        );
+      }
+    } else {
+      // if no rotation is selected
+      return _.includes(
+        condition.condition.toLowerCase(),
+        searchTerm.toLowerCase()
+      );
     }
   });
 
@@ -54,17 +68,17 @@ export default function(state = INITIAL_STATE, action) {
       if (state.rotationSelected === '') {
         return {
           ...state,
-          ...action.payload,
+          allConditions: action.payload,
           filteredConditions: _.values(action.payload)
         };
       } else {
         listOfConditionsToShow = theListOfConditionsToShow(state.searchTerm, {
           ...state,
-          ...action.payload
+          allConditions: action.payload
         });
         return {
           ...state,
-          ...action.payload,
+          allConditions: action.payload,
           filteredConditions: listOfConditionsToShow
         };
       }
@@ -78,7 +92,10 @@ export default function(state = INITIAL_STATE, action) {
       );
       return {
         ...state,
-        [action.payload._id]: action.payload,
+        allConditions: {
+          ...state.allConditions,
+          [action.payload._id]: action.payload
+        },
         filteredConditions: listOfConditionsToShow,
         loadingAddCondition: false,
         error: '',
@@ -93,6 +110,10 @@ export default function(state = INITIAL_STATE, action) {
         error: action.payload
       };
     case SET_ROTATION_SELECTED:
+      if (action.payload === 'all') {
+        action.payload = '';
+      }
+      console.log(action.payload);
       listOfConditionsToShow = theListOfConditionsToShow(state.searchTerm, {
         ...state,
         rotationSelected: action.payload
@@ -141,7 +162,10 @@ export default function(state = INITIAL_STATE, action) {
       );
       return {
         ...state,
-        [action.payload._id]: action.payload,
+        allConditions: {
+          ...state.allConditions,
+          [action.payload._id]: action.payload
+        },
         filteredConditions: listOfConditionsToShow
       };
     case UPDATE_LEARNING:
@@ -152,7 +176,10 @@ export default function(state = INITIAL_STATE, action) {
       );
       return {
         ...state,
-        [action.payload._id]: action.payload,
+        allConditions: {
+          ...state.allConditions,
+          [action.payload._id]: action.payload
+        },
         filteredConditions: listOfConditionsToShow
       };
     case DELETE_LEARNING:
@@ -163,7 +190,10 @@ export default function(state = INITIAL_STATE, action) {
       );
       return {
         ...state,
-        [action.payload._id]: action.payload,
+        allConditions: {
+          ...state.allConditions,
+          [action.payload._id]: action.payload
+        },
         filteredConditions: listOfConditionsToShow
       };
     default:

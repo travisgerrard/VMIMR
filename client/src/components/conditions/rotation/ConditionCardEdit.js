@@ -3,15 +3,13 @@ import {
   Button,
   Card,
   Input,
-  Dropdown,
   Form,
   TextArea,
   Icon,
   Image
 } from 'semantic-ui-react';
-import rotations from '../rotations';
+import RotationDropDown from './shared/RotationDropDown';
 import moment from 'moment';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 
@@ -23,13 +21,6 @@ class ConditionCardView extends Component {
     date: moment().format('MM/DD/YY'),
     whatWasLearned: ''
   };
-
-  multiSelectOptions() {
-    var options = _.map(rotations, ({ name, dbname }) => {
-      return { key: name, text: name, value: dbname };
-    });
-    return options;
-  }
 
   saveCondition = () => {
     this.props.addCondition({
@@ -66,13 +57,10 @@ class ConditionCardView extends Component {
               onClick={this.props.hideCard}
             />
           </Image>
-          <Dropdown
+          <RotationDropDown
+            multiple={true}
+            inline={false}
             placeholder="Tags"
-            fluid
-            multiple
-            search
-            selection
-            options={this.multiSelectOptions()}
             onChange={(params, data) =>
               this.setState({
                 tags: data.value
