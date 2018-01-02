@@ -3,6 +3,7 @@ import { Button, Card, Input, TextArea, Form } from 'semantic-ui-react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
+import UserDropDown from './shared/UserDropDown';
 
 class ConditionCardPostEdit extends Component {
   state = {
@@ -57,7 +58,7 @@ class ConditionCardPostEdit extends Component {
     return (
       <Card.Content>
         <Input
-          label="Seen With"
+          label="Attending"
           placeholder="Ex: Baliga"
           value={this.state.seenWith}
           onChange={(params, data) =>
@@ -74,6 +75,11 @@ class ConditionCardPostEdit extends Component {
               date: data.value
             })
           }
+        />
+        <UserDropDown
+          multiple={true}
+          onChange={(params, data) => console.log(data.value)}
+          placeholder="Learned with"
         />
         <Form>
           <TextArea

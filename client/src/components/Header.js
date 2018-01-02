@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
 
 class Header extends Component {
@@ -21,17 +21,13 @@ class Header extends Component {
     if (this.props.authenticated) {
       // show sign out
       return [
-        <Menu.Item key="4" position="right">
-          <Link to="/rotations">Rotations</Link>
-        </Menu.Item>,
         <Menu.Item key="2" position="right">
           <Link to="/conditions">Conditions</Link>
         </Menu.Item>,
-        <Menu.Item key="3" position="right">
-          <Link to="/education">Conference</Link>
-        </Menu.Item>,
         <Menu.Item key="1" position="right">
-          <Link to="/signout">Sign Out</Link>
+          <Link to="/messages">
+            <Icon name="mail" />
+          </Link>
         </Menu.Item>
       ];
     }
@@ -48,7 +44,7 @@ class Header extends Component {
 
   render() {
     return (
-      <Menu color="green" inverted stackable>
+      <Menu color="green" inverted>
         <Menu.Item>
           <Link to="/">VM:IMR</Link>
         </Menu.Item>

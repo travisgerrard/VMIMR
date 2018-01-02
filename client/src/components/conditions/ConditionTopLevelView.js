@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
-import RotationConditionOverview from './rotation/RotationConditionOverview';
 import * as actions from '../../actions';
 import RotationDropDown from './rotation/shared/RotationDropDown';
+import RotationConditionInput from './rotation/RotationConditionInput';
+import RotationConditionList from './rotation/RotationConditionList';
 
 class ConditionTopLevelView extends Component {
   componentWillMount() {
     this.props.fetchAllConditions();
+    this.props.fetchAllUsers();
   }
 
   render() {
     return (
       <Container>
+        <RotationConditionInput title="" />
         <span>
           <h4>
-            Conditions for{' '}
+            Rotation:{' '}
             <RotationDropDown
               multiple={false}
               inline
@@ -24,11 +27,10 @@ class ConditionTopLevelView extends Component {
                 this.props.setRotationSelected(data.value)
               }
             />{' '}
-            rotation(s)
           </h4>
         </span>
         <br />
-        <RotationConditionOverview title="" />
+        <RotationConditionList title="" />
       </Container>
     );
   }

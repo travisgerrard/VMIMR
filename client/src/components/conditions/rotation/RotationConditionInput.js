@@ -72,7 +72,6 @@ class RotationConditionInput extends Component {
           {this.props.conditions.error}
         </div>
         {this.shouldShowAddCard()}
-        <br />
       </div>
     );
   }

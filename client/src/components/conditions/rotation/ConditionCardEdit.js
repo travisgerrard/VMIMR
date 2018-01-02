@@ -70,7 +70,7 @@ class ConditionCardView extends Component {
         </Card.Content>
         <Card.Content>
           <Input
-            label="Seen With"
+            label="Attending"
             placeholder="Ex: Baliga"
             value={this.state.seenWith}
             onChange={(params, data) =>
@@ -88,6 +88,7 @@ class ConditionCardView extends Component {
               })
             }
           />
+
           <Form>
             <TextArea
               autoHeight
