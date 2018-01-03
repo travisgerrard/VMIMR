@@ -57,8 +57,13 @@ module.exports = app => {
   );
 
   app.put('/api/condition/learning', requireAuth, async (req, res) => {
-    const { seenWith, date, whatWasLearned, learningId } = req.body;
-    console.log(learningId);
+    const {
+      seenWith,
+      date,
+      whatWasLearned,
+      usersTagged,
+      learningId
+    } = req.body;
 
     var learningToUpdate = await ConditionLearning.findOneAndUpdate(
       {
@@ -68,7 +73,9 @@ module.exports = app => {
         $set: {
           whatWasLearned: whatWasLearned,
           dateField: date,
-          seenWith: seenWith
+          seenWith: seenWith,
+          usersTagged: usersTagged,
+          dateUpdated: Date.now()
         }
       },
       { new: true }
@@ -92,6 +99,7 @@ module.exports = app => {
       whatWasLearned: whatWasLearned,
       dateField: date,
       seenWith: seenWith,
+      usersTagged: usersTagged,
       dateCreated: Date.now(),
       dateUpdated: Date.now(),
       _condition: conditionId,
@@ -144,6 +152,7 @@ module.exports = app => {
           whatWasLearned: learning.whatWasLearned,
           dateField: learning.date,
           seenWith: learning.seenWith,
+          usersTagged: usersTagged,
           dateCreated: Date.now(),
           dateUpdated: Date.now(),
           _condition: conditionNew._id,

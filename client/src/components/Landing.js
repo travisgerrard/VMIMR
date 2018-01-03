@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
+import LastFiveConditions from './landing/LastFiveConditions';
 import jwt_decode from 'jwt-decode';
 
-class Landing extends Component {
-  renderLandingPage = () => {
-    if (localStorage.getItem('token') !== null) {
-      return (
+const Landing = () => {
+  var landingPage;
+  if (localStorage.getItem('token') !== null) {
+    landingPage = (
+      <div>
         <h5>{`Hi there ${jwt_decode(localStorage.getItem('token')).name}`}</h5>
-      );
-    }
-    return <h5>Login to get started</h5>;
-  };
-
-  render() {
-    return <div>{this.renderLandingPage()}</div>;
+        <LastFiveConditions />
+      </div>
+    );
+  } else {
+    landingPage = <h5>Login to get started</h5>;
   }
-}
+
+  return <div>{landingPage}</div>;
+};
 
 export default Landing;

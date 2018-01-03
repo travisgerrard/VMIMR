@@ -11,7 +11,7 @@ class ConditionCardPostEdit extends Component {
       ? this.props.dateField
       : moment().format('MM/DD/YY'),
     whatWasLearned: this.props.whatWasLearned ? this.props.whatWasLearned : '',
-    usersTagged: []
+    usersTagged: this.props.usersTagged ? this.props.usersTagged : []
   };
 
   saveLearning = () => {
@@ -59,6 +59,7 @@ class ConditionCardPostEdit extends Component {
         attendingPlaceholder="Ex: Baliga"
         userPlaceholder="Learned with"
         wwlPlaceholder="What was learned"
+        userDefaultValue={this.state.usersTagged}
         attendingOnChange={(params, data) =>
           this.setState({
             seenWith: data.value

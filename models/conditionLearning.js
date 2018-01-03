@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const conditionLearningSchema = new Schema({
   tags: [{ type: String }],
+  usersTagged: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   whatWasLearned: String,
   dateField: String,
   seenWith: String,

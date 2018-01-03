@@ -55,7 +55,7 @@ class ConditionCardView extends Component {
           <RotationDropDown
             multiple={true}
             inline={false}
-            placeholder="Tags"
+            placeholder="Rotation tags"
             onChange={(params, data) =>
               this.setState({
                 tags: data.value

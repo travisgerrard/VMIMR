@@ -19,7 +19,8 @@ const LearningEdit = ({
   saveOnClick,
   cancelOnClick,
   deleteOnClick,
-  showDeleteButton
+  showDeleteButton,
+  userDefaultValue
 }) => {
   var deleteButton;
   if (showDeleteButton) {
@@ -43,6 +44,7 @@ const LearningEdit = ({
         multiple={multiple}
         onChange={userOnChange}
         placeholder={userPlaceholder}
+        defaultValue={userDefaultValue}
       />
       <Form>
         <TextArea
