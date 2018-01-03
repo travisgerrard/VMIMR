@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Card, Input, TextArea, Form } from 'semantic-ui-react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
-import UserDropDown from './shared/UserDropDown';
+import LearningEdit from './LearningEdit';
 
 class ConditionCardPostEdit extends Component {
   state = {
@@ -11,23 +10,28 @@ class ConditionCardPostEdit extends Component {
     date: this.props.dateField
       ? this.props.dateField
       : moment().format('MM/DD/YY'),
-    whatWasLearned: this.props.whatWasLearned ? this.props.whatWasLearned : ''
+    whatWasLearned: this.props.whatWasLearned ? this.props.whatWasLearned : '',
+    usersTagged: []
   };
 
   saveLearning = () => {
     if (this.props.conditionId) {
+      //New learning
       this.props.addLearningToCondition({
         seenWith: this.state.seenWith,
         date: this.state.date,
         whatWasLearned: this.state.whatWasLearned,
+        usersTagged: this.state.usersTagged,
         conditionId: this.props.conditionId
       });
     }
     if (this.props.learningId) {
+      //Updateing learning
       this.props.updateLearning({
         seenWith: this.state.seenWith,
         date: this.state.date,
         whatWasLearned: this.state.whatWasLearned,
+        usersTagged: this.state.usersTagged,
         learningId: this.props.learningId
       });
     }
@@ -43,66 +47,43 @@ class ConditionCardPostEdit extends Component {
     }
   };
 
-  showDeleteButton = () => {
-    if (this.props.learningId) {
-      return (
-        <Button basic color="red" onClick={this.deleteLearning}>
-          Delete
-        </Button>
-      );
-    }
-  };
-
   render() {
-    console.log(this.props.conditionId);
     return (
-      <Card.Content>
-        <Input
-          label="Attending"
-          placeholder="Ex: Baliga"
-          value={this.state.seenWith}
-          onChange={(params, data) =>
-            this.setState({
-              seenWith: data.value
-            })
-          }
-        />
-        <Input
-          label="Date"
-          value={this.state.date}
-          onChange={(params, data) =>
-            this.setState({
-              date: data.value
-            })
-          }
-        />
-        <UserDropDown
-          multiple={true}
-          onChange={(params, data) => console.log(data.value)}
-          placeholder="Learned with"
-        />
-        <Form>
-          <TextArea
-            autoHeight
-            placeholder="What was learned"
-            value={this.state.whatWasLearned}
-            onChange={(params, data) =>
-              this.setState({
-                whatWasLearned: data.value
-              })
-            }
-          />
-        </Form>
-        <div className="ui three buttons">
-          <Button basic color="green" onClick={this.saveLearning}>
-            Save
-          </Button>
-          <Button basic color="grey" onClick={this.cancelLearning}>
-            Cancel
-          </Button>
-          {this.showDeleteButton()}
-        </div>
-      </Card.Content>
+      <LearningEdit
+        attendingLabel="Attending"
+        dateLabel="Date"
+        attendingValue={this.state.seenWith}
+        dateValue={this.state.date}
+        wwlValue={this.state.whatWasLearned}
+        multiple={true}
+        attendingPlaceholder="Ex: Baliga"
+        userPlaceholder="Learned with"
+        wwlPlaceholder="What was learned"
+        attendingOnChange={(params, data) =>
+          this.setState({
+            seenWith: data.value
+          })
+        }
+        dateOnChange={(params, data) =>
+          this.setState({
+            date: data.value
+          })
+        }
+        userOnChange={(params, data) =>
+          this.setState({
+            usersTagged: data.value
+          })
+        }
+        wwlOnChange={(params, data) =>
+          this.setState({
+            whatWasLearned: data.value
+          })
+        }
+        saveOnClick={this.saveLearning}
+        cancelOnClick={this.cancelLearning}
+        deleteOnClick={this.deleteLearning}
+        showDeleteButton={this.props.learningId}
+      />
     );
   }
 }

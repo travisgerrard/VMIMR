@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Card,
-  Input,
-  Form,
-  TextArea,
-  Icon,
-  Image
-} from 'semantic-ui-react';
+import { Card, Input, Icon, Image } from 'semantic-ui-react';
 import RotationDropDown from './shared/RotationDropDown';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
+import LearningEdit from './LearningEdit';
 
 class ConditionCardView extends Component {
   state = {
@@ -19,7 +12,8 @@ class ConditionCardView extends Component {
     tags: '',
     seenWith: '',
     date: moment().format('MM/DD/YY'),
-    whatWasLearned: ''
+    whatWasLearned: '',
+    usersTagged: []
   };
 
   saveCondition = () => {
@@ -28,6 +22,7 @@ class ConditionCardView extends Component {
       tags: this.state.tags,
       learning: {
         seenWith: this.state.seenWith,
+        usersTagged: this.state.usersTagged,
         tag: this.state.tags,
         date: this.state.date,
         whatWasLearned: this.state.whatWasLearned
@@ -68,50 +63,40 @@ class ConditionCardView extends Component {
             }
           />
         </Card.Content>
-        <Card.Content>
-          <Input
-            label="Attending"
-            placeholder="Ex: Baliga"
-            value={this.state.seenWith}
-            onChange={(params, data) =>
-              this.setState({
-                seenWith: data.value
-              })
-            }
-          />
-          <Input
-            label="Date"
-            value={this.state.date}
-            onChange={(params, data) =>
-              this.setState({
-                date: data.value
-              })
-            }
-          />
-
-          <Form>
-            <TextArea
-              autoHeight
-              placeholder="What was learned"
-              value={this.state.whatWasLearned}
-              onChange={(params, data) =>
-                this.setState({
-                  whatWasLearned: data.value
-                })
-              }
-            />
-          </Form>
-        </Card.Content>
-        <Card.Content extra>
-          <div className="ui two buttons">
-            <Button basic color="green" onClick={this.saveCondition}>
-              Save
-            </Button>
-            <Button basic color="red">
-              Cancel
-            </Button>
-          </div>
-        </Card.Content>
+        <LearningEdit
+          attendingLabel="Attending"
+          dateLabel="Date"
+          attendingValue={this.state.seenWith}
+          dateValue={this.state.date}
+          wwlValue={this.state.whatWasLearned}
+          multiple={true}
+          attendingPlaceholder="Ex: Baliga"
+          userPlaceholder="Learned with"
+          wwlPlaceholder="What was learned"
+          attendingOnChange={(params, data) =>
+            this.setState({
+              seenWith: data.value
+            })
+          }
+          dateOnChange={(params, data) =>
+            this.setState({
+              date: data.value
+            })
+          }
+          userOnChange={(params, data) =>
+            this.setState({
+              usersTagged: data.value
+            })
+          }
+          wwlOnChange={(params, data) =>
+            this.setState({
+              whatWasLearned: data.value
+            })
+          }
+          saveOnClick={this.saveCondition}
+          cancelOnClick={this.props.hideCard}
+          showDeleteButton={this.props.learningId}
+        />
       </Card>
     );
   }
