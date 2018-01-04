@@ -67,11 +67,9 @@ class ModifyUser extends Component {
             >
               Save
             </Form.Button>
-            <Form.Button color="red">
-              <Link to="/users" style={{ color: 'white' }}>
-                Cancel
-              </Link>
-            </Form.Button>
+            <Link to="/users" style={{ color: 'white' }}>
+              <Form.Button color="red">Cancel</Form.Button>
+            </Link>
           </Form.Group>
         </Form>
       </Container>
