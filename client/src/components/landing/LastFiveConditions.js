@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
 import ConditionCardView from '../conditions/rotation/ConditionCardView';
 import { connect } from 'react-redux';
+import { Card } from 'semantic-ui-react';
 import * as actions from '../../actions';
+import _ from 'lodash';
 
 class LastFiveConditions extends Component {
   componentWillMount() {
-    // Lets make a new actions that just pulls last 5 actives from database....
+    this.props.fetchLastFiveConditions();
+  }
+
+  listOfConditions() {
+    return _.map(this.props.landing, condition => {
+      return (
+        <ConditionCardView
+          condition={condition}
+          key={condition._id}
+          conditionId={condition._id}
+        />
+      );
+    });
   }
 
   render() {
-    return <div>Last Five</div>;
+    return (
+      <div>
+        <p>Last Five</p>
+        <Card.Group>{this.listOfConditions()}</Card.Group>
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
-  console.log(state.conditions.allConditions);
+  console.log(state.landing);
   return state;
 }
 

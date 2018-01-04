@@ -93,7 +93,13 @@ module.exports = app => {
   });
 
   app.post('/api/condition/learning', requireAuth, async (req, res) => {
-    const { seenWith, date, whatWasLearned, conditionId } = req.body;
+    const {
+      seenWith,
+      date,
+      whatWasLearned,
+      conditionId,
+      usersTagged
+    } = req.body;
 
     const conditionLearningNew = new ConditionLearning({
       whatWasLearned: whatWasLearned,
@@ -152,7 +158,7 @@ module.exports = app => {
           whatWasLearned: learning.whatWasLearned,
           dateField: learning.date,
           seenWith: learning.seenWith,
-          usersTagged: usersTagged,
+          usersTagged: learning.usersTagged,
           dateCreated: Date.now(),
           dateUpdated: Date.now(),
           _condition: conditionNew._id,

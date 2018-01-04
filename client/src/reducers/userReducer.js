@@ -1,4 +1,4 @@
-import { FETCH_ALL_USERS, SUBMIT_USER } from '../actions/types';
+import { FETCH_ALL_USERS, SUBMIT_USER, UNAUTH_USER } from '../actions/types';
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -8,6 +8,8 @@ export default function(state = {}, action) {
       console.log(action.payload);
       console.log(state);
       return { ...state, [action.payload._id]: action.payload };
+    case UNAUTH_USER:
+      return {};
     default:
       return { ...state };
   }

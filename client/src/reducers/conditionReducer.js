@@ -13,7 +13,8 @@ import {
   HIDE_ADD_CARD,
   ADD_LEARNING_TO_CONDITION,
   UPDATE_LEARNING,
-  DELETE_LEARNING
+  DELETE_LEARNING,
+  UNAUTH_USER
 } from '../actions/types';
 import _ from 'lodash';
 
@@ -196,6 +197,8 @@ export default function(state = INITIAL_STATE, action) {
         },
         filteredConditions: listOfConditionsToShow
       };
+    case UNAUTH_USER:
+      return INITIAL_STATE;
     default:
       return state;
   }

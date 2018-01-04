@@ -1,7 +1,7 @@
 import {
   AUTH_USER,
-  UNAUTH_USER,
   AUTH_ERROR,
+  UNAUTH_USER,
   FETCH_MESSAGE
 } from '../actions/types';
 

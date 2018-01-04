@@ -28,6 +28,11 @@ class Header extends Component {
           <Link to="/messages">
             <Icon name="mail" />
           </Link>
+        </Menu.Item>,
+        <Menu.Item key="3" position="right">
+          <Link to="/signout">
+            <Icon name="x" size="large" />
+          </Link>
         </Menu.Item>
       ];
     }

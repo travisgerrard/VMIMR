@@ -37,11 +37,9 @@ class ListOfAllUsers extends Component {
           <List divided relaxed>
             {this.listOfUsers()}
           </List>
-          <Button color="green">
-            <Link to="/users/newUser" style={{ color: 'white' }}>
-              New User
-            </Link>
-          </Button>
+          <Link to="/users/newUser" style={{ color: 'white' }}>
+            <Button color="green">New User</Button>
+          </Link>
         </Container>
       </div>
     );
