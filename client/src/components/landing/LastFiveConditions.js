@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ConditionCardView from '../conditions/rotation/ConditionCardView';
 import { connect } from 'react-redux';
-import { Card } from 'semantic-ui-react';
+import { Card, Container } from 'semantic-ui-react';
+import jwt_decode from 'jwt-decode';
 import * as actions from '../../actions';
 import _ from 'lodash';
 
@@ -25,10 +26,11 @@ class LastFiveConditions extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
+        <h5>{`Hi there ${jwt_decode(localStorage.getItem('token')).name}`}</h5>
         <p>Last Five</p>
         <Card.Group>{this.listOfConditions()}</Card.Group>
-      </div>
+      </Container>
     );
   }
 }

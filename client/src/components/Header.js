@@ -40,9 +40,6 @@ class Header extends Component {
     return [
       <Menu.Item key="signin">
         <Link to="/signin">Sign in</Link>
-      </Menu.Item>,
-      <Menu.Item key="signup">
-        <Link to="/signup">Sign up</Link>
       </Menu.Item>
     ];
   }
