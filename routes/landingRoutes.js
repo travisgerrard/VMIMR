@@ -25,7 +25,6 @@ module.exports = app => {
       const arrayOfConditionIds = _.map(lastFiveLearnings, '_condition');
       const arrayOfLearningIds = _.map(lastFiveLearnings, '_id');
 
-      console.log(arrayOfLearningIds);
       var conditionsToReturnWithLearning = await Condition.find({
         _id: { $in: arrayOfConditionIds }
       }).populate({

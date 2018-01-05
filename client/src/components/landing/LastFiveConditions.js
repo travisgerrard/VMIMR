@@ -11,7 +11,8 @@ class LastFiveConditions extends Component {
   }
 
   listOfConditions() {
-    return _.map(this.props.landing, condition => {
+    var lastFiveReversed = _.values(this.props.landing).reverse();
+    return _.map(lastFiveReversed, condition => {
       return (
         <ConditionCardView
           condition={condition}
