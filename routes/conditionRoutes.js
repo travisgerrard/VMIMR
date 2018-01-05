@@ -10,7 +10,16 @@ module.exports = app => {
     try {
       const conditionsArray = await Condition.find({}).populate({
         path: '_learnings',
-        match: { _creator: { $eq: req.user.id } }
+        match: {
+          $or: [
+            {
+              _creator: { $eq: req.user.id }
+            },
+            {
+              usersTagged: req.user.id
+            }
+          ]
+        }
       });
       var conditionsObject = {};
       conditionsArray.forEach(function(condition) {
@@ -86,7 +95,16 @@ module.exports = app => {
       _id: learningToUpdate._condition
     }).populate({
       path: '_learnings',
-      match: { _creator: { $eq: req.user.id } }
+      match: {
+        $or: [
+          {
+            _creator: { $eq: req.user.id }
+          },
+          {
+            usersTagged: req.user.id
+          }
+        ]
+      }
     });
 
     res.send(conditionToSend);
