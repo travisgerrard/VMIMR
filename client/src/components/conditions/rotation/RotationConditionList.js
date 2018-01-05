@@ -8,7 +8,37 @@ import { Card } from 'semantic-ui-react';
 
 class RotationConditionList extends Component {
   listOfConditions() {
-    return _.map(this.props.conditions.filteredConditions, condition => {
+    var { filteredConditions } = this.props.conditions;
+    // Sort filteredConditions so conditions with learnings show up first.
+    filteredConditions.sort(function(a, b) {
+      var x = a._learnings.length;
+      var y = b._learnings.length;
+      if (x > y) {
+        return -1;
+      }
+      if (x < y) {
+        return 1;
+      }
+      return 0;
+    });
+
+    filteredConditions.sort(function(a, b) {
+      if (a._learnings.length > 0 && b._learnings.length > 0) {
+        var x = a._learnings[0].dateUpdated;
+        var y = b._learnings[0].dateUpdated;
+        if (x > y) {
+          return -1;
+        }
+        if (x < y) {
+          return 1;
+        }
+        return 0;
+      }
+    });
+
+    console.log(filteredConditions);
+
+    return _.map(filteredConditions, condition => {
       return (
         <ConditionCardView
           condition={condition}
@@ -25,7 +55,7 @@ class RotationConditionList extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
+  //console.log(state);
   return state;
 }
 
