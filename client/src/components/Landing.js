@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LastFiveConditions from './landing/LastFiveConditions';
 
 const Landing = () => {

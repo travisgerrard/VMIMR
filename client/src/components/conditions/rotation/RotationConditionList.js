@@ -9,6 +9,7 @@ import { Card } from 'semantic-ui-react';
 class RotationConditionList extends Component {
   listOfConditions() {
     var { filteredConditions } = this.props.conditions;
+
     // Sort filteredConditions so conditions with learnings show up first.
     filteredConditions.sort(function(a, b) {
       var x = a._learnings.length;
@@ -22,6 +23,7 @@ class RotationConditionList extends Component {
       return 0;
     });
 
+    // Sort filteredConditions so most recent learnings show up first.
     filteredConditions.sort(function(a, b) {
       if (a._learnings.length > 0 && b._learnings.length > 0) {
         var x = a._learnings[0].dateUpdated;
@@ -34,9 +36,8 @@ class RotationConditionList extends Component {
         }
         return 0;
       }
+      return 0;
     });
-
-    console.log(filteredConditions);
 
     return _.map(filteredConditions, condition => {
       return (
@@ -55,7 +56,6 @@ class RotationConditionList extends Component {
 }
 
 function mapStateToProps(state) {
-  //console.log(state);
   return state;
 }
 
