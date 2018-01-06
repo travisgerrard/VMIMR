@@ -20,7 +20,7 @@ module.exports = app => {
         ]
       })
         .sort('-dateUpdated')
-        .limit(5)
+        .limit(3)
         .select('_condition');
       const arrayOfConditionIds = _.map(lastFiveLearnings, '_condition');
       const arrayOfLearningIds = _.map(lastFiveLearnings, '_id');

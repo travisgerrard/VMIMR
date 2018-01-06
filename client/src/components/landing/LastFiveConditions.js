@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ConditionCardView from '../conditions/rotation/ConditionCardView';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Card, Container } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
 import * as actions from '../../actions';
@@ -12,8 +13,20 @@ class LastFiveConditions extends Component {
   }
 
   listOfConditions() {
-    var lastFiveReversed = _.values(this.props.landing).reverse();
-    return _.map(lastFiveReversed, condition => {
+    var { landing } = this.props;
+    landing.sort(function(a, b) {
+      var x = a._learnings[0].dateUpdated;
+      var y = b._learnings[0].dateUpdated;
+      if (x > y) {
+        return -1;
+      }
+      if (x < y) {
+        return 1;
+      }
+      return 0;
+    });
+
+    return _.map(landing, condition => {
       return (
         <ConditionCardView
           condition={condition}
@@ -28,7 +41,10 @@ class LastFiveConditions extends Component {
     return (
       <Container>
         <h5>{`Hi there ${jwt_decode(localStorage.getItem('token')).name}`}</h5>
-        <p>Last Five</p>
+        <p>
+          Your three most recent <Link to="/conditions/">condition</Link>{' '}
+          learnings
+        </p>
         <Card.Group>{this.listOfConditions()}</Card.Group>
       </Container>
     );
@@ -36,7 +52,6 @@ class LastFiveConditions extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.landing);
   return state;
 }
 
