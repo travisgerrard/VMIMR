@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Image, Icon, Button } from 'semantic-ui-react';
 
-const TEXTLENGTH = 140;
+const TEXTLENGTH = 280;
 
 class NormalCardConditionLearningView extends Component {
   state = { showAllText: false };

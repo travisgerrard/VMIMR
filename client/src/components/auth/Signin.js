@@ -3,17 +3,18 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
+import { Form, Container } from 'semantic-ui-react';
+import SigninField from '../users/UserInputField';
 
 class Signin extends Component {
   handleFormSubmit = ({ username, password }) => {
-    console.log(username);
     this.props.signinUser({ username, password, history: this.props.history });
   };
 
   renderAlert() {
     if (this.props.errorMessage) {
       return (
-        <div className="red-text" style={{ marginBottom: '10px' }}>
+        <div style={{ marginBottom: '10px', color: 'red' }}>
           <strong>Ooops</strong> {this.props.errorMessage}
         </div>
       );
@@ -22,36 +23,28 @@ class Signin extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-          <div>
-            <label>Username</label>
-            <div>
-              <Field
-                name="username"
-                component="input"
-                type="text"
-                placeholder="j12345"
-              />
-            </div>
-          </div>
-          <div>
-            <label>Password</label>
-            <div>
-              <Field
-                name="password"
-                component="input"
-                type="password"
-                placeholder="password"
-              />
-            </div>
-          </div>
+      <Container>
+        <Form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+          <Field
+            component={SigninField}
+            label="Username"
+            name="username"
+            placeholder="j12345"
+          />
+          <Field
+            component={SigninField}
+            label="Password"
+            name="password"
+            placeholder="password"
+            type="password"
+          />
+
           {this.renderAlert()}
-          <button type="submit" className="green btn-flat white-text">
+          <Form.Button color="green" type="submit">
             Submit
-          </button>
-        </form>
-      </div>
+          </Form.Button>
+        </Form>
+      </Container>
     );
   }
 }

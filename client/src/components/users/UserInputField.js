@@ -5,6 +5,7 @@ export default ({
   input,
   label,
   placeholder,
+  type,
   defaultValue,
   meta: { error, touched }
 }) => {
@@ -14,6 +15,7 @@ export default ({
       label={label}
       placeholder={placeholder}
       defaultValue={defaultValue}
+      type={type ? type : 'text'}
     />
   );
 };
