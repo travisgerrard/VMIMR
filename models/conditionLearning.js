@@ -9,6 +9,7 @@ const conditionLearningSchema = new Schema({
   seenWith: String,
   dateCreated: Date,
   dateUpdated: Date,
+  dotPhrase: { type: Boolean, default: false },
   _condition: { type: mongoose.Schema.Types.ObjectId, ref: 'Condition' },
   _creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
