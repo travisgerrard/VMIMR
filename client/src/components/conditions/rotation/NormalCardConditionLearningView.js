@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Card, Image, Icon, Button } from 'semantic-ui-react';
+import ReactMarkdown from 'react-markdown';
 
-const TEXTLENGTH = 280;
+const TEXTLENGTH = 200;
 
 class NormalCardConditionLearningView extends Component {
   state = { showAllText: false };
 
   learningText = text => {
     if (this.state.showAllText) {
-      return text;
+      return <ReactMarkdown source={text} />;
     } else {
-      return text.substring(0, TEXTLENGTH);
+      return <ReactMarkdown source={text.substring(0, TEXTLENGTH)} />;
     }
   };
 
@@ -23,8 +24,8 @@ class NormalCardConditionLearningView extends Component {
           <div
             style={{
               position: 'relative',
-              bottom: '1em',
-              height: '1em',
+              bottom: '25px',
+              height: '10px',
               background:
                 '-webkit-linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%)',
               backgroundImage:
@@ -86,11 +87,8 @@ class NormalCardConditionLearningView extends Component {
           Seen With: {seenWith} on {dateField}
         </Card.Meta>
         <Card.Description>
-          <span style={{ whiteSpace: 'pre-line' }}>
-            {this.learningText(whatWasLearned)}
-
-            {this.showAllTextButton(whatWasLearned)}
-          </span>
+          {this.learningText(whatWasLearned)}
+          {this.showAllTextButton(whatWasLearned)}
         </Card.Description>
       </Card.Content>
     );
