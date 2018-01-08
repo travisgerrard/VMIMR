@@ -87,7 +87,7 @@ class NormalCardConditionLearningView extends Component {
           Seen With: {seenWith} on {dateField}
         </Card.Meta>
         <Card.Description>
-          <span style={{ whiteSpace: 'pre' }}>
+          <span style={{ whiteSpace: 'pre-wrap' }}>
             {this.learningText(whatWasLearned)}
             {this.showAllTextButton(whatWasLearned)}
           </span>
