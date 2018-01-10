@@ -69,7 +69,7 @@ class ConditionCardView extends Component {
 
   render() {
     return (
-      <Card>
+      <Card centered>
         <Card.Content>
           <Card.Header>{this.props.condition.condition}</Card.Header>
           <Card.Meta>Tags: {this.props.condition.tags.join(', ')}</Card.Meta>

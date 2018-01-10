@@ -41,6 +41,7 @@ class LastFiveConditions extends Component {
     return (
       <Container>
         <h5>{`Hi there ${jwt_decode(localStorage.getItem('token')).name}`}</h5>
+        <p>Some promo info </p>
         <p>
           Your three most recent <Link to="/conditions/">condition</Link>{' '}
           learnings

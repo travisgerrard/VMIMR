@@ -13,21 +13,36 @@ class ConditionCardView extends Component {
     seenWith: '',
     date: moment().format('MM/DD/YY'),
     whatWasLearned: '',
-    usersTagged: []
+    usersTagged: [],
+    error: ''
   };
 
   saveCondition = () => {
-    this.props.addCondition({
-      condition: this.state.conditionToAdd,
-      tags: this.state.tags,
-      learning: {
-        seenWith: this.state.seenWith,
-        usersTagged: this.state.usersTagged,
-        tag: this.state.tags,
-        date: this.state.date,
-        whatWasLearned: this.state.whatWasLearned
-      }
-    });
+    if (this.state.conditionToAdd === '') {
+      this.setState({
+        error: "Condition can't be blank"
+      });
+    } else if (this.state.tags === '') {
+      this.setState({
+        error: "Tags can't be blank"
+      });
+    } else if (this.state.whatWasLearned === '') {
+      this.setState({
+        error: 'Need to have learned something'
+      });
+    } else {
+      this.props.addCondition({
+        condition: this.state.conditionToAdd,
+        tags: this.state.tags,
+        learning: {
+          seenWith: this.state.seenWith,
+          usersTagged: this.state.usersTagged,
+          tag: this.state.tags,
+          date: this.state.date,
+          whatWasLearned: this.state.whatWasLearned
+        }
+      });
+    }
   };
 
   render() {

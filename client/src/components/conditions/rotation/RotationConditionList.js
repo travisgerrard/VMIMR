@@ -11,33 +11,33 @@ class RotationConditionList extends Component {
     var { filteredConditions } = this.props.conditions;
 
     // Sort filteredConditions so conditions with learnings show up first.
-    filteredConditions.sort(function(a, b) {
-      var x = a._learnings.length;
-      var y = b._learnings.length;
-      if (x > y) {
-        return -1;
-      }
-      if (x < y) {
-        return 1;
-      }
-      return 0;
-    });
+    // filteredConditions.sort(function(a, b) {
+    //   var x = a._learnings.length;
+    //   var y = b._learnings.length;
+    //   if (x > y) {
+    //     return -1;
+    //   }
+    //   if (x < y) {
+    //     return 1;
+    //   }
+    //   return 0;
+    // });
 
     // Sort filteredConditions so most recent learnings show up first.
-    filteredConditions.sort(function(a, b) {
-      if (a._learnings.length > 0 && b._learnings.length > 0) {
-        var x = a._learnings[0].dateUpdated;
-        var y = b._learnings[0].dateUpdated;
-        if (x > y) {
-          return -1;
-        }
-        if (x < y) {
-          return 1;
-        }
-        return 0;
-      }
-      return 0;
-    });
+    // filteredConditions.sort(function(a, b) {
+    //   if (a._learnings.length > 0 && b._learnings.length > 0) {
+    //     var x = a._learnings[0].dateUpdated;
+    //     var y = b._learnings[0].dateUpdated;
+    //     if (x > y) {
+    //       return -1;
+    //     }
+    //     if (x < y) {
+    //       return 1;
+    //     }
+    //     return 0;
+    //   }
+    //   return 0;
+    // })
 
     return _.map(filteredConditions, condition => {
       return (
@@ -56,6 +56,28 @@ class RotationConditionList extends Component {
 }
 
 function mapStateToProps(state) {
+  //Sort filteredConditions so the ones with newest learnings are first
+  state.conditions.filteredConditions.sort(function(a, b) {
+    if (a._learnings.length > 0 && b._learnings.length > 0) {
+      var x = a._learnings[0].dateUpdated;
+      var y = b._learnings[0].dateUpdated;
+
+      if (x > y) {
+        return -1;
+      }
+      if (x < y) {
+        return 1;
+      }
+    } else if (a._learnings.length > 0 && b._learnings.length === 0) {
+      return -1;
+    } else if (a._learnings.length === 0 && b._learnings.length > 0) {
+      return 1;
+    } else {
+      return 0;
+    }
+    return 0;
+  });
+
   return state;
 }
 

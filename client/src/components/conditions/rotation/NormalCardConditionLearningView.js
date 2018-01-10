@@ -28,14 +28,12 @@ class NormalCardConditionLearningView extends Component {
               height: '10px',
               background:
                 '-webkit-linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%)',
-              backgroundImage:
+              backgroundImage: [
                 '-moz-linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%)',
-              backgroundImage:
                 '-o-linear-gradient(rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 100%)',
-              backgroundImage:
                 'linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%)',
-              backgroundImage:
                 '-ms-linear-gradient(rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 100%)'
+              ]
             }}
           />
           <Button

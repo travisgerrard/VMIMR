@@ -10,7 +10,12 @@ const Landing = () => {
       </div>
     );
   } else {
-    landingPage = <h5>Login to get started</h5>;
+    landingPage = (
+      <div>
+        <h3>Login to get started</h3>
+        <p>Perhaps some promo info should go here...</p>
+      </div>
+    );
   }
 
   return <div>{landingPage}</div>;
