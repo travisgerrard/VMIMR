@@ -7,7 +7,10 @@ const userSchema = new Schema({
   name: { type: String, unique: true },
   username: { type: String, unique: true },
   email: { type: String, unique: true, lowercase: true },
+  phoneNumber: { type: String, unique: true },
   password: String,
+  creationTime: Date,
+  lastSignInTime: Date,
   admin: { type: Boolean, default: false }
 });
 

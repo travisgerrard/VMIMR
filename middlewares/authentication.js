@@ -13,6 +13,19 @@ function tokenForUser(user) {
 }
 
 exports.signin = function(req, res, next) {
+  console.log('this is running');
+
+  //Well this took forever, but now last signintime is logged...
+  User.findOne({ _id: req.user.id }, function(err, user, data) {
+    if (err) res.send(err);
+    user.lastSignInTime = Date.now();
+    user.password = req.body.password;
+    user.save(function(err) {
+      if (err) {
+        console.log(err);
+      }
+    });
+  });
   // User has already had their email and password auth'd
   // We just need to give them a token
   // Passport returns the req.user

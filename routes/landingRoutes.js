@@ -9,7 +9,6 @@ const _ = require('lodash');
 
 module.exports = app => {
   app.get('/api/landing/lastfivelearnings/', requireAuth, async (req, res) => {
-    console.log(req.user.id);
     try {
       var lastFiveLearnings = await ConditionLearning.find({
         $or: [
@@ -31,7 +30,6 @@ module.exports = app => {
         path: '_learnings',
         match: { _id: { $in: arrayOfLearningIds } }
       });
-      console.log(conditionsToReturnWithLearning);
       res.send(conditionsToReturnWithLearning);
     } catch (err) {
       console.log('Sending this error...');
