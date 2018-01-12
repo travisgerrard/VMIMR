@@ -22,6 +22,8 @@ require('./routes/authRoutes')(app);
 require('./routes/conditionRoutes')(app);
 require('./routes/userRoutes')(app);
 require('./routes/landingRoutes')(app);
+require('./routes/twilioTestRoute')(app);
+
 // To make it so react is fallback for paths in app
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assests

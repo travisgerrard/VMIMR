@@ -9,6 +9,7 @@ import _ from 'lodash';
 
 class LastFiveConditions extends Component {
   componentWillMount() {
+    this.props.fetchAllUsers();
     this.props.fetchLastFiveConditions();
   }
 

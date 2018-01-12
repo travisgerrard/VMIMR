@@ -7,6 +7,14 @@ const TEXTLENGTH = 200;
 class NormalCardConditionLearningView extends Component {
   state = { showAllText: false };
 
+  linkRenderer = props => {
+    return (
+      <a href={props.href} target="_blank">
+        {props.children}
+      </a>
+    );
+  };
+
   learningText = text => {
     if (this.state.showAllText) {
       return <ReactMarkdown source={text} />;

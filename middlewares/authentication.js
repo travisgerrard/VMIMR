@@ -13,18 +13,21 @@ function tokenForUser(user) {
 }
 
 exports.signin = function(req, res, next) {
-  console.log('this is running');
-
-  //Well this took forever, but now last signintime is logged...
+  //Well this took forever, but at last signintime is logged without resetting password...
   User.findOne({ _id: req.user.id }, function(err, user, data) {
     if (err) res.send(err);
-    user.lastSignInTime = Date.now();
-    user.password = req.body.password;
-    user.save(function(err) {
-      if (err) {
-        console.log(err);
+    User.update(
+      user,
+      {
+        $set: {
+          lastSignInTime: Date.now()
+        }
+      },
+      function(err, numAffected, raw) {
+        if (err) console.log(err);
+        console.log('updated ' + JSON.stringify(numAffected));
       }
-    });
+    );
   });
   // User has already had their email and password auth'd
   // We just need to give them a token

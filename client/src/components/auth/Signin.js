@@ -30,6 +30,7 @@ class Signin extends Component {
             label="Username"
             name="username"
             placeholder="j12345"
+            autoCapitalize="none"
           />
           <Field
             component={SigninField}
