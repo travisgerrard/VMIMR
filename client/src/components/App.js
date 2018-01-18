@@ -11,6 +11,7 @@ import Rotations from './rotations/RotationTopLevelView';
 import ListOfAllUsers from './users/ListOfAllUsers';
 import ModifyUser from './users/ModifyUser';
 import Messages from './messages';
+import ConditionPage from './conditions/rotation/ConditionPage';
 
 class App extends Component {
   render() {
@@ -22,7 +23,12 @@ class App extends Component {
           <Route exact path="/signin" component={Signin} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signout" component={Signout} />
-          <Route path="/conditions" component={RequireAuth(Conditions)} />
+          <Route exact path="/conditions" component={RequireAuth(Conditions)} />
+          <Route
+            exact
+            path={`/conditions/condition/:id`}
+            component={RequireAuth(ConditionPage)}
+          />
           <Route path="/rotations" component={RequireAuth(Rotations)} />
           <Route exact path="/users" component={RequireAuth(ListOfAllUsers)} />
           <Route

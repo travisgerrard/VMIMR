@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react';
 import ConditionCardLearningView from './ConditionCardLearningView';
 import ConditionCardPostEdit from './ConditionCardPostEdit';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 class ConditionCardView extends Component {
@@ -23,6 +24,7 @@ class ConditionCardView extends Component {
             {...learning}
             key={learning._id}
             learningId={learning._id}
+            canEdit={this.props.canEdit}
           />
         );
       });
@@ -54,13 +56,22 @@ class ConditionCardView extends Component {
     } else {
       return (
         <Card.Content extra>
-          <Image floated="left">
+          <Image floated="left" style={{ margin: '0px' }}>
             <Icon
               name="add"
               color="green"
               style={{ cursor: 'pointer' }}
               onClick={this.editingToTrue}
             />
+          </Image>
+          <Image floated="right">
+            <Link to={`/conditions/condition/${this.props.conditionId}`}>
+              <Icon
+                name="arrow right"
+                color="green"
+                style={{ cursor: 'pointer' }}
+              />
+            </Link>
           </Image>
         </Card.Content>
       );

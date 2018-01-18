@@ -7,14 +7,6 @@ const TEXTLENGTH = 200;
 class NormalCardConditionLearningView extends Component {
   state = { showAllText: false };
 
-  linkRenderer = props => {
-    return (
-      <a href={props.href} target="_blank">
-        {props.children}
-      </a>
-    );
-  };
-
   learningText = text => {
     if (this.state.showAllText) {
       return <ReactMarkdown source={text} />;
@@ -76,19 +68,28 @@ class NormalCardConditionLearningView extends Component {
     }
   };
 
-  render() {
-    const { seenWith, dateField, whatWasLearned, editLearning } = this.props;
-
-    return (
-      <Card.Content>
+  showEditButton = () => {
+    console.log(this.props.canEdit);
+    if (this.props.canEdit) {
+      return (
         <Image floated="right">
           <Icon
             name="edit"
             color="grey"
             style={{ cursor: 'pointer' }}
-            onClick={editLearning}
+            onClick={this.props.editLearning}
           />
         </Image>
+      );
+    }
+  };
+
+  render() {
+    const { seenWith, dateField, whatWasLearned, editLearning } = this.props;
+
+    return (
+      <Card.Content>
+        {this.showEditButton()}
         <Card.Meta>
           Seen With: {seenWith} on {dateField}
         </Card.Meta>

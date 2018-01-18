@@ -33,6 +33,7 @@ class LastFiveConditions extends Component {
           condition={condition}
           key={condition._id}
           conditionId={condition._id}
+          canEdit={false}
         />
       );
     });
@@ -42,10 +43,16 @@ class LastFiveConditions extends Component {
     return (
       <Container>
         <h5>{`Hi there ${jwt_decode(localStorage.getItem('token')).name}`}</h5>
-        <p>Some promo info </p>
         <p>
-          Your three most recent <Link to="/conditions/">condition</Link>{' '}
-          learnings
+          This will be the site of the VM: Internal Medicine Recidency landing
+          page
+        </p>
+        <p>For now it just shows the most recnetly added conditions</p>
+        <p>
+          <Link to="/conditions/">
+            Your three most recent condition learnings. Tap this line to add to
+            your collection of learnings.
+          </Link>
         </p>
         <Card.Group>{this.listOfConditions()}</Card.Group>
       </Container>

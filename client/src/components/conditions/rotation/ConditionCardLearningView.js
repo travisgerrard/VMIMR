@@ -41,6 +41,7 @@ class ConditionCardLearningView extends Component {
         <NormalCardConditionLearningView
           {...this.props}
           editLearning={this.editingToTrue}
+          canEdit={this.props.canEdit}
         />
       );
     }

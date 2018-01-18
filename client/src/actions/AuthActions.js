@@ -13,9 +13,7 @@ export const signinUser = ({
     // - Update state to indicate authenticated
     localStorage.setItem('token', res.data.token);
     dispatch({ type: AUTH_USER });
-    axios.defaults.headers.common['authorization'] = localStorage.getItem(
-      'token'
-    );
+    axios.defaults.headers.common['authorization'] = res.data.token;
     // - Save the JWT token
     // - Redirect to the rout '/feature'
     history.push('/');
