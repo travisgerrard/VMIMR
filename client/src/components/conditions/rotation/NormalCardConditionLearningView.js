@@ -9,11 +9,11 @@ class NormalCardConditionLearningView extends Component {
   state = { showAllText: false };
 
   learningText = text => {
-    if (this.state.showAllText) {
-      return <ReactMarkdown source={text} />;
-    } else {
-      return <ReactMarkdown source={text.substring(0, TEXTLENGTH)} />;
-    }
+    //if (this.state.showAllText) {
+    return <ReactMarkdown source={text} />;
+    //} else {
+    //  return <ReactMarkdown source={text.substring(0, TEXTLENGTH)} />;
+    //}
   };
 
   showAllTextButton = text => {
@@ -85,6 +85,8 @@ class NormalCardConditionLearningView extends Component {
     }
   };
 
+  //            {this.showAllTextButton(whatWasLearned)}
+
   render() {
     const { seenWith, dateField, whatWasLearned, editLearning } = this.props;
 
@@ -97,7 +99,6 @@ class NormalCardConditionLearningView extends Component {
         <Card.Description>
           <span style={{ whiteSpace: 'pre-wrap' }}>
             {this.learningText(whatWasLearned)}
-            {this.showAllTextButton(whatWasLearned)}
           </span>
         </Card.Description>
       </Card.Content>
