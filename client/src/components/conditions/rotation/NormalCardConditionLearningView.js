@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Image, Icon, Button } from 'semantic-ui-react';
 import ReactMarkdown from 'react-markdown';
+import './markdown.css';
 
 const TEXTLENGTH = 200;
 
