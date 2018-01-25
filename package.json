@@ -16,6 +16,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.0",
+    "expo-server-sdk": "^2.3.3",
     "express": "^4.16.2",
     "jwt-decode": "^2.2.0",
     "jwt-simple": "^0.5.1",

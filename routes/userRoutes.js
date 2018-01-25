@@ -72,4 +72,33 @@ module.exports = app => {
       res.send(user);
     });
   });
+
+  app.post(
+    '/api/registerPushNotifications',
+    requireAuth,
+    async (req, res, next) => {
+      const { pushToken } = req.body;
+      User.findOne({ _id: req.user.id }, async (err, existingUser) => {
+        if (err) {
+          return next(err);
+        }
+
+        if (existingUser) {
+          var userToUpdate = await User.findOneAndUpdate(
+            {
+              _id: req.user.id
+            },
+            {
+              $set: {
+                pushToken
+              }
+            },
+            { new: true }
+          );
+          await userToUpdate.save();
+          res.send(userToUpdate);
+        }
+      });
+    }
+  );
 };

@@ -8,6 +8,7 @@ const userSchema = new Schema({
   username: { type: String, unique: true },
   email: { type: String, unique: true, lowercase: true },
   phoneNumber: { type: String, unique: true },
+  pushToken: String,
   password: String,
   creationTime: Date,
   lastSignInTime: Date,
