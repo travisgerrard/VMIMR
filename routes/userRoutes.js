@@ -65,11 +65,32 @@ module.exports = app => {
         password
       });
 
+      bcrypt.genSalt(10, function(err, salt) {
+        if (err) {
+          return next(err);
+        }
+
+        // hash {encrypt} our password using the salt
+        bcrypt.hash(user.password, salt, null, function(err, hash) {
+          if (err) {
+            return next(err);
+          }
+
+          // overwrite plan text password with encypted password
+          user.password = hash;
+          //next();
+        });
+      });
+
+      console.log(`User1: ${user}`);
+
       await user.save(function(err) {
         if (err) {
           return next(err);
         }
       });
+      console.log(`User2: ${user}`);
+
       res.send(user);
     });
   });
