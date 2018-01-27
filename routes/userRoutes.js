@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
+const bcrypt = require('bcrypt-nodejs');
 
 const User = mongoose.model('users');
 
@@ -46,7 +47,8 @@ module.exports = app => {
               name,
               username,
               email,
-              admin
+              admin,
+              password: username
             }
           },
           { new: true }
@@ -77,7 +79,9 @@ module.exports = app => {
     '/api/registerPushNotifications',
     requireAuth,
     async (req, res, next) => {
-      const { pushToken } = req.body;
+      console.log(req.body);
+      const { token } = req.body;
+      console.log(token);
       User.findOne({ _id: req.user.id }, async (err, existingUser) => {
         if (err) {
           return next(err);
@@ -90,7 +94,7 @@ module.exports = app => {
             },
             {
               $set: {
-                pushToken
+                pushToken: token
               }
             },
             { new: true }
