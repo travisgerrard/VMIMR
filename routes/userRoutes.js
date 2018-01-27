@@ -47,8 +47,7 @@ module.exports = app => {
               name,
               username,
               email,
-              admin,
-              password: username
+              admin
             }
           },
           { new: true }

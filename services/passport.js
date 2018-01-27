@@ -26,7 +26,7 @@ const localLogin = new LocalStrategy(localOptions, function(
     }
 
     //Not comparing passwords right now as it fucks up with last logged in time
-    return done(null, user);
+    //return done(null, user);
 
     // compare passwords - is 'password' equal to user.password
     user.comparePassword(password, function(err, isMatch) {
