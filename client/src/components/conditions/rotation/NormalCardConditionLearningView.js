@@ -98,10 +98,7 @@ class NormalCardConditionLearningView extends Component {
       editLearning
     } = this.props;
 
-    console.log(users);
-    console.log(`usersTagged: ${usersTagged}`);
     const learnedWith = _.map(usersTagged, user => {
-      console.log(`user: ${user}`);
       return users[user].name;
     });
     const learendWithText = learnedWith.length ? (
