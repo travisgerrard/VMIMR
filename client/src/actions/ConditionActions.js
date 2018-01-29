@@ -14,7 +14,8 @@ import {
   HIDE_ADD_CARD,
   ADD_LEARNING_TO_CONDITION,
   UPDATE_LEARNING,
-  DELETE_LEARNING
+  DELETE_LEARNING,
+  ALL_LEARNING_FOR_CONDITION
 } from './types';
 
 axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
@@ -23,6 +24,14 @@ export const fetchAllConditions = () => async dispatch => {
   const res = await axios.get('/api/condition');
   dispatch({
     type: FETCH_ALL_CONDITIONS,
+    payload: res.data
+  });
+};
+
+export const fetchAllLearningForCondition = conditionId => async dispatch => {
+  const res = await axios.get(`/api/condition/${conditionId}`);
+  dispatch({
+    type: ALL_LEARNING_FOR_CONDITION,
     payload: res.data
   });
 };

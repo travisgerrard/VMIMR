@@ -9,7 +9,6 @@ import RotationConditionList from './rotation/RotationConditionList';
 class ConditionTopLevelView extends Component {
   componentWillMount() {
     this.props.fetchAllConditions();
-    this.props.fetchAllUsers();
   }
 
   render() {

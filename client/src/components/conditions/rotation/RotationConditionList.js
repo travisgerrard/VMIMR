@@ -49,7 +49,6 @@ function mapStateToProps(state) {
     }
     return 0;
   });
-  console.log(state);
   return state;
 }
 

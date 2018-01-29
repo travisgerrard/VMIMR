@@ -14,7 +14,8 @@ import {
   ADD_LEARNING_TO_CONDITION,
   UPDATE_LEARNING,
   DELETE_LEARNING,
-  UNAUTH_USER
+  UNAUTH_USER,
+  ALL_LEARNING_FOR_CONDITION
 } from '../actions/types';
 import _ from 'lodash';
 
@@ -196,6 +197,21 @@ export default function(state = INITIAL_STATE, action) {
           [action.payload._id]: action.payload
         },
         filteredConditions: listOfConditionsToShow
+      };
+    case ALL_LEARNING_FOR_CONDITION:
+      //Since only one conditions, not adding and sorting list
+      // listOfConditionsToShow = theListOfConditionsToShow(
+      //   state.searchTerm,
+      //   state,
+      //   action.payload
+      // );
+      return {
+        ...state,
+        allConditions: {
+          ...state.allConditions,
+          [action.payload._id]: action.payload
+        }
+        //filteredConditions: listOfConditionsToShow
       };
     case UNAUTH_USER:
       return INITIAL_STATE;

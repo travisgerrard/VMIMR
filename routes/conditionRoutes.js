@@ -31,6 +31,22 @@ module.exports = app => {
     }
   });
 
+  app.get('/api/condition/:conditionId', requireAuth, async (req, res) => {
+    var conditionId = req.params.conditionId;
+
+    try {
+      const condition = await Condition.findOne({
+        _id: conditionId
+      }).populate({
+        path: '_learnings'
+      });
+
+      res.send(condition);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
+
   app.delete(
     '/api/condition/learning/:learningId',
     requireAuth,

@@ -20,3 +20,4 @@ export const DELETE_LEARNING = 'delete_learning';
 export const FETCH_ALL_USERS = 'fetch_all_users';
 export const SUBMIT_USER = 'submit_user';
 export const FETCH_LAST_FIVE_LEARNINGS = 'fetch_last_five_learnings';
+export const ALL_LEARNING_FOR_CONDITION = 'all_learning_for_condition';

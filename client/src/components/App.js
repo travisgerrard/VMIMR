@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
 import Signin from './auth/Signin';
@@ -14,6 +16,10 @@ import Messages from './messages';
 import ConditionPage from './conditions/rotation/ConditionPage';
 
 class App extends Component {
+  componentWillMount() {
+    this.props.fetchAllUsers();
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -44,4 +50,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, actions)(App);

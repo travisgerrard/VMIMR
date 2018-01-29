@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Card, Image, Icon, Button } from 'semantic-ui-react';
 import ReactMarkdown from 'react-markdown';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 import './markdown.css';
 
 const TEXTLENGTH = 200;
@@ -70,7 +72,6 @@ class NormalCardConditionLearningView extends Component {
   };
 
   showEditButton = () => {
-    console.log(this.props.canEdit);
     if (this.props.canEdit) {
       return (
         <Image floated="right">
@@ -88,7 +89,23 @@ class NormalCardConditionLearningView extends Component {
   //            {this.showAllTextButton(whatWasLearned)}
 
   render() {
-    const { seenWith, dateField, whatWasLearned, editLearning } = this.props;
+    const {
+      users,
+      usersTagged,
+      seenWith,
+      dateField,
+      whatWasLearned,
+      editLearning
+    } = this.props;
+
+    const learnedWith = _.map(usersTagged, user => {
+      return users[user].name;
+    });
+    const learendWithText = learnedWith.length ? (
+      <Card.Meta>Learned with: {learnedWith.join(', ')}</Card.Meta>
+    ) : (
+      ''
+    );
 
     return (
       <Card.Content>
@@ -96,6 +113,7 @@ class NormalCardConditionLearningView extends Component {
         <Card.Meta>
           Seen With: {seenWith} on {dateField}
         </Card.Meta>
+        {learendWithText}
         <Card.Description>
           <span style={{ whiteSpace: 'pre-wrap' }}>
             {this.learningText(whatWasLearned)}
@@ -106,4 +124,8 @@ class NormalCardConditionLearningView extends Component {
   }
 }
 
-export default NormalCardConditionLearningView;
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps)(NormalCardConditionLearningView);

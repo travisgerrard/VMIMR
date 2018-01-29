@@ -6,9 +6,10 @@ import * as actions from '../../../actions';
 import _ from 'lodash';
 import ConditionCardLearningView from './ConditionCardLearningView';
 
+//When we are looking at ALL the learning, regardless of creator, from one conditions, this page gets called
 class ConditionPage extends Component {
   componentWillMount() {
-    this.props.fetchAllConditions();
+    this.props.fetchAllLearningForCondition(this.props.match.params.id);
   }
 
   learningCards = condition => {
@@ -37,7 +38,6 @@ class ConditionPage extends Component {
       ];
     }
 
-    console.log(condition);
     if (condition !== undefined) {
       return (
         <Container>
