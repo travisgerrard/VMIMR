@@ -99,7 +99,9 @@ class NormalCardConditionLearningView extends Component {
     } = this.props;
 
     const learnedWith = _.map(usersTagged, user => {
-      return users[user].name;
+      if (users[user].name !== null) {
+        return users[user].name;
+      }
     });
     const learendWithText = learnedWith.length ? (
       <Card.Meta>Learned with: {learnedWith.join(', ')}</Card.Meta>
