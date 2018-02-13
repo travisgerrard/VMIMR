@@ -98,6 +98,8 @@ class NormalCardConditionLearningView extends Component {
       editLearning
     } = this.props;
 
+    console.log(this.props);
+
     const learnedWith = _.map(usersTagged, user => {
       return users[user].name;
     });
@@ -107,9 +109,12 @@ class NormalCardConditionLearningView extends Component {
       ''
     );
 
+    //const createdBy = console.log();
+
     return (
       <Card.Content>
         {this.showEditButton()}
+
         <Card.Meta>
           Seen With: {seenWith} on {dateField}
         </Card.Meta>
