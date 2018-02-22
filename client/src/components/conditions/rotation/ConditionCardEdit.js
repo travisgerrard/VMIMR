@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Input, Icon, Image } from 'semantic-ui-react';
+import { Card, Input, Icon, Image, Message } from 'semantic-ui-react';
 import RotationDropDown from './shared/RotationDropDown';
 import moment from 'moment';
 import { connect } from 'react-redux';
@@ -24,7 +24,7 @@ class ConditionCardView extends Component {
       });
     } else if (this.state.tags === '') {
       this.setState({
-        error: "Tags can't be blank"
+        error: "Rotation tags can't be blank"
       });
     } else if (this.state.whatWasLearned === '') {
       this.setState({
@@ -45,74 +45,93 @@ class ConditionCardView extends Component {
     }
   };
 
+  clearError = () => {
+    this.setState({
+      error: ''
+    });
+  };
+
+  showErrorMessage = () => {
+    if (this.state.error) {
+      return (
+        <Message negative onDismiss={this.clearError}>
+          <Message.Header>{`Can't save: ${this.state.error}`}</Message.Header>
+        </Message>
+      );
+    }
+  };
+
   render() {
     return (
-      <Card fluid>
-        <Card.Content>
-          <Input
-            label="Condition"
-            placeholder="Ex: ARDS"
-            value={this.state.conditionToAdd}
-            onChange={(params, data) =>
-              this.setState({
-                conditionToAdd: data.value
-              })
-            }
-          />
-          <Image floated="right">
-            <Icon
-              name="remove"
-              color="grey"
-              style={{ cursor: 'pointer' }}
-              onClick={this.props.hideCard}
+      <div>
+        {this.showErrorMessage()}
+        <Card fluid>
+          <Card.Content>
+            <Input
+              label="Condition"
+              placeholder="Ex: ARDS"
+              value={this.state.conditionToAdd}
+              onChange={(params, data) =>
+                this.setState({
+                  conditionToAdd: data.value
+                })
+              }
             />
-          </Image>
-          <RotationDropDown
+            <Image floated="right">
+              <Icon
+                name="remove"
+                color="grey"
+                style={{ cursor: 'pointer' }}
+                onClick={this.props.hideCard}
+              />
+            </Image>
+            <RotationDropDown
+              multiple={true}
+              inline={false}
+              placeholder="Rotation tags"
+              onChange={(params, data) =>
+                this.setState({
+                  tags: data.value
+                })
+              }
+            />
+          </Card.Content>
+          <LearningEdit
+            attendingLabel="Attending"
+            dateLabel="Date"
+            attendingValue={this.state.seenWith}
+            dateValue={this.state.date}
+            wwlValue={this.state.whatWasLearned}
             multiple={true}
-            inline={false}
-            placeholder="Rotation tags"
-            onChange={(params, data) =>
+            attendingPlaceholder="Ex: Baliga"
+            userPlaceholder="Learned with"
+            wwlPlaceholder="What was learned"
+            attendingOnChange={(params, data) =>
               this.setState({
-                tags: data.value
+                seenWith: data.value
               })
             }
+            dateOnChange={(params, data) =>
+              this.setState({
+                date: data.value
+              })
+            }
+            userOnChange={(params, data) =>
+              this.setState({
+                usersTagged: data.value
+              })
+            }
+            wwlOnChange={(params, data) =>
+              this.setState({
+                whatWasLearned: data.value
+              })
+            }
+            saveOnClick={this.saveCondition}
+            cancelOnClick={this.props.hideCard}
+            showDeleteButton={this.props.learningId}
           />
-        </Card.Content>
-        <LearningEdit
-          attendingLabel="Attending"
-          dateLabel="Date"
-          attendingValue={this.state.seenWith}
-          dateValue={this.state.date}
-          wwlValue={this.state.whatWasLearned}
-          multiple={true}
-          attendingPlaceholder="Ex: Baliga"
-          userPlaceholder="Learned with"
-          wwlPlaceholder="What was learned"
-          attendingOnChange={(params, data) =>
-            this.setState({
-              seenWith: data.value
-            })
-          }
-          dateOnChange={(params, data) =>
-            this.setState({
-              date: data.value
-            })
-          }
-          userOnChange={(params, data) =>
-            this.setState({
-              usersTagged: data.value
-            })
-          }
-          wwlOnChange={(params, data) =>
-            this.setState({
-              whatWasLearned: data.value
-            })
-          }
-          saveOnClick={this.saveCondition}
-          cancelOnClick={this.props.hideCard}
-          showDeleteButton={this.props.learningId}
-        />
-      </Card>
+        </Card>
+      </div>
     );
   }
 }

@@ -66,11 +66,7 @@ class ConditionCardView extends Component {
           </Image>
           <Image floated="right">
             <Link to={`/conditions/condition/${this.props.conditionId}`}>
-              <Icon
-                name="arrow right"
-                color="green"
-                style={{ cursor: 'pointer' }}
-              />
+              <Icon name="expand" color="green" style={{ cursor: 'pointer' }} />
             </Link>
           </Image>
         </Card.Content>
@@ -81,7 +77,7 @@ class ConditionCardView extends Component {
   render() {
     return (
       <Card centered>
-        <Card.Content>
+        <Card.Content style={{ background: '#E5F5DD' }}>
           <Card.Header>{this.props.condition.condition}</Card.Header>
           <Card.Meta>Tags: {this.props.condition.tags.join(', ')}</Card.Meta>
         </Card.Content>

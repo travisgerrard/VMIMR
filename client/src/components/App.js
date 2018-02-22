@@ -14,6 +14,7 @@ import ListOfAllUsers from './users/ListOfAllUsers';
 import ModifyUser from './users/ModifyUser';
 import Messages from './messages';
 import ConditionPage from './conditions/rotation/ConditionPage';
+import NoonConference from './conferences/NoonConference';
 
 class App extends Component {
   componentWillMount() {
@@ -44,6 +45,10 @@ class App extends Component {
           />
           <Route path={`/users/newUser`} component={RequireAuth(ModifyUser)} />
           <Route path={`/messages`} component={RequireAuth(Messages)} />
+          <Route
+            path={`/noonConference`}
+            component={RequireAuth(NoonConference)}
+          />
         </div>
       </BrowserRouter>
     );

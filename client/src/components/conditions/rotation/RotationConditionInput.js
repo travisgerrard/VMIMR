@@ -26,9 +26,6 @@ class RotationConditionInput extends Component {
 
   renderInputButton = () => {
     if (this.props.conditions.showAddButton) {
-      // <Button primary onClick={this.addClicked}>
-      //   Add
-      // </Button>
       return (
         <Input
           action={{

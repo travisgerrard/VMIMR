@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Image, Icon, Button, Container } from 'semantic-ui-react';
 import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../../../actions';
 import _ from 'lodash';
 import ConditionCardLearningView from './ConditionCardLearningView';
@@ -41,7 +42,19 @@ class ConditionPage extends Component {
     if (condition !== undefined) {
       return (
         <Container>
-          <h1>{condition.condition}</h1>
+          <div>
+            <h1>
+              {condition.condition}
+              <Button
+                basic
+                onClick={() => this.props.history.goBack()}
+                style={{ float: 'right' }}
+              >
+                {' '}
+                Back
+              </Button>
+            </h1>
+          </div>
           {this.learningCards(condition)}
         </Container>
       );
@@ -55,4 +68,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps, actions)(ConditionPage);
+export default connect(mapStateToProps, actions)(withRouter(ConditionPage));
