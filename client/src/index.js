@@ -12,9 +12,9 @@ const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
 //If token, assume user is signed in
-const token = localStorage.getItem('token');
+const token = localStorage.getItem('VMIMRToken');
 if (token) {
-  store.dispatch({ type: AUTH_USER });
+  store.dispatch({ type: AUTH_USER, payload: token });
 }
 
 ReactDOM.render(

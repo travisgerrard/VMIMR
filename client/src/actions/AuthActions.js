@@ -11,8 +11,8 @@ export const signinUser = ({
     const res = await axios.post('/api/signin', { username, password });
     // IF req good
     // - Update state to indicate authenticated
-    localStorage.setItem('token', res.data.token);
-    dispatch({ type: AUTH_USER });
+    localStorage.setItem('VMIMRToken', res.data.token);
+    dispatch({ type: AUTH_USER, payload: res.data.token });
     axios.defaults.headers.common['authorization'] = res.data.token;
     // - Save the JWT token
     // - Redirect to the rout '/feature'
@@ -28,7 +28,7 @@ export const signupUser = ({ email, password, history }) => async dispatch => {
   try {
     const res = await axios.post('/api/signup', { email, password });
     dispatch({ type: AUTH_USER });
-    localStorage.setItem('token', res.data.token);
+    localStorage.setItem('VMIMRToken', res.data.token);
     history.push('/');
   } catch (err) {
     dispatch(authError(err.response.data.error));
@@ -43,14 +43,14 @@ export const authError = error => {
 };
 
 export const signoutUser = () => {
-  localStorage.removeItem('token');
+  localStorage.removeItem('VMIMRToken');
 
   return { type: UNAUTH_USER };
 };
 
 export const fetchMessage = () => async dispatch => {
   const res = await axios.get('/api/', {
-    headers: { authorization: localStorage.getItem('token') }
+    headers: { authorization: localStorage.getItem('VMIMRToken') }
   });
   dispatch({
     type: FETCH_MESSAGE,

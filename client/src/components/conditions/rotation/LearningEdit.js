@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  Card,
-  Input,
-  Form,
-  TextArea,
-  Checkbox
-} from 'semantic-ui-react';
+import { Button, Card, Input, Form, TextArea } from 'semantic-ui-react';
 import UserDropDown from './shared/UserDropDown';
 
 const LearningEdit = ({

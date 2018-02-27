@@ -3,7 +3,12 @@ import rotations from '../../rotations';
 import { Dropdown } from 'semantic-ui-react';
 import _ from 'lodash';
 
-const RotationDropDown = ({ onChange, multiple, placeholder }) => {
+const RotationDropDown = ({
+  onChange,
+  multiple,
+  placeholder,
+  defaultValue
+}) => {
   const options = _.map(rotations, ({ name, dbname }) => {
     return { key: name, text: name, value: dbname };
   });
@@ -14,7 +19,12 @@ const RotationDropDown = ({ onChange, multiple, placeholder }) => {
       multiple={multiple}
       search
       selection
-      options={options}
+      defaultValue={defaultValue ? defaultValue : ''}
+      options={
+        multiple
+          ? options
+          : [{ key: 'All', text: 'All', value: 'all' }, ...options]
+      }
       onChange={onChange}
     />
   );

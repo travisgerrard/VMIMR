@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Image, Icon, Button, Container } from 'semantic-ui-react';
-import ReactMarkdown from 'react-markdown';
+import { Card, Button, Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../../actions';

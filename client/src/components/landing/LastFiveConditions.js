@@ -3,7 +3,6 @@ import ConditionCardView from '../conditions/rotation/ConditionCardView';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, Container } from 'semantic-ui-react';
-import jwt_decode from 'jwt-decode';
 import * as actions from '../../actions';
 import _ from 'lodash';
 
@@ -42,7 +41,7 @@ class LastFiveConditions extends Component {
   render() {
     return (
       <Container>
-        <h5>{`Hi there ${jwt_decode(localStorage.getItem('token')).name}`}</h5>
+        <h5>{`Hi there ${this.props.auth.userDetails.name}`}</h5>
         <p>
           This will be the site of the VM: Internal Medicine Recidency landing
           page

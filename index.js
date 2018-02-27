@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 
 require('./routes/authRoutes')(app);
 require('./routes/conditionRoutes')(app);
+require('./routes/learningRoutes')(app);
 require('./routes/userRoutes')(app);
 require('./routes/landingRoutes')(app);
 //require('./routes/twilioTestRoute')(app);

@@ -2,6 +2,8 @@ import {
   ADD_CONDITION,
   ADD_CONDITION_SUCCESS,
   ADD_CONDITION_FAIL,
+  UPDATE_CONDITION,
+  DELETE_CONDITION,
   SET_ROTATION_SELECTED,
   FETCH_ALL_CONDITIONS,
   CLEAR_ERROR,
@@ -30,6 +32,7 @@ const INITIAL_STATE = {
   allConditions: {}
 };
 
+// What the user actually sees
 function theListOfConditionsToShow(searchTerm, state, addedObject) {
   var { allConditions, rotationSelected } = state;
   if (addedObject) {
@@ -110,6 +113,34 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         loadingAddCondition: false,
         error: action.payload
+      };
+    case UPDATE_CONDITION:
+      listOfConditionsToShow = theListOfConditionsToShow(
+        state.searchTerm,
+        state,
+        action.payload
+      );
+      return {
+        ...state,
+        allConditions: {
+          ...state.allConditions,
+          [action.payload._id]: action.payload
+        },
+        filteredConditions: listOfConditionsToShow
+      };
+    case DELETE_CONDITION:
+      const allConditions = _.omit(
+        state.allConditions,
+        action.payload.conditionDeleted
+      );
+      listOfConditionsToShow = theListOfConditionsToShow(state.searchTerm, {
+        ...state,
+        allConditions
+      });
+      return {
+        ...state,
+        allConditions,
+        filteredConditions: listOfConditionsToShow
       };
     case SET_ROTATION_SELECTED:
       if (action.payload === 'all') {

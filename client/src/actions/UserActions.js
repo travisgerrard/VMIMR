@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_ALL_USERS, SUBMIT_USER } from './types';
 
-axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
+axios.defaults.headers.common['authorization'] = localStorage.getItem('VMIMRToken');
 
 export const fetchAllUsers = () => async dispatch => {
   const res = await axios.get('/api/users');

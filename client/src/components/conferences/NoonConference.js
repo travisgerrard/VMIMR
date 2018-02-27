@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Checkbox,
-  Form,
-  Input,
-  Radio,
-  Select,
-  TextArea,
-  List,
-  Container,
-  Grid
-} from 'semantic-ui-react';
-import { Editor, EditorState, ContentState } from 'draft-js';
+import { Form, Input, TextArea, List, Grid } from 'semantic-ui-react';
+import { Editor, EditorState } from 'draft-js';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
 import _ from 'lodash';
 
@@ -312,7 +301,6 @@ class NoonConference extends Component {
   };
 
   render() {
-    const { value } = this.state;
     return (
       <Form style={{ marginLeft: 25, marginRight: 25 }}>
         <Grid columns={3}>

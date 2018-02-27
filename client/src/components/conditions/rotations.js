@@ -2,14 +2,6 @@
 
 export default [
   {
-    name: 'All',
-    amReportReq: false,
-    noonReportReq: true,
-    dbname: 'all',
-    exact: true,
-    path: '/all'
-  },
-  {
     name: 'Wards',
     amReportReq: false,
     noonReportReq: true,
@@ -74,7 +66,7 @@ export default [
     path: '/cardiology'
   },
   {
-    name: 'Dermatology ',
+    name: 'Dermatology',
     amReportReq: true,
     noonReportReq: true,
     dbname: 'dermatology',
@@ -98,7 +90,7 @@ export default [
     path: '/ent'
   },
   {
-    name: 'Gastroenterology ',
+    name: 'Gastroenterology/GI',
     amReportReq: true,
     noonReportReq: true,
     dbname: 'gi',
@@ -154,7 +146,7 @@ export default [
     path: '/infectiousdisease'
   },
   {
-    name: 'Nephrology  ',
+    name: 'Nephrology',
     amReportReq: true,
     noonReportReq: true,
     dbname: 'nephro',
@@ -162,7 +154,7 @@ export default [
     path: '/nephro'
   },
   {
-    name: 'Neurology ',
+    name: 'Neurology',
     amReportReq: true,
     noonReportReq: true,
     dbname: 'neuro',
@@ -296,5 +288,13 @@ export default [
     dbname: 'hyperbarics',
     exact: true,
     path: '/hyperbarics'
+  },
+  {
+    name: 'Dot Phrase',
+    amReportReq: true,
+    noonReportReq: true,
+    dbname: 'dotPhrase',
+    exact: true,
+    path: '/dotPhrase'
   }
 ];

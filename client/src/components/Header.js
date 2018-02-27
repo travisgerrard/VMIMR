@@ -6,8 +6,8 @@ import jwt_decode from 'jwt-decode';
 
 class Header extends Component {
   adminLinks() {
-    if (localStorage.getItem('token') !== null) {
-      if (jwt_decode(localStorage.getItem('token')).admin) {
+    if (localStorage.getItem('VMIMRToken') !== null) {
+      if (jwt_decode(localStorage.getItem('VMIMRToken')).admin) {
         return (
           <Menu.Item position="right">
             <Link to="/users">Users</Link>

@@ -11,11 +11,7 @@ class NormalCardConditionLearningView extends Component {
   state = { showAllText: false };
 
   learningText = text => {
-    //if (this.state.showAllText) {
     return <ReactMarkdown source={text} />;
-    //} else {
-    //  return <ReactMarkdown source={text.substring(0, TEXTLENGTH)} />;
-    //}
   };
 
   showAllTextButton = text => {
@@ -77,8 +73,7 @@ class NormalCardConditionLearningView extends Component {
         <Image floated="right">
           <Icon
             name="edit"
-            color="grey"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', color: '#00824d' }}
             onClick={this.props.editLearning}
           />
         </Image>
@@ -94,8 +89,7 @@ class NormalCardConditionLearningView extends Component {
       usersTagged,
       seenWith,
       dateField,
-      whatWasLearned,
-      editLearning
+      whatWasLearned
     } = this.props;
 
     //console.log(this.props);

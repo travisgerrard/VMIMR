@@ -4,6 +4,8 @@ import {
   FETCH_ALL_CONDITIONS,
   ADD_CONDITION_SUCCESS,
   ADD_CONDITION_FAIL,
+  UPDATE_CONDITION,
+  DELETE_CONDITION,
   SET_ROTATION_SELECTED,
   CLEAR_ERROR,
   CLEAR_SEARCH_TERM,
@@ -18,7 +20,9 @@ import {
   ALL_LEARNING_FOR_CONDITION
 } from './types';
 
-axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
+axios.defaults.headers.common['authorization'] = localStorage.getItem(
+  'VMIMRToken'
+);
 
 export const fetchAllConditions = () => async dispatch => {
   const res = await axios.get('/api/condition');
@@ -52,6 +56,25 @@ export const addLearningToCondition = props => async dispatch => {
   try {
     const res = await axios.post('/api/condition/learning', props);
     dispatch({ type: ADD_LEARNING_TO_CONDITION, payload: res.data });
+  } catch (err) {
+    console.log(err.response.data.error);
+  }
+};
+
+export const updateCondition = props => async dispatch => {
+  console.log(props);
+  try {
+    const res = await axios.put('/api/condition/', props);
+    dispatch({ type: UPDATE_CONDITION, payload: res.data });
+  } catch (err) {
+    console.log(err.response.data.error);
+  }
+};
+
+export const deleteCondition = props => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/condition/${props}`);
+    dispatch({ type: DELETE_CONDITION, payload: res.data });
   } catch (err) {
     console.log(err.response.data.error);
   }

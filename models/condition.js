@@ -5,6 +5,7 @@ const conditionSchema = new Schema({
   tags: [{ type: String }],
   condition: String,
   dateCreated: Date,
+  dateUpdated: Date,
   _learnings: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'conditionLearnings' }
   ],

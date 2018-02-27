@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Landing = () => {
   var landingPage;
-  if (localStorage.getItem('token') !== null) {
+  if (localStorage.getItem('VMIMRToken') !== null) {
     landingPage = (
       <div>
         <LastFiveConditions />
