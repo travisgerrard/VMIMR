@@ -67,8 +67,15 @@ class NormalCardConditionLearningView extends Component {
     }
   };
 
+  showEdit = () => {
+    const didUserCreate =
+      this.props._creator === this.props.auth.userDetails.sub;
+    if (didUserCreate) return true;
+    return false;
+  };
+
   showEditButton = () => {
-    if (this.props.canEdit) {
+    if (this.props.canEdit && this.showEdit()) {
       return (
         <Image floated="right">
           <Icon
@@ -80,8 +87,6 @@ class NormalCardConditionLearningView extends Component {
       );
     }
   };
-
-  //            {this.showAllTextButton(whatWasLearned)}
 
   render() {
     const {

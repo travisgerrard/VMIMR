@@ -235,7 +235,7 @@ class ConditionCardView extends Component {
   showEdit = () => {
     const didUserCreate =
       this.props.condition._creator === this.props.auth.userDetails.sub;
-    if (didUserCreate) {
+    if (didUserCreate && this.props.canEdit) {
       return (
         <Image floated="right">
           <Icon

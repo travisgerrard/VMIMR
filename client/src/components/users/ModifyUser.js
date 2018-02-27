@@ -29,7 +29,7 @@ class ModifyUser extends Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{ marginTop: '4.5em' }}>
         <Form>
           <Field
             component={UserInputField}

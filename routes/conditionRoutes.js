@@ -11,17 +11,7 @@ module.exports = app => {
   app.get('/api/condition/', requireAuth, async (req, res) => {
     try {
       const conditionsArray = await Condition.find({}).populate({
-        path: '_learnings',
-        match: {
-          $or: [
-            {
-              _creator: { $eq: req.user.id }
-            },
-            {
-              usersTagged: req.user.id
-            }
-          ]
-        }
+        path: '_learnings'
       });
       var conditionsObject = {};
       conditionsArray.forEach(function(condition) {

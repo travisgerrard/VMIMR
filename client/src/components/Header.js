@@ -18,11 +18,6 @@ class Header extends Component {
   }
 
   renderLinks() {
-    // <Menu.Item key="1" position="right">
-    //   <Link to="/messages">
-    //     <Icon name="mail" />
-    //   </Link>
-    // </Menu.Item>,
     if (this.props.authenticated) {
       // show sign out
       return [
@@ -47,12 +42,19 @@ class Header extends Component {
 
   render() {
     return (
-      <Menu style={{ background: '#00b6de', borderRadius: '0px' }} inverted>
+      <Menu
+        fixed="top"
+        style={{ background: '#00b6de', borderRadius: '0px' }}
+        inverted
+      >
         <Menu.Item>
           <Link to="/">VM:IMR</Link>
         </Menu.Item>
-        {this.adminLinks()}
-        <Menu.Menu position="right">{this.renderLinks()}</Menu.Menu>
+
+        <Menu.Menu position="right">
+          {this.adminLinks()}
+          {this.renderLinks()}
+        </Menu.Menu>
       </Menu>
     );
   }

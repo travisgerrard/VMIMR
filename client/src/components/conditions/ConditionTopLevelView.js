@@ -13,7 +13,7 @@ class ConditionTopLevelView extends Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{ marginTop: '4.5em' }}>
         <p>
           Search for a condition: If conditions exists, add learning to it; If
           it doesn't exist add it with associated learning

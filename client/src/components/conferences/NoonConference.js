@@ -302,7 +302,7 @@ class NoonConference extends Component {
 
   render() {
     return (
-      <Form style={{ marginLeft: 25, marginRight: 25 }}>
+      <Form style={{ marginLeft: 25, marginRight: 25, marginTop: '4.5em' }}>
         <Grid columns={3}>
           <Grid.Row stretched>
             <Grid.Column>

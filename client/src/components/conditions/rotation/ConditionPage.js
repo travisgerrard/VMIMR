@@ -40,14 +40,14 @@ class ConditionPage extends Component {
 
     if (condition !== undefined) {
       return (
-        <Container>
+        <Container style={{ marginTop: '4.5em' }}>
           <div>
             <h1>
               {condition.condition}
               <Button
                 basic
                 onClick={() => this.props.history.goBack()}
-                style={{ float: 'right' }}
+                style={{ float: 'right', marginTop: 5 }}
               >
                 {' '}
                 Back

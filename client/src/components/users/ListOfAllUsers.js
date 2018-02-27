@@ -33,7 +33,7 @@ class ListOfAllUsers extends Component {
   render() {
     return (
       <div>
-        <Container>
+        <Container style={{ marginTop: '4.5em' }}>
           <List divided relaxed>
             {this.listOfUsers()}
           </List>
