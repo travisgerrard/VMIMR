@@ -10,6 +10,8 @@ class RotationConditionList extends Component {
   listOfConditions() {
     var { filteredConditions } = this.props.conditions;
 
+    console.log(this.props.conditionFilter);
+
     return _.map(filteredConditions, condition => {
       return (
         <ConditionCardView
@@ -49,6 +51,7 @@ function mapStateToProps(state) {
     }
     return 0;
   });
+
   return state;
 }
 
