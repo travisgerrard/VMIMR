@@ -53,7 +53,9 @@ class LastFiveConditions extends Component {
             your collection of learnings.
           </Link>
         </p>
-        <Card.Group>{this.listOfConditions()}</Card.Group>
+        <Card.Group itemsPerRow={3} stackable doubling>
+          {this.listOfConditions()}
+        </Card.Group>
       </Container>
     );
   }

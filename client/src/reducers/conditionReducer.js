@@ -67,6 +67,7 @@ export default function(state = INITIAL_STATE, action) {
   var listOfConditionsToShow;
   switch (action.type) {
     case FETCH_ALL_CONDITIONS:
+      console.log(action.payload);
       //When linking to conditions
       // The rotaiton selected occurs faster than server call
       // As such need if statement below to factor in selected rotation

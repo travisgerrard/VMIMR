@@ -14,59 +14,6 @@ class NormalCardConditionLearningView extends Component {
     return <ReactMarkdown source={text} />;
   };
 
-  showAllTextButton = text => {
-    const showTextBool = this.state.showAllText;
-    //Style below makes it so the text has a fadout
-    if (text.length >= TEXTLENGTH && !showTextBool) {
-      return (
-        <div>
-          <div
-            style={{
-              position: 'relative',
-              bottom: '25px',
-              height: '10px',
-              background:
-                '-webkit-linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%)',
-              backgroundImage: [
-                '-moz-linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%)',
-                '-o-linear-gradient(rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 100%)',
-                'linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%)',
-                '-ms-linear-gradient(rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 100%)'
-              ]
-            }}
-          />
-          <Button
-            compact
-            fluid
-            basic
-            onClick={() =>
-              this.setState({
-                showAllText: !showTextBool
-              })
-            }
-          >
-            Show all text
-          </Button>
-        </div>
-      );
-    } else if (text.length >= TEXTLENGTH && showTextBool) {
-      return (
-        <Button
-          compact
-          fluid
-          basic
-          onClick={() =>
-            this.setState({
-              showAllText: !showTextBool
-            })
-          }
-        >
-          Hide text
-        </Button>
-      );
-    }
-  };
-
   showEdit = () => {
     const didUserCreate =
       this.props._creator === this.props.auth.userDetails.sub;

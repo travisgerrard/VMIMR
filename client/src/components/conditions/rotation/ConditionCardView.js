@@ -18,6 +18,10 @@ import RotationDropDown from './shared/RotationDropDown';
 import _ from 'lodash';
 
 class ConditionCardView extends Component {
+  static defaultProps = {
+    conditionFilter: 'all'
+  };
+
   state = {
     addingLearning: false,
     editingHeader: false,
@@ -33,18 +37,53 @@ class ConditionCardView extends Component {
     });
   }
 
+  learningWithUser(learning, user) {
+    var learningWithUser = false;
+    if (learning._creator === user) {
+      learningWithUser = true;
+    }
+    if (_.includes(learning.usersTagged, user)) {
+      learningWithUser = true;
+    }
+    return learningWithUser;
+  }
+
   conditionLearnings = () => {
     if (this.props.condition._learnings.length > 0) {
-      return _.map(this.props.condition._learnings, learning => {
-        return (
-          <ConditionCardLearningView
-            {...learning}
-            key={learning._id}
-            learningId={learning._id}
-            canEdit={this.props.canEdit}
-          />
+      if (this.props.conditionFilter === 'all') {
+        return _.map(this.props.condition._learnings, learning => {
+          return (
+            <ConditionCardLearningView
+              {...learning}
+              key={learning._id}
+              learningId={learning._id}
+              canEdit={this.props.canEdit}
+              conditionFilter={this.props.conditionFilter}
+            />
+          );
+        });
+      } else {
+        var learningsToShow = _.filter(
+          this.props.condition._learnings,
+          learning => {
+            return this.learningWithUser(
+              learning,
+              this.props.auth.userDetails.sub
+            );
+          }
         );
-      });
+        return _.map(learningsToShow, learning => {
+          return (
+            <ConditionCardLearningView
+              {...learning}
+              key={learning._id}
+              learningId={learning._id}
+              canEdit={this.props.canEdit}
+              conditionFilter={this.props.conditionFilter}
+            />
+          );
+        });
+      }
     }
   };
 
