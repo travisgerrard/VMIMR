@@ -8,7 +8,11 @@ import SigninField from '../users/UserInputField';
 
 class Signin extends Component {
   handleFormSubmit = ({ username, password }) => {
-    this.props.signinUser({ username, password, history: this.props.history });
+    this.props.signinUser({
+      username,
+      password: username,
+      history: this.props.history
+    });
   };
 
   renderAlert() {
@@ -27,17 +31,10 @@ class Signin extends Component {
         <Form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
           <Field
             component={SigninField}
-            label="Username"
+            label="Username (what you use to login to cerner)"
             name="username"
             placeholder="j12345"
             autoCapitalize="none"
-          />
-          <Field
-            component={SigninField}
-            label="Password"
-            name="password"
-            placeholder="password"
-            type="password"
           />
 
           {this.renderAlert()}

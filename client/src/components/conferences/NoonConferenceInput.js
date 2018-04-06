@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Form, Input, TextArea, List, Grid, Divider } from 'semantic-ui-react';
-import { Editor, EditorState } from 'draft-js';
+import { Editor, EditorState, RichUtils } from 'draft-js';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
 import _ from 'lodash';
 
 const PHYSICALEXAMMARKDOWN = `
   __Vitals__:  
-  __Temp__: 98 __HR__: 70 __BP__: 120/80    
-  .  
+  __Tmax__: 98 __HR__: 70 __BP__: 120/80    
+  __...__  
   __Phyiscal Exam__  
   __Const__: A&Ox3, NAD, well developed  
   __HEENT__: NC/AT, EOMI, MMM  
@@ -21,104 +21,22 @@ const PHYSICALEXAMMARKDOWN = `
   __Psych__: Mood and behabiour normal  
 `;
 
+const ROSMARKDOWN = `
+  __Constitutional:__  
+  __Skin__:  
+  __HEENT__:  
+  __Cardiac__:  
+  __Respiratory__:  
+  __GI__:  
+  __GU__:  
+  __MSK__:  
+  __Endo/Hem/Allergy__:  
+  __Neuro__:  
+  __Psych__:  
+`;
+
 class NoonConference extends Component {
   state = {
-    ROS: [
-      {
-        id: 0,
-        system: 'CONSTITUTIONAL',
-        sx: 'Fevers',
-        qualifier: ''
-      },
-      {
-        id: 1,
-        system: 'CONSTITUTIONAL',
-        sx: 'Chills',
-        qualifier: ''
-      },
-      { id: 2, system: 'CONSTITUTIONAL', sx: 'Weight loss', qualifier: '' },
-      {
-        id: 3,
-        system: 'CONSTITUTIONAL',
-        sx: 'Malaise/Fatigue',
-        qualifier: ''
-      },
-      { id: 4, system: 'CONSTITUTIONAL', sx: 'Diaphoresis', qualifier: '' },
-      { id: 5, system: 'CONSTITUTIONAL', sx: 'Weakness', qualifier: '' },
-      { id: 6, system: 'SKIN', sx: 'Rash', qualifier: '' },
-      { id: 7, system: 'SKIN', sx: 'Itching', qualifier: '' },
-      { id: 8, system: 'HEENT', sx: 'Vision changes', qualifier: '' },
-      { id: 9, system: 'HEENT', sx: 'Eye pain', qualifier: '' },
-      { id: 10, system: 'HEENT', sx: 'Hearing changes', qualifier: '' },
-      { id: 11, system: 'HEENT', sx: 'Ear pain', qualifier: '' },
-      { id: 12, system: 'HEENT', sx: 'Nosebleeds', qualifier: '' },
-      { id: 13, system: 'HEENT', sx: 'Congestion', qualifier: '' },
-      { id: 14, system: 'HEENT', sx: 'Sinus pain', qualifier: '' },
-      { id: 15, system: 'HEENT', sx: 'Sore throat', qualifier: '' },
-      { id: 16, system: 'CARDIAC', sx: 'Chest pain', qualifier: '' },
-      { id: 17, system: 'CARDIAC', sx: 'Palpitations', qualifier: '' },
-      { id: 18, system: 'CARDIAC', sx: 'Orthopnea', qualifier: '' },
-      { id: 19, system: 'CARDIAC', sx: 'Claudication', qualifier: '' },
-      { id: 20, system: 'CARDIAC', sx: 'Leg swelling', qualifier: '' },
-      { id: 21, system: 'CARDIAC', sx: 'PND', qualifier: '' },
-      { id: 22, system: 'RESPIRATORY', sx: 'Cough', qualifier: '' },
-      { id: 23, system: 'RESPIRATORY', sx: 'Hemoptysis', qualifier: '' },
-      { id: 24, system: 'RESPIRATORY', sx: 'Sputum production', qualifier: '' },
-      {
-        id: 25,
-        system: 'RESPIRATORY',
-        sx: 'Shortness of breath',
-        qualifier: ''
-      },
-      { id: 26, system: 'RESPIRATORY', sx: 'Wheezing', qualifier: '' },
-      { id: 27, system: 'GI', sx: 'Heartburn', qualifier: '' },
-      { id: 28, system: 'GI', sx: 'Nausea', qualifier: '' },
-      { id: 29, system: 'GI', sx: 'Vomiting', qualifier: '' },
-      { id: 30, system: 'GI', sx: 'Abdominal pain', qualifier: '' },
-      { id: 31, system: 'GI', sx: 'Diarrhea', qualifier: '' },
-      { id: 32, system: 'GI', sx: 'Constipation', qualifier: '' },
-      { id: 33, system: 'GI', sx: 'Blood in stool', qualifier: '' },
-      { id: 34, system: 'GI', sx: 'Melena', qualifier: '' },
-      { id: 35, system: 'GU', sx: 'Dysuria', qualifier: '' },
-      { id: 36, system: 'GU', sx: 'Urgency', qualifier: '' },
-      { id: 37, system: 'GU', sx: 'Frequency', qualifier: '' },
-      { id: 38, system: 'GU', sx: 'Hematuria', qualifier: '' },
-      { id: 39, system: 'GU', sx: 'Flank pain', qualifier: '' },
-      { id: 40, system: 'MSK', sx: 'Myalgias', qualifier: '' },
-      { id: 41, system: 'MSK', sx: 'Neck pain', qualifier: '' },
-      { id: 42, system: 'MSK', sx: 'Back pain', qualifier: '' },
-      { id: 43, system: 'MSK', sx: 'Joint pain', qualifier: '' },
-      { id: 44, system: 'MSK', sx: 'Falls', qualifier: '' },
-      {
-        id: 45,
-        system: 'ENDO/HEME/ALLERGY',
-        sx: 'Easy bruise/bleed',
-        qualifier: ''
-      },
-      {
-        id: 46,
-        system: 'ENDO/HEME/ALLERGY',
-        sx: 'Env allergies',
-        qualifier: ''
-      },
-      { id: 47, system: 'ENDO/HEME/ALLERGY', sx: 'Polydipsia', qualifier: '' },
-      { id: 48, system: 'NEUROLOGICAL', sx: 'Dizziness', qualifier: '' },
-      { id: 49, system: 'NEUROLOGICAL', sx: 'Headaches', qualifier: '' },
-      { id: 50, system: 'NEUROLOGICAL', sx: 'Tingling', qualifier: '' },
-      { id: 51, system: 'NEUROLOGICAL', sx: 'Tremor', qualifier: '' },
-      { id: 52, system: 'NEUROLOGICAL', sx: 'Sensory change', qualifier: '' },
-      { id: 53, system: 'NEUROLOGICAL', sx: 'Speech change', qualifier: '' },
-      { id: 54, system: 'NEUROLOGICAL', sx: 'Focal weakness', qualifier: '' },
-      { id: 55, system: 'NEUROLOGICAL', sx: 'Seizure', qualifier: '' },
-      { id: 56, system: 'NEUROLOGICAL', sx: 'LOC', qualifier: '' },
-      { id: 57, system: 'PSYCHIATRIC', sx: 'Depression', qualifier: '' },
-      { id: 58, system: 'PSYCHIATRIC', sx: 'Suicidal ideas', qualifier: '' },
-      { id: 59, system: 'PSYCHIATRIC', sx: 'Substance abuse', qualifier: '' },
-      { id: 60, system: 'PSYCHIATRIC', sx: 'Hallucinations', qualifier: '' },
-      { id: 61, system: 'PSYCHIATRIC', sx: 'Nervous/Anxious', qualifier: '' },
-      { id: 62, system: 'PSYCHIATRIC', sx: 'Insomnia', qualifier: '' },
-      { id: 63, system: 'PSYCHIATRIC', sx: 'Momory loss', qualifier: '' }
-    ],
     hpiValue: '',
     additionalText: '',
     medValue: '',
@@ -139,63 +57,46 @@ class NoonConference extends Component {
     BUN: '',
     Cr: '',
     Glu: '',
+    AP: '',
+    ALT: '',
+    AST: '',
+    Tbili: '',
     editorState: EditorState.createWithContent(
       stateFromMarkdown(PHYSICALEXAMMARKDOWN)
-    )
+    ),
+    editorState2: EditorState.createWithContent(stateFromMarkdown(ROSMARKDOWN))
   };
 
-  clickedROS = symptom => {
-    var { id, qualifier } = symptom;
-    let ROS = this.state.ROS;
-    let copyOfSymptom = { ...this.state.ROS[symptom.id] };
-    if (qualifier === '') {
-      qualifier = ' + ';
-    } else if (qualifier === ' + ') {
-      qualifier = ' - ';
-    } else if (qualifier === ' - ') {
-      qualifier = '';
+  handleKeyCommand(command, editorState) {
+    const newState = RichUtils.handleKeyCommand(editorState, command);
+    if (newState) {
+      this.onChange(newState);
+      return 'handled';
     }
-    copyOfSymptom.qualifier = qualifier;
-    ROS = { ...ROS, [id]: copyOfSymptom };
-    this.setState({
-      ROS
-    });
-  };
+    return 'not-handled';
+  }
+
+  editorOnChange2 = editorState2 => this.setState({ editorState2 });
 
   ROS = () => {
-    let system = '';
-    return _.map(this.state.ROS, symptom => {
-      const showSystem = system === symptom.system ? false : true;
-      if (system === '' || system !== symptom.system) {
-        system = symptom.system;
-      }
-      const firstItem = symptom.sx === 'Fevers';
-
-      return (
-        <div key={symptom.id} style={{ display: 'inline' }}>
-          {firstItem ? <label style={{ fontWeight: 'bold' }}>ROS</label> : ''}
-          {showSystem || firstItem ? <br /> : ''}
-          {showSystem ? (
-            <span
-              style={{
-                cursor: 'default',
-                userSelect: 'none',
-                fontWeight: 'bold'
-              }}
-            >{`${symptom.system}: `}</span>
-          ) : (
-            ''
-          )}
-          <span
-            style={{ cursor: 'pointer', userSelect: 'none' }}
-            onClick={() => this.clickedROS(symptom)}
-          >
-            {symptom.sx}
-            {symptom.qualifier},{' '}
-          </span>
+    return (
+      <div>
+        <label style={{ fontWeight: 'bold' }}>ROS</label>
+        <div
+          style={{
+            border: '1px solid rgba(34, 36, 38, 0.15)',
+            borderRadius: '0.28571429rem',
+            padding: '0.67857143em 1em'
+          }}
+        >
+          <Editor
+            editorState={this.state.editorState2}
+            handleKeyCommand={this.handleKeyCommand}
+            onChange={this.editorOnChange2}
+          />
         </div>
-      );
-    });
+      </div>
+    );
   };
 
   listFromArray = arrayName => {
@@ -249,6 +150,7 @@ class NoonConference extends Component {
       >
         <Editor
           editorState={this.state.editorState}
+          handleKeyCommand={this.handleKeyCommand}
           onChange={this.editorOnChange}
         />
       </div>
@@ -283,13 +185,21 @@ class NoonConference extends Component {
         <br />
         <label>BMP</label>
         <br />
-        {this.labInput('Na')} /
-        {this.labInput('K')} /
-        {this.labInput('Cl')} /
-        {this.labInput('HC02')} /
+        {this.labInput('Na')} |
+        {this.labInput('Cl')} |
         {this.labInput('BUN')} /
-        {this.labInput('Cr')} /
+        <br />
+        {this.labInput('K')} |
+        {this.labInput('HC02')} |
+        {this.labInput('Cr')} \
         {this.labInput('Glu')}
+        <br />
+        <label>Hepatic Function Panel</label>
+        <br />
+        {this.labInput('AP')} /
+        {this.labInput('ALT')} /
+        {this.labInput('AST')} /
+        {this.labInput('Tbili')}
         <Form.Field
           control={TextArea}
           placeholder="Additional Labs"
@@ -320,18 +230,26 @@ class NoonConference extends Component {
               />
               <div>{this.ROS()}</div>
               <Grid columns={3} style={{ marginTop: 10 }}>
-                {this.listCreator('Meds', 'Xanax', 'medsArray', 'medValue')}
                 {this.listCreator(
-                  'Medical/Surgical hx',
+                  'Meds',
+                  'Xanax',
+                  'medsArray',
+                  'medValue',
+                  110
+                )}
+                {this.listCreator(
+                  'Med/Surg hx',
                   'Diabetes',
                   'hxArray',
-                  'hxValue'
+                  'hxValue',
+                  110
                 )}
                 {this.listCreator(
                   'Social',
                   'EtOH',
                   'socialArray',
-                  'socialValue2'
+                  'socialValue2',
+                  110
                 )}
               </Grid>
             </Grid.Column>
@@ -347,6 +265,17 @@ class NoonConference extends Component {
               />
             </Grid.Column>
             <Grid.Column>
+              <Form.Field
+                control={TextArea}
+                label="Summary assessment"
+                placeholder="45M with ..."
+                value={this.state.additionalText}
+                onChange={text =>
+                  this.setState({
+                    additionalText: text.target.value
+                  })
+                }
+              />
               {this.listCreator(
                 'Differential diagnosis',
                 'ACS...',
@@ -358,18 +287,6 @@ class NoonConference extends Component {
           </Grid.Row>
         </Grid>
         <br />
-        <Divider />
-        <Form.Field
-          control={TextArea}
-          label="Summary assessment / Banter"
-          placeholder="Summary assessment / Other"
-          value={this.state.additionalText}
-          onChange={text =>
-            this.setState({
-              additionalText: text.target.value
-            })
-          }
-        />
       </Form>
     );
   }
