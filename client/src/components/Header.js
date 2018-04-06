@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'semantic-ui-react';
+import * as actions from '../actions';
 import jwt_decode from 'jwt-decode';
 
 class Header extends Component {
@@ -26,8 +27,12 @@ class Header extends Component {
         </Menu.Item>,
 
         <Menu.Item key="3" position="right">
-          <Link to="/signout">
-            <Icon name="x" size="large" />
+          <Link to="/">
+            <Icon
+              name="x"
+              size="large"
+              onClick={() => this.props.signoutUser()}
+            />
           </Link>
         </Menu.Item>
       ];
@@ -66,4 +71,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions)(Header);

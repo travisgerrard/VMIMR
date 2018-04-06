@@ -46,7 +46,7 @@ class LastFiveConditions extends Component {
           This will be the site of the VM: Internal Medicine Recidency landing
           page
         </p>
-        <p>For now it just shows the most recnetly added conditions</p>
+        <p>For now it just shows the most recently added conditions</p>
         <p>
           <Link to="/conditions/">
             Your three most recent condition learnings. Tap this line to add to

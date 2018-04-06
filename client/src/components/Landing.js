@@ -17,14 +17,13 @@ const Landing = () => {
         <h1>VM:IMR</h1>
         <p>
           Welcome to the Virginia Mason: Internal Medicine recidency home page
-          for residents.
+          for residents
         </p>
         <p>Aiming to help organize your residency life and learning</p>
         <h3>
           <Link to="/signin">Login to get started</Link>
         </h3>
         <p>TK: Blog / noon conference report</p>
-        <p>TK: Slack link / noon conference report</p>
       </Container>
     );
   }
