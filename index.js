@@ -1,21 +1,26 @@
 // Main starting point of the application
 const express = require('express');
 const mongoose = require('mongoose');
+const expressGraphQL = require('express-graphql');
 const http = require('http');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const keys = require('./config/keys');
+const schema = require('./schema/schema');
+
 require('./models/user');
 require('./models/condition');
 require('./models/conditionLearning');
 require('./services/passport');
 
+// Set up mongoose to connect to mongLab. Connect to ES2015 Promse
 mongoose.connect(keys.mongoURI);
+mongoose.Promise = global.Promise;
 
 const app = express();
 
 // App Setup
-app.use(morgan('combined')); // Logs incoming requires
+//app.use(morgan('combined')); // Logs incoming requires
 app.use(bodyParser.json());
 
 require('./routes/authRoutes')(app);
@@ -23,7 +28,18 @@ require('./routes/conditionRoutes')(app);
 require('./routes/learningRoutes')(app);
 require('./routes/userRoutes')(app);
 require('./routes/landingRoutes')(app);
-//require('./routes/twilioTestRoute')(app);
+
+const passport = require('passport');
+const requireAuth = passport.authenticate('jwt', { session: false });
+
+app.use(
+  '/graphql',
+  requireAuth,
+  expressGraphQL(async (request, response, graphQLParams) => ({
+    schema,
+    graphiql: true,
+  })),
+);
 
 // To make it so react is fallback for paths in app
 if (process.env.NODE_ENV === 'production') {
