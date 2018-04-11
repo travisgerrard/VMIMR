@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const providerSchema = new Schema({
   name: String,
+  rotationTag: String,
   _creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
