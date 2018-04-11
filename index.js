@@ -8,14 +8,14 @@ const morgan = require('morgan');
 const keys = require('./config/keys');
 const schema = require('./schema/schema');
 
+// Set up mongoose to connect to mongLab. Connect to ES2015 Promse
+mongoose.connect(keys.mongoURI);
+mongoose.Promise = global.Promise;
+
 require('./models/user');
 require('./models/condition');
 require('./models/conditionLearning');
 require('./services/passport');
-
-// Set up mongoose to connect to mongLab. Connect to ES2015 Promse
-mongoose.connect(keys.mongoURI);
-mongoose.Promise = global.Promise;
 
 const app = express();
 

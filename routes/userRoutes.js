@@ -40,17 +40,17 @@ module.exports = app => {
       if (existingUser) {
         var userToUpdate = await User.findOneAndUpdate(
           {
-            _id: id
+            _id: id,
           },
           {
             $set: {
               name,
               username,
               email,
-              admin
-            }
+              admin,
+            },
           },
-          { new: true }
+          { new: true },
         );
         await userToUpdate.save();
         res.send(userToUpdate);
@@ -62,7 +62,7 @@ module.exports = app => {
         username,
         email,
         admin,
-        password
+        password,
       });
 
       bcrypt.genSalt(10, function(err, salt) {
@@ -110,19 +110,19 @@ module.exports = app => {
         if (existingUser) {
           var userToUpdate = await User.findOneAndUpdate(
             {
-              _id: req.user.id
+              _id: req.user.id,
             },
             {
               $set: {
-                pushToken: token
-              }
+                pushToken: token,
+              },
             },
-            { new: true }
+            { new: true },
           );
           await userToUpdate.save();
           res.send(userToUpdate);
         }
       });
-    }
+    },
   );
 };
