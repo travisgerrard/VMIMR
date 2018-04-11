@@ -9,11 +9,14 @@ class Header extends Component {
   adminLinks() {
     if (localStorage.getItem('VMIMRToken') !== null) {
       if (jwt_decode(localStorage.getItem('VMIMRToken')).admin) {
-        return (
-          <Menu.Item position="right">
+        return [
+          <Menu.Item key="2" position="right">
+            <Link to="/rotations">Rotations</Link>
+          </Menu.Item>,
+          <Menu.Item key="1" position="right">
             <Link to="/users">Users</Link>
-          </Menu.Item>
-        );
+          </Menu.Item>,
+        ];
       }
     }
   }
@@ -34,14 +37,14 @@ class Header extends Component {
               onClick={() => this.props.signoutUser()}
             />
           </Link>
-        </Menu.Item>
+        </Menu.Item>,
       ];
     }
     //show sign in
     return [
       <Menu.Item key="signin">
         <Link to="/signin">Sign in</Link>
-      </Menu.Item>
+      </Menu.Item>,
     ];
   }
 
@@ -67,7 +70,7 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
   };
 }
 
