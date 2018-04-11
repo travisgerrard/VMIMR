@@ -13,8 +13,10 @@ const {
 
 require('../models/user');
 require('../models/provider');
+require('../models/rotation');
 const User = mongoose.model('users');
 const Provider = mongoose.model('Provider');
+const Rotation = mongoose.model('Rotation');
 
 const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -80,13 +82,39 @@ var ProviderType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'The provider name',
     },
-    rotationTag: {
-      type: GraphQLString,
-      description: 'Specialty provider is associated with',
+    associatedRotation: {
+      type: GraphQLID,
+      description: 'ID of rotation that provider was created from',
     },
     _creator: {
       type: GraphQLID,
       description: 'The id for the user who created the provider',
+    },
+  }),
+});
+
+var RotationType = new GraphQLObjectType({
+  name: 'rotationType',
+  fields: () => ({
+    id: {
+      type: GraphQLID,
+      description: 'ID for rotation',
+    },
+    title: {
+      type: GraphQLString,
+      description: 'Rotation title',
+    },
+    generalInfo: {
+      type: GraphQLString,
+      description: 'Genral info regarding a rotation',
+    },
+    providers: {
+      type: GraphQLList(GraphQLID),
+      description: 'List of providers associated with rotation',
+    },
+    _creator: {
+      type: GraphQLID,
+      description: 'Creator of this rotation',
     },
   }),
 });
@@ -107,12 +135,33 @@ var listOfProviders = {
   },
 };
 
+var returnRotation = {
+  type: RotationType,
+  description: 'Info regarding specific rotation',
+  args: {
+    id: { type: GraphQLID },
+  },
+  async resolve(parentValues, { id }, req) {
+    return await Rotation.findById(id);
+  },
+};
+
+var listOfRotations = {
+  type: GraphQLList(RotationType),
+  description: 'List of all rotations',
+  resolve: (parentValues, args, req) => {
+    return Rotation.find();
+  },
+};
+
 var RootQueryType = new GraphQLObjectType({
   name: 'RootQuery',
   fields: () => ({
     currentUser,
     listOfUsers,
     listOfProviders,
+    listOfRotations,
+    returnRotation,
   }),
 });
 
@@ -125,13 +174,15 @@ var runMutation = {
 
 var addProvider = {
   type: ProviderType,
+  description:
+    'Creates a providers and updates the rotation so it knows the provider is attached to it',
   args: {
     name: { type: new GraphQLNonNull(GraphQLString) },
-    rotationTag: { type: new GraphQLNonNull(GraphQLString) },
-    creator: { type: new GraphQLNonNull(GraphQLID) },
+    associatedRotation: { type: new GraphQLNonNull(GraphQLID) },
+    _creator: { type: new GraphQLNonNull(GraphQLID) },
   },
-  async resolve(parentValues, { name, rotationTag, _creator }) {
-    var newProvider = new Provider({ name, rotationTag, _creator });
+  async resolve(parentValues, { name, associatedRotation, _creator }) {
+    var newProvider = new Provider({ name, associatedRotation, _creator });
 
     await newProvider.save(function(err) {
       if (err) {
@@ -139,7 +190,46 @@ var addProvider = {
       }
     });
 
+    await Rotation.findByIdAndUpdate(
+      associatedRotation,
+      { $push: { providers: newProvider._id } },
+      { new: true },
+    );
+
     return newProvider;
+  },
+};
+
+var addRotation = {
+  type: RotationType,
+  args: {
+    title: { type: new GraphQLNonNull(GraphQLString) },
+    _creator: { type: new GraphQLNonNull(GraphQLID) },
+  },
+  async resolve(parentValues, { title, _creator }) {
+    var newRotation = new Rotation({ title, _creator });
+
+    await newRotation.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+    });
+
+    return newRotation;
+  },
+};
+
+var updateRotation = {
+  type: RotationType,
+  args: {
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    generalInfo: { type: GraphQLString },
+  },
+  async resolve(parentValues, args) {
+    var { id } = args;
+
+    return await Rotation.findByIdAndUpdate(id, args, { new: true });
   },
 };
 
@@ -148,6 +238,8 @@ var MutationType = new GraphQLObjectType({
   fields: () => ({
     runMutation,
     addProvider,
+    addRotation,
+    updateRotation,
   }),
 });
 
