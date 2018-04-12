@@ -34,15 +34,21 @@ const requireAuth = passport.authenticate('jwt', { session: false });
 
 console.log(requireAuth);
 
-app.use(
+app.all('/graphql', requireAuth);
+app.get(
   '/graphql',
-  requireAuth,
-  expressGraphQL(async (request, response, graphQLParams) => ({
+  expressGraphQL({
     schema,
     graphiql: true,
-  })),
+  }),
 );
-
+app.post(
+  '/graphql',
+  expressGraphQL({
+    schema,
+    graphiql: true,
+  }),
+);
 // To make it so react is fallback for paths in app
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assests

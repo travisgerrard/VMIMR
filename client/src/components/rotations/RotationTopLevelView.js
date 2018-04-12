@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 
 import RotationNavBar from './RotationNavBar';
+import RotationMainView from './RotationMainView';
 
 class RotationTopLevelView extends Component {
   state = {
     activeItem: '',
+    activeItemId: '5acd8914f0a4808f5423fd20',
   };
 
-  handleMenubarItemClick = (e, { name }) => this.setState({ activeItem: name });
+  handleMenubarItemClick = (e, { name, id }) => {
+    console.log(id);
+
+    this.setState({ activeItem: name });
+    this.setState({ activeItemId: id });
+  };
 
   render() {
     return (
@@ -21,7 +28,14 @@ class RotationTopLevelView extends Component {
             />
           </Grid.Column>
           <Grid.Column stretched width={12}>
-            <h1>{this.state.activeItem}</h1>
+            {this.state.activeItemId ? (
+              <RotationMainView
+                rotation={this.state.activeItem}
+                id={this.state.activeItemId}
+              />
+            ) : (
+              <h1>Select a rotation</h1>
+            )}
           </Grid.Column>
         </Grid>
       </div>

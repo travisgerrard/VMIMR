@@ -25,6 +25,7 @@ class RotationTopLevelView extends Component {
                 <Menu.Item
                   name={rotation.title}
                   active={activeItem === rotation.title}
+                  id={rotation.id}
                   onClick={this.props.handleMenubarItemClick}
                   key={rotation.title}
                 >
