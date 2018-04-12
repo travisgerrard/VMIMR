@@ -5,6 +5,7 @@ export default gql`
     currentUser {
       id
       name
+      admin
     }
   }
 `;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'semantic-ui-react';
@@ -31,22 +30,25 @@ class Header extends Component {
         </Menu.Item>,
 
         <Menu.Item key="3" position="right">
-          <Link to="/">
+          <a href="/">
             <Icon
               name="x"
               size="large"
-              onClick={() => this.props.signoutUser()}
+              onClick={() => {
+                this.props.signoutUser();
+              }}
             />
-          </Link>
+          </a>
+        </Menu.Item>,
+      ];
+    } else {
+      //show sign in
+      return [
+        <Menu.Item key="signin">
+          <Link to="/signin">Sign in</Link>
         </Menu.Item>,
       ];
     }
-    //show sign in
-    return [
-      <Menu.Item key="signin">
-        <Link to="/signin">Sign in</Link>
-      </Menu.Item>,
-    ];
   }
 
   render() {
