@@ -24,7 +24,7 @@
     "expo-server-sdk": "^2.3.3",
     "express": "^4.16.2",
     "express-graphql": "^0.6.12",
-    "graphql": "^0.13.2",
+    "graphql": "0.13.0",
     "graphql-tag": "^2.8.0",
     "jwt-decode": "^2.2.0",
     "jwt-simple": "^0.5.1",

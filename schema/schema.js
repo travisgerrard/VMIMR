@@ -21,15 +21,7 @@ const Rotation = mongoose.model('Rotation');
 const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
 
-var currentUser = {
-  type: GraphQLString,
-  description: 'The Current User',
-  resolve: (parentValues, args, req) => {
-    return req.user.name;
-  },
-};
-
-var userType = new GraphQLObjectType({
+var UserType = new GraphQLObjectType({
   name: 'UserType',
   fields: () => ({
     id: {
@@ -70,6 +62,14 @@ var userType = new GraphQLObjectType({
     },
   }),
 });
+
+var currentUser = {
+  type: UserType,
+  description: 'The Current User',
+  resolve: (parentValues, args, req) => {
+    return req.user;
+  },
+};
 
 var ProviderType = new GraphQLObjectType({
   name: 'providerType',
@@ -120,7 +120,7 @@ var RotationType = new GraphQLObjectType({
 });
 
 var listOfUsers = {
-  type: GraphQLList(userType),
+  type: GraphQLList(UserType),
   description: 'List of all the users',
   resolve: (parentValues, args, req) => {
     return User.find();
