@@ -11,7 +11,7 @@ class Header extends Component {
       if (jwt_decode(localStorage.getItem('VMIMRToken')).admin) {
         return [
           <Menu.Item key="2" position="right">
-            <Link to="/rotations">Rotations</Link>
+            <a href="/rotations">Rotations</a>
           </Menu.Item>,
           <Menu.Item key="1" position="right">
             <Link to="/users">Users</Link>
