@@ -142,7 +142,7 @@ var returnRotation = {
     id: { type: GraphQLID },
   },
   async resolve(parentValues, { id }, req) {
-    return await Rotation.findById(id);
+    return await Rotation.findById(id).populate('providers');
   },
 };
 
@@ -150,7 +150,7 @@ var listOfRotations = {
   type: GraphQLList(RotationType),
   description: 'List of all rotations',
   resolve: (parentValues, args, req) => {
-    return Rotation.find().populate('providers');
+    return Rotation.find();
   },
 };
 

@@ -6,7 +6,10 @@ export default gql`
       id
       title
       generalInfo
-      providers
+      providers {
+        id
+        name
+      }
     }
   }
 `;

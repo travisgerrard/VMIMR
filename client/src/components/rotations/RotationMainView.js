@@ -10,7 +10,7 @@ class RotationMainView extends Component {
   state = {
     editGeneralInfo: false,
     generalInfo: '',
-    errors: ''
+    errors: '',
   };
 
   handleEditGeneralInfoClick = e => this.setState({ editGeneralInfo: true });
@@ -23,7 +23,7 @@ class RotationMainView extends Component {
         },
         refetchQueries: [{ query: SELECTED_ROTATION }],
       })
-      .then(this.setState({ editGeneralInfo: false }));
+      .then(this.setState({ editGeneralInfo: false }))
       .catch(res => {
         const errors = res.graphQLErrors.map(error => error.message);
         this.setState({ errors });
@@ -91,6 +91,8 @@ class RotationMainView extends Component {
             query: GET_CURRENT_USER,
           });
 
+          console.log(data.returnRotation);
+
           const { admin } = currentUserQuery.currentUser;
           const { generalInfo, title, providers } = data.returnRotation;
 
@@ -101,7 +103,9 @@ class RotationMainView extends Component {
               <h4>Providers</h4>
               <Segment.Group style={{ marginRight: 25 }}>
                 {providers.map(provider => {
-                  return <Segment key={provider}>{provider}</Segment>;
+                  console.log(provider);
+
+                  return <Segment key={provider.id}>{provider.name}</Segment>;
                 })}
               </Segment.Group>
 
