@@ -6,87 +6,21 @@ import GET_CURRENT_USER from '../../queries/CurrentUser';
 import SELECTED_ROTATION from '../../queries/SelectedRotation';
 import UPDATE_ROTATION from '../../mutations/UpdateRotation';
 
+import RotationGeneralInfo from './RotationGeneralInfo';
+
 class RotationMainView extends Component {
   state = {
-    editGeneralInfo: false,
-    generalInfo: '',
     providerName: '',
     providerGeneralInfo: '',
     addProvider: false,
     errors: '',
   };
 
-  handleEditGeneralInfoClick = e => this.setState({ editGeneralInfo: true });
-  handleEditGeneralInfoSubmit = e => {
-    this.props
-      .mutate({
-        variables: {
-          id: this.props.id,
-          generalInfo: this.state.generalInfo,
-        },
-        refetchQueries: [{ query: SELECTED_ROTATION }],
-      })
-      .then(this.setState({ editGeneralInfo: false }))
-      .catch(res => {
-        const errors = res.graphQLErrors.map(error => error.message);
-        this.setState({ errors });
-      });
-  };
   handleAddProviderClick = e => {
     this.setState({ addProvider: true });
   };
   handleAddProviderSubmit = e => {
     this.setState({ addProvider: false });
-  };
-
-  adminGeneralInfo = () => {
-    if (this.state.editGeneralInfo) {
-      return (
-        <Form onSubmit={() => this.handleEditGeneralInfoSubmit()}>
-          <TextArea
-            value={this.state.generalInfo}
-            onChange={e => this.setState({ generalInfo: e.target.value })}
-          />
-          <Button size="mini">Submit</Button>
-        </Form>
-      );
-    } else {
-      return (
-        <div>
-          <Button size="mini" onClick={() => this.handleEditGeneralInfoClick()}>
-            Edit
-          </Button>
-          <Segment stacked style={{ marginRight: 25 }}>
-            {this.state.generalInfo}
-          </Segment>
-        </div>
-      );
-    }
-  };
-
-  displayGeneralInfo = (generalInfo, isAdmin) => {
-    if (isAdmin) {
-      if (this.state.generalInfo === '') {
-        this.setState({ generalInfo });
-      }
-      return (
-        <div>
-          <h4 style={{ display: 'inline-block', float: 'left' }}>
-            General Info
-          </h4>{' '}
-          {this.adminGeneralInfo()}
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <h4>General Info</h4>
-          <Segment stacked style={{ marginRight: 25 }}>
-            {generalInfo}
-          </Segment>
-        </div>
-      );
-    }
   };
 
   adminProviderInfo = () => {
@@ -174,7 +108,11 @@ class RotationMainView extends Component {
           return (
             <Container>
               <h1>{title}</h1>
-              {this.displayGeneralInfo(generalInfo, admin)}
+              <RotationGeneralInfo
+                generalInfo={generalInfo}
+                admin={admin}
+                id={this.props.id}
+              />
               <br />
               {this.displayProviderInfo(providers, admin)}
               <h4>{title} learnings</h4>
@@ -194,4 +132,4 @@ class RotationMainView extends Component {
   }
 }
 
-export default withApollo(graphql(UPDATE_ROTATION)(RotationMainView));
+export default withApollo(RotationMainView);

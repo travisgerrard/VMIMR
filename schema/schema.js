@@ -183,10 +183,19 @@ var addProvider = {
   args: {
     name: { type: new GraphQLNonNull(GraphQLString) },
     associatedRotation: { type: new GraphQLNonNull(GraphQLID) },
+    generalInfo: { type: GraphQLString },
     _creator: { type: new GraphQLNonNull(GraphQLID) },
   },
-  async resolve(parentValues, { name, associatedRotation, _creator }) {
-    var newProvider = new Provider({ name, associatedRotation, _creator });
+  async resolve(
+    parentValues,
+    { name, associatedRotation, generalInfo, _creator },
+  ) {
+    var newProvider = new Provider({
+      name,
+      associatedRotation,
+      generalInfo,
+      _creator,
+    });
 
     await newProvider.save(function(err) {
       if (err) {
