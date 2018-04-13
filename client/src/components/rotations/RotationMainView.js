@@ -10,6 +10,9 @@ class RotationMainView extends Component {
   state = {
     editGeneralInfo: false,
     generalInfo: '',
+    providerName: '',
+    providerGeneralInfo: '',
+    addProvider: false,
     errors: '',
   };
 
@@ -28,6 +31,12 @@ class RotationMainView extends Component {
         const errors = res.graphQLErrors.map(error => error.message);
         this.setState({ errors });
       });
+  };
+  handleAddProviderClick = e => {
+    this.setState({ addProvider: true });
+  };
+  handleAddProviderSubmit = e => {
+    this.setState({ addProvider: false });
   };
 
   adminGeneralInfo = () => {
@@ -80,6 +89,72 @@ class RotationMainView extends Component {
     }
   };
 
+  adminProviderInfo = () => {
+    if (this.state.addProvider) {
+      return (
+        <Form onSubmit={() => this.handleAddProviderSubmit()}>
+          <Form.Input
+            fluid
+            label="Provider Name"
+            value={this.state.providerName}
+            onChange={e => this.setState({ providerName: e.target.value })}
+          />
+          <Form.TextArea
+            label="Provider Info"
+            value={this.state.providerGeneralInfo}
+            onChange={e =>
+              this.setState({ providerGeneralInfo: e.target.value })
+            }
+          />
+          <Form.Button>Submit</Form.Button>
+        </Form>
+      );
+    } else {
+      return (
+        <Button size="mini" onClick={() => this.handleAddProviderClick()}>
+          Add
+        </Button>
+      );
+    }
+  };
+
+  displayProviderInfo = (providers, isAdmin) => {
+    if (isAdmin) {
+      return (
+        <div>
+          <h4 style={{ display: 'inline-block', float: 'left' }}>Providers</h4>
+          {this.adminProviderInfo()}
+          <Segment.Group style={{ marginRight: 25 }}>
+            {providers.map(provider => {
+              return (
+                <Segment key={provider.id}>
+                  <h4>{provider.name}</h4>
+                  <p>{provider.generalInfo}</p>
+                </Segment>
+              );
+            })}
+          </Segment.Group>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h4>Providers</h4>
+          <Segment.Group style={{ marginRight: 25 }}>
+            {providers.map(provider => {
+              return (
+                <Segment key={provider.id}>
+                  <h4>{provider.name}</h4>
+                  <p>{provider.generalInfo}</p>
+                </Segment>
+              );
+            })}
+          </Segment.Group>
+        </div>
+      );
+    }
+  };
+
   getTitleInfoProviders = () => {
     return (
       <Query query={SELECTED_ROTATION} variables={{ id: this.props.id }}>
@@ -100,15 +175,8 @@ class RotationMainView extends Component {
             <Container>
               <h1>{title}</h1>
               {this.displayGeneralInfo(generalInfo, admin)}
-              <h4>Providers</h4>
-              <Segment.Group style={{ marginRight: 25 }}>
-                {providers.map(provider => {
-                  console.log(provider);
-
-                  return <Segment key={provider.id}>{provider.name}</Segment>;
-                })}
-              </Segment.Group>
-
+              <br />
+              {this.displayProviderInfo(providers, admin)}
               <h4>{title} learnings</h4>
               <p>Will pull in most recent conditions learned regarding gyn</p>
 
