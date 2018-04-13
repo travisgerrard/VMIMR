@@ -8,6 +8,7 @@ import ADD_ROTATION from '../../mutations/AddRotation';
 class RotationTopLevelView extends Component {
   state = {
     rotationInput: '',
+    errors: '',
   };
 
   listOfRotations = () => {
