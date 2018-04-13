@@ -10,6 +10,7 @@ class RotationMainView extends Component {
   state = {
     editGeneralInfo: false,
     generalInfo: '',
+    errors: ''
   };
 
   handleEditGeneralInfoClick = e => this.setState({ editGeneralInfo: true });
@@ -23,6 +24,10 @@ class RotationMainView extends Component {
         refetchQueries: [{ query: SELECTED_ROTATION }],
       })
       .then(this.setState({ editGeneralInfo: false }));
+      .catch(res => {
+        const errors = res.graphQLErrors.map(error => error.message);
+        this.setState({ errors });
+      });
   };
 
   adminGeneralInfo = () => {

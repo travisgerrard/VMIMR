@@ -109,7 +109,7 @@ var RotationType = new GraphQLObjectType({
       description: 'Genral info regarding a rotation',
     },
     providers: {
-      type: GraphQLList(GraphQLID),
+      type: GraphQLList(ProviderType),
       description: 'List of providers associated with rotation',
     },
     _creator: {
@@ -150,7 +150,7 @@ var listOfRotations = {
   type: GraphQLList(RotationType),
   description: 'List of all rotations',
   resolve: (parentValues, args, req) => {
-    return Rotation.find();
+    return Rotation.find().populate('providers');
   },
 };
 
