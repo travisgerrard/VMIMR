@@ -19,7 +19,9 @@ class RotationGeneralInfo extends Component {
           id: this.props.id,
           generalInfo: this.state.generalInfo,
         },
-        refetchQueries: [{ query: SELECTED_ROTATION }],
+        refetchQueries: [
+          { query: SELECTED_ROTATION, variables: { id: this.props.id } },
+        ],
       })
       .then(this.setState({ editGeneralInfo: false }))
       .catch(res => {
@@ -33,7 +35,7 @@ class RotationGeneralInfo extends Component {
       return (
         <Form onSubmit={() => this.handleEditGeneralInfoSubmit()}>
           <TextArea
-            value={this.state.generalInfo}
+            value={this.state.generalInfo ? this.state.generalInfo : ''}
             onChange={e => this.setState({ generalInfo: e.target.value })}
           />
           <Button size="mini">Submit</Button>

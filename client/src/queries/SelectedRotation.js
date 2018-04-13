@@ -9,6 +9,7 @@ export default gql`
       providers {
         id
         name
+        generalInfo
       }
     }
   }

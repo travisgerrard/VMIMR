@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Input } from 'semantic-ui-react';
-import { Query, withApollo, readQuery, graphql } from 'react-apollo';
+import { Query, withApollo, graphql } from 'react-apollo';
 import GET_CURRENT_USER from '../../queries/CurrentUser';
 import GET_LIST_OF_ROTATIONS from '../../queries/ListOfRotations';
 import ADD_ROTATION from '../../mutations/AddRotation';
