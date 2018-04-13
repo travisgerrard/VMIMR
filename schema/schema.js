@@ -82,6 +82,10 @@ var ProviderType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'The provider name',
     },
+    generalInfo: {
+      type: GraphQLString,
+      description: 'General info about provider',
+    }
     associatedRotation: {
       type: GraphQLID,
       description: 'ID of rotation that provider was created from',
