@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Query, withApollo, readQuery, graphql } from 'react-apollo';
-import { Segment, Container, Button, Form, TextArea } from 'semantic-ui-react';
+import { Query, withApollo } from 'react-apollo';
+import { Container } from 'semantic-ui-react';
 
 import GET_CURRENT_USER from '../../queries/CurrentUser';
 import SELECTED_ROTATION from '../../queries/SelectedRotation';

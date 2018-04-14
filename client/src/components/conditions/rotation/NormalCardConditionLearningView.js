@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Card, Image, Icon, Button } from 'semantic-ui-react';
+import { Card, Image, Icon } from 'semantic-ui-react';
 import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import './markdown.css';
-
-const TEXTLENGTH = 200;
 
 class NormalCardConditionLearningView extends Component {
   state = { showAllText: false };
@@ -41,7 +39,7 @@ class NormalCardConditionLearningView extends Component {
       usersTagged,
       seenWith,
       dateField,
-      whatWasLearned
+      whatWasLearned,
     } = this.props;
 
     //console.log(this.props);

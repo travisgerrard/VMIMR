@@ -3,16 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
-import {
-  Form,
-  Container,
-  Button,
-  Grid,
-  Header,
-  Image,
-  Message,
-  Segment
-} from 'semantic-ui-react';
+import { Form, Button, Grid, Header, Segment } from 'semantic-ui-react';
 import SigninField from '../users/UserInputField';
 
 class Signin extends Component {
@@ -20,7 +11,7 @@ class Signin extends Component {
     this.props.signinUser({
       username,
       password: username,
-      history: this.props.history
+      history: this.props.history,
     });
   };
 
@@ -84,5 +75,5 @@ function mapStateToProps(state) {
 }
 
 export default reduxForm({
-  form: 'signin' // no fields array given
+  form: 'signin', // no fields array given
 })(connect(mapStateToProps, actions)(withRouter(Signin)));

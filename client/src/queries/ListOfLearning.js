@@ -21,7 +21,10 @@ export default gql`
         tags
         _creator
       }
-      _creator
+      _creator {
+        id
+        name
+      }
     }
   }
 `;
