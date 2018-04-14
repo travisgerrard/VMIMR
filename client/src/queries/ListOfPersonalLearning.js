@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  {
-    listOfLearning {
+  query ListOfPersonalLearning($id: ID) {
+    listOfPersonalLearning(id: $id) {
       id
       whatWasLearned
       tags

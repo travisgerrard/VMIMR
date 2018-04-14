@@ -68,14 +68,6 @@ var UserType = new GraphQLObjectType({
   }),
 });
 
-var currentUser = {
-  type: UserType,
-  description: 'The Current User',
-  resolve: (parentValues, args, req) => {
-    return req.user;
-  },
-};
-
 var ProviderType = new GraphQLObjectType({
   name: 'providerType',
   fields: () => ({
@@ -214,6 +206,14 @@ var ConditionLearningType = new GraphQLObjectType({
   }),
 });
 
+var currentUser = {
+  type: UserType,
+  description: 'The Current User',
+  resolve: (parentValues, args, req) => {
+    return req.user;
+  },
+};
+
 var listOfUsers = {
   type: GraphQLList(UserType),
   description: 'List of all the users',
@@ -266,7 +266,31 @@ var listOfConditions = {
   },
 };
 
-var listOfLearning = {
+var listOfPersonalLearning = {
+  type: GraphQLList(ConditionLearningType),
+  description:
+    'List of learning which your created or in which you are tagged or which you liked',
+  args: {
+    id: { type: GraphQLID },
+  },
+  resolve: (parentValues, { id }, req) => {
+    var learnings = ConditionLearning.find({
+      $or: [
+        {
+          usersTagged: id,
+        },
+        { _creator: id },
+      ],
+    })
+      .populate({ path: '_condition', model: 'conditions' })
+      .populate({ path: '_creator', model: 'users' })
+      .populate({ path: 'usersTagged', model: 'users' })
+      .sort('-dateUpdated');
+    return learnings;
+  },
+};
+
+var listOfAllLearning = {
   type: GraphQLList(ConditionLearningType),
   description: 'List of all learning',
   resolve: (parentValues, args, req) => {
@@ -288,7 +312,8 @@ var RootQueryType = new GraphQLObjectType({
     listOfRotations,
     returnRotation,
     listOfConditions,
-    listOfLearning,
+    listOfPersonalLearning,
+    listOfAllLearning,
   }),
 });
 

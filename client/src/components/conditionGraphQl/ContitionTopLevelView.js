@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
 import { Query, withApollo, graphql } from 'react-apollo';
-import GET_ALL_LEARNING from '../../queries/ListOfLearning';
+import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
 import GET_CURRENT_USER from '../../queries/CurrentUser';
 
 import SortConditionCards from './SortConditionCards';
