@@ -15,6 +15,7 @@ import ModifyUser from './users/ModifyUser';
 import Messages from './messages';
 import ConditionPage from './conditions/rotation/ConditionPage';
 import NoonConference from './conferences/NoonConference';
+import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
 
 class App extends Component {
   componentWillMount() {
@@ -35,6 +36,11 @@ class App extends Component {
             exact
             path={`/conditions/condition/:id`}
             component={RequireAuth(ConditionPage)}
+          />
+          <Route
+            exat
+            path="/conditionGQL"
+            component={RequireAuth(ConditionTopLevelViewGQL)}
           />
           <Route path="/rotations" component={RequireAuth(Rotations)} />
           <Route exact path="/users" component={RequireAuth(ListOfAllUsers)} />

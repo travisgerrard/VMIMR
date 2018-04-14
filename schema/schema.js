@@ -204,7 +204,7 @@ var ConditionLearningType = new GraphQLObjectType({
         'Aspiration field to determine if learning should be used as a dot phrase',
     },
     _condition: {
-      type: GraphQLID,
+      type: ConditionType,
       description: 'The condition that this learning is associated with',
     },
     _creator: {
@@ -253,7 +253,7 @@ var listOfConditions = {
   type: GraphQLList(ConditionType),
   description: 'List of all conditions',
   resolve: (parentValues, args, req) => {
-    return Condition.find().populate({
+    var conditions = Condition.find().populate({
       path: '_learnings',
       model: 'conditionLearnings',
       populate: {
@@ -261,6 +261,21 @@ var listOfConditions = {
         model: 'users',
       },
     });
+
+    return conditions;
+  },
+};
+
+var listOfLearning = {
+  type: GraphQLList(ConditionLearningType),
+  description: 'List of all learning',
+  resolve: (parentValues, args, req) => {
+    var learnings = ConditionLearning.find().populate({
+      path: '_condition',
+      model: 'conditions',
+    });
+
+    return learnings;
   },
 };
 
@@ -273,6 +288,7 @@ var RootQueryType = new GraphQLObjectType({
     listOfRotations,
     returnRotation,
     listOfConditions,
+    listOfLearning,
   }),
 });
 
