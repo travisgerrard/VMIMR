@@ -1,5 +1,6 @@
 import React from 'react';
 import LastFiveConditions from './landing/LastFiveConditions';
+import Conditions from './conditions/ConditionTopLevelView';
 import { Link } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
@@ -8,7 +9,7 @@ const Landing = () => {
   if (localStorage.getItem('VMIMRToken') !== null) {
     landingPage = (
       <div>
-        <LastFiveConditions />
+        <Conditions />
       </div>
     );
   } else {
