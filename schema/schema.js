@@ -123,6 +123,92 @@ var RotationType = new GraphQLObjectType({
   }),
 });
 
+var ConditionType = new GraphQLObjectType({
+  name: 'conditionType',
+  fields: () => ({
+    id: {
+      type: GraphQLID,
+      description: 'ID for condition',
+    },
+    condition: {
+      type: GraphQLString,
+      description: 'Title of condition',
+    },
+    tags: {
+      type: GraphQLList(GraphQLString),
+      description: 'Rotations linked to a condition',
+    },
+    _learnings: {
+      type: GraphQLList(ConditionLearningType),
+      description: 'A conditions associated learning',
+    },
+    dateCreated: {
+      type: GraphQLString,
+      description: 'Date condition created',
+    },
+    dateUpdated: {
+      type: GraphQLString,
+      description: 'Date that condition was last updated',
+    },
+    _creator: {
+      type: GraphQLID,
+      description: 'Creator of this condition',
+    },
+  }),
+});
+
+var ConditionLearningType = new GraphQLObjectType({
+  name: 'conditionLearningType',
+  fields: () => ({
+    id: {
+      type: GraphQLID,
+      description: 'ID for conditionLearning',
+    },
+    whatWasLearned: {
+      type: GraphQLString,
+      description: 'The markdown text of what was learned',
+    },
+    tags: {
+      type: GraphQLList(GraphQLString),
+      description: 'list of tags associated with learning',
+    },
+    usersTagged: {
+      type: GraphQLID(UserType),
+      description: 'Users tagged in learning',
+    },
+    dateField: {
+      type: GraphQLString,
+      description: 'User entered date for info',
+    },
+    seenWith: {
+      type: GraphQLString,
+      description:
+        'User entered field for attending that learning is associated with',
+    },
+    dateCreated: {
+      type: GraphQLString,
+      description: 'Computer gen date, when created',
+    },
+    dateUpdated: {
+      type: GraphQLString,
+      description: 'Computer gen date, when mst recently updated',
+    },
+    dotPhrase: {
+      type: GraphQLBoolean,
+      description:
+        'Aspiration field to determine if learning should be used as a dot phrase',
+    },
+    _condition: {
+      type: ConditionType,
+      description: 'The condition that this learning is associated with',
+    },
+    _creator: {
+      type: UserType,
+      description: 'User who created this condition',
+    },
+  }),
+});
+
 var listOfUsers = {
   type: GraphQLList(UserType),
   description: 'List of all the users',
