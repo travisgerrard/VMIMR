@@ -15,6 +15,7 @@ class ConditionTopLevelViewGQL extends Component {
   state = {
     sortActiveItem: 'personal',
     searchTerm: '',
+    category: 'all',
   };
 
   handleSortItemClick = (e, { name }) =>
@@ -24,20 +25,40 @@ class ConditionTopLevelViewGQL extends Component {
     this.setState({ searchTerm: value });
   };
 
+  handleCategoryChanged = (e, { value }) => {
+    this.setState({ category: value });
+  };
+
   filterQuery = query => {
     var filteredQuery = _.filter(
       query,
       function(o) {
-        return (
-          o._condition.condition
-            .toLowerCase()
-            .includes(this.state.searchTerm.toLowerCase()) ||
-          o.whatWasLearned
-            .toLowerCase()
-            .includes(this.state.searchTerm.toLowerCase())
-        );
+        if (this.state.category === 'all') {
+          return (
+            o._condition.condition
+              .toLowerCase()
+              .includes(this.state.searchTerm.toLowerCase()) ||
+            o.whatWasLearned
+              .toLowerCase()
+              .includes(this.state.searchTerm.toLowerCase())
+          );
+        } else {
+          console.log(this.state.category);
+
+          return (
+            (o._condition.condition
+              .toLowerCase()
+              .includes(this.state.searchTerm.toLowerCase()) ||
+              o.whatWasLearned
+                .toLowerCase()
+                .includes(this.state.searchTerm.toLowerCase())) &&
+            _.includes(o._condition.tags, this.state.category)
+          );
+        }
       }.bind(this),
     );
+    console.log(filteredQuery);
+
     return filteredQuery;
   };
 
@@ -107,6 +128,7 @@ class ConditionTopLevelViewGQL extends Component {
         <SearchBox
           searchTerm={this.state.searchTerm}
           searchTermChanged={this.handleSearchTermChanged}
+          handleCategoryChanged={this.handleCategoryChanged}
         />
         {this.loadConditions()}
       </Container>

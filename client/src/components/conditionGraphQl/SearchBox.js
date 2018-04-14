@@ -22,6 +22,8 @@ class SearchBox extends Component {
         <Select
           options={[{ key: 'All', text: 'All', value: 'all' }, ...options]}
           defaultValue="all"
+          search
+          onChange={this.props.handleCategoryChanged}
         />
         <Button disabled={true} type="submit">
           Add Learning
