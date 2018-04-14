@@ -272,8 +272,9 @@ var listOfPersonalLearning = {
     'List of learning which your created or in which you are tagged or which you liked',
   args: {
     id: { type: GraphQLID },
+    searchTerm: { type: GraphQLString },
   },
-  resolve: (parentValues, { id }, req) => {
+  resolve: (parentValues, { id, searchTerm }, req) => {
     var learnings = ConditionLearning.find({
       $or: [
         {
@@ -293,9 +294,13 @@ var listOfPersonalLearning = {
 var listOfAllLearning = {
   type: GraphQLList(ConditionLearningType),
   description: 'List of all learning',
+
   resolve: (parentValues, args, req) => {
     var learnings = ConditionLearning.find()
-      .populate({ path: '_condition', model: 'conditions' })
+      .populate({
+        path: '_condition',
+        model: 'conditions',
+      })
       .populate({ path: '_creator', model: 'users' })
       .populate({ path: 'usersTagged', model: 'users' })
       .sort('-dateUpdated');

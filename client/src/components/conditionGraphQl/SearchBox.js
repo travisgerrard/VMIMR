@@ -13,10 +13,10 @@ class SearchBox extends Component {
       <Input
         type="text"
         placeholder="Search/Add Condition"
-        value={this.props.serachTerm}
+        value={this.props.searchTerm}
         action
         style={{ marginBottom: 25 }}
-        onChange={this.props.serchTermChanged}
+        onChange={this.props.searchTermChanged}
       >
         <input />
         <Select

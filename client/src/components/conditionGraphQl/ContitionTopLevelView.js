@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Loader } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
+import _ from 'lodash';
+
 import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
 import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
 import GET_CURRENT_USER from '../../queries/CurrentUser';
@@ -22,6 +24,23 @@ class ConditionTopLevelViewGQL extends Component {
     this.setState({ searchTerm: value });
   };
 
+  filterQuery = query => {
+    var filteredQuery = _.filter(
+      query,
+      function(o) {
+        return (
+          o._condition.condition
+            .toLowerCase()
+            .includes(this.state.searchTerm.toLowerCase()) ||
+          o.whatWasLearned
+            .toLowerCase()
+            .includes(this.state.searchTerm.toLowerCase())
+        );
+      }.bind(this),
+    );
+    return filteredQuery;
+  };
+
   loadConditions = () => {
     return (
       <Query query={GET_CURRENT_USER}>
@@ -39,9 +58,13 @@ class ConditionTopLevelViewGQL extends Component {
                   if (loading) return <Loader active inline="centered" />;
                   if (error) return `Error! ${error.message}`;
 
+                  const filteredQuery = this.filterQuery(
+                    data.listOfPersonalLearning,
+                  );
+
                   return (
                     <DisplayConditionCards
-                      learnings={data.listOfPersonalLearning}
+                      learnings={filteredQuery}
                       currentUser={data.currentUser}
                     />
                   );
@@ -55,9 +78,13 @@ class ConditionTopLevelViewGQL extends Component {
                   if (loading) return <Loader active inline="centered" />;
                   if (error) return `Error! ${error.message}`;
 
+                  const filteredQuery = this.filterQuery(
+                    data.listOfAllLearning,
+                  );
+
                   return (
                     <DisplayConditionCards
-                      learnings={data.listOfAllLearning}
+                      learnings={filteredQuery}
                       currentUser={data.currentUser}
                     />
                   );
@@ -78,8 +105,8 @@ class ConditionTopLevelViewGQL extends Component {
           activeItem={this.state.sortActiveItem}
         />
         <SearchBox
-          serachTerm={this.state.searchTerm}
-          serchTermChanged={this.handleSearchTermChanged}
+          searchTerm={this.state.searchTerm}
+          searchTermChanged={this.handleSearchTermChanged}
         />
         {this.loadConditions()}
       </Container>
