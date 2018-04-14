@@ -7,12 +7,20 @@ import GET_CURRENT_USER from '../../queries/CurrentUser';
 
 import SortConditionCards from './SortConditionCards';
 import DisplayConditionCards from './DisplayConditionCards';
+import SearchBox from './SearchBox';
 
 class ConditionTopLevelViewGQL extends Component {
-  state = { sortActiveItem: 'personal' };
+  state = {
+    sortActiveItem: 'personal',
+    searchTerm: '',
+  };
 
   handleSortItemClick = (e, { name }) =>
     this.setState({ sortActiveItem: name });
+
+  handleSearchTermChanged = (e, { value }) => {
+    this.setState({ searchTerm: value });
+  };
 
   loadConditions = () => {
     return (
@@ -68,6 +76,10 @@ class ConditionTopLevelViewGQL extends Component {
         <SortConditionCards
           handleItemClick={this.handleSortItemClick}
           activeItem={this.state.sortActiveItem}
+        />
+        <SearchBox
+          serachTerm={this.state.searchTerm}
+          serchTermChanged={this.handleSearchTermChanged}
         />
         {this.loadConditions()}
       </Container>
