@@ -4,9 +4,15 @@ import { Query, withApollo, graphql } from 'react-apollo';
 import GET_ALL_LEARNING from '../../queries/ListOfLearning';
 import GET_CURRENT_USER from '../../queries/CurrentUser';
 
+import SortConditionCards from './SortConditionCards';
 import DisplayConditionCards from './DisplayConditionCards';
 
 class ConditionTopLevelViewGQL extends Component {
+  state = { sortActiveItem: 'personal' };
+
+  handleSortItemClick = (e, { name }) =>
+    this.setState({ sortActiveItem: name });
+
   loadConditions = () => {
     return (
       <Query query={GET_ALL_LEARNING}>
@@ -32,6 +38,10 @@ class ConditionTopLevelViewGQL extends Component {
   render() {
     return (
       <Container style={{ marginTop: '4.5em' }}>
+        <SortConditionCards
+          handleItemClick={this.handleSortItemClick}
+          activeItem={this.state.sortActiveItem}
+        />
         {this.loadConditions()}
       </Container>
     );
