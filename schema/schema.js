@@ -273,8 +273,8 @@ var listOfLearning = {
     var learnings = ConditionLearning.find()
       .populate({ path: '_condition', model: 'conditions' })
       .populate({ path: '_creator', model: 'users' })
-      .populate({ path: 'usersTagged', model: 'users' });
-
+      .populate({ path: 'usersTagged', model: 'users' })
+      .sort('-dateUpdated');
     return learnings;
   },
 };
