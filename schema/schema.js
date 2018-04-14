@@ -14,9 +14,14 @@ const {
 require('../models/user');
 require('../models/provider');
 require('../models/rotation');
+require('../models/condition');
+require('../models/conditionLearning');
+
 const User = mongoose.model('users');
 const Provider = mongoose.model('Provider');
 const Rotation = mongoose.model('Rotation');
+const Condition = mongoose.model('conditions');
+const ConditionLearning = mongoose.model('conditionLearnings');
 
 const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -173,7 +178,7 @@ var ConditionLearningType = new GraphQLObjectType({
       description: 'list of tags associated with learning',
     },
     usersTagged: {
-      type: GraphQLID(UserType),
+      type: GraphQLList(UserType),
       description: 'Users tagged in learning',
     },
     dateField: {
@@ -199,11 +204,11 @@ var ConditionLearningType = new GraphQLObjectType({
         'Aspiration field to determine if learning should be used as a dot phrase',
     },
     _condition: {
-      type: ConditionType,
+      type: GraphQLID,
       description: 'The condition that this learning is associated with',
     },
     _creator: {
-      type: UserType,
+      type: GraphQLID,
       description: 'User who created this condition',
     },
   }),
@@ -244,6 +249,21 @@ var listOfRotations = {
   },
 };
 
+var listOfConditions = {
+  type: GraphQLList(ConditionType),
+  description: 'List of all conditions',
+  resolve: (parentValues, args, req) => {
+    return Condition.find().populate({
+      path: '_learnings',
+      model: 'conditionLearnings',
+      populate: {
+        path: 'usersTagged',
+        model: 'users',
+      },
+    });
+  },
+};
+
 var RootQueryType = new GraphQLObjectType({
   name: 'RootQuery',
   fields: () => ({
@@ -252,6 +272,7 @@ var RootQueryType = new GraphQLObjectType({
     listOfProviders,
     listOfRotations,
     returnRotation,
+    listOfConditions,
   }),
 });
 
