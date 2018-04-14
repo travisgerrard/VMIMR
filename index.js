@@ -32,8 +32,6 @@ require('./routes/landingRoutes')(app);
 const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
 
-console.log(requireAuth);
-
 app.all('/graphql', requireAuth);
 app.get(
   '/graphql',
