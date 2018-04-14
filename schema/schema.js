@@ -208,8 +208,8 @@ var ConditionLearningType = new GraphQLObjectType({
       description: 'The condition that this learning is associated with',
     },
     _creator: {
-      type: GraphQLID,
-      description: 'User who created this condition',
+      type: UserType,
+      description: 'User who created this learning',
     },
   }),
 });
@@ -270,10 +270,10 @@ var listOfLearning = {
   type: GraphQLList(ConditionLearningType),
   description: 'List of all learning',
   resolve: (parentValues, args, req) => {
-    var learnings = ConditionLearning.find().populate({
-      path: '_condition',
-      model: 'conditions',
-    });
+    var learnings = ConditionLearning.find()
+      .populate({ path: '_condition', model: 'conditions' })
+      .populate({ path: '_creator', model: 'users' })
+      .populate({ path: 'usersTagged', model: 'users' });
 
     return learnings;
   },

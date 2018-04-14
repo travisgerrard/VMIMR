@@ -9,11 +9,12 @@ import {
   Message,
   Container,
 } from 'semantic-ui-react';
-import { Query } from 'react-apollo';
+import { Query, withApollo, graphql } from 'react-apollo';
 import ReactMarkdown from 'react-markdown';
 import './markdown.css';
 import GET_ALL_CONDITIONS from '../../queries/ListOfConditions';
 import GET_ALL_LEARNING from '../../queries/ListOfLearning';
+import GET_CURRENT_USER from '../../queries/CurrentUser';
 
 class ConditionTopLevelViewGQL extends Component {
   cardHeader = ({ condition, tags }) => {
@@ -60,6 +61,12 @@ class ConditionTopLevelViewGQL extends Component {
           if (loading) return 'Loading...';
           if (error) return `Error! ${error.message}`;
 
+          const currentUserQuery = this.props.client.readQuery({
+            query: GET_CURRENT_USER,
+          });
+
+          console.log(currentUserQuery.currentUser);
+
           return (
             <Card.Group>{this.showCondition(data.listOfLearning)}</Card.Group>
           );
@@ -77,4 +84,4 @@ class ConditionTopLevelViewGQL extends Component {
   }
 }
 
-export default ConditionTopLevelViewGQL;
+export default withApollo(graphql(GET_CURRENT_USER)(ConditionTopLevelViewGQL));
