@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Questions from './Questions';
 import { Form, Input, TextArea, List, Grid } from 'semantic-ui-react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
@@ -212,81 +213,84 @@ class NoonConference extends Component {
 
   render() {
     return (
-      <Form style={{ marginLeft: 25, marginRight: 25, marginTop: '4.5em' }}>
-        <Grid columns={3}>
-          <Grid.Row stretched>
-            <Grid.Column>
-              <Form.Field
-                control={TextArea}
-                label="HPI"
-                placeholder="45F p/w ..."
-                value={this.state.hpiValue}
-                onChange={text =>
-                  this.setState({
-                    hpiValue: text.target.value,
-                  })
-                }
-              />
-              <div>{this.ROS()}</div>
-              <Grid columns={3} style={{ marginTop: 10 }}>
+      <div>
+        <Form style={{ marginLeft: 25, marginRight: 25, marginTop: '4.5em' }}>
+          <Grid columns={3}>
+            <Grid.Row stretched>
+              <Grid.Column>
+                <Form.Field
+                  control={TextArea}
+                  label="HPI"
+                  placeholder="45F p/w ..."
+                  value={this.state.hpiValue}
+                  onChange={text =>
+                    this.setState({
+                      hpiValue: text.target.value,
+                    })
+                  }
+                />
+                <div>{this.ROS()}</div>
+                <Grid columns={3} style={{ marginTop: 10 }}>
+                  {this.listCreator(
+                    'Meds',
+                    'Xanax',
+                    'medsArray',
+                    'medValue',
+                    110,
+                  )}
+                  {this.listCreator(
+                    'Med/Surg hx',
+                    'Diabetes',
+                    'hxArray',
+                    'hxValue',
+                    110,
+                  )}
+                  {this.listCreator(
+                    'Social',
+                    'EtOH',
+                    'socialArray',
+                    'socialValue2',
+                    110,
+                  )}
+                </Grid>
+              </Grid.Column>
+              <Grid.Column>
+                {this.physicalExam()}
+                {this.labs()}
+                <Form.Field
+                  control={TextArea}
+                  label="Imaging"
+                  placeholder="CXR..."
+                  value={this.state.imaging}
+                  onChange={text => console.log(text.target.value)}
+                />
+              </Grid.Column>
+              <Grid.Column>
+                <Form.Field
+                  control={TextArea}
+                  label="Summary assessment"
+                  placeholder="45M with ..."
+                  value={this.state.additionalText}
+                  onChange={text =>
+                    this.setState({
+                      additionalText: text.target.value,
+                    })
+                  }
+                />
                 {this.listCreator(
-                  'Meds',
-                  'Xanax',
-                  'medsArray',
-                  'medValue',
-                  110,
+                  'Differential diagnosis',
+                  'ACS...',
+                  'ddxArray',
+                  'ddxValue',
+                  '225',
                 )}
-                {this.listCreator(
-                  'Med/Surg hx',
-                  'Diabetes',
-                  'hxArray',
-                  'hxValue',
-                  110,
-                )}
-                {this.listCreator(
-                  'Social',
-                  'EtOH',
-                  'socialArray',
-                  'socialValue2',
-                  110,
-                )}
-              </Grid>
-            </Grid.Column>
-            <Grid.Column>
-              {this.physicalExam()}
-              {this.labs()}
-              <Form.Field
-                control={TextArea}
-                label="Imaging"
-                placeholder="CXR..."
-                value={this.state.imaging}
-                onChange={text => console.log(text.target.value)}
-              />
-            </Grid.Column>
-            <Grid.Column>
-              <Form.Field
-                control={TextArea}
-                label="Summary assessment"
-                placeholder="45M with ..."
-                value={this.state.additionalText}
-                onChange={text =>
-                  this.setState({
-                    additionalText: text.target.value,
-                  })
-                }
-              />
-              {this.listCreator(
-                'Differential diagnosis',
-                'ACS...',
-                'ddxArray',
-                'ddxValue',
-                '225',
-              )}
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-        <br />
-      </Form>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+          <br />
+        </Form>
+        <Questions />
+      </div>
     );
   }
 }
