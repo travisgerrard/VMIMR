@@ -14,21 +14,21 @@ class ConditionCardView extends Component {
     date: moment().format('MM/DD/YY'),
     whatWasLearned: '',
     usersTagged: [],
-    error: ''
+    error: '',
   };
 
   saveCondition = () => {
     if (this.state.conditionToAdd === '') {
       this.setState({
-        error: "Condition can't be blank"
+        error: "Condition can't be blank",
       });
     } else if (this.state.tags === '') {
       this.setState({
-        error: "Rotation tags can't be blank"
+        error: "Rotation tags can't be blank",
       });
     } else if (this.state.whatWasLearned === '') {
       this.setState({
-        error: 'Need to have learned something'
+        error: 'Need to have learned something',
       });
     } else {
       this.props.addCondition({
@@ -39,15 +39,15 @@ class ConditionCardView extends Component {
           usersTagged: this.state.usersTagged,
           tag: this.state.tags,
           date: this.state.date,
-          whatWasLearned: this.state.whatWasLearned
-        }
+          whatWasLearned: this.state.whatWasLearned,
+        },
       });
     }
   };
 
   clearError = () => {
     this.setState({
-      error: ''
+      error: '',
     });
   };
 
@@ -73,7 +73,7 @@ class ConditionCardView extends Component {
               value={this.state.conditionToAdd}
               onChange={(params, data) =>
                 this.setState({
-                  conditionToAdd: data.value
+                  conditionToAdd: data.value,
                 })
               }
             />
@@ -91,7 +91,7 @@ class ConditionCardView extends Component {
               placeholder="Rotation tags"
               onChange={(params, data) =>
                 this.setState({
-                  tags: data.value
+                  tags: data.value,
                 })
               }
             />
@@ -108,22 +108,22 @@ class ConditionCardView extends Component {
             wwlPlaceholder="What was learned"
             attendingOnChange={(params, data) =>
               this.setState({
-                seenWith: data.value
+                seenWith: data.value,
               })
             }
             dateOnChange={(params, data) =>
               this.setState({
-                date: data.value
+                date: data.value,
               })
             }
             userOnChange={(params, data) =>
               this.setState({
-                usersTagged: data.value
+                usersTagged: data.value,
               })
             }
             wwlOnChange={(params, data) =>
               this.setState({
-                whatWasLearned: data.value
+                whatWasLearned: data.value,
               })
             }
             saveOnClick={this.saveCondition}

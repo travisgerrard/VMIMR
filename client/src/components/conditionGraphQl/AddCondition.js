@@ -1,0 +1,137 @@
+import React, { Component } from 'react';
+import {
+  Segment,
+  Input,
+  Select,
+  TextArea,
+  Form,
+  Loader,
+  Button,
+} from 'semantic-ui-react';
+import moment from 'moment';
+import _ from 'lodash';
+import { Query } from 'react-apollo';
+import rotations from '../conditions/rotations';
+
+import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
+
+class AddCondition extends Component {
+  state = {
+    conditionTitle: '',
+    tags: '',
+    attending: '',
+    date: moment().format('MM/DD/YY'),
+    wwl: '',
+  };
+
+  saveClicked = () => {
+    console.log('save clicked');
+  };
+
+  cancelClicked = () => {
+    console.log('cancel clicked');
+  };
+
+  render() {
+    const options = _.map(rotations, ({ name, dbname }) => {
+      return { key: name, text: name, value: dbname };
+    });
+
+    return (
+      <Query query={LIST_ALL_USERS}>
+        {({ loading, error, data }) => {
+          if (loading) return <Loader active inline="centered" />;
+          if (error) return `Error! ${error.message}`;
+
+          const listOfUsers = _.map(data.listOfUsers, ({ name, id }) => {
+            return { key: id, text: name, value: id };
+          });
+
+          return (
+            <div>
+              <Segment.Group stacked>
+                <Segment>
+                  <Input
+                    label="Name"
+                    placeholder="Ex: ARDS"
+                    value={this.state.conditionTitle}
+                    onChange={(params, data) =>
+                      this.setState({ conditionTitle: data.value })
+                    }
+                  />
+                  <Select
+                    options={options}
+                    search
+                    multiple
+                    placeholder="Rotation tags"
+                    onChange={(params, data) =>
+                      this.setState({ tags: data.value })
+                    }
+                  />
+                </Segment>
+                <Segment>
+                  <Input
+                    label="Attending"
+                    placeholder="Ex: Baliga"
+                    value={this.state.attending}
+                    onChange={(params, data) =>
+                      this.setState({ conditionTitle: data.value })
+                    }
+                  />
+                  <Input
+                    label="Date"
+                    placeholder=""
+                    value={this.state.attending}
+                    onChange={(params, data) =>
+                      this.setState({ date: data.value })
+                    }
+                  />
+                  <Select
+                    options={listOfUsers}
+                    search
+                    multiple
+                    placeholder="Learned With"
+                    onChange={(params, data) =>
+                      this.setState({ tags: data.value })
+                    }
+                  />
+                  <Form>
+                    <TextArea
+                      placeholder="What was learned"
+                      value={this.state.wwl}
+                      onChange={(params, data) =>
+                        this.setState({ wwl: data.value })
+                      }
+                    />
+                  </Form>
+                  <div className="ui two buttons">
+                    <Button
+                      basic
+                      color="green"
+                      onClick={() => this.saveClicked()}
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      basic
+                      color="grey"
+                      onClick={() => this.cancelClicked()}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </Segment>
+              </Segment.Group>
+              <p>
+                FYI: You can add a link by typing: [Some Link
+                Text](http://www.link.org/)
+              </p>
+            </div>
+          );
+        }}
+      </Query>
+    );
+  }
+}
+
+export default AddCondition;

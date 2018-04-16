@@ -20,13 +20,19 @@ class SearchBox extends Component {
       >
         <input />
         <Select
+          style={{ width: '125px' }}
           options={[{ key: 'All', text: 'All', value: 'all' }, ...options]}
           defaultValue="all"
           search
+          compact
           onChange={this.props.handleCategoryChanged}
         />
-        <Button disabled={true} type="submit">
-          Add Learning
+        <Button
+          disabled={!this.props.searchTerm}
+          type="submit"
+          onClick={this.props.handleAddButtonPressed}
+        >
+          Add
         </Button>
       </Input>
     );

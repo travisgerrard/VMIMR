@@ -4,34 +4,34 @@ import { Editor, EditorState, RichUtils } from 'draft-js';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
 
 const PHYSICALEXAMMARKDOWN = `
-  __Vitals__:
-  __Tmax__: 98 __HR__: 70 __BP__: 120/80
-  __...__
-  __Phyiscal Exam__
-  __Const__: A&Ox3, NAD, well developed
-  __HEENT__: NC/AT, EOMI, MMM
-  __Neck__: Supple, no JVD
-  __Heart__: RRR, no MRG
-  __Lungs__: CTAB
-  __Abd__: Soft, NT/ND
-  __Extremities__: No LE edema, +ve peripheral pulses
-  __Neuro__: Cranial nerves grossly intact, MAE spontaneously
-  __Skin__: Warm, dry with no observable rahes
-  __Psych__: Mood and behabiour normal
+  __Vitals__:  
+  __Tmax__: 98 __HR__: 70 __BP__: 120/80  
+  __...__  
+  __Phyiscal Exam__  
+  __Const__: A&Ox3, NAD, well developed  
+  __HEENT__: NC/AT, EOMI, MMM  
+  __Neck__: Supple, no JVD  
+  __Heart__: RRR, no MRG  
+  __Lungs__: CTAB  
+  __Abd__: Soft, NT/ND  
+  __Extremities__: No LE edema, +ve peripheral pulses  
+  __Neuro__: Cranial nerves grossly intact, MAE spontaneously  
+  __Skin__: Warm, dry with no observable rahes  
+  __Psych__: Mood and behabiour normal  
 `;
 
 const ROSMARKDOWN = `
-  __Constitutional:__
-  __Skin__:
-  __HEENT__:
-  __Cardiac__:
-  __Respiratory__:
-  __GI__:
-  __GU__:
-  __MSK__:
-  __Endo/Hem/Allergy__:
-  __Neuro__:
-  __Psych__:
+  __Constitutional:__  
+  __Skin__:  
+  __HEENT__:  
+  __Cardiac__:  
+  __Respiratory__:  
+  __GI__:  
+  __GU__:  
+  __MSK__:  
+  __Endo/Hem/Allergy__:  
+  __Neuro__:  
+  __Psych__:  
 `;
 
 class NoonConference extends Component {

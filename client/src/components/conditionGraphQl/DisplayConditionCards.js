@@ -69,7 +69,11 @@ class DisplayConditionCards extends Component {
   };
 
   render() {
-    return <Card.Group>{this.showCondition(this.props.learnings)}</Card.Group>;
+    return (
+      <Card.Group itemsPerRow={3} stackable doubling>
+        {this.showCondition(this.props.learnings)}
+      </Card.Group>
+    );
   }
 }
 

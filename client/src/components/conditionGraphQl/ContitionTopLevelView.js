@@ -10,12 +10,14 @@ import GET_CURRENT_USER from '../../queries/CurrentUser';
 import SortConditionCards from './SortConditionCards';
 import DisplayConditionCards from './DisplayConditionCards';
 import SearchBox from './SearchBox';
+import AddCondition from './AddCondition';
 
 class ConditionTopLevelViewGQL extends Component {
   state = {
     sortActiveItem: 'personal',
     searchTerm: '',
     category: 'all',
+    addingLearning: true,
   };
 
   handleSortItemClick = (e, { name }) =>
@@ -27,6 +29,11 @@ class ConditionTopLevelViewGQL extends Component {
 
   handleCategoryChanged = (e, { value }) => {
     this.setState({ category: value });
+  };
+
+  handleAddButtonPressed = (e, args) => {
+    console.log(args);
+    this.setState({ addingLearning: true });
   };
 
   filterQuery = query => {
@@ -125,12 +132,18 @@ class ConditionTopLevelViewGQL extends Component {
           handleItemClick={this.handleSortItemClick}
           activeItem={this.state.sortActiveItem}
         />
+        <p>
+          Search through stuff you've learned, or add something new! If you want
+          to see everybody's learned, click "All" above.
+        </p>
+
         <SearchBox
           searchTerm={this.state.searchTerm}
           searchTermChanged={this.handleSearchTermChanged}
           handleCategoryChanged={this.handleCategoryChanged}
+          handleAddButtonPressed={this.handleAddButtonPressed}
         />
-        {this.loadConditions()}
+        {this.state.addingLearning ? <AddCondition /> : this.loadConditions()}
       </Container>
     );
   }
