@@ -399,6 +399,61 @@ var updateRotation = {
   },
 };
 
+var addLearning = {
+  type: ConditionLearningType,
+  args: {
+    condition: { type: new GraphQLNonNull(GraphQLString) },
+    tags: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
+    attending: { type: new GraphQLNonNull(GraphQLString) },
+    date: { type: new GraphQLNonNull(GraphQLString) },
+    userTags: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
+    wwl: { type: new GraphQLNonNull(GraphQLString) },
+  },
+  async resolve(
+    parentValues,
+    { condition, tags, attending, date, userTags, wwl },
+    req,
+  ) {
+    console.log(condition, tags, attending, date, userTags, wwl);
+
+    const conditionExists = await Condition.findOne({
+      condition,
+    });
+
+    if (conditionExists == null) {
+      const conditionExists = new Condition({
+        tags,
+        condition,
+        _creator: req.user.id,
+        dateCreated: Date.now(),
+      });
+    }
+
+    await conditionExists.save();
+
+    // If there is a learning associated with new conditions, need to create and save it
+    const conditionLearningNew = new ConditionLearning({
+      tags,
+      whatWasLearned: wwl,
+      dateField: date,
+      seenWith: attending,
+      usersTagged: userTags,
+      dateCreated: Date.now(),
+      dateUpdated: Date.now(),
+      _condition: conditionExists._id,
+      _creator: req.user.id,
+    });
+
+    await conditionLearningNew.save();
+
+    // now need to let the conditions know that the learning exists, and save it
+    conditionExists._learnings.push(conditionLearningNew._id);
+    await conditionExists.save();
+
+    return conditionLearningNew;
+  },
+};
+
 var MutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
@@ -406,6 +461,7 @@ var MutationType = new GraphQLObjectType({
     addProvider,
     addRotation,
     updateRotation,
+    addLearning,
   }),
 });
 
