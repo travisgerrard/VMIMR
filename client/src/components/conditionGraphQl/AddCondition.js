@@ -37,8 +37,6 @@ class AddCondition extends Component {
         this.state.wwl
       }, conditionTitle: ${this.state.conditionTitle},  `,
     );
-
-    console.log('save clicked');
   };
 
   cancelClicked = () => {
