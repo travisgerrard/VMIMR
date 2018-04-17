@@ -17,7 +17,7 @@ class ConditionTopLevelViewGQL extends Component {
     sortActiveItem: 'personal',
     searchTerm: '',
     category: 'all',
-    addingLearning: true,
+    addingLearning: false,
   };
 
   handleSortItemClick = (e, { name }) =>
@@ -32,7 +32,6 @@ class ConditionTopLevelViewGQL extends Component {
   };
 
   handleAddButtonPressed = (e, args) => {
-    console.log(args);
     this.setState({ addingLearning: true });
   };
 
@@ -50,8 +49,6 @@ class ConditionTopLevelViewGQL extends Component {
               .includes(this.state.searchTerm.toLowerCase())
           );
         } else {
-          console.log(this.state.category);
-
           return (
             (o._condition.condition
               .toLowerCase()
@@ -64,7 +61,6 @@ class ConditionTopLevelViewGQL extends Component {
         }
       }.bind(this),
     );
-    console.log(filteredQuery);
 
     return filteredQuery;
   };
@@ -125,6 +121,23 @@ class ConditionTopLevelViewGQL extends Component {
     );
   };
 
+  isAddingCondition = () => {
+    if (this.state.addingLearning) {
+      return <AddCondition />;
+    }
+    return (
+      <div>
+        <SearchBox
+          searchTerm={this.state.searchTerm}
+          searchTermChanged={this.handleSearchTermChanged}
+          handleCategoryChanged={this.handleCategoryChanged}
+          handleAddButtonPressed={this.handleAddButtonPressed}
+        />
+        {this.loadConditions()}
+      </div>
+    );
+  };
+
   render() {
     return (
       <Container style={{ marginTop: '4.5em' }}>
@@ -137,13 +150,7 @@ class ConditionTopLevelViewGQL extends Component {
           to see everybody's learned, click "All" above.
         </p>
 
-        <SearchBox
-          searchTerm={this.state.searchTerm}
-          searchTermChanged={this.handleSearchTermChanged}
-          handleCategoryChanged={this.handleCategoryChanged}
-          handleAddButtonPressed={this.handleAddButtonPressed}
-        />
-        {this.state.addingLearning ? <AddCondition /> : this.loadConditions()}
+        {this.isAddingCondition()}
       </Container>
     );
   }

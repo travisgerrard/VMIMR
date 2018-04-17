@@ -12,6 +12,8 @@ import moment from 'moment';
 import _ from 'lodash';
 import { Query } from 'react-apollo';
 import rotations from '../conditions/rotations';
+import ReactMarkdown from 'react-markdown';
+import './markdown.css';
 
 import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
 
@@ -21,10 +23,21 @@ class AddCondition extends Component {
     tags: '',
     attending: '',
     date: moment().format('MM/DD/YY'),
+    userTags: '',
     wwl: '',
   };
 
   saveClicked = () => {
+    console.log(
+      `conditionTitle: ${this.state.conditionTitle}, tags: ${
+        this.state.tags
+      }, attending: ${this.state.attending}, date: ${
+        this.state.date
+      }, userTags: ${this.state.userTags}, wwl: ${
+        this.state.wwl
+      }, conditionTitle: ${this.state.conditionTitle},  `,
+    );
+
     console.log('save clicked');
   };
 
@@ -75,13 +88,13 @@ class AddCondition extends Component {
                     placeholder="Ex: Baliga"
                     value={this.state.attending}
                     onChange={(params, data) =>
-                      this.setState({ conditionTitle: data.value })
+                      this.setState({ attending: data.value })
                     }
                   />
                   <Input
                     label="Date"
                     placeholder=""
-                    value={this.state.attending}
+                    value={this.state.date}
                     onChange={(params, data) =>
                       this.setState({ date: data.value })
                     }
@@ -92,7 +105,7 @@ class AddCondition extends Component {
                     multiple
                     placeholder="Learned With"
                     onChange={(params, data) =>
-                      this.setState({ tags: data.value })
+                      this.setState({ userTags: data.value })
                     }
                   />
                   <Form>
@@ -123,9 +136,34 @@ class AddCondition extends Component {
                 </Segment>
               </Segment.Group>
               <p>
-                FYI: You can add a link by typing: [Some Link
-                Text](http://www.link.org/)
+                FYI: This site uses{' '}
+                <a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">
+                  Markdown
+                </a>{' '}
+                to style text
               </p>
+              <p>
+                You can add a link by typing:{' '}
+                <b>[Some Link Text](http://www.link.org/) </b>
+              </p>
+              <p />
+              <p>
+                You can add a photo if you know an address it can be found by by
+                typing:{' '}
+                <b>
+                  ![Text that describes photo](http://www.aphoto.com/aPhoto)
+                </b>
+              </p>
+              <p />
+              <h3>Preview</h3>
+              <Segment>
+                {this.state.wwl ? (
+                  <ReactMarkdown source={this.state.wwl} />
+                ) : (
+                  <p>Start typeing above to see preview</p>
+                )}
+              </Segment>
+              <br />
             </div>
           );
         }}
