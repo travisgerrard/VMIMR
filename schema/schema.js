@@ -310,7 +310,7 @@ var listOfAllLearning = {
 
 var returnLearning = {
   type: ConditionLearningType,
-  description: 'Info regarding specific rotation',
+  description: 'Info regarding specific learning',
   args: {
     id: { type: GraphQLID },
   },
@@ -475,6 +475,46 @@ var addLearning = {
   },
 };
 
+var deleteLearning = {
+  type: ConditionLearningType,
+  description: 'Delete specific learning',
+  args: {
+    id: { type: GraphQLID },
+  },
+  async resolve(parentValues, { id }, req) {
+    var learningToBeDeleted = await ConditionLearning.findById(id).populate({
+      path: '_condition',
+      model: 'conditions',
+    });
+
+    var conditionAsociatedWithLearning = await Condition.findById(
+      learningToBeDeleted._condition.id,
+    );
+
+    if (conditionAsociatedWithLearning._learnings.length === 1) {
+      await Condition.findByIdAndRemove(
+        learningToBeDeleted._condition.id,
+        function(err, offer) {
+          if (err) {
+            throw err;
+          }
+        },
+      );
+    } else {
+      conditionAsociatedWithLearning._learnings.pull(id);
+      await conditionAsociatedWithLearning.save();
+    }
+
+    await ConditionLearning.findByIdAndRemove(id, function(err, offer) {
+      if (err) {
+        throw err;
+      }
+    });
+
+    return learningToBeDeleted;
+  },
+};
+
 var MutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
@@ -483,6 +523,7 @@ var MutationType = new GraphQLObjectType({
     addRotation,
     updateRotation,
     addLearning,
+    deleteLearning,
   }),
 });
 
