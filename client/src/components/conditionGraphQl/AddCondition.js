@@ -22,10 +22,10 @@ import ADD_LEARNING from '../../mutations/AddLearning';
 class AddCondition extends Component {
   state = {
     conditionTitle: this.props.conditionTitle,
-    tags: '',
+    tags: [],
     attending: '',
     date: moment().format('MM/DD/YY'),
-    userTags: '',
+    userTags: [],
     wwl: '',
   };
 
@@ -114,7 +114,6 @@ class AddCondition extends Component {
                       wwl: this.state.wwl,
                     },
                   });
-                  this.props.doneAddingLearning();
                 }}
               >
                 Save
@@ -155,14 +154,16 @@ class AddCondition extends Component {
                       variables: { id: this.props.currentUser.id },
                     },
                   ]}
+                  onCompleted={() => this.props.doneAddingLearning()}
                 >
-                  {(addLearning, { data }) => (
+                  {(addLearning, { data, loading, error }) => (
                     <div>
                       {this.gutsOfAddLearning(
                         options,
                         listOfUsers,
                         addLearning,
                       )}
+                      {loading && <Loader active inline="centered" />}
                     </div>
                   )}
                 </Mutation>

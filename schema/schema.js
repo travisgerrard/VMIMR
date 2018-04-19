@@ -406,7 +406,7 @@ var addLearning = {
     tags: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
     attending: { type: new GraphQLNonNull(GraphQLString) },
     date: { type: new GraphQLNonNull(GraphQLString) },
-    userTags: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
+    userTags: { type: GraphQLList(GraphQLString) },
     wwl: { type: new GraphQLNonNull(GraphQLString) },
   },
   async resolve(

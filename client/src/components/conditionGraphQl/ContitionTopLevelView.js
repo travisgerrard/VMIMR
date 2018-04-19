@@ -68,6 +68,7 @@ class ConditionTopLevelViewGQL extends Component {
 
   learningAdded = () => {
     this.setState({ addingLearning: false });
+    this.setState({ searchTerm: '' });
   };
 
   isAddingCondition = (queryDataToDisplay, currentUser) => {
