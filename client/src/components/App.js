@@ -6,7 +6,7 @@ import Signin from './auth/Signin';
 import Signup from './auth/Signup';
 import Signout from './auth/Signout';
 import RequireAuth from './auth/require_authentication';
-import Conditions from './conditions/ConditionTopLevelView';
+//import Conditions from './conditions/ConditionTopLevelView';
 import Rotations from './rotations/RotationTopLevelView';
 import ListOfAllUsers from './users/ListOfAllUsers';
 import ModifyUser from './users/ModifyUser';
@@ -25,7 +25,11 @@ class App extends Component {
           <Route exact path="/signin" component={Signin} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signout" component={Signout} />
-          <Route exact path="/conditions" component={RequireAuth(Conditions)} />
+          <Route
+            exact
+            path="/conditions"
+            component={RequireAuth(ConditionTopLevelViewGQL)}
+          />
           <Route
             exact
             path={`/conditions/condition/:id`}
