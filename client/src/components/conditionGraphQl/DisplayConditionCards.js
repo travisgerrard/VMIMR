@@ -1,12 +1,45 @@
 import React, { Component } from 'react';
-import { Card } from 'semantic-ui-react';
+import { Card, Image, Icon } from 'semantic-ui-react';
 import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 import './markdown.css';
 
 class DisplayConditionCards extends Component {
-  cardHeader = ({ condition, tags }) => {
+  showIcons = (createdById, conditionId) => {
+    if (createdById === this.props.currentUser.id) {
+      return (
+        <Image floated="right">
+          <Icon
+            name="edit"
+            style={{ cursor: 'pointer', color: '#00824d' }}
+            onClick={this.props.editLearning}
+          />
+          <Link to={`/conditions/condition/${conditionId}`}>
+            <Icon
+              name="expand"
+              style={{ cursor: 'pointer', color: '#00824d' }}
+            />
+          </Link>
+        </Image>
+      );
+    } else {
+      return (
+        <Image floated="right">
+          <Link to={`/conditions/condition/${conditionId}`}>
+            <Icon
+              name="expand"
+              style={{ cursor: 'pointer', color: '#00824d' }}
+            />
+          </Link>{' '}
+        </Image>
+      );
+    }
+  };
+
+  cardHeader = ({ condition, tags, id }, createdById) => {
     return (
       <Card.Content style={{ background: '#E5F5DD' }}>
+        {this.showIcons(createdById, id)}
         <Card.Header>{condition}</Card.Header>
         <Card.Meta>Tags: {tags.join(', ')}</Card.Meta>
       </Card.Content>
@@ -61,7 +94,7 @@ class DisplayConditionCards extends Component {
       const { _condition } = learning;
       return (
         <Card centered key={learning.id}>
-          {this.cardHeader(_condition)}
+          {this.cardHeader(_condition, learning._creator.id)}
           {this.conditionLearnings(learning)}
         </Card>
       );
