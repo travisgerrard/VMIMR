@@ -13,17 +13,16 @@ import reducers from './reducers';
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
-
 const token = localStorage.getItem('VMIMRToken');
 const client = new ApolloClient({
   uri: '/graphql',
-  request: (operation) => {
+  request: operation => {
     operation.setContext({
       headers: {
-        authorization: token
-      }
+        authorization: token,
+      },
     });
-  }
+  },
 });
 
 //If token, assume user is signed in
@@ -37,5 +36,5 @@ ReactDOM.render(
       <App />
     </Provider>
   </ApolloProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

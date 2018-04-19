@@ -416,12 +416,12 @@ var addLearning = {
   ) {
     console.log(condition, tags, attending, date, userTags, wwl);
 
-    const conditionExists = await Condition.findOne({
+    var conditionExists = await Condition.findOne({
       condition,
     });
 
     if (conditionExists == null) {
-      const conditionExists = new Condition({
+      conditionExists = new Condition({
         tags,
         condition,
         _creator: req.user.id,
@@ -442,7 +442,10 @@ var addLearning = {
       dateUpdated: Date.now(),
       _condition: conditionExists._id,
       _creator: req.user.id,
-    });
+    })
+      .populate({ path: '_condition', model: 'conditions' })
+      .populate({ path: '_creator', model: 'users' })
+      .populate({ path: 'usersTagged', model: 'users' });
 
     await conditionLearningNew.save();
 

@@ -65,68 +65,17 @@ class ConditionTopLevelViewGQL extends Component {
     return filteredQuery;
   };
 
-  loadConditions = () => {
-    return (
-      <Query query={GET_CURRENT_USER}>
-        {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
-          if (error) return `Error! ${error.message}`;
-
-          if (this.state.sortActiveItem === 'personal') {
-            return (
-              <Query
-                query={GET_PERSONAL_LEARNING}
-                variables={{ id: data.currentUser.id }}
-              >
-                {({ loading, error, data }) => {
-                  if (loading) return <Loader active inline="centered" />;
-                  if (error) return `Error! ${error.message}`;
-
-                  const filteredQuery = this.filterQuery(
-                    data.listOfPersonalLearning,
-                  );
-
-                  return (
-                    <DisplayConditionCards
-                      learnings={filteredQuery}
-                      currentUser={data.currentUser}
-                    />
-                  );
-                }}
-              </Query>
-            );
-          } else {
-            return (
-              <Query query={GET_ALL_LEARNING}>
-                {({ loading, error, data }) => {
-                  if (loading) return <Loader active inline="centered" />;
-                  if (error) return `Error! ${error.message}`;
-
-                  const filteredQuery = this.filterQuery(
-                    data.listOfAllLearning,
-                  );
-
-                  return (
-                    <DisplayConditionCards
-                      learnings={filteredQuery}
-                      currentUser={data.currentUser}
-                    />
-                  );
-                }}
-              </Query>
-            );
-          }
-        }}
-      </Query>
-    );
-  };
-
-  isAddingCondition = () => {
+  isAddingCondition = (queryDataToDisplay, currentUser) => {
     if (this.state.addingLearning) {
       return (
         <AddCondition
           conditionTitle={this.state.searchTerm}
           doneAddingLearning={() => this.setState({ addingLearning: false })}
+          cancelAddingcondition={() =>
+            this.setState({
+              addingLearning: false,
+            })
+          }
         />
       );
     }
@@ -138,7 +87,10 @@ class ConditionTopLevelViewGQL extends Component {
           handleCategoryChanged={this.handleCategoryChanged}
           handleAddButtonPressed={this.handleAddButtonPressed}
         />
-        {this.loadConditions()}
+        <DisplayConditionCards
+          learnings={queryDataToDisplay}
+          currentUser={currentUser}
+        />
       </div>
     );
   };
@@ -155,7 +107,59 @@ class ConditionTopLevelViewGQL extends Component {
           to see everybody's learned, click "All" above.
         </p>
 
-        {this.isAddingCondition()}
+        <Query query={GET_CURRENT_USER}>
+          {({ loading, error, data }) => {
+            if (loading) return 'Loading...';
+            if (error) return `Error! ${error.message}`;
+
+            if (this.state.sortActiveItem === 'personal') {
+              return (
+                <Query
+                  query={GET_PERSONAL_LEARNING}
+                  variables={{ id: data.currentUser.id }}
+                >
+                  {({ loading, error, data }) => {
+                    if (loading) return <Loader active inline="centered" />;
+                    if (error) return `Error! ${error.message}`;
+
+                    const filteredQuery = this.filterQuery(
+                      data.listOfPersonalLearning,
+                    );
+                    return (
+                      <div>
+                        {this.isAddingCondition(
+                          filteredQuery,
+                          data.currentUser,
+                        )}
+                      </div>
+                    );
+                  }}
+                </Query>
+              );
+            } else {
+              return (
+                <Query query={GET_ALL_LEARNING}>
+                  {({ loading, error, data }) => {
+                    if (loading) return <Loader active inline="centered" />;
+                    if (error) return `Error! ${error.message}`;
+
+                    const filteredQuery = this.filterQuery(
+                      data.listOfAllLearning,
+                    );
+                    return (
+                      <div>
+                        {this.isAddingCondition(
+                          filteredQuery,
+                          data.currentUser,
+                        )}
+                      </div>
+                    );
+                  }}
+                </Query>
+              );
+            }
+          }}
+        </Query>
       </Container>
     );
   }
