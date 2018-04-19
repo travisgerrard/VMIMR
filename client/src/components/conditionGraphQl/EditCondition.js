@@ -249,7 +249,9 @@ class EditCondition extends Component {
         <h3>Preview</h3>
         <Segment>
           {this.state.wwl ? (
-            <ReactMarkdown source={this.state.wwl} />
+            <span style={{ whiteSpace: 'pre-wrap' }}>
+              <ReactMarkdown source={this.state.wwl} />
+            </span>
           ) : (
             <p>Start typeing above to see preview</p>
           )}
