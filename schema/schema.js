@@ -535,11 +535,14 @@ var updateLearning = {
       model: 'conditions',
     });
 
-    let conditionToModify;
+    console.log(learningToBeUpdated);
+
+    var conditionToModify = await Condition.findById(
+      learningToBeUpdated._condition.id,
+    );
+    console.log(conditionToModify);
+
     if (condition !== learningToBeUpdated._condition.condition) {
-      conditionToModify = await Condition.findOne({
-        condition,
-      });
       if (conditionToModify._learnings.length === 1) {
         conditionToModify.condition = condition;
         await conditionToModify.save();
@@ -558,6 +561,8 @@ var updateLearning = {
       }
     }
 
+    console.log(conditionToModify);
+
     var learningToUpdate = await ConditionLearning.findOneAndUpdate(
       {
         _id: id,
@@ -573,9 +578,13 @@ var updateLearning = {
         },
       },
       { new: true },
-    );
+    )
+      .populate({ path: '_condition', model: 'conditions' })
+      .populate({ path: '_creator', model: 'users' })
+      .populate({ path: 'usersTagged', model: 'users' });
     await learningToUpdate.save();
-    return learningToBeUpdated;
+
+    return learningToUpdate;
   },
 };
 

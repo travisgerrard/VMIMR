@@ -16,7 +16,7 @@ import './markdown.css';
 import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
 import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
 import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
-import ADD_LEARNING from '../../mutations/AddLearning';
+import UPDATE_LEARNING from '../../mutations/UpdateLearning';
 import DELETE_LEARNING from '../../mutations/DeleteLearning';
 
 class EditCondition extends Component {
@@ -38,7 +38,7 @@ class EditCondition extends Component {
 
   deleteClicked = () => {};
 
-  gutsOfAddLearning = (options, listOfUsers, addLearning, deleteLearning) => {
+  gutsOfeditLearning = (options, listOfUsers, editLearning, deleteLearning) => {
     return (
       <div>
         <Segment.Group stacked>
@@ -100,8 +100,9 @@ class EditCondition extends Component {
                 basic
                 color="green"
                 onClick={() => {
-                  addLearning({
+                  editLearning({
                     variables: {
+                      id: this.props.learning.id,
                       condition: this.state.conditionTitle,
                       tags: this.state.tags,
                       attending: this.state.attending,
@@ -156,7 +157,7 @@ class EditCondition extends Component {
             if (this.props.sortingBy === 'personal') {
               return (
                 <Mutation
-                  mutation={ADD_LEARNING}
+                  mutation={UPDATE_LEARNING}
                   refetchQueries={[
                     {
                       query: GET_PERSONAL_LEARNING,
@@ -165,7 +166,7 @@ class EditCondition extends Component {
                   ]}
                   onCompleted={() => this.props.doneEditingLearning()}
                 >
-                  {(addLearning, { data, loading, error }) => (
+                  {(editLearning, { data, loading, error }) => (
                     <Mutation
                       mutation={DELETE_LEARNING}
                       variables={{ id: this.props.learning.id }}
@@ -179,10 +180,10 @@ class EditCondition extends Component {
                     >
                       {(deleteLearning, { data, loading, error }) => (
                         <div>
-                          {this.gutsOfAddLearning(
+                          {this.gutsOfeditLearning(
                             options,
                             listOfUsers,
-                            addLearning,
+                            editLearning,
                             deleteLearning,
                           )}
                           {loading && <Loader active inline="centered" />}
@@ -195,10 +196,10 @@ class EditCondition extends Component {
             } else {
               return (
                 <Mutation
-                  mutation={ADD_LEARNING}
+                  mutation={UPDATE_LEARNING}
                   refetchQueries={[{ query: GET_ALL_LEARNING }]}
                 >
-                  {(addLearning, { data }) => (
+                  {(editLearning, { data }) => (
                     <Mutation
                       mutation={DELETE_LEARNING}
                       variables={{ id: this.props.learning.id }}
@@ -212,10 +213,10 @@ class EditCondition extends Component {
                     >
                       {(deleteLearning, { data, loading, error }) => (
                         <div>
-                          {this.gutsOfAddLearning(
+                          {this.gutsOfeditLearning(
                             options,
                             listOfUsers,
-                            addLearning,
+                            editLearning,
                             deleteLearning,
                           )}
                         </div>
