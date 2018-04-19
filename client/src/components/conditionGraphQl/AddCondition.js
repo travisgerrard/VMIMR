@@ -16,6 +16,7 @@ import ReactMarkdown from 'react-markdown';
 import './markdown.css';
 import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
 import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
+import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
 import ADD_LEARNING from '../../mutations/AddLearning';
 
 class AddCondition extends Component {
@@ -144,18 +145,46 @@ class AddCondition extends Component {
               return { key: id, text: name, value: id };
             });
 
-            return (
-              <Mutation
-                mutation={ADD_LEARNING}
-                refetchQueries={[{ query: GET_ALL_LEARNING }]}
-              >
-                {(addLearning, { data }) => (
-                  <div>
-                    {this.gutsOfAddLearning(options, listOfUsers, addLearning)}
-                  </div>
-                )}
-              </Mutation>
-            );
+            if (this.props.sortingBy === 'personal') {
+              return (
+                <Mutation
+                  mutation={ADD_LEARNING}
+                  refetchQueries={[
+                    {
+                      query: GET_PERSONAL_LEARNING,
+                      variables: { id: this.props.currentUser.id },
+                    },
+                  ]}
+                >
+                  {(addLearning, { data }) => (
+                    <div>
+                      {this.gutsOfAddLearning(
+                        options,
+                        listOfUsers,
+                        addLearning,
+                      )}
+                    </div>
+                  )}
+                </Mutation>
+              );
+            } else {
+              return (
+                <Mutation
+                  mutation={ADD_LEARNING}
+                  refetchQueries={[{ query: GET_ALL_LEARNING }]}
+                >
+                  {(addLearning, { data }) => (
+                    <div>
+                      {this.gutsOfAddLearning(
+                        options,
+                        listOfUsers,
+                        addLearning,
+                      )}
+                    </div>
+                  )}
+                </Mutation>
+              );
+            }
           }}
         </Query>
         <p>

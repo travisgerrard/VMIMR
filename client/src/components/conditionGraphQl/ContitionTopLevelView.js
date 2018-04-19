@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Loader } from 'semantic-ui-react';
-import { Query } from 'react-apollo';
+import { Query, withApollo } from 'react-apollo';
 import _ from 'lodash';
 
 import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
@@ -17,6 +17,7 @@ class ConditionTopLevelViewGQL extends Component {
     sortActiveItem: 'personal',
     searchTerm: '',
     category: 'all',
+    currentUserId: '',
     addingLearning: false,
   };
 
@@ -65,17 +66,23 @@ class ConditionTopLevelViewGQL extends Component {
     return filteredQuery;
   };
 
+  learningAdded = () => {
+    this.setState({ addingLearning: false });
+  };
+
   isAddingCondition = (queryDataToDisplay, currentUser) => {
     if (this.state.addingLearning) {
       return (
         <AddCondition
           conditionTitle={this.state.searchTerm}
-          doneAddingLearning={() => this.setState({ addingLearning: false })}
+          doneAddingLearning={() => this.learningAdded()}
           cancelAddingcondition={() =>
             this.setState({
               addingLearning: false,
             })
           }
+          currentUser={currentUser}
+          sortingBy={this.state.sortActiveItem}
         />
       );
     }
@@ -125,11 +132,15 @@ class ConditionTopLevelViewGQL extends Component {
                     const filteredQuery = this.filterQuery(
                       data.listOfPersonalLearning,
                     );
+                    const currentUserQuery = this.props.client.readQuery({
+                      query: GET_CURRENT_USER,
+                    });
+
                     return (
                       <div>
                         {this.isAddingCondition(
                           filteredQuery,
-                          data.currentUser,
+                          currentUserQuery.currentUser,
                         )}
                       </div>
                     );
@@ -146,11 +157,15 @@ class ConditionTopLevelViewGQL extends Component {
                     const filteredQuery = this.filterQuery(
                       data.listOfAllLearning,
                     );
+                    const currentUserQuery = this.props.client.readQuery({
+                      query: GET_CURRENT_USER,
+                    });
+
                     return (
                       <div>
                         {this.isAddingCondition(
                           filteredQuery,
-                          data.currentUser,
+                          currentUserQuery.currentUser,
                         )}
                       </div>
                     );
@@ -165,4 +180,4 @@ class ConditionTopLevelViewGQL extends Component {
   }
 }
 
-export default ConditionTopLevelViewGQL;
+export default withApollo(ConditionTopLevelViewGQL);
