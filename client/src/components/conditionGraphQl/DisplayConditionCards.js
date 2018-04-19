@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import './markdown.css';
 
 class DisplayConditionCards extends Component {
-  showIcons = (createdById, conditionId) => {
+  showIcons = (createdById, conditionId, learningId) => {
     if (createdById === this.props.currentUser.id) {
       return (
         <Image floated="right">
           <Icon
             name="edit"
             style={{ cursor: 'pointer', color: '#00824d' }}
-            onClick={this.props.editLearning}
+            onClick={() => this.props.editLearning(learningId)}
           />
           <Link to={`/conditions/condition/${conditionId}`}>
             <Icon
@@ -36,10 +36,10 @@ class DisplayConditionCards extends Component {
     }
   };
 
-  cardHeader = ({ condition, tags, id }, createdById) => {
+  cardHeader = ({ condition, tags, id }, createdById, learningId) => {
     return (
       <Card.Content style={{ background: '#E5F5DD' }}>
-        {this.showIcons(createdById, id)}
+        {this.showIcons(createdById, id, learningId)}
         <Card.Header>{condition}</Card.Header>
         <Card.Meta>Tags: {tags.join(', ')}</Card.Meta>
       </Card.Content>
@@ -94,7 +94,7 @@ class DisplayConditionCards extends Component {
       const { _condition } = learning;
       return (
         <Card centered key={learning.id}>
-          {this.cardHeader(_condition, learning._creator.id)}
+          {this.cardHeader(_condition, learning._creator.id, learning.id)}
           {this.conditionLearnings(learning)}
         </Card>
       );

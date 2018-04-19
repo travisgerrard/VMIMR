@@ -308,6 +308,23 @@ var listOfAllLearning = {
   },
 };
 
+var returnLearning = {
+  type: ConditionLearningType,
+  description: 'Info regarding specific rotation',
+  args: {
+    id: { type: GraphQLID },
+  },
+  async resolve(parentValues, { id }, req) {
+    return await ConditionLearning.findById(id)
+      .populate({
+        path: '_condition',
+        model: 'conditions',
+      })
+      .populate({ path: '_creator', model: 'users' })
+      .populate({ path: 'usersTagged', model: 'users' });
+  },
+};
+
 var RootQueryType = new GraphQLObjectType({
   name: 'RootQuery',
   fields: () => ({
@@ -319,6 +336,7 @@ var RootQueryType = new GraphQLObjectType({
     listOfConditions,
     listOfPersonalLearning,
     listOfAllLearning,
+    returnLearning,
   }),
 });
 

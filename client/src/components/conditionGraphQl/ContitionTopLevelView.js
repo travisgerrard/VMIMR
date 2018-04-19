@@ -6,11 +6,13 @@ import _ from 'lodash';
 import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
 import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
 import GET_CURRENT_USER from '../../queries/CurrentUser';
+import LEARNING_TO_EDIT from '../../queries/SelectedLearning';
 
 import SortConditionCards from './SortConditionCards';
 import DisplayConditionCards from './DisplayConditionCards';
 import SearchBox from './SearchBox';
 import AddCondition from './AddCondition';
+import EditCondition from './EditCondition';
 
 class ConditionTopLevelViewGQL extends Component {
   state = {
@@ -19,6 +21,8 @@ class ConditionTopLevelViewGQL extends Component {
     category: 'all',
     currentUserId: '',
     addingLearning: false,
+    editingLearning: false,
+    learningIdToEdit: '',
   };
 
   handleSortItemClick = (e, { name }) =>
@@ -71,6 +75,11 @@ class ConditionTopLevelViewGQL extends Component {
     this.setState({ searchTerm: '' });
   };
 
+  editingLearning = learningId => {
+    this.setState({ learningIdToEdit: learningId });
+    this.setState({ editingLearning: true });
+  };
+
   isAddingCondition = (queryDataToDisplay, currentUser) => {
     if (this.state.addingLearning) {
       return (
@@ -86,6 +95,33 @@ class ConditionTopLevelViewGQL extends Component {
           sortingBy={this.state.sortActiveItem}
         />
       );
+    } else if (this.state.editingLearning) {
+      return (
+        <Query
+          query={LEARNING_TO_EDIT}
+          variables={{ id: this.state.learningIdToEdit }}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return <Loader active inline="centered" />;
+            if (error) return `Error! ${error.message}`;
+
+            return (
+              <EditCondition
+                conditionTitle={this.state.searchTerm}
+                doneEditingLearning={() => this.learningAdded()}
+                cancelAddingcondition={() =>
+                  this.setState({
+                    editingLearning: false,
+                  })
+                }
+                currentUser={currentUser}
+                learning={data.returnLearning}
+                sortingBy={this.state.sortActiveItem}
+              />
+            );
+          }}
+        </Query>
+      );
     }
     return (
       <div>
@@ -98,6 +134,7 @@ class ConditionTopLevelViewGQL extends Component {
         <DisplayConditionCards
           learnings={queryDataToDisplay}
           currentUser={currentUser}
+          editLearning={learningId => this.editingLearning(learningId)}
         />
       </div>
     );

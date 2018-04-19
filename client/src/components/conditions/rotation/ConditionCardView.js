@@ -6,7 +6,7 @@ import {
   Input,
   Button,
   Label,
-  Message
+  Message,
 } from 'semantic-ui-react';
 import ConditionCardLearningView from './ConditionCardLearningView';
 import ConditionCardPostEdit from './ConditionCardPostEdit';
@@ -19,7 +19,7 @@ import _ from 'lodash';
 
 class ConditionCardView extends Component {
   static defaultProps = {
-    conditionFilter: 'all'
+    conditionFilter: 'all',
   };
 
   state = {
@@ -27,13 +27,13 @@ class ConditionCardView extends Component {
     editingHeader: false,
     conditionHeaderName: '',
     conditionHeaderTags: [],
-    error: ''
+    error: '',
   };
 
   // This is hack so that when new learning added, resets this var
   componentWillReceiveProps(nextProps) {
     this.setState({
-      addingLearning: false
+      addingLearning: false,
     });
   }
 
@@ -68,9 +68,9 @@ class ConditionCardView extends Component {
           learning => {
             return this.learningWithUser(
               learning,
-              this.props.auth.userDetails.sub
+              this.props.auth.userDetails.sub,
             );
-          }
+          },
         );
         return _.map(learningsToShow, learning => {
           return (
@@ -89,13 +89,13 @@ class ConditionCardView extends Component {
 
   addingLearningToTrue = () => {
     this.setState({
-      addingLearning: true
+      addingLearning: true,
     });
   };
 
   addingLearningToFalse = () => {
     this.setState({
-      addingLearning: false
+      addingLearning: false,
     });
   };
 
@@ -103,13 +103,13 @@ class ConditionCardView extends Component {
     this.setState({
       editingHeader: true,
       conditionHeaderName: this.props.condition.condition,
-      conditionHeaderTags: this.props.condition.tags
+      conditionHeaderTags: this.props.condition.tags,
     });
   };
 
   editingHeaderToFalse = () => {
     this.setState({
-      editingHeader: false
+      editingHeader: false,
     });
   };
 
@@ -149,7 +149,7 @@ class ConditionCardView extends Component {
   doesNameExists = conditionName => {
     if (conditionName === this.props.condition.condition) return false;
     const doesNameExists = _.some(this.props.conditions.allConditions, {
-      condition: conditionName
+      condition: conditionName,
     });
     return doesNameExists;
   };
@@ -158,25 +158,25 @@ class ConditionCardView extends Component {
     const { conditionHeaderName } = this.state;
     if (conditionHeaderName === '') {
       this.setState({
-        error: `Can't save: condition can't be blank`
+        error: `Can't save: condition can't be blank`,
       });
     } else if (this.state.conditionHeaderTags.length === 0) {
       this.setState({
-        error: `Can't save: need at least one tag`
+        error: `Can't save: need at least one tag`,
       });
     } else if (this.doesNameExists(conditionHeaderName)) {
       this.setState({
-        error: `Can't save: condition name already exists`
+        error: `Can't save: condition name already exists`,
       });
     } else {
       console.log('Saving changes');
       this.props.updateCondition({
         condition: this.state.conditionHeaderName,
         tags: this.state.conditionHeaderTags,
-        conditionId: this.props.condition._id
+        conditionId: this.props.condition._id,
       });
       this.setState({
-        error: ''
+        error: '',
       });
       this.editingHeaderToFalse();
     }
@@ -194,12 +194,12 @@ class ConditionCardView extends Component {
   deleteCondition = () => {
     if (this.doesConditionHaveLearning()) {
       this.setState({
-        error: `Can't delete condition with learning`
+        error: `Can't delete condition with learning`,
       });
     } else {
       this.props.deleteCondition(this.props.condition._id);
       this.setState({
-        error: ''
+        error: '',
       });
     }
   };
@@ -224,7 +224,7 @@ class ConditionCardView extends Component {
             value={this.state.conditionHeaderName}
             onChange={(params, data) =>
               this.setState({
-                conditionHeaderName: data.value
+                conditionHeaderName: data.value,
               })
             }
           />
@@ -235,7 +235,7 @@ class ConditionCardView extends Component {
             defaultValue={this.state.conditionHeaderTags}
             onChange={(params, data) =>
               this.setState({
-                conditionHeaderTags: data.value
+                conditionHeaderTags: data.value,
               })
             }
           />
