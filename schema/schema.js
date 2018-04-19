@@ -588,6 +588,7 @@ var MutationType = new GraphQLObjectType({
     updateRotation,
     addLearning,
     deleteLearning,
+    updateLearning,
   }),
 });
 
