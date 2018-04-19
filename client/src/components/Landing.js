@@ -1,8 +1,8 @@
 import React from 'react';
 //import LastFiveConditions from './landing/LastFiveConditions';
 import Conditions from './conditions/ConditionTopLevelView';
-import { Link } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
+import Signin from './auth/Signin';
 
 const Landing = () => {
   var landingPage;
@@ -14,17 +14,15 @@ const Landing = () => {
     );
   } else {
     landingPage = (
-      <Container style={{ marginTop: '4.5em' }}>
+      <Container style={{ marginTop: '4.5em' }} textAlign="center">
         <h1>VM:IMR</h1>
         <p>
           Welcome to the Virginia Mason: Internal Medicine recidency home page
           for residents
         </p>
         <p>Aiming to help organize your residency life and learning</p>
-        <h3>
-          <Link to="/signin">Login to get started</Link>
-        </h3>
-        <p>TK: Blog / noon conference report</p>
+
+        <Signin />
       </Container>
     );
   }

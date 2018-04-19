@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, Image, Icon } from 'semantic-ui-react';
 import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
-import _ from 'lodash';
+//import _ from 'lodash';
 import './markdown.css';
 
 class NormalCardConditionLearningView extends Component {
@@ -35,23 +35,25 @@ class NormalCardConditionLearningView extends Component {
 
   render() {
     const {
-      users,
-      usersTagged,
+      // users,
+      // usersTagged,
       seenWith,
       dateField,
       whatWasLearned,
     } = this.props;
 
+    var learendWithText = <div />;
     //console.log(this.props);
-
-    const learnedWith = _.map(usersTagged, user => {
-      return users[user].name;
-    });
-    const learendWithText = learnedWith.length ? (
-      <Card.Meta>Learned with: {learnedWith.join(', ')}</Card.Meta>
-    ) : (
-      ''
-    );
+    // if (usersTagged.length > 0) {
+    //   const learnedWith = _.map(usersTagged, user => {
+    //     return users[user].name;
+    //   });
+    //   learendWithText = learnedWith.length ? (
+    //     <Card.Meta>Learned with: {learnedWith.join(', ')}</Card.Meta>
+    //   ) : (
+    //     ''
+    //   );
+    // }
 
     //const createdBy = console.log();
 

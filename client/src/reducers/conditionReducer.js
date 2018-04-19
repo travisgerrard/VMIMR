@@ -17,7 +17,7 @@ import {
   UPDATE_LEARNING,
   DELETE_LEARNING,
   UNAUTH_USER,
-  ALL_LEARNING_FOR_CONDITION
+  ALL_LEARNING_FOR_CONDITION,
 } from '../actions/types';
 import _ from 'lodash';
 
@@ -29,7 +29,7 @@ const INITIAL_STATE = {
   showAddCard: false,
   rotationSelected: '',
   filteredConditions: [],
-  allConditions: {}
+  allConditions: {},
 };
 
 // What the user actually sees
@@ -48,14 +48,14 @@ function theListOfConditionsToShow(searchTerm, state, addedObject) {
       if (_.indexOf(condition.tags, rotationSelected) >= 0) {
         return _.includes(
           condition.condition.toLowerCase(),
-          searchTerm.toLowerCase()
+          searchTerm.toLowerCase(),
         );
       }
     } else {
       // if no rotation is selected
       return _.includes(
         condition.condition.toLowerCase(),
-        searchTerm.toLowerCase()
+        searchTerm.toLowerCase(),
       );
     }
   });
@@ -67,7 +67,6 @@ export default function(state = INITIAL_STATE, action) {
   var listOfConditionsToShow;
   switch (action.type) {
     case FETCH_ALL_CONDITIONS:
-      console.log(action.payload);
       //When linking to conditions
       // The rotaiton selected occurs faster than server call
       // As such need if statement below to factor in selected rotation
@@ -75,17 +74,17 @@ export default function(state = INITIAL_STATE, action) {
         return {
           ...state,
           allConditions: action.payload,
-          filteredConditions: _.values(action.payload)
+          filteredConditions: _.values(action.payload),
         };
       } else {
         listOfConditionsToShow = theListOfConditionsToShow(state.searchTerm, {
           ...state,
-          allConditions: action.payload
+          allConditions: action.payload,
         });
         return {
           ...state,
           allConditions: action.payload,
-          filteredConditions: listOfConditionsToShow
+          filteredConditions: listOfConditionsToShow,
         };
       }
     case ADD_CONDITION:
@@ -94,54 +93,54 @@ export default function(state = INITIAL_STATE, action) {
       listOfConditionsToShow = theListOfConditionsToShow(
         '',
         state,
-        action.payload
+        action.payload,
       );
       return {
         ...state,
         allConditions: {
           ...state.allConditions,
-          [action.payload._id]: action.payload
+          [action.payload._id]: action.payload,
         },
         filteredConditions: listOfConditionsToShow,
         loadingAddCondition: false,
         error: '',
         showAddCard: false,
         showAddButton: false,
-        searchTerm: ''
+        searchTerm: '',
       };
     case ADD_CONDITION_FAIL:
       return {
         ...state,
         loadingAddCondition: false,
-        error: action.payload
+        error: action.payload,
       };
     case UPDATE_CONDITION:
       listOfConditionsToShow = theListOfConditionsToShow(
         state.searchTerm,
         state,
-        action.payload
+        action.payload,
       );
       return {
         ...state,
         allConditions: {
           ...state.allConditions,
-          [action.payload._id]: action.payload
+          [action.payload._id]: action.payload,
         },
-        filteredConditions: listOfConditionsToShow
+        filteredConditions: listOfConditionsToShow,
       };
     case DELETE_CONDITION:
       const allConditions = _.omit(
         state.allConditions,
-        action.payload.conditionDeleted
+        action.payload.conditionDeleted,
       );
       listOfConditionsToShow = theListOfConditionsToShow(state.searchTerm, {
         ...state,
-        allConditions
+        allConditions,
       });
       return {
         ...state,
         allConditions,
-        filteredConditions: listOfConditionsToShow
+        filteredConditions: listOfConditionsToShow,
       };
     case SET_ROTATION_SELECTED:
       if (action.payload === 'all') {
@@ -150,12 +149,12 @@ export default function(state = INITIAL_STATE, action) {
       console.log(action.payload);
       listOfConditionsToShow = theListOfConditionsToShow(state.searchTerm, {
         ...state,
-        rotationSelected: action.payload
+        rotationSelected: action.payload,
       });
       return {
         ...state,
         rotationSelected: action.payload,
-        filteredConditions: listOfConditionsToShow
+        filteredConditions: listOfConditionsToShow,
       };
     case CLEAR_ERROR:
       return { ...state, error: '' };
@@ -173,7 +172,7 @@ export default function(state = INITIAL_STATE, action) {
           ...state,
           searchTerm: action.payload,
           filteredConditions: listOfConditionsToShow,
-          showAddButton: true
+          showAddButton: true,
         };
       } else {
         return {
@@ -181,7 +180,7 @@ export default function(state = INITIAL_STATE, action) {
           searchTerm: action.payload,
           filteredConditions: listOfConditionsToShow,
           showAddButton: false,
-          showAddCard: false
+          showAddCard: false,
         };
       }
     case SHOW_ADD_CARD:
@@ -192,43 +191,43 @@ export default function(state = INITIAL_STATE, action) {
       listOfConditionsToShow = theListOfConditionsToShow(
         state.searchTerm,
         state,
-        action.payload
+        action.payload,
       );
       return {
         ...state,
         allConditions: {
           ...state.allConditions,
-          [action.payload._id]: action.payload
+          [action.payload._id]: action.payload,
         },
-        filteredConditions: listOfConditionsToShow
+        filteredConditions: listOfConditionsToShow,
       };
     case UPDATE_LEARNING:
       listOfConditionsToShow = theListOfConditionsToShow(
         state.searchTerm,
         state,
-        action.payload
+        action.payload,
       );
       return {
         ...state,
         allConditions: {
           ...state.allConditions,
-          [action.payload._id]: action.payload
+          [action.payload._id]: action.payload,
         },
-        filteredConditions: listOfConditionsToShow
+        filteredConditions: listOfConditionsToShow,
       };
     case DELETE_LEARNING:
       listOfConditionsToShow = theListOfConditionsToShow(
         state.searchTerm,
         state,
-        action.payload
+        action.payload,
       );
       return {
         ...state,
         allConditions: {
           ...state.allConditions,
-          [action.payload._id]: action.payload
+          [action.payload._id]: action.payload,
         },
-        filteredConditions: listOfConditionsToShow
+        filteredConditions: listOfConditionsToShow,
       };
     case ALL_LEARNING_FOR_CONDITION:
       //Since only one conditions, not adding and sorting list
@@ -241,8 +240,8 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         allConditions: {
           ...state.allConditions,
-          [action.payload._id]: action.payload
-        }
+          [action.payload._id]: action.payload,
+        },
         //filteredConditions: listOfConditionsToShow
       };
     case UNAUTH_USER:

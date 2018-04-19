@@ -123,7 +123,12 @@ class ConditionTopLevelViewGQL extends Component {
 
   isAddingCondition = () => {
     if (this.state.addingLearning) {
-      return <AddCondition />;
+      return (
+        <AddCondition
+          conditionTitle={this.state.searchTerm}
+          doneAddingLearning={() => this.setState({ addingLearning: false })}
+        />
+      );
     }
     return (
       <div>

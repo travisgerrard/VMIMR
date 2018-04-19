@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
 import Signin from './auth/Signin';
@@ -18,10 +16,6 @@ import NoonConference from './conferences/NoonConference';
 import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
 
 class App extends Component {
-  componentWillMount() {
-    this.props.fetchAllUsers();
-  }
-
   render() {
     return (
       <BrowserRouter>
@@ -61,4 +55,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+export default App;
