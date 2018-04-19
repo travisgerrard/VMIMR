@@ -432,8 +432,6 @@ var addLearning = {
     { condition, tags, attending, date, userTags, wwl },
     req,
   ) {
-    console.log(condition, tags, attending, date, userTags, wwl);
-
     var conditionExists = await Condition.findOne({
       condition,
     });
@@ -512,6 +510,72 @@ var deleteLearning = {
     });
 
     return learningToBeDeleted;
+  },
+};
+
+var updateLearning = {
+  type: ConditionLearningType,
+  description: 'Update specific learning',
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+    condition: { type: new GraphQLNonNull(GraphQLString) },
+    tags: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
+    attending: { type: new GraphQLNonNull(GraphQLString) },
+    date: { type: new GraphQLNonNull(GraphQLString) },
+    userTags: { type: GraphQLList(GraphQLString) },
+    wwl: { type: new GraphQLNonNull(GraphQLString) },
+  },
+  async resolve(
+    parentValues,
+    { condition, tags, attending, date, userTags, wwl, id },
+    req,
+  ) {
+    var learningToBeUpdated = await ConditionLearning.findById(id).populate({
+      path: '_condition',
+      model: 'conditions',
+    });
+
+    let conditionToModify;
+    if (condition !== learningToBeUpdated._condition.condition) {
+      conditionToModify = await Condition.findOne({
+        condition,
+      });
+      if (conditionToModify._learnings.length === 1) {
+        conditionToModify.condition = condition;
+        await conditionToModify.save();
+      } else {
+        conditionToModify._learnings.pull(id);
+        await conditionToModify.save();
+        conditionToModify = new Condition({
+          tags,
+          condition,
+          _creator: req.user.id,
+          dateCreated: Date.now(),
+        });
+        conditionToModify._learnings.push(id);
+
+        await conditionToModify.save();
+      }
+    }
+
+    var learningToUpdate = await ConditionLearning.findOneAndUpdate(
+      {
+        _id: id,
+      },
+      {
+        $set: {
+          whatWasLearned: wwl,
+          dateField: date,
+          seenWith: attending,
+          usersTagged: userTags,
+          dateUpdated: Date.now(),
+          _condition: conditionToModify._id,
+        },
+      },
+      { new: true },
+    );
+    await learningToUpdate.save();
+    return learningToBeUpdated;
   },
 };
 
