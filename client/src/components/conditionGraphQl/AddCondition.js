@@ -29,18 +29,6 @@ class AddCondition extends Component {
     wwl: '',
   };
 
-  saveClicked = () => {
-    console.log(
-      `conditionTitle: ${this.state.conditionTitle}, tags: ${
-        this.state.tags
-      }, attending: ${this.state.attending}, date: ${
-        this.state.date
-      }, userTags: ${this.state.userTags}, wwl: ${
-        this.state.wwl
-      }, conditionTitle: ${this.state.conditionTitle},  `,
-    );
-  };
-
   cancelClicked = () => {
     this.props.cancelAddingcondition();
   };
