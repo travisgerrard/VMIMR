@@ -80,6 +80,11 @@ class ConditionTopLevelViewGQL extends Component {
     this.setState({ editingLearning: true });
   };
 
+  doneEditingLearning = () => {
+    this.setState({ learningIdToEdit: '' });
+    this.setState({ editingLearning: false });
+  };
+
   isAddingCondition = (queryDataToDisplay, currentUser) => {
     if (this.state.addingLearning) {
       return (
@@ -108,12 +113,8 @@ class ConditionTopLevelViewGQL extends Component {
             return (
               <EditCondition
                 conditionTitle={this.state.searchTerm}
-                doneEditingLearning={() => this.learningAdded()}
-                cancelAddingcondition={() =>
-                  this.setState({
-                    editingLearning: false,
-                  })
-                }
+                doneEditingLearning={() => this.doneEditingLearning()}
+                cancelAddingcondition={() => this.doneEditingLearning()}
                 currentUser={currentUser}
                 learning={data.returnLearning}
                 sortingBy={this.state.sortActiveItem}

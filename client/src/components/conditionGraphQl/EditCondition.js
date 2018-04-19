@@ -9,7 +9,7 @@ import {
   Button,
 } from 'semantic-ui-react';
 import _ from 'lodash';
-import { Query, Mutation, withApollo } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import rotations from '../conditions/rotations';
 import ReactMarkdown from 'react-markdown';
 import './markdown.css';
@@ -17,6 +17,7 @@ import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
 import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
 import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
 import ADD_LEARNING from '../../mutations/AddLearning';
+import DELETE_LEARNING from '../../mutations/DeleteLearning';
 
 class EditCondition extends Component {
   state = {
@@ -28,13 +29,16 @@ class EditCondition extends Component {
       return id;
     }),
     wwl: this.props.learning.whatWasLearned,
+    error: [],
   };
 
   cancelClicked = () => {
     this.props.cancelAddingcondition();
   };
 
-  gutsOfAddLearning = (options, listOfUsers, addLearning) => {
+  deleteClicked = () => {};
+
+  gutsOfAddLearning = (options, listOfUsers, addLearning, deleteLearning) => {
     return (
       <div>
         <Segment.Group stacked>
@@ -113,7 +117,17 @@ class EditCondition extends Component {
               <Button basic color="grey" onClick={() => this.cancelClicked()}>
                 Cancel
               </Button>
-              <Button basic color="red" onClick={() => this.deleteClicked()}>
+              <Button
+                basic
+                color="red"
+                onClick={() => {
+                  deleteLearning({
+                    variables: {
+                      id: this.props.learning.id,
+                    },
+                  });
+                }}
+              >
                 Delete
               </Button>
             </div>
@@ -149,17 +163,32 @@ class EditCondition extends Component {
                       variables: { id: this.props.currentUser.id },
                     },
                   ]}
-                  onCompleted={() => this.props.doneAddingLearning()}
+                  onCompleted={() => this.props.doneEditingLearning()}
                 >
                   {(addLearning, { data, loading, error }) => (
-                    <div>
-                      {this.gutsOfAddLearning(
-                        options,
-                        listOfUsers,
-                        addLearning,
+                    <Mutation
+                      mutation={DELETE_LEARNING}
+                      variables={{ id: this.props.learning.id }}
+                      refetchQueries={[
+                        {
+                          query: GET_PERSONAL_LEARNING,
+                          variables: { id: this.props.currentUser.id },
+                        },
+                      ]}
+                      onCompleted={() => this.props.doneEditingLearning()}
+                    >
+                      {(deleteLearning, { data, loading, error }) => (
+                        <div>
+                          {this.gutsOfAddLearning(
+                            options,
+                            listOfUsers,
+                            addLearning,
+                            deleteLearning,
+                          )}
+                          {loading && <Loader active inline="centered" />}
+                        </div>
                       )}
-                      {loading && <Loader active inline="centered" />}
-                    </div>
+                    </Mutation>
                   )}
                 </Mutation>
               );
@@ -170,20 +199,34 @@ class EditCondition extends Component {
                   refetchQueries={[{ query: GET_ALL_LEARNING }]}
                 >
                   {(addLearning, { data }) => (
-                    <div>
-                      {this.gutsOfAddLearning(
-                        options,
-                        listOfUsers,
-                        addLearning,
+                    <Mutation
+                      mutation={DELETE_LEARNING}
+                      variables={{ id: this.props.learning.id }}
+                      refetchQueries={[
+                        {
+                          query: GET_PERSONAL_LEARNING,
+                          variables: { id: this.props.currentUser.id },
+                        },
+                      ]}
+                      onCompleted={() => this.props.doneEditingLearning()}
+                    >
+                      {(deleteLearning, { data, loading, error }) => (
+                        <div>
+                          {this.gutsOfAddLearning(
+                            options,
+                            listOfUsers,
+                            addLearning,
+                            deleteLearning,
+                          )}
+                        </div>
                       )}
-                    </div>
+                    </Mutation>
                   )}
                 </Mutation>
               );
             }
           }}
         </Query>
-        <br />
         <p>
           FYI: This site uses{' '}
           <a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">
@@ -216,4 +259,4 @@ class EditCondition extends Component {
   }
 }
 
-export default withApollo(EditCondition);
+export default EditCondition;
