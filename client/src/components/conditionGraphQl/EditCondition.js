@@ -7,6 +7,7 @@ import {
   Form,
   Loader,
   Button,
+  Message,
 } from 'semantic-ui-react';
 import _ from 'lodash';
 import { Query, Mutation } from 'react-apollo';
@@ -18,6 +19,7 @@ import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
 import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
 import UPDATE_LEARNING from '../../mutations/UpdateLearning';
 import DELETE_LEARNING from '../../mutations/DeleteLearning';
+import { validateInputs } from './validation';
 
 class EditCondition extends Component {
   state = {
@@ -29,7 +31,7 @@ class EditCondition extends Component {
       return id;
     }),
     wwl: this.props.learning.whatWasLearned,
-    error: [],
+    error: '',
   };
 
   cancelClicked = () => {
@@ -100,17 +102,32 @@ class EditCondition extends Component {
                 basic
                 color="green"
                 onClick={() => {
-                  editLearning({
-                    variables: {
-                      id: this.props.learning.id,
-                      condition: this.state.conditionTitle,
-                      tags: this.state.tags,
-                      attending: this.state.attending,
-                      date: this.state.date,
-                      userTags: this.state.userTags,
-                      wwl: this.state.wwl,
-                    },
-                  });
+                  var isValid = validateInputs(
+                    this.state.conditionTitle,
+                    this.state.tags,
+                    this.state.attending,
+                    this.state.date,
+                    this.state.userTags,
+                    this.state.wwl,
+                  );
+
+                  const { error } = isValid;
+
+                  if (!error) {
+                    editLearning({
+                      variables: {
+                        id: this.props.learning.id,
+                        condition: this.state.conditionTitle,
+                        tags: this.state.tags,
+                        attending: this.state.attending,
+                        date: this.state.date,
+                        userTags: this.state.userTags,
+                        wwl: this.state.wwl,
+                      },
+                    });
+                  } else {
+                    this.setState({ error });
+                  }
                 }}
               >
                 Save
@@ -228,6 +245,13 @@ class EditCondition extends Component {
             }
           }}
         </Query>
+        {this.state.error ? (
+          <Message negative>
+            <Message.Header>{this.state.error}</Message.Header>
+          </Message>
+        ) : (
+          ''
+        )}
         <p>
           FYI: This site uses{' '}
           <a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">

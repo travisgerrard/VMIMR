@@ -7,6 +7,7 @@ import {
   Form,
   Loader,
   Button,
+  Message,
 } from 'semantic-ui-react';
 import moment from 'moment';
 import _ from 'lodash';
@@ -18,6 +19,7 @@ import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
 import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
 import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
 import ADD_LEARNING from '../../mutations/AddLearning';
+import { validateInputs } from './validation';
 
 class AddCondition extends Component {
   state = {
@@ -27,6 +29,7 @@ class AddCondition extends Component {
     date: moment().format('MM/DD/YY'),
     userTags: [],
     wwl: '',
+    error: '',
   };
 
   cancelClicked = () => {
@@ -80,6 +83,7 @@ class AddCondition extends Component {
             />
             <Form>
               <TextArea
+                style={{ marginTop: 10 }}
                 placeholder="What was learned"
                 value={this.state.wwl}
                 onChange={(params, data) => this.setState({ wwl: data.value })}
@@ -92,16 +96,30 @@ class AddCondition extends Component {
                 basic
                 color="green"
                 onClick={() => {
-                  addLearning({
-                    variables: {
-                      condition: this.state.conditionTitle,
-                      tags: this.state.tags,
-                      attending: this.state.attending,
-                      date: this.state.date,
-                      userTags: this.state.userTags,
-                      wwl: this.state.wwl,
-                    },
-                  });
+                  var isValid = validateInputs(
+                    this.state.conditionTitle,
+                    this.state.tags,
+                    this.state.attending,
+                    this.state.date,
+                    this.state.userTags,
+                    this.state.wwl,
+                  );
+
+                  const { error } = isValid;
+                  if (!error) {
+                    addLearning({
+                      variables: {
+                        condition: this.state.conditionTitle,
+                        tags: this.state.tags,
+                        attending: this.state.attending,
+                        date: this.state.date,
+                        userTags: this.state.userTags,
+                        wwl: this.state.wwl,
+                      },
+                    });
+                  } else {
+                    this.setState({ error });
+                  }
                 }}
               >
                 Save
@@ -176,6 +194,13 @@ class AddCondition extends Component {
             }
           }}
         </Query>
+        {this.state.error ? (
+          <Message negative>
+            <Message.Header>{this.state.error}</Message.Header>
+          </Message>
+        ) : (
+          ''
+        )}
         <p>
           FYI: This site uses{' '}
           <a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">
