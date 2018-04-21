@@ -4,7 +4,7 @@ import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MESSAGE } from './types';
 export const signinUser = ({
   username,
   password,
-  history
+  history,
 }) => async dispatch => {
   try {
     // Submit email/password to server
@@ -38,7 +38,7 @@ export const signupUser = ({ email, password, history }) => async dispatch => {
 export const authError = error => {
   return {
     type: AUTH_ERROR,
-    payload: error
+    payload: error,
   };
 };
 
@@ -50,10 +50,10 @@ export const signoutUser = () => {
 
 export const fetchMessage = () => async dispatch => {
   const res = await axios.get('/api/', {
-    headers: { authorization: localStorage.getItem('VMIMRToken') }
+    headers: { authorization: localStorage.getItem('VMIMRToken') },
   });
   dispatch({
     type: FETCH_MESSAGE,
-    payload: res.data.message
+    payload: res.data.message,
   });
 };

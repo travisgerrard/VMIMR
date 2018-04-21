@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './Header';
+import Footer from './Footer';
 import Landing from './Landing';
 import Signin from './auth/Signin';
 import Signup from './auth/Signup';
@@ -18,7 +19,7 @@ import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter forceRefresh={true}>
         <div>
           <Header />
           <Route exact path="/" component={Landing} />
@@ -53,6 +54,7 @@ class App extends Component {
             path={`/noonConference`}
             component={RequireAuth(NoonConference)}
           />
+          <Footer />
         </div>
       </BrowserRouter>
     );

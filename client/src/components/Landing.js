@@ -17,11 +17,8 @@ const Landing = () => {
   } else {
     landingPage = (
       <Container style={{ marginTop: '4.5em' }} textAlign="center">
-        <h1>VM:IMR</h1>
-        <p>
-          Welcome to the Virginia Mason: Internal Medicine recidency home page
-          for residents
-        </p>
+        <h1>Virginia Mason: Internal Medicine Residency</h1>
+        <p>Welcome to VM:IMR, the homepage for IM residents at VM</p>
         <p>Aiming to help organize your residency life and learning</p>
 
         <Signin />
