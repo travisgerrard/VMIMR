@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Loader } from 'semantic-ui-react';
+import { Query, Mutation } from 'react-apollo';
+import _ from 'lodash';
 
 import EastgateNavBar from './EastgateNavBar';
 import EastgateManual from './EastgateManual';
+
+import GET_ALL_EASTGATE_CONTENT from '../../queries/ListOfEastgateContent';
+import ADD_EASTGATE_CONTENT from '../../mutations/AddEastgateContent';
+import GET_CURRENT_USER from '../../queries/CurrentUser';
 
 class EastgateTopLevelView extends Component {
   state = {
@@ -20,17 +26,72 @@ class EastgateTopLevelView extends Component {
       });
   }
 
+  navSection = eastgateContent => {
+    return <EastgateNavBar content={eastgateContent} />;
+  };
+
+  contentSection = eastgateContent => {
+    return (
+      <Query query={GET_CURRENT_USER}>
+        {({ loading, error, data }) => {
+          if (loading) return 'Loading...';
+          if (error) return `Error! ${error.message}`;
+
+          const currentUser = data.currentUser;
+
+          return (
+            <Mutation
+              mutation={ADD_EASTGATE_CONTENT}
+              refetchQueries={[
+                {
+                  query: GET_ALL_EASTGATE_CONTENT,
+                  variables: { id: data.currentUser.id },
+                },
+              ]}
+              onCompleted={() => console.log('Add some content')}
+            >
+              {(addContent, { data, loading, error }) => (
+                <div>
+                  <EastgateManual
+                    content={eastgateContent}
+                    addContent={addContent}
+                    currentUserId={currentUser.id}
+                  />
+                  {loading && <Loader active inline="centered" />}
+                </div>
+              )}
+            </Mutation>
+          );
+        }}
+      </Query>
+    );
+  };
+
   render() {
     return (
       <div style={{ marginTop: '4.5em' }}>
-        <Grid>
-          <Grid.Column width={4} style={{ backgroundColor: '#F7F7F7' }}>
-            <EastgateNavBar />
-          </Grid.Column>
-          <Grid.Column stretched width={12}>
-            <EastgateManual markdown={this.state.markdown} />
-          </Grid.Column>
-        </Grid>
+        <Query query={GET_ALL_EASTGATE_CONTENT}>
+          {({ loading, error, data }) => {
+            if (loading) return 'Loading...';
+            if (error) return `Error! ${error.message}`;
+
+            var eastgateContent = _.sortBy(
+              data.listOfEastgateManual,
+              'sectionIndex',
+            );
+
+            return (
+              <Grid>
+                <Grid.Column width={4} style={{ backgroundColor: '#F7F7F7' }}>
+                  {this.navSection(eastgateContent)}
+                </Grid.Column>
+                <Grid.Column stretched width={12}>
+                  {this.contentSection(eastgateContent)}
+                </Grid.Column>
+              </Grid>
+            );
+          }}
+        </Query>
       </div>
     );
   }
