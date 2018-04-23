@@ -6,6 +6,7 @@ const {
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLString,
+  GraphQLFloat,
   GraphQLError,
   GraphQLBoolean,
   GraphQLNonNull,
@@ -16,12 +17,14 @@ require('../models/provider');
 require('../models/rotation');
 require('../models/condition');
 require('../models/conditionLearning');
+require('../models/eastgate');
 
 const User = mongoose.model('users');
 const Provider = mongoose.model('Provider');
 const Rotation = mongoose.model('Rotation');
 const Condition = mongoose.model('conditions');
 const ConditionLearning = mongoose.model('conditionLearnings');
+const Eastgate = mongoose.model('Eastgate');
 
 const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -206,6 +209,32 @@ var ConditionLearningType = new GraphQLObjectType({
   }),
 });
 
+var EastgateType = new GraphQLObjectType({
+  name: 'eastgateType',
+  fields: () => ({
+    id: {
+      type: GraphQLID,
+      description: 'ID for eastgateType',
+    },
+    sectionTitle: {
+      type: GraphQLString,
+      description: 'The title of a eastgate section',
+    },
+    sectionContent: {
+      type: GraphQLString,
+      description: 'Eastgate manual section content',
+    },
+    sectionIndex: {
+      type: GraphQLFloat,
+      description: 'Where this section fits into the manual',
+    },
+    _creator: {
+      type: UserType,
+      description: 'User who created this section of the manual',
+    },
+  }),
+});
+
 var currentUser = {
   type: UserType,
   description: 'The Current User',
@@ -227,6 +256,14 @@ var listOfProviders = {
   description: 'list of all providers',
   resolve: (parentValues, args, req) => {
     return Provider.find();
+  },
+};
+
+var listOfEastgateManual = {
+  type: GraphQLList(EastgateType),
+  description: 'list of all eastgate stuff to create manual',
+  resolve: (parentValues, args, req) => {
+    return Eastgate.find();
   },
 };
 
@@ -337,6 +374,7 @@ var RootQueryType = new GraphQLObjectType({
     listOfPersonalLearning,
     listOfAllLearning,
     returnLearning,
+    listOfEastgateManual,
   }),
 });
 
@@ -344,6 +382,36 @@ var runMutation = {
   type: GraphQLString,
   resolve: (parentValues, args, context) => {
     return 'GraphQL mutation OK';
+  },
+};
+
+var addEastgateManualSection = {
+  type: EastgateType,
+  description: 'Adds a section to the eastgate manual',
+  args: {
+    sectionTitle: { type: new GraphQLNonNull(GraphQLString) },
+    sectionContent: { type: new GraphQLNonNull(GraphQLString) },
+    sectionIndex: { type: new GraphQLNonNull(GraphQLFloat) },
+    _creator: { type: new GraphQLNonNull(GraphQLID) },
+  },
+  async resolve(
+    parentValues,
+    { sectionTitle, sectionContent, sectionIndex, _creator },
+  ) {
+    var newEastgateContent = new Eastgate({
+      sectionTitle,
+      sectionContent,
+      sectionIndex,
+      _creator,
+    });
+
+    await newEastgateContent.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+    });
+
+    return newEastgateContent;
   },
 };
 
@@ -598,6 +666,7 @@ var MutationType = new GraphQLObjectType({
     addLearning,
     deleteLearning,
     updateLearning,
+    addEastgateManualSection,
   }),
 });
 

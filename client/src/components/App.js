@@ -15,6 +15,7 @@ import Messages from './messages';
 import ConditionPage from './conditions/rotation/ConditionPage';
 import NoonConference from './conferences/NoonConference';
 import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
+import Eastgate from './eastgate/EastgateTopLevelView';
 
 class App extends Component {
   render() {
@@ -54,6 +55,7 @@ class App extends Component {
             path={`/noonConference`}
             component={RequireAuth(NoonConference)}
           />
+          <Route path={`/eastgate`} component={RequireAuth(Eastgate)} />
           <Footer />
         </div>
       </BrowserRouter>
