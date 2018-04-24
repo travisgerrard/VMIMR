@@ -389,6 +389,7 @@ var addEastgateManualSection = {
   type: EastgateType,
   description: 'Adds a section to the eastgate manual',
   args: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
     sectionTitle: { type: new GraphQLNonNull(GraphQLString) },
     sectionContent: { type: new GraphQLNonNull(GraphQLString) },
     sectionIndex: { type: new GraphQLNonNull(GraphQLFloat) },
@@ -396,22 +397,30 @@ var addEastgateManualSection = {
   },
   async resolve(
     parentValues,
-    { sectionTitle, sectionContent, sectionIndex, _creator },
+    { id, sectionTitle, sectionContent, sectionIndex, _creator },
   ) {
-    var newEastgateContent = new Eastgate({
-      sectionTitle,
-      sectionContent,
-      sectionIndex,
-      _creator,
-    });
+    if (id === '12345') {
+      var newEastgateContent = new Eastgate({
+        sectionTitle,
+        sectionContent,
+        sectionIndex,
+        _creator,
+      });
 
-    await newEastgateContent.save(function(err) {
-      if (err) {
-        return next(err);
-      }
-    });
+      await newEastgateContent.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      });
 
-    return newEastgateContent;
+      return newEastgateContent;
+    }
+
+    return await Eastgate.findByIdAndUpdate(
+      id,
+      { sectionTitle, sectionContent, sectionIndex },
+      { new: true },
+    );
   },
 };
 

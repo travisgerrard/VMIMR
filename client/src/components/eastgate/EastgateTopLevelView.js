@@ -7,7 +7,7 @@ import EastgateNavBar from './EastgateNavBar';
 import EastgateManual from './EastgateManual';
 
 import GET_ALL_EASTGATE_CONTENT from '../../queries/ListOfEastgateContent';
-import ADD_EASTGATE_CONTENT from '../../mutations/AddEastgateContent';
+import ADD_OR_UPDATE_EASTGATE_CONTENT from '../../mutations/AddEastgateContent';
 import GET_CURRENT_USER from '../../queries/CurrentUser';
 
 class EastgateTopLevelView extends Component {
@@ -15,16 +15,16 @@ class EastgateTopLevelView extends Component {
     markdown: '',
   };
 
-  componentWillMount() {
-    const manualPath = require('./EastgateManual.md');
-    fetch(manualPath)
-      .then(response => {
-        return response.text();
-      })
-      .then(text => {
-        this.setState({ markdown: text });
-      });
-  }
+  // componentWillMount() {
+  //   const manualPath = require('./EastgateManual.md');
+  //   fetch(manualPath)
+  //     .then(response => {
+  //       return response.text();
+  //     })
+  //     .then(text => {
+  //       this.setState({ markdown: text });
+  //     });
+  // }
 
   navSection = eastgateContent => {
     return <EastgateNavBar content={eastgateContent} />;
@@ -41,7 +41,7 @@ class EastgateTopLevelView extends Component {
 
           return (
             <Mutation
-              mutation={ADD_EASTGATE_CONTENT}
+              mutation={ADD_OR_UPDATE_EASTGATE_CONTENT}
               refetchQueries={[
                 {
                   query: GET_ALL_EASTGATE_CONTENT,
@@ -52,12 +52,15 @@ class EastgateTopLevelView extends Component {
             >
               {(addContent, { data, loading, error }) => (
                 <div>
+                  {loading && <Loader active inline="centered" />}
                   <EastgateManual
                     content={eastgateContent}
                     addContent={addContent}
                     currentUserId={currentUser.id}
+                    loading={loading}
+                    data={data}
+                    error={error}
                   />
-                  {loading && <Loader active inline="centered" />}
                 </div>
               )}
             </Mutation>
@@ -82,10 +85,10 @@ class EastgateTopLevelView extends Component {
 
             return (
               <Grid>
-                <Grid.Column width={4} style={{ backgroundColor: '#F7F7F7' }}>
+                <Grid.Column width={2} style={{ backgroundColor: '#F7F7F7' }}>
                   {this.navSection(eastgateContent)}
                 </Grid.Column>
-                <Grid.Column stretched width={12}>
+                <Grid.Column stretched width={14}>
                   {this.contentSection(eastgateContent)}
                 </Grid.Column>
               </Grid>

@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Button, Segment, Form, Message } from 'semantic-ui-react';
+import {
+  Button,
+  Segment,
+  Form,
+  Message,
+  Grid,
+  Divider,
+} from 'semantic-ui-react';
 
 class EastgateManual extends Component {
   state = {
+    id: '12345',
     addingContent: false,
     title: '',
     index: 0,
@@ -21,7 +29,7 @@ class EastgateManual extends Component {
         error: 'Title cannot be blank',
         titleError: true,
       });
-    } else if (this.state.index === 0) {
+    } else if (this.state.index <= 0) {
       this.setState({
         error: 'Index must be greater than one',
         indexError: true,
@@ -34,22 +42,21 @@ class EastgateManual extends Component {
     } else {
       this.props.addContent({
         variables: {
+          id: this.state.id,
           sectionTitle: this.state.title,
           sectionIndex: this.state.index,
           sectionContent: this.state.content,
           _creator: this.props.currentUserId,
         },
       });
-      console.log(
-        `Title: ${this.state.title}, Index: ${this.state.index}, Content: ${
-          this.state.content
-        }`,
-      );
+      // Making dangerous assumtion that update/addition worked...
+      this.resetDefaults();
     }
   };
 
   resetDefaults = () => {
     this.setState({
+      id: '12345',
       addingContent: false,
       title: '',
       index: 0,
@@ -66,7 +73,7 @@ class EastgateManual extends Component {
     if (this.state.addingContent) {
       return (
         <Segment style={{ marginRight: 25 }}>
-          <Form error={this.state.formError}>
+          <Form error={this.state.formError} loading={this.props.loading}>
             <Form.Group>
               <Form.Input
                 label="Section Title"
@@ -133,17 +140,48 @@ class EastgateManual extends Component {
     }
   };
 
+  editSelectedContent = (id, sectionContent, sectionTitle, sectionIndex) => {
+    this.setState({
+      id,
+      addingContent: true,
+      title: sectionTitle,
+      index: sectionIndex,
+      content: sectionContent,
+    });
+  };
+
   returnContent = () => {
     return (
       <div>
-        {this.props.content.map(({ id, sectionContent, sectionTitle }) => {
-          return (
-            <div key={id}>
-              <h2>{sectionTitle}</h2>
-              <ReactMarkdown source={sectionContent} />
-            </div>
-          );
-        })}
+        {this.props.content.map(
+          ({ id, sectionContent, sectionTitle, sectionIndex }) => {
+            return (
+              <div key={id}>
+                <Grid style={{ marginBottom: 5, marginTop: 5 }}>
+                  <Grid.Column width={4}>
+                    <h2>{sectionTitle}</h2>
+                  </Grid.Column>
+                  <Grid.Column width={4}>
+                    <Button
+                      size="mini"
+                      onClick={() =>
+                        this.editSelectedContent(
+                          id,
+                          sectionContent,
+                          sectionTitle,
+                          sectionIndex,
+                        )
+                      }
+                    >
+                      Edit
+                    </Button>
+                  </Grid.Column>
+                </Grid>
+                <ReactMarkdown source={sectionContent} />
+              </div>
+            );
+          },
+        )}
       </div>
     );
   };
@@ -152,6 +190,7 @@ class EastgateManual extends Component {
     return (
       <div>
         {this.addContentSection()}
+        <Divider />
         {this.returnContent()}
       </div>
     );
