@@ -9,6 +9,9 @@ import {
   Divider,
 } from 'semantic-ui-react';
 
+import EastgateNavBar from './EastgateNavBar';
+import './Eastgate.css';
+
 class EastgateManual extends Component {
   state = {
     id: '12345',
@@ -156,28 +159,30 @@ class EastgateManual extends Component {
         {this.props.content.map(
           ({ id, sectionContent, sectionTitle, sectionIndex }) => {
             return (
-              <div key={id}>
-                <Grid style={{ marginBottom: 5, marginTop: 5 }}>
-                  <Grid.Column width={4}>
-                    <h2>{sectionTitle}</h2>
-                  </Grid.Column>
-                  <Grid.Column width={4}>
-                    <Button
-                      size="mini"
-                      onClick={() =>
-                        this.editSelectedContent(
-                          id,
-                          sectionContent,
-                          sectionTitle,
-                          sectionIndex,
-                        )
-                      }
-                    >
-                      Edit
-                    </Button>
-                  </Grid.Column>
-                </Grid>
-                <ReactMarkdown source={sectionContent} />
+              <div key={id} id={sectionIndex}>
+                <section id={sectionIndex.toString()}>
+                  <Grid style={{ marginBottom: 5, marginTop: 5 }}>
+                    <Grid.Column width={4}>
+                      <h2>{sectionTitle}</h2>
+                    </Grid.Column>
+                    <Grid.Column width={4}>
+                      <Button
+                        size="mini"
+                        onClick={() =>
+                          this.editSelectedContent(
+                            id,
+                            sectionContent,
+                            sectionTitle,
+                            sectionIndex,
+                          )
+                        }
+                      >
+                        Edit
+                      </Button>
+                    </Grid.Column>
+                  </Grid>
+                  <ReactMarkdown source={sectionContent} />
+                </section>
               </div>
             );
           },
@@ -188,11 +193,19 @@ class EastgateManual extends Component {
 
   render() {
     return (
-      <div>
-        {this.addContentSection()}
-        <Divider />
-        {this.returnContent()}
-      </div>
+      <Grid>
+        <Grid.Column
+          width={3}
+          style={{ backgroundColor: '#F7F7F7', paddingLeft: '0' }}
+        >
+          <EastgateNavBar content={this.props.content} />
+        </Grid.Column>
+        <Grid.Column stretched width={13}>
+          {this.addContentSection()}
+          <Divider />
+          {this.returnContent()}{' '}
+        </Grid.Column>
+      </Grid>
     );
   }
 }
