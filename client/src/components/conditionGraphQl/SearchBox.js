@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Select, Input } from 'semantic-ui-react';
+import { Select, Input, Button } from 'semantic-ui-react';
 import rotations from '../conditions/rotations';
 import _ from 'lodash';
 
@@ -10,31 +10,36 @@ class SearchBox extends Component {
     });
 
     return (
-      <Input
-        type="text"
-        placeholder="Search/Add Condition"
-        value={this.props.searchTerm}
-        action
-        style={{ marginBottom: 25 }}
-        onChange={this.props.searchTermChanged}
-      >
-        <input />
+      <div>
+        <Button
+          primary
+          onClick={() => this.props.handleAddButtonPressed}
+          style={{ marginBottom: 10 }}
+        >
+          Add New Learning
+        </Button>
+        <br />
+        <label>Search Learnings</label>
+        <br />
+        <Input
+          type="text"
+          placeholder="Search Learnings"
+          value={this.props.searchTerm}
+          style={{ marginBottom: 10, marginRight: 10 }}
+          onChange={this.props.searchTermChanged}
+        />
+        <br />
+        <label>Filter By Rotation</label>
+        <br />
         <Select
-          style={{ width: '125px' }}
+          style={{ width: '125px', marginBottom: 25 }}
           options={[{ key: 'All', text: 'All', value: 'all' }, ...options]}
           defaultValue="all"
           search
           compact
           onChange={this.props.handleCategoryChanged}
         />
-        <Button
-          disabled={!this.props.searchTerm}
-          type="submit"
-          onClick={this.props.handleAddButtonPressed}
-        >
-          Add
-        </Button>
-      </Input>
+      </div>
     );
   }
 }

@@ -1,3 +1,4 @@
+// Top level view for adding / searching learning
 import React, { Component } from 'react';
 import { Container, Loader } from 'semantic-ui-react';
 import { Query, withApollo } from 'react-apollo';
@@ -16,12 +17,12 @@ import EditCondition from './EditCondition';
 
 class ConditionTopLevelViewGQL extends Component {
   state = {
-    sortActiveItem: 'personal',
-    searchTerm: '',
-    category: 'all',
+    sortActiveItem: 'personal', // personal vs all to filter contents if user has made
+    searchTerm: '', // Tracks what is written in search box
+    category: 'all', // Sort conditions with regard to rotation
     currentUserId: '',
-    addingLearning: false,
-    editingLearning: false,
+    addingLearning: false, // Boolean to help displays correct components
+    editingLearning: false, // Boolean to help displays correct components
     learningIdToEdit: '',
   };
 
@@ -40,6 +41,7 @@ class ConditionTopLevelViewGQL extends Component {
     this.setState({ addingLearning: true });
   };
 
+  // The functions that takes an input array of learning and outputs just learning that fits applied filters and search termms
   filterQuery = query => {
     var filteredQuery = _.filter(
       query,
@@ -70,21 +72,25 @@ class ConditionTopLevelViewGQL extends Component {
     return filteredQuery;
   };
 
+  // Setter for after learning has been added
   learningAdded = () => {
     this.setState({ addingLearning: false });
     this.setState({ searchTerm: '' });
   };
 
+  // Setter for initiationg editing of learning
   editingLearning = learningId => {
     this.setState({ learningIdToEdit: learningId });
     this.setState({ editingLearning: true });
   };
 
+  // Setter for finalizing the editing of learning
   doneEditingLearning = () => {
     this.setState({ learningIdToEdit: '' });
     this.setState({ editingLearning: false });
   };
 
+  // Decideds what user should see depending on if user is creating/editing learning or looking for past learing
   isAddingCondition = (queryDataToDisplay, currentUser) => {
     if (this.state.addingLearning) {
       return (
@@ -126,6 +132,7 @@ class ConditionTopLevelViewGQL extends Component {
     }
     return (
       <div>
+        <br />
         <SearchBox
           searchTerm={this.state.searchTerm}
           searchTermChanged={this.handleSearchTermChanged}
@@ -148,10 +155,6 @@ class ConditionTopLevelViewGQL extends Component {
           handleItemClick={this.handleSortItemClick}
           activeItem={this.state.sortActiveItem}
         />
-        <p>
-          Search through stuff you've learned, or add something new! If you want
-          to see everybody's learned, click "All" above.
-        </p>
 
         <Query query={GET_CURRENT_USER}>
           {({ loading, error, data }) => {
