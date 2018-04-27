@@ -1,3 +1,5 @@
+// Add condition Button, search box, and filter drop down
+
 import React, { Component } from 'react';
 import { Select, Input, Button } from 'semantic-ui-react';
 import rotations from '../conditions/rotations';
@@ -12,27 +14,26 @@ class SearchBox extends Component {
     return (
       <div>
         <Button
+          fluid
           primary
-          onClick={() => this.props.handleAddButtonPressed}
           style={{ marginBottom: 10 }}
+          onClick={this.props.handleAddButtonPressed}
         >
           Add New Learning
         </Button>
-        <br />
         <label>Search Learnings</label>
-        <br />
         <Input
+          style={{ marginBottom: 10 }}
           type="text"
+          fluid
           placeholder="Search Learnings"
           value={this.props.searchTerm}
-          style={{ marginBottom: 10, marginRight: 10 }}
           onChange={this.props.searchTermChanged}
         />
-        <br />
         <label>Filter By Rotation</label>
-        <br />
         <Select
-          style={{ width: '125px', marginBottom: 25 }}
+          fluid
+          style={{ marginBottom: 25 }}
           options={[{ key: 'All', text: 'All', value: 'all' }, ...options]}
           defaultValue="all"
           search

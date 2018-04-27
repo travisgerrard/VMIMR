@@ -30,70 +30,75 @@ class AddCondition extends Component {
     userTags: [],
     wwl: '',
     error: '',
+    formError: false,
   };
 
   cancelClicked = () => {
     this.props.cancelAddingcondition();
   };
 
-  gutsOfAddLearning = (options, listOfUsers, addLearning) => {
+  gutsOfAddLearning = (options, listOfUsers, addLearning, loading) => {
     return (
       <div>
-        <Segment.Group stacked>
-          <Segment>
-            <Input
-              label="Name"
-              placeholder="Ex: ARDS"
-              value={this.state.conditionTitle}
-              onChange={(params, data) =>
-                this.setState({ conditionTitle: data.value })
-              }
-            />
-            <Select
-              options={options}
-              search
-              multiple
-              placeholder="Rotation tags"
-              onChange={(params, data) => this.setState({ tags: data.value })}
-            />
-          </Segment>
-          <Segment>
-            <Input
-              label="Attending"
-              placeholder="Ex: Baliga"
-              value={this.state.attending}
-              onChange={(params, data) =>
-                this.setState({ attending: data.value })
-              }
-            />
-            <Input
-              label="Date"
-              placeholder=""
-              value={this.state.date}
-              onChange={(params, data) => this.setState({ date: data.value })}
-            />
-            <Select
-              options={listOfUsers}
-              search
-              multiple
-              placeholder="Learned With"
-              onChange={(params, data) =>
-                this.setState({ userTags: data.value })
-              }
-            />
-            <Form>
+        <Segment stacked>
+          <Form error={this.state.formError} loading={loading}>
+            <Form.Group widths="equal">
+              <Form.Input
+                label="Name"
+                placeholder="Ex: ARDS"
+                value={this.state.conditionTitle}
+                onChange={(params, data) =>
+                  this.setState({ conditionTitle: data.value })
+                }
+              />
+              <Form.Select
+                options={options}
+                search
+                multiple
+                label="Rotation tags"
+                placeholder="Rotation tags"
+                onChange={(params, data) => this.setState({ tags: data.value })}
+              />
+            </Form.Group>
+            <Form.Group widths="equal">
+              <Form.Input
+                label="Attending"
+                placeholder="Ex: Baliga"
+                value={this.state.attending}
+                onChange={(params, data) =>
+                  this.setState({ attending: data.value })
+                }
+              />
+              <Form.Input
+                label="Date"
+                placeholder=""
+                value={this.state.date}
+                onChange={(params, data) => this.setState({ date: data.value })}
+              />
+              <Form.Select
+                options={listOfUsers}
+                search
+                multiple
+                label="Learned With (Not required)"
+                placeholder="Learned With"
+                onChange={(params, data) =>
+                  this.setState({ userTags: data.value })
+                }
+              />
+            </Form.Group>
+            <Form.Group>
               <TextArea
-                style={{ marginTop: 10 }}
+                style={{ marginTop: 10, marginBottom: 20 }}
                 placeholder="What was learned"
+                label="What was learned"
                 value={this.state.wwl}
                 onChange={(params, data) => this.setState({ wwl: data.value })}
               />
-            </Form>
-          </Segment>
-          <Segment>
-            <div className="ui two buttons">
-              <Button
+            </Form.Group>
+            <Form.Group widths="equal">
+              <Form.Button
                 basic
+                fluid
                 color="green"
                 onClick={() => {
                   var isValid = validateInputs(
@@ -118,18 +123,23 @@ class AddCondition extends Component {
                       },
                     });
                   } else {
-                    this.setState({ error });
+                    this.setState({ error: error });
                   }
                 }}
               >
                 Save
-              </Button>
-              <Button basic color="grey" onClick={() => this.cancelClicked()}>
+              </Form.Button>
+              <Form.Button
+                basic
+                fluid
+                color="grey"
+                onClick={() => this.cancelClicked()}
+              >
                 Cancel
-              </Button>
-            </div>
-          </Segment>
-        </Segment.Group>
+              </Form.Button>
+            </Form.Group>
+          </Form>
+        </Segment>
       </div>
     );
   };
@@ -168,8 +178,8 @@ class AddCondition extends Component {
                         options,
                         listOfUsers,
                         addLearning,
+                        loading,
                       )}
-                      {loading && <Loader active inline="centered" />}
                     </div>
                   )}
                 </Mutation>

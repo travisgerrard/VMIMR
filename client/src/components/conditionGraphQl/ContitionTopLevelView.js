@@ -132,7 +132,6 @@ class ConditionTopLevelViewGQL extends Component {
     }
     return (
       <div>
-        <br />
         <SearchBox
           searchTerm={this.state.searchTerm}
           searchTermChanged={this.handleSearchTermChanged}
