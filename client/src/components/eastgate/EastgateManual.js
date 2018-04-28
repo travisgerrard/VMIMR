@@ -8,7 +8,7 @@ import {
   Divider,
   Grid,
   Menu,
-  List,
+  Confirm,
 } from 'semantic-ui-react';
 
 import EastgateNavBar from './EastgateNavBar';
@@ -26,6 +26,8 @@ class EastgateManual extends Component {
     titleError: false,
     indexError: false,
     contentError: false,
+    confirmOpen: false,
+    idToDelete: '',
   };
 
   submitAddContent = e => {
@@ -57,6 +59,11 @@ class EastgateManual extends Component {
       // Making dangerous assumtion that update/addition worked...
       this.resetDefaults();
     }
+  };
+
+  deleteContent = id => {
+    this.setState({ confirmOpen: true });
+    this.setState({ idToDelete: id });
   };
 
   resetDefaults = () => {
@@ -159,12 +166,12 @@ class EastgateManual extends Component {
     return (
       <div>
         {this.props.content.map(
-          ({ id, sectionContent, sectionTitle, sectionIndex }) => {
+          ({ id, sectionContent, sectionTitle, sectionIndex, _creator }) => {
             return (
               <div key={id} id={sectionIndex}>
                 <section id={sectionIndex.toString()}>
                   <Grid style={{ marginBottom: 5, marginTop: 5 }}>
-                    <Grid.Column width={4}>
+                    <Grid.Column width={8}>
                       <h2>{sectionTitle}</h2>
                     </Grid.Column>
                     <Grid.Column width={4}>
@@ -181,6 +188,15 @@ class EastgateManual extends Component {
                       >
                         Edit
                       </Button>
+                      {this.props.currentUserId === _creator.id && (
+                        <Button
+                          size="mini"
+                          color="red"
+                          onClick={() => this.deleteContent(id)}
+                        >
+                          Delete
+                        </Button>
+                      )}
                     </Grid.Column>
                   </Grid>
                   <ReactMarkdown source={sectionContent} />
@@ -215,6 +231,19 @@ class EastgateManual extends Component {
           <Divider />
           {this.returnContent()}
         </Segment>
+        <Confirm
+          open={this.state.confirmOpen}
+          content="Are you sure you want to delete this content?"
+          onCancel={() => this.setState({ confirmOpen: false })}
+          onConfirm={() => {
+            this.props.deleteContent({
+              variables: {
+                id: this.state.idToDelete,
+              },
+            });
+            this.setState({ confirmOpen: false });
+          }}
+        />
       </div>
     );
   }

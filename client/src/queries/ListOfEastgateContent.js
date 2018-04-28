@@ -7,6 +7,9 @@ export default gql`
       sectionTitle
       sectionContent
       sectionIndex
+      _creator {
+        id
+      }
     }
   }
 `;

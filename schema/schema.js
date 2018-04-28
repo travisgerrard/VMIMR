@@ -263,7 +263,7 @@ var listOfEastgateManual = {
   type: GraphQLList(EastgateType),
   description: 'list of all eastgate stuff to create manual',
   resolve: (parentValues, args, req) => {
-    return Eastgate.find();
+    return Eastgate.find().populate({ path: '_creator', model: 'users' });
   },
 };
 
@@ -421,6 +421,21 @@ var addEastgateManualSection = {
       { sectionTitle, sectionContent, sectionIndex },
       { new: true },
     );
+  },
+};
+
+var deleteEastgateManualSection = {
+  type: EastgateType,
+  description: 'Delete eastgate content',
+  args: {
+    id: { type: GraphQLID },
+  },
+  async resolve(parentValues, { id }, req) {
+    return await Eastgate.findByIdAndRemove(id, function(err, offer) {
+      if (err) {
+        throw err;
+      }
+    });
   },
 };
 
@@ -612,12 +627,9 @@ var updateLearning = {
       model: 'conditions',
     });
 
-    console.log(learningToBeUpdated);
-
     var conditionToModify = await Condition.findById(
       learningToBeUpdated._condition.id,
     );
-    console.log(conditionToModify);
 
     if (condition !== learningToBeUpdated._condition.condition) {
       if (conditionToModify._learnings.length === 1) {
@@ -637,8 +649,6 @@ var updateLearning = {
         await conditionToModify.save();
       }
     }
-
-    console.log(conditionToModify);
 
     var learningToUpdate = await ConditionLearning.findOneAndUpdate(
       {
@@ -676,6 +686,7 @@ var MutationType = new GraphQLObjectType({
     deleteLearning,
     updateLearning,
     addEastgateManualSection,
+    deleteEastgateManualSection,
   }),
 });
 

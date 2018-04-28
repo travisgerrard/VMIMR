@@ -7,6 +7,7 @@ import EastgateManual from './EastgateManual';
 
 import GET_ALL_EASTGATE_CONTENT from '../../queries/ListOfEastgateContent';
 import ADD_OR_UPDATE_EASTGATE_CONTENT from '../../mutations/AddEastgateContent';
+import DELETE_EASTGATE_CONTENT from '../../mutations/DeleteEastgateContent';
 import GET_CURRENT_USER from '../../queries/CurrentUser';
 
 class EastgateTopLevelView extends Component {
@@ -29,23 +30,33 @@ class EastgateTopLevelView extends Component {
               refetchQueries={[
                 {
                   query: GET_ALL_EASTGATE_CONTENT,
-                  variables: { id: data.currentUser.id },
                 },
               ]}
-              onCompleted={() => console.log('Add some content')}
             >
               {(addContent, { data, loading, error }) => (
-                <div>
-                  {loading && <Loader active inline="centered" />}
-                  <EastgateManual
-                    content={eastgateContent}
-                    addContent={addContent}
-                    currentUserId={currentUser.id}
-                    loading={loading}
-                    data={data}
-                    error={error}
-                  />
-                </div>
+                <Mutation
+                  mutation={DELETE_EASTGATE_CONTENT}
+                  refetchQueries={[
+                    {
+                      query: GET_ALL_EASTGATE_CONTENT,
+                    },
+                  ]}
+                >
+                  {(deleteContent, { data, loading, error }) => (
+                    <div>
+                      {loading && <Loader active inline="centered" />}
+                      <EastgateManual
+                        content={eastgateContent}
+                        addContent={addContent}
+                        deleteContent={deleteContent}
+                        currentUserId={currentUser.id}
+                        loading={loading}
+                        data={data}
+                        error={error}
+                      />
+                    </div>
+                  )}
+                </Mutation>
               )}
             </Mutation>
           );
