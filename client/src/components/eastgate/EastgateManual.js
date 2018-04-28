@@ -5,8 +5,10 @@ import {
   Segment,
   Form,
   Message,
-  Grid,
   Divider,
+  Grid,
+  Menu,
+  List,
 } from 'semantic-ui-react';
 
 import EastgateNavBar from './EastgateNavBar';
@@ -193,19 +195,27 @@ class EastgateManual extends Component {
 
   render() {
     return (
-      <Grid>
-        <Grid.Column
-          width={3}
-          style={{ backgroundColor: '#F7F7F7', paddingLeft: '0' }}
+      <div>
+        <Menu
+          as={Menu}
+          borderless
+          vertical
+          style={{
+            position: 'fixed',
+            top: '0px',
+            bottom: '0px',
+            overflowY: 'auto',
+            width: '180px',
+          }}
         >
           <EastgateNavBar content={this.props.content} />
-        </Grid.Column>
-        <Grid.Column stretched width={13}>
+        </Menu>
+        <Segment basic style={{ position: 'relative', marginLeft: '200px' }}>
           {this.addContentSection()}
           <Divider />
-          {this.returnContent()}{' '}
-        </Grid.Column>
-      </Grid>
+          {this.returnContent()}
+        </Segment>
+      </div>
     );
   }
 }
