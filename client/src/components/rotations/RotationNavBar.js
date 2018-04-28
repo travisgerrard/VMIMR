@@ -20,21 +20,29 @@ class RotationTopLevelView extends Component {
 
           const { activeItem } = this.props;
 
-          return (
-            <div>
-              {data.listOfRotations.map(rotation => (
-                <Menu.Item
-                  name={rotation.title}
-                  active={activeItem === rotation.title}
-                  id={rotation.id}
-                  onClick={this.props.handleMenubarItemClick}
-                  key={rotation.title}
-                >
-                  {rotation.title}
-                </Menu.Item>
-              ))}
-            </div>
-          );
+          return data.listOfRotations.map(rotation => {
+            if (
+              this.props.rotationOnLanding === rotation.title &&
+              this.props.initialLoad
+            ) {
+              this.props.handleRotationOnLanding(rotation.title, rotation.id);
+            }
+            return (
+              <div key={rotation.id}>
+                {data.listOfRotations.map(rotation => (
+                  <Menu.Item
+                    name={rotation.title}
+                    active={activeItem === rotation.title}
+                    id={rotation.id}
+                    onClick={this.props.handleMenubarItemClick}
+                    key={rotation.title}
+                  >
+                    {rotation.title}
+                  </Menu.Item>
+                ))}
+              </div>
+            );
+          });
         }}
       </Query>
     );

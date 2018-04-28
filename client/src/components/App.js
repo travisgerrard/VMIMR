@@ -38,11 +38,17 @@ class App extends Component {
             component={RequireAuth(ConditionPage)}
           />
           <Route
-            exat
+            exact
             path="/conditionGQL"
             component={RequireAuth(ConditionTopLevelViewGQL)}
           />
-          <Route path="/rotations" component={RequireAuth(Rotations)} />
+          <Route exact path="/rotations" component={RequireAuth(Rotations)} />
+          <Route
+            exact
+            path="/rotations/:id"
+            component={RequireAuth(Rotations)}
+          />
+
           <Route exact path="/users" component={RequireAuth(ListOfAllUsers)} />
           <Route
             exact

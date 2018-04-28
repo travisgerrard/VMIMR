@@ -5,11 +5,9 @@ import urology from './urology';
 
 class RotatationContentContainer extends Component {
   render() {
-    console.log(urology);
     const { rotation, location, contact, conferences } = urology[
       this.props.dbname
     ];
-    console.log(this.props.dbname);
     return (
       <div>
         <h1>{rotation}</h1>

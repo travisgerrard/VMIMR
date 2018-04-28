@@ -1,3 +1,5 @@
+// Top level view that displayes menu as well as content
+
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 
@@ -7,12 +9,21 @@ import RotationMainView from './RotationMainView';
 class RotationTopLevelView extends Component {
   state = {
     activeItem: '',
-    activeItemId: '5acd8914f0a4808f5423fd20',
+    activeItemId: '',
+    initialLoad: true,
   };
 
   handleMenubarItemClick = (e, { name, id }) => {
     this.setState({ activeItem: name });
     this.setState({ activeItemId: id });
+  };
+
+  handleRotationOnLanding = (name, id) => {
+    console.log(name);
+
+    this.setState({ activeItem: name });
+    this.setState({ activeItemId: id });
+    this.setState({ initialLoad: false });
   };
 
   render() {
@@ -21,6 +32,9 @@ class RotationTopLevelView extends Component {
         <Grid>
           <Grid.Column width={4}>
             <RotationNavBar
+              rotationOnLanding={this.props.match.params.id}
+              initialLoad={this.state.initialLoad}
+              handleRotationOnLanding={this.handleRotationOnLanding}
               activeItem={this.state.activeItem}
               handleMenubarItemClick={this.handleMenubarItemClick}
             />

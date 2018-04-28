@@ -1,3 +1,6 @@
+// The top level of the rotation view
+// Handles displaying general info...
+
 import React, { Component } from 'react';
 import { Query, withApollo } from 'react-apollo';
 import { Container } from 'semantic-ui-react';
