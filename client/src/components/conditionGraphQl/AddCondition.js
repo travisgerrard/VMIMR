@@ -1,3 +1,5 @@
+// Add condition form
+
 import React, { Component } from 'react';
 import { Segment, Form, Loader, Message } from 'semantic-ui-react';
 import moment from 'moment';
@@ -32,7 +34,7 @@ class AddCondition extends Component {
     return (
       <div>
         <Segment stacked>
-          <Form error={this.state.formError} loading={loading}>
+          <Form loading={loading}>
             <Form.Group widths="equal">
               <Form.Input
                 label="Name"

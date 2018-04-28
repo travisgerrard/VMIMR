@@ -1,14 +1,7 @@
+// Edit condition form
+
 import React, { Component } from 'react';
-import {
-  Segment,
-  Input,
-  Select,
-  TextArea,
-  Form,
-  Loader,
-  Button,
-  Message,
-} from 'semantic-ui-react';
+import { Segment, Form, Loader, Message } from 'semantic-ui-react';
 import _ from 'lodash';
 import { Query, Mutation } from 'react-apollo';
 import rotations from '../conditions/rotations';
@@ -40,66 +33,71 @@ class EditCondition extends Component {
 
   deleteClicked = () => {};
 
-  gutsOfeditLearning = (options, listOfUsers, editLearning, deleteLearning) => {
+  gutsOfeditLearning = (
+    options,
+    listOfUsers,
+    editLearning,
+    deleteLearning,
+    loading,
+  ) => {
     return (
       <div>
-        <Segment.Group stacked>
-          <Segment>
-            <Input
-              label="Name"
-              placeholder="Ex: ARDS"
-              value={this.state.conditionTitle}
-              onChange={(params, data) =>
-                this.setState({ conditionTitle: data.value })
-              }
-            />
-            <Select
-              options={options}
-              search
-              multiple
-              placeholder="Rotation tags"
-              defaultValue={this.state.tags}
-              onChange={(params, data) => this.setState({ tags: data.value })}
-            />
-          </Segment>
-          <Segment>
-            <Input
-              label="Attending"
-              placeholder="Ex: Baliga"
-              value={this.state.attending}
-              onChange={(params, data) =>
-                this.setState({ attending: data.value })
-              }
-            />
-            <Input
-              label="Date"
-              placeholder=""
-              value={this.state.date}
-              onChange={(params, data) => this.setState({ date: data.value })}
-            />
-            <Select
-              options={listOfUsers}
-              search
-              multiple
-              placeholder="Learned With"
-              defaultValue={this.state.userTags}
-              onChange={(params, data) =>
-                this.setState({ userTags: data.value })
-              }
-            />
-            <Form>
-              <TextArea
-                style={{ marginTop: 10 }}
-                placeholder="What was learned"
-                value={this.state.wwl}
-                onChange={(params, data) => this.setState({ wwl: data.value })}
+        <Segment stacked>
+          <Form loading={loading}>
+            <Form.Group widths="equal">
+              <Form.Input
+                label="Name"
+                placeholder="Ex: ARDS"
+                value={this.state.conditionTitle}
+                onChange={(params, data) =>
+                  this.setState({ conditionTitle: data.value })
+                }
               />
-            </Form>
-          </Segment>
-          <Segment>
-            <div className="ui three buttons">
-              <Button
+              <Form.Select
+                options={options}
+                search
+                multiple
+                label="Rotation tags"
+                placeholder="Rotation tags"
+                onChange={(params, data) => this.setState({ tags: data.value })}
+              />
+            </Form.Group>
+            <Form.Group widths="equal">
+              <Form.Input
+                label="Attending"
+                placeholder="Ex: Baliga"
+                value={this.state.attending}
+                onChange={(params, data) =>
+                  this.setState({ attending: data.value })
+                }
+              />
+              <Form.Input
+                label="Date"
+                placeholder=""
+                value={this.state.date}
+                onChange={(params, data) => this.setState({ date: data.value })}
+              />
+              <Form.Select
+                options={listOfUsers}
+                search
+                multiple
+                label="Learned With (Not required)"
+                placeholder="Learned With"
+                onChange={(params, data) =>
+                  this.setState({ userTags: data.value })
+                }
+              />
+            </Form.Group>
+            <Form.TextArea
+              placeholder="What was learned"
+              label="What was learned"
+              value={this.state.wwl}
+              onChange={(params, data) => this.setState({ wwl: data.value })}
+            />
+            <Form.Group widths="equal">
+              <Form.Button
                 basic
+                fluid
                 color="green"
                 onClick={() => {
                   var isValid = validateInputs(
@@ -131,12 +129,18 @@ class EditCondition extends Component {
                 }}
               >
                 Save
-              </Button>
-              <Button basic color="grey" onClick={() => this.cancelClicked()}>
-                Cancel
-              </Button>
-              <Button
+              </Form.Button>
+              <Form.Button
                 basic
+                fluid
+                color="grey"
+                onClick={() => this.cancelClicked()}
+              >
+                Cancel
+              </Form.Button>
+              <Form.Button
+                basic
+                fluid
                 color="red"
                 onClick={() => {
                   deleteLearning({
@@ -147,10 +151,10 @@ class EditCondition extends Component {
                 }}
               >
                 Delete
-              </Button>
-            </div>
-          </Segment>
-        </Segment.Group>
+              </Form.Button>
+            </Form.Group>
+          </Form>
+        </Segment>
       </div>
     );
   };
@@ -202,6 +206,7 @@ class EditCondition extends Component {
                             listOfUsers,
                             editLearning,
                             deleteLearning,
+                            loading,
                           )}
                           {loading && <Loader active inline="centered" />}
                         </div>
