@@ -9,6 +9,7 @@ import {
   Grid,
   Menu,
   Confirm,
+  Modal,
 } from 'semantic-ui-react';
 
 import EastgateNavBar from './EastgateNavBar';
@@ -28,6 +29,7 @@ class EastgateManual extends Component {
     contentError: false,
     confirmOpen: false,
     idToDelete: '',
+    modalHeader: 'Add Eastgate Manual Content',
   };
 
   submitAddContent = e => {
@@ -78,63 +80,74 @@ class EastgateManual extends Component {
       titleError: false,
       indexError: false,
       contentError: false,
+      modalHeader: 'Add Eastgate Manual Content',
     });
   };
 
   addContentSection = () => {
     if (this.state.addingContent) {
       return (
-        <Segment style={{ marginRight: 25 }}>
-          <Form error={this.state.formError} loading={this.props.loading}>
-            <Form.Group>
-              <Form.Input
-                label="Section Title"
+        <Modal open={this.state.addingContent} size="large">
+          <Modal.Header>{this.state.modalHeader}</Modal.Header>
+          <Segment>
+            <Form error={this.state.formError} loading={this.props.loading}>
+              <Form.Group>
+                <Form.Input
+                  label="Section Title"
+                  required={true}
+                  value={this.state.title}
+                  onChange={e =>
+                    this.setState({ title: e.target.value, titleError: false })
+                  }
+                  error={this.state.titleError}
+                />
+                <Form.Input
+                  required={true}
+                  label="Section Index"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={this.state.index}
+                  onChange={e =>
+                    this.setState({ index: e.target.value, indexError: false })
+                  }
+                  error={this.state.indexError}
+                />
+              </Form.Group>
+              <Form.TextArea
                 required={true}
-                value={this.state.title}
+                label="Section Content"
+                value={this.state.content}
                 onChange={e =>
-                  this.setState({ title: e.target.value, titleError: false })
+                  this.setState({
+                    content: e.target.value,
+                    contentError: false,
+                  })
                 }
-                error={this.state.titleError}
+                error={this.state.contentError}
               />
-              <Form.Input
-                required={true}
-                label="Section Index"
-                type="number"
-                min="0"
-                step="0.01"
-                value={this.state.index}
-                onChange={e =>
-                  this.setState({ index: e.target.value, indexError: false })
-                }
-                error={this.state.indexError}
-              />
-            </Form.Group>
-            <Form.TextArea
-              required={true}
-              label="Section Content"
-              value={this.state.content}
-              onChange={e =>
-                this.setState({ content: e.target.value, contentError: false })
-              }
-              error={this.state.contentError}
-            />
-            <Form.Group>
-              <Form.Button onClick={e => this.submitAddContent(e)}>
-                Submit
-              </Form.Button>
-              <Form.Button onClick={() => this.resetDefaults()}>
-                Cancel
-              </Form.Button>
-            </Form.Group>
-          </Form>
-          {this.state.titleError ||
-          this.state.indexError ||
-          this.state.contentError ? (
-            <Message error header="Error" content={this.state.error} />
-          ) : (
-            <div />
-          )}
-        </Segment>
+              <Form.Group>
+                <Form.Button
+                  basic
+                  onClick={e => this.submitAddContent(e)}
+                  color="green"
+                >
+                  Submit
+                </Form.Button>
+                <Form.Button basic onClick={() => this.resetDefaults()}>
+                  Cancel
+                </Form.Button>
+              </Form.Group>
+            </Form>
+            {this.state.titleError ||
+            this.state.indexError ||
+            this.state.contentError ? (
+              <Message error header="Error" content={this.state.error} />
+            ) : (
+              <div />
+            )}
+          </Segment>
+        </Modal>
       );
     } else {
       return (
@@ -159,6 +172,7 @@ class EastgateManual extends Component {
       title: sectionTitle,
       index: sectionIndex,
       content: sectionContent,
+      modalHeader: 'Edit Eastgate Manual Content',
     });
   };
 
@@ -227,9 +241,9 @@ class EastgateManual extends Component {
           <EastgateNavBar content={this.props.content} />
         </Menu>
         <Segment basic style={{ position: 'relative', marginLeft: '200px' }}>
-          {this.addContentSection()}
-          <Divider />
           {this.returnContent()}
+          <Divider />
+          {this.addContentSection()}
         </Segment>
         <Confirm
           open={this.state.confirmOpen}
