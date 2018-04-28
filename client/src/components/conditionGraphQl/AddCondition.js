@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Segment,
-  Input,
-  Select,
-  TextArea,
-  Form,
-  Loader,
-  Button,
-  Message,
-} from 'semantic-ui-react';
+import { Segment, Form, Loader, Message } from 'semantic-ui-react';
 import moment from 'moment';
 import _ from 'lodash';
 import { Query, Mutation } from 'react-apollo';
@@ -86,15 +77,12 @@ class AddCondition extends Component {
                 }
               />
             </Form.Group>
-            <Form.Group>
-              <TextArea
-                style={{ marginTop: 10, marginBottom: 20 }}
-                placeholder="What was learned"
-                label="What was learned"
-                value={this.state.wwl}
-                onChange={(params, data) => this.setState({ wwl: data.value })}
-              />
-            </Form.Group>
+            <Form.TextArea
+              placeholder="What was learned"
+              label="What was learned"
+              value={this.state.wwl}
+              onChange={(params, data) => this.setState({ wwl: data.value })}
+            />
             <Form.Group widths="equal">
               <Form.Button
                 basic
