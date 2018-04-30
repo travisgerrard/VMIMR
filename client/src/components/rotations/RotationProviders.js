@@ -1,3 +1,5 @@
+// Handles the provider portion of the rotaiton view
+
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import { Segment, Button, Form, Grid } from 'semantic-ui-react';
@@ -7,6 +9,7 @@ import SELECTED_ROTATION from '../../queries/SelectedRotation';
 
 class RotationProviders extends Component {
   state = {
+    id: '12345',
     providerName: '',
     providerGeneralInfo: '',
     addProvider: false,
@@ -38,6 +41,7 @@ class RotationProviders extends Component {
               onSubmit={() =>
                 addProvider({
                   variables: {
+                    id: this.state.id,
                     name: this.state.providerName,
                     associatedRotation: this.props.id,
                     generalInfo: this.state.providerGeneralInfo,

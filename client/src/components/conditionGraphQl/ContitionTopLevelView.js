@@ -1,6 +1,6 @@
 // Top level view for adding / searching learning
 import React, { Component } from 'react';
-import { Container, Loader } from 'semantic-ui-react';
+import { Container, Loader, Message } from 'semantic-ui-react';
 import { Query, withApollo } from 'react-apollo';
 import _ from 'lodash';
 
@@ -24,6 +24,8 @@ class ConditionTopLevelViewGQL extends Component {
     addingLearning: false, // Boolean to help displays correct components
     editingLearning: false, // Boolean to help displays correct components
     learningIdToEdit: '',
+    message: '',
+    messageVisible: false,
   };
 
   handleSortItemClick = (e, { name }) =>
@@ -147,6 +149,10 @@ class ConditionTopLevelViewGQL extends Component {
     );
   };
 
+  handleDismiss = () => {
+    this.setState({ messageVisible: false });
+  };
+
   render() {
     return (
       <Container style={{ marginTop: '4.5em' }}>
@@ -177,6 +183,17 @@ class ConditionTopLevelViewGQL extends Component {
                       query: GET_CURRENT_USER,
                     });
 
+                    console.log(data.listOfPersonalLearning.length);
+
+                    if (!data.listOfPersonalLearning.length) {
+                      this.setState({
+                        sortActiveItem: 'all',
+                        messageVisible: true,
+                        message:
+                          'Since you do not created or been tagged in any learning we are showing you all the learning that has been created.',
+                      });
+                    }
+
                     return (
                       <div>
                         {this.isAddingCondition(
@@ -204,6 +221,13 @@ class ConditionTopLevelViewGQL extends Component {
 
                     return (
                       <div>
+                        {this.state.messageVisible && (
+                          <Message
+                            positive
+                            onDismiss={this.handleDismiss}
+                            content={this.state.message}
+                          />
+                        )}
                         {this.isAddingCondition(
                           filteredQuery,
                           currentUserQuery.currentUser,

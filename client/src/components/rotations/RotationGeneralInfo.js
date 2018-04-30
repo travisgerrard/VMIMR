@@ -1,6 +1,9 @@
+// Handles the genearl info portions of the rotation view
+
 import React, { Component } from 'react';
 import { withApollo, graphql } from 'react-apollo';
 import { Segment, Button, Form, TextArea } from 'semantic-ui-react';
+import ReactMarkdown from 'react-markdown';
 
 import SELECTED_ROTATION from '../../queries/SelectedRotation';
 import UPDATE_ROTATION from '../../mutations/UpdateRotation';
@@ -47,8 +50,8 @@ class RotationGeneralInfo extends Component {
           <Button size="mini" onClick={() => this.handleEditGeneralInfoClick()}>
             Edit
           </Button>
-          <Segment stacked style={{ marginRight: 25 }}>
-            {this.state.generalInfo}
+          <Segment stacked style={{ marginRight: 25, whiteSpace: 'pre-wrap' }}>
+            <ReactMarkdown source={this.state.generalInfo} />
           </Segment>
         </div>
       );
@@ -72,8 +75,8 @@ class RotationGeneralInfo extends Component {
       return (
         <div>
           <h4>General Info</h4>
-          <Segment stacked style={{ marginRight: 25 }}>
-            {generalInfo}
+          <Segment stacked style={{ marginRight: 25, whiteSpace: 'pre-wrap' }}>
+            <ReactMarkdown source={this.state.generalInfo} />
           </Segment>
         </div>
       );

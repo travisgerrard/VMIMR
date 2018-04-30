@@ -444,6 +444,7 @@ var addProvider = {
   description:
     'Creates a providers and updates the rotation so it knows the provider is attached to it',
   args: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
     name: { type: new GraphQLNonNull(GraphQLString) },
     associatedRotation: { type: new GraphQLNonNull(GraphQLID) },
     generalInfo: { type: GraphQLString },
@@ -451,28 +452,39 @@ var addProvider = {
   },
   async resolve(
     parentValues,
-    { name, associatedRotation, generalInfo, _creator },
+    { id, name, associatedRotation, generalInfo, _creator },
   ) {
-    var newProvider = new Provider({
-      name,
-      associatedRotation,
-      generalInfo,
-      _creator,
-    });
+    if (id === '12345') {
+      var newProvider = new Provider({
+        name,
+        associatedRotation,
+        generalInfo,
+        _creator,
+      });
 
-    await newProvider.save(function(err) {
-      if (err) {
-        return next(err);
-      }
-    });
+      await newProvider.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      });
 
-    await Rotation.findByIdAndUpdate(
-      associatedRotation,
-      { $push: { providers: newProvider._id } },
+      await Rotation.findByIdAndUpdate(
+        associatedRotation,
+        { $push: { providers: newProvider._id } },
+        { new: true },
+      );
+
+      return newProvider;
+    }
+
+    return await Provider.findByIdAndUpdate(
+      id,
+      {
+        name,
+        generalInfo,
+      },
       { new: true },
     );
-
-    return newProvider;
   },
 };
 
