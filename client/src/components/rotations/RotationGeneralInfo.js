@@ -76,7 +76,7 @@ class RotationGeneralInfo extends Component {
         <div>
           <h4>General Info</h4>
           <Segment stacked style={{ marginRight: 25, whiteSpace: 'pre-wrap' }}>
-            <ReactMarkdown source={this.state.generalInfo} />
+            <ReactMarkdown source={generalInfo} />
           </Segment>
         </div>
       );
