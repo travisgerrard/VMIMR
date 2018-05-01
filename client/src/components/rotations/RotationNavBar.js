@@ -29,17 +29,15 @@ class RotationTopLevelView extends Component {
             }
             return (
               <div key={rotation.id}>
-                {data.listOfRotations.map(rotation => (
-                  <Menu.Item
-                    name={rotation.title}
-                    active={activeItem === rotation.title}
-                    id={rotation.id}
-                    onClick={this.props.handleMenubarItemClick}
-                    key={rotation.title}
-                  >
-                    {rotation.title}
-                  </Menu.Item>
-                ))}
+                <Menu.Item
+                  name={rotation.title}
+                  active={activeItem === rotation.title}
+                  id={rotation.id}
+                  onClick={this.props.handleMenubarItemClick}
+                  key={rotation.title}
+                >
+                  {rotation.title}
+                </Menu.Item>
               </div>
             );
           });

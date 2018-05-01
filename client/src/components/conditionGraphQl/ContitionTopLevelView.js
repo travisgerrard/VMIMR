@@ -17,15 +17,13 @@ import EditCondition from './EditCondition';
 
 class ConditionTopLevelViewGQL extends Component {
   state = {
-    sortActiveItem: 'personal', // personal vs all to filter contents if user has made
+    sortActiveItem: 'Your Personal Learning', // personal vs all to filter contents if user has made
     searchTerm: '', // Tracks what is written in search box
     category: 'all', // Sort conditions with regard to rotation
     currentUserId: '',
     addingLearning: false, // Boolean to help displays correct components
     editingLearning: false, // Boolean to help displays correct components
     learningIdToEdit: '',
-    message: '',
-    messageVisible: false,
   };
 
   handleSortItemClick = (e, { name }) =>
@@ -149,10 +147,6 @@ class ConditionTopLevelViewGQL extends Component {
     );
   };
 
-  handleDismiss = () => {
-    this.setState({ messageVisible: false });
-  };
-
   render() {
     return (
       <Container style={{ marginTop: '4.5em' }}>
@@ -166,7 +160,7 @@ class ConditionTopLevelViewGQL extends Component {
             if (loading) return 'Loading...';
             if (error) return `Error! ${error.message}`;
 
-            if (this.state.sortActiveItem === 'personal') {
+            if (this.state.sortActiveItem === 'Your Personal Learning') {
               return (
                 <Query
                   query={GET_PERSONAL_LEARNING}
@@ -183,19 +177,14 @@ class ConditionTopLevelViewGQL extends Component {
                       query: GET_CURRENT_USER,
                     });
 
-                    console.log(data.listOfPersonalLearning.length);
-
-                    if (!data.listOfPersonalLearning.length) {
-                      this.setState({
-                        sortActiveItem: 'all',
-                        messageVisible: true,
-                        message:
-                          'Since you do not created or been tagged in any learning we are showing you all the learning that has been created.',
-                      });
-                    }
-
                     return (
                       <div>
+                        {!data.listOfPersonalLearning.length && (
+                          <Message
+                            positive
+                            content={`It looks like you have not created or been tagged in any learning yet. Click "All Learning" above to show all the learning that has been created by others users.`}
+                          />
+                        )}
                         {this.isAddingCondition(
                           filteredQuery,
                           currentUserQuery.currentUser,
@@ -221,13 +210,6 @@ class ConditionTopLevelViewGQL extends Component {
 
                     return (
                       <div>
-                        {this.state.messageVisible && (
-                          <Message
-                            positive
-                            onDismiss={this.handleDismiss}
-                            content={this.state.message}
-                          />
-                        )}
                         {this.isAddingCondition(
                           filteredQuery,
                           currentUserQuery.currentUser,

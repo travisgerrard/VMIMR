@@ -7,13 +7,13 @@ class SortConditionCards extends Component {
     return (
       <Menu pointing secondary>
         <Menu.Item
-          name="personal"
-          active={activeItem === 'personal'}
+          name="Your Personal Learning"
+          active={activeItem === 'Your Personal Learning'}
           onClick={this.props.handleItemClick}
         />
         <Menu.Item
-          name="all"
-          active={activeItem === 'all'}
+          name="All Learning"
+          active={activeItem === 'All Learning'}
           onClick={this.props.handleItemClick}
         />
       </Menu>
