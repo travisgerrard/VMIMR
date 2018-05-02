@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import { Card, Image, Icon } from 'semantic-ui-react';
 import ReactMarkdown from 'react-markdown';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import './markdown.css';
 
 class DisplayConditionCards extends Component {
+  state = {
+    items: this.props.learnings.slice(0, 10),
+    hasMore: true,
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.learnings !== prevState.learnings) {
+      return { items: nextProps.learnings.slice(0, 10) };
+    }
+  }
+
   showIcons = (createdById, conditionId, learningId) => {
     if (createdById === this.props.currentUser.id) {
       return (
@@ -101,11 +113,47 @@ class DisplayConditionCards extends Component {
     });
   };
 
+  fetchMoreData = () => {
+    var itemLength = this.state.items.length;
+
+    if (itemLength + 5 >= this.props.learnings.length) {
+      this.setState({ hasMore: false });
+      console.log('fetchMoreData called');
+    }
+    this.setState({
+      items: this.state.items.concat(
+        this.props.learnings.slice(itemLength, itemLength + 5),
+      ),
+    });
+  };
+
   render() {
     return (
-      <Card.Group itemsPerRow={3} stackable doubling>
-        {this.showCondition(this.props.learnings)}
-      </Card.Group>
+      <InfiniteScroll
+        dataLength={this.state.items.length}
+        next={this.fetchMoreData}
+        hasMore={this.state.hasMore}
+        loader={<h4>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: 'center' }}>
+            <b>Thats all the conditions have seen it all</b>
+          </p>
+        }
+      >
+        <Card.Group
+          itemsPerRow={3}
+          stackable
+          doubling
+          style={{
+            marginLeft: 0,
+            marginRight: 0,
+            marginBottom: 0,
+            marginTop: 5,
+          }}
+        >
+          {this.showCondition(this.state.items)}
+        </Card.Group>
+      </InfiniteScroll>
     );
   }
 }

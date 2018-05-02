@@ -68,7 +68,6 @@ class RotationTopLevelView extends Component {
 
   handleKeyPress = e => {
     if (e.key === 'Enter') {
-      console.log(this.state.rotationInput);
       this.addRotation();
     }
   };
@@ -90,6 +89,7 @@ class RotationTopLevelView extends Component {
                     this.setState({ rotationInput: e.target.value })
                   }
                   onKeyPress={this.handleKeyPress}
+                  style={{ width: '160px' }}
                 />
               </Menu.Item>
             );
@@ -103,7 +103,7 @@ class RotationTopLevelView extends Component {
 
   render() {
     return (
-      <Menu secondary vertical>
+      <Menu secondary vertical style={{ width: '160px' }}>
         {this.addRotationInput()}
         {this.listOfRotations()}
       </Menu>
