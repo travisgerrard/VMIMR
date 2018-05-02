@@ -20,8 +20,8 @@ require('../models/conditionLearning');
 require('../models/eastgate');
 
 const User = mongoose.model('users');
-const Provider = mongoose.model('Provider');
 const Rotation = mongoose.model('Rotation');
+const Provider = mongoose.model('Provider');
 const Condition = mongoose.model('conditions');
 const ConditionLearning = mongoose.model('conditionLearnings');
 const Eastgate = mongoose.model('Eastgate');
@@ -442,7 +442,7 @@ var deleteEastgateManualSection = {
 var addProvider = {
   type: ProviderType,
   description:
-    'Creates a providers and updates the rotation so it knows the provider is attached to it',
+    'Creates or updates a provider. If provider is added it updates the rotation so it knows the provider is attached to it',
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
     name: { type: new GraphQLNonNull(GraphQLString) },
@@ -485,6 +485,35 @@ var addProvider = {
       },
       { new: true },
     );
+  },
+};
+
+var deleteProvider = {
+  type: ProviderType,
+  description: 'Delete a provider',
+  args: {
+    id: { type: GraphQLID },
+  },
+  async resolve(parentValues, { id }, req) {
+    var providerToBeDeleted = await Provider.findById(id).populate({
+      path: 'associatedRotation',
+      model: 'Rotation',
+    });
+
+    var rotationAssociatedWithProvider = await Rotation.findById(
+      providerToBeDeleted.associatedRotation.id,
+    );
+
+    rotationAssociatedWithProvider.providers.pull(id);
+    await rotationAssociatedWithProvider.save();
+
+    await Provider.findByIdAndRemove(id, function(err, offer) {
+      if (err) {
+        throw err;
+      }
+    });
+
+    return providerToBeDeleted;
   },
 };
 
@@ -593,6 +622,7 @@ var deleteLearning = {
       learningToBeDeleted._condition.id,
     );
 
+    // If there is only one learning point asscoated with a given conditions, then we will delete the condtiion as well
     if (conditionAsociatedWithLearning._learnings.length === 1) {
       await Condition.findByIdAndRemove(
         learningToBeDeleted._condition.id,
@@ -603,6 +633,7 @@ var deleteLearning = {
         },
       );
     } else {
+      // Just take the ID asscoated with a given learning out of the array
       conditionAsociatedWithLearning._learnings.pull(id);
       await conditionAsociatedWithLearning.save();
     }
@@ -692,6 +723,7 @@ var MutationType = new GraphQLObjectType({
   fields: () => ({
     runMutation,
     addProvider,
+    deleteProvider,
     addRotation,
     updateRotation,
     addLearning,

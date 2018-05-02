@@ -24,7 +24,6 @@ class RotationMainView extends Component {
           });
 
           const { admin } = currentUserQuery.currentUser;
-          console.log(data);
 
           if (data.returnRotation === null) return <div>Pick a rotation</div>;
 
