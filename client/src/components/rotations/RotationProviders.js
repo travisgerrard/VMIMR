@@ -78,7 +78,15 @@ class RotationProviders extends Component {
                   <Form.Group>
                     <Form.Button>Submit</Form.Button>
                     <Form.Button
-                      onClick={() => this.setState({ addProvider: false })}
+                      onClick={() =>
+                        this.setState({
+                          addProvider: false,
+                          providerName: '',
+                          providerGeneralInfo: '',
+                          id: '12345',
+                          modalHeader: 'Add a provider',
+                        })
+                      }
                     >
                       Cancel
                     </Form.Button>
