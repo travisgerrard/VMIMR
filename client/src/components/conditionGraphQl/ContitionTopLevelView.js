@@ -74,6 +74,8 @@ class ConditionTopLevelViewGQL extends Component {
 
   // Setter for after learning has been added
   learningAdded = () => {
+    console.log('learningAdded');
+
     this.setState({ addingLearning: false });
     this.setState({ searchTerm: '' });
   };

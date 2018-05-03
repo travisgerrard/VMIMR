@@ -102,6 +102,8 @@ class AddCondition extends Component {
 
                   const { error } = isValid;
                   if (!error) {
+                    console.log('adding learning');
+
                     addLearning({
                       variables: {
                         condition: this.state.conditionTitle,
@@ -150,7 +152,7 @@ class AddCondition extends Component {
               return { key: id, text: name, value: id };
             });
 
-            if (this.props.sortingBy === 'personal') {
+            if (this.props.sortingBy === 'Your Personal Learning') {
               return (
                 <Mutation
                   mutation={ADD_LEARNING}
@@ -161,6 +163,7 @@ class AddCondition extends Component {
                     },
                   ]}
                   onCompleted={() => this.props.doneAddingLearning()}
+                  onError={() => console.log(error)}
                 >
                   {(addLearning, { data, loading, error }) => (
                     <div>
@@ -180,12 +183,13 @@ class AddCondition extends Component {
                   mutation={ADD_LEARNING}
                   refetchQueries={[{ query: GET_ALL_LEARNING }]}
                 >
-                  {(addLearning, { data }) => (
+                  {(addLearning, { data, loading, error }) => (
                     <div>
                       {this.gutsOfAddLearning(
                         options,
                         listOfUsers,
                         addLearning,
+                        loading,
                       )}
                     </div>
                   )}

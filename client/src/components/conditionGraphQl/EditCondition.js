@@ -175,7 +175,7 @@ class EditCondition extends Component {
               return { key: id, text: name, value: id };
             });
 
-            if (this.props.sortingBy === 'personal') {
+            if (this.props.sortingBy === 'Your Personal Learning') {
               return (
                 <Mutation
                   mutation={UPDATE_LEARNING}
@@ -208,7 +208,6 @@ class EditCondition extends Component {
                             deleteLearning,
                             loading,
                           )}
-                          {loading && <Loader active inline="centered" />}
                         </div>
                       )}
                     </Mutation>
