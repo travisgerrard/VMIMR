@@ -1,33 +1,42 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { List, Container, Button } from 'semantic-ui-react';
+import { List, Container, Button, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import * as actions from '../../actions';
+
 import _ from 'lodash';
+import { Query } from 'react-apollo';
+
+import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
 
 class ListOfAllUsers extends Component {
-  componentWillMount() {
-    this.props.fetchAllUsers();
-  }
-
   listOfUsers = () => {
-    return _.map(this.props.users, user => {
-      return (
-        <List.Item key={user._id}>
-          <List.Icon
-            name="user circle outline"
-            size="large"
-            verticalAlign="middle"
-          />
-          <List.Content>
-            <List.Header>
-              <Link to={`/users/user/${user._id}`}>{user.name}</Link>
-            </List.Header>
-            <List.Description as="a">{user.email}</List.Description>
-          </List.Content>
-        </List.Item>
-      );
-    });
+    return (
+      <Query query={LIST_ALL_USERS}>
+        {({ loading, error, data }) => {
+          if (loading) return <Loader active inline="centered" />;
+          if (error) return 'Error';
+
+          console.log(data.listOfUsers);
+
+          return data.listOfUsers.map(user => {
+            return (
+              <List.Item key={user.id}>
+                <List.Icon
+                  name="user circle outline"
+                  size="large"
+                  verticalAlign="middle"
+                />
+                <List.Content>
+                  <List.Header>
+                    <Link to={`/users/user/${user.id}`}>{user.name}</Link>
+                  </List.Header>
+                  <List.Description as="a">{user.email}</List.Description>
+                </List.Content>
+              </List.Item>
+            );
+          });
+        }}
+      </Query>
+    );
   };
 
   render() {
@@ -46,8 +55,4 @@ class ListOfAllUsers extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return state;
-}
-
-export default connect(mapStateToProps, actions)(ListOfAllUsers);
+export default ListOfAllUsers;
