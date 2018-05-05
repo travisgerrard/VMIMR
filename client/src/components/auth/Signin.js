@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
 import { Form, Button, Grid, Header, Segment } from 'semantic-ui-react';
-import SigninField from '../users/UserInputField';
+import SigninField from './UserInputField';
 
 class Signin extends Component {
   handleFormSubmit = ({ username, password }) => {
