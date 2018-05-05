@@ -397,6 +397,43 @@ var runMutation = {
   },
 };
 
+var addUser = {
+  type: UserType,
+  description: 'Add or modify a user',
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    username: { type: new GraphQLNonNull(GraphQLString) },
+    email: { type: new GraphQLNonNull(GraphQLString) },
+    admin: { type: new GraphQLNonNull(GraphQLBoolean) },
+  },
+  async resolve(parentValues, { id, name, username, email, admin }) {
+    if (id === '12345') {
+      var newUser = new User({
+        name,
+        username,
+        email,
+        admin,
+        creationTime: Date.now(),
+      });
+
+      await newUser.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      });
+
+      return newUser;
+    }
+
+    return await User.findByIdAndUpdate(
+      id,
+      { name, username, email, admin },
+      { new: true },
+    );
+  },
+};
+
 var addEastgateManualSection = {
   type: EastgateType,
   description: 'Adds a section to the eastgate manual',
@@ -734,6 +771,7 @@ var MutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
     runMutation,
+    addUser,
     addProvider,
     deleteProvider,
     addRotation,
