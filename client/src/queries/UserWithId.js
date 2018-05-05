@@ -1,10 +1,11 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  {
-    listOfUsers {
+  query UserWithId($id: ID) {
+    userWithId(id: $id) {
       id
       name
+      username
       email
       admin
     }

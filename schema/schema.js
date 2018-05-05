@@ -251,6 +251,17 @@ var listOfUsers = {
   },
 };
 
+var userWithId = {
+  type: UserType,
+  description: 'User with respeictive ID',
+  args: {
+    id: { type: GraphQLID },
+  },
+  async resolve(parentValues, { id }, req) {
+    return await User.findById(id);
+  },
+};
+
 var listOfProviders = {
   type: GraphQLList(ProviderType),
   description: 'list of all providers',
@@ -367,6 +378,7 @@ var RootQueryType = new GraphQLObjectType({
   fields: () => ({
     currentUser,
     listOfUsers,
+    userWithId,
     listOfProviders,
     listOfRotations,
     returnRotation,

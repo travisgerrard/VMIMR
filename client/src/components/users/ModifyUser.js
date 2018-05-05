@@ -1,89 +1,95 @@
 import React, { Component } from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
-import { Container, Form } from 'semantic-ui-react';
+import { Container, Form, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import UserInputField from './UserInputField';
-import UserCheckboxField from './UserCheckboxField';
-import * as actions from '../../actions';
+import { Query } from 'react-apollo';
+
+import USER_WITH_ID from '../../queries/UserWithId';
 
 class ModifyUser extends Component {
-  componentWillMount() {
-    var name,
-      username,
-      email = '';
-    var admin = false;
-    if (this.props.users[this.props.match.params.id] !== undefined) {
-      ({ name, username, email, admin } = this.props.users[
-        this.props.match.params.id
-      ]);
-    }
-    this.props.initialize({
-      name,
-      username,
-      email,
-      admin,
-      id: this.props.match.params.id
-    });
+  state = {
+    name: '',
+    username: '',
+    email: '',
+    admin: false,
+    initialLoad: true,
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps);
+    return nextProps;
   }
 
   render() {
     return (
       <Container style={{ marginTop: '4.5em' }}>
-        <Form>
-          <Field
-            component={UserInputField}
-            label="name"
-            name="name"
-            placeholder="Name"
-          />
-          <Field
-            component={UserInputField}
-            label="username"
-            name="username"
-            placeholder="Username"
-          />
-          <Field
-            component={UserInputField}
-            label="email"
-            name="email"
-            placeholder="Email"
-          />
-          <Field
-            component={UserCheckboxField}
-            type="checkbox"
-            name="admin"
-            label="Is Admin"
-          />
-          <Form.Group>
-            <Form.Button
-              color="green"
-              onClick={() =>
-                this.props.submitUser(
-                  this.props.form.userForm.values,
-                  this.props.history
-                )
-              }
-            >
-              Save
-            </Form.Button>
-            <Link to="/users" style={{ color: 'white' }}>
-              <Form.Button color="red">Cancel</Form.Button>
-            </Link>
-          </Form.Group>
-        </Form>
+        <Query
+          query={USER_WITH_ID}
+          variables={{ id: this.props.match.params.id }}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return <Loader active inline="centered" />;
+            if (error) return `Error! ${error.message}`;
+
+            if (this.state.initialLoad) {
+              this.setState({
+                name: data.userWithId.name,
+                username: data.userWithId.username,
+                email: data.userWithId.email,
+                admin: data.userWithId.admin,
+                initialLoad: false,
+              });
+            }
+
+            return (
+              <Form>
+                <Form.Input
+                  label="name"
+                  value={this.state.name}
+                  onChange={e => this.setState({ name: e.target.value })}
+                />
+                <Form.Input
+                  label="username"
+                  value={this.state.username}
+                  onChange={e => this.setState({ username: e.target.value })}
+                />
+                <Form.Input
+                  label="email"
+                  value={this.state.email}
+                  onChange={e => this.setState({ email: e.target.value })}
+                />
+                <Form.Field
+                  label="admin"
+                  control="input"
+                  type="checkbox"
+                  checked={this.state.admin}
+                  onChange={e => this.setState({ admin: !this.state.admin })}
+                />
+
+                <Form.Group>
+                  <Form.Button
+                    color="green"
+                    onClick={() =>
+                      console.log(
+                        this.state.name,
+                        this.state.username,
+                        this.state.email,
+                        this.state.admin,
+                      )
+                    }
+                  >
+                    Save
+                  </Form.Button>
+                  <Link to="/users" style={{ color: 'white' }}>
+                    <Form.Button color="red">Cancel</Form.Button>
+                  </Link>
+                </Form.Group>
+              </Form>
+            );
+          }}
+        </Query>
       </Container>
     );
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  //console.log(state.form.userForm);
-  return state;
-}
-
-ModifyUser = connect(mapStateToProps, actions)(ModifyUser);
-
-export default reduxForm({
-  form: 'userForm' // a unique name for this form
-})(ModifyUser);
+export default ModifyUser;

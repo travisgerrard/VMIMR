@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { List, Container, Button, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
-import _ from 'lodash';
 import { Query } from 'react-apollo';
 
 import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
@@ -14,8 +12,6 @@ class ListOfAllUsers extends Component {
         {({ loading, error, data }) => {
           if (loading) return <Loader active inline="centered" />;
           if (error) return 'Error';
-
-          console.log(data.listOfUsers);
 
           return data.listOfUsers.map(user => {
             return (
