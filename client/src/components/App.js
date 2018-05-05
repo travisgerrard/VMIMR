@@ -16,6 +16,7 @@ import ConditionPage from './conditions/rotation/ConditionPage';
 import NoonConference from './conferences/NoonConference';
 import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
 import Eastgate from './eastgate/EastgateTopLevelView';
+import LoggedInLanding from './landing/LoggedInLanding';
 
 class App extends Component {
   render() {
@@ -24,6 +25,11 @@ class App extends Component {
         <div>
           <Header />
           <Route exact path="/" component={Landing} />
+          <Route
+            exact
+            path="/landing"
+            component={RequireAuth(LoggedInLanding)}
+          />
           <Route exact path="/signin" component={Signin} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signout" component={Signout} />
