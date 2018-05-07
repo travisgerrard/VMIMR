@@ -1,10 +1,14 @@
 // Top level view that displayes menu as well as content
 
 import React, { Component } from 'react';
-import { Segment, Menu } from 'semantic-ui-react';
+import { Segment, Menu, List } from 'semantic-ui-react';
+import { Query } from 'react-apollo';
+import { Link } from 'react-router-dom';
 
 import RotationNavBar from './RotationNavBar';
 import RotationMainView from './RotationMainView';
+
+import GET_LIST_OF_ROTATIONS from '../../queries/ListOfRotations';
 
 class RotationTopLevelView extends Component {
   state = {
@@ -62,7 +66,27 @@ class RotationTopLevelView extends Component {
               id={this.state.activeItemId}
             />
           ) : (
-            <h1>Select a rotation</h1>
+            <div>
+              <h2>Select a rotation</h2>
+              <Query query={GET_LIST_OF_ROTATIONS}>
+                {({ loading, error, data }) => {
+                  if (loading) return 'Loading...';
+                  if (error) return `Error! ${error.message}`;
+
+                  return data.listOfRotations.map(rotation => {
+                    return (
+                      <div key={rotation.id}>
+                        <List.Item>
+                          <Link to={`/rotations/${rotation.title}`}>
+                            {rotation.title}
+                          </Link>
+                        </List.Item>
+                      </div>
+                    );
+                  });
+                }}
+              </Query>
+            </div>
           )}
         </Segment>
       </div>

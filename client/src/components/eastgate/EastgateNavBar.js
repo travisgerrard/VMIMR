@@ -25,7 +25,7 @@ class EastgateNavBar extends Component {
                 <ul key={id} style={{ paddingLeft: 0 }} className="is-current">
                   <a
                     href={`#${sectionIndex.toString()}`}
-                  >{`${sectionIndex} ${sectionTitle}`}</a>
+                  >{`${sectionIndex.toFixed(1)} ${sectionTitle}`}</a>
                 </ul>
               );
             })}
