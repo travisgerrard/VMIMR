@@ -31,7 +31,7 @@ class Question extends Component {
               </List.Item>
             </List>
             <Button
-              onClick={() => this.setState({ answerFirstQuestion: false })}
+              onClick={() => this.setState({ answerFirstQuestion: true })}
             >
               Submit
             </Button>
@@ -60,23 +60,21 @@ class Question extends Component {
             </h2>
             <List as="ol">
               <List.Item as="li">Isoniazid, rifampin</List.Item>
-              <List.Item as="li">
-                {this.state.answerSecondQuestion ? (
-                  <b>Isoniazid, rifampin, ethambutol</b>
-                ) : (
-                  <p>Isoniazid, rifampin, ethambutol</p>
-                )}
-              </List.Item>
+              <List.Item as="li">Isoniazid, rifampin, ethambutol</List.Item>
               <List.Item as="li">Isoniazid, rifampin, pyrazinadmide</List.Item>
               <List.Item as="li">
-                Isoniazid, rifampin, pyrazinadmide, ethambutol
+                {this.state.answerSecondQuestion ? (
+                  <b>Isoniazid, rifampin, pyrazinadmide, ethambutol</b>
+                ) : (
+                  <p>Isoniazid, rifampin, pyrazinadmide, ethambutol</p>
+                )}
               </List.Item>
               <List.Item as="li">
                 Isoniazid, rifampin, pyrazinadmide, ethambutol, prednisone
               </List.Item>
             </List>
             <Button
-              onClick={() => this.setState({ answerSecondQuestion: false })}
+              onClick={() => this.setState({ answerSecondQuestion: true })}
             >
               Submit
             </Button>
