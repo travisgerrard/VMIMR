@@ -339,6 +339,35 @@ var listOfPersonalLearning = {
   },
 };
 
+var listOfLearningWithTag = {
+  type: GraphQLList(ConditionLearningType),
+  description: 'Most recent learning regarding a rotation',
+  args: {
+    id: { type: GraphQLID },
+    rotation: { type: GraphQLString },
+  },
+  resolve: (parentValues, { id, rotation }, req) => {
+    var learnings = ConditionLearning.find({
+      $or: [
+        {
+          usersTagged: id,
+        },
+        { _creator: id },
+      ],
+      tags: { $in: [rotation] },
+    })
+      .limit(3)
+      .sort({
+        dateUpdated: -1,
+      })
+      .populate({ path: '_condition', model: 'conditions' })
+      .populate({ path: '_creator', model: 'users' })
+      .populate({ path: 'usersTagged', model: 'users' });
+
+    return learnings;
+  },
+};
+
 var listOfAllLearning = {
   type: GraphQLList(ConditionLearningType),
   description: 'List of all learning',
@@ -385,6 +414,7 @@ var RootQueryType = new GraphQLObjectType({
     listOfConditions,
     listOfPersonalLearning,
     listOfAllLearning,
+    listOfLearningWithTag,
     returnLearning,
     listOfEastgateManual,
   }),

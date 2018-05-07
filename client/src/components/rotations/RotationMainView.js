@@ -3,10 +3,12 @@
 
 import React, { Component } from 'react';
 import { Query, withApollo } from 'react-apollo';
-import { Container } from 'semantic-ui-react';
+import { Container, Loader } from 'semantic-ui-react';
+import DisplayConditionCards from '../conditionGraphQl/DisplayConditionCards';
 
 import GET_CURRENT_USER from '../../queries/CurrentUser';
 import SELECTED_ROTATION from '../../queries/SelectedRotation';
+import GET_ROTATION_LEARNING from '../../queries/ListOfLearningWithTag';
 
 import RotationGeneralInfo from './RotationGeneralInfo';
 import RotationProviders from './RotationProviders';
@@ -23,7 +25,7 @@ class RotationMainView extends Component {
             query: GET_CURRENT_USER,
           });
 
-          const { admin } = currentUserQuery.currentUser;
+          const { admin, id } = currentUserQuery.currentUser;
 
           if (data.returnRotation === null) return <div>Pick a rotation</div>;
 
@@ -42,11 +44,34 @@ class RotationMainView extends Component {
                 providers={providers}
                 admin={admin}
                 id={this.props.id}
-                creator={currentUserQuery.currentUser.id}
+                creator={id}
               />
               <br />
               <h4>{title} learnings</h4>
-              <p>Will pull in most recent conditions learned regarding gyn</p>
+              <Query
+                query={GET_ROTATION_LEARNING}
+                variables={{ id, rotation: title.toLowerCase() }}
+              >
+                {({ loading, error, data }) => {
+                  if (loading) return <Loader active inline="centered" />;
+                  if (error) return `Error! ${error.message}`;
+
+                  //console.log(data.listOfLearningWithTag);
+
+                  if (data.listOfLearningWithTag.length) {
+                    return (
+                      <DisplayConditionCards
+                        learnings={data.listOfLearningWithTag}
+                        currentUser={currentUserQuery.currentUser}
+                        editLearning={learningId =>
+                          this.editingLearning(learningId)
+                        }
+                      />
+                    );
+                  }
+                  return <div>No learning associated with {title} yet</div>;
+                }}
+              </Query>
 
               <h4>General Comments</h4>
               <p>Will put in general comments section regarding the rotation</p>

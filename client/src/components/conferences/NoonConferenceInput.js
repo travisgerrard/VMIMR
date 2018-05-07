@@ -6,24 +6,26 @@ import { stateFromMarkdown } from 'draft-js-import-markdown';
 
 const PHYSICALEXAMMARKDOWN = `
   __Vitals__:  
-  __Tmax__: 98 __HR__: 70 __BP__: 120/80  
+  __Tmax__: xxx __HR__: xx __BP__: xxx/xx  
   __...__  
-  __Phyiscal Exam__  
-  
+  __Physical Exam__  
+  __Const__:   
+  __HEENT__:   
+  __Neck__:  
+  __Heart__:   
+  __Lungs__:   
+  __Abd__:   
+  __Extremities__:   
+  __Neuro__:   
+  __Skin__:   
+  __Psych__:   
 `;
 
 const ROSMARKDOWN = `
-  __Constitutional:__  
-  __Skin__:  
-  __HEENT__:  
-  __Cardiac__:  
-  __Respiratory__:  
-  __GI__:  
-  __GU__:  
-  __MSK__:  
-  __Endo/Hem/Allergy__:  
-  __Neuro__:  
-  __Psych__:  
+  __+ve__:  
+  ...  
+  __-ve__:  
+ 
 `;
 
 class NoonConference extends Component {
@@ -55,9 +57,7 @@ class NoonConference extends Component {
     editorState: EditorState.createWithContent(
       stateFromMarkdown(PHYSICALEXAMMARKDOWN),
     ),
-    editorState2: EditorState.createWithContent(
-      stateFromMarkdown('__Constitutional__...'),
-    ),
+    editorState2: EditorState.createWithContent(stateFromMarkdown(ROSMARKDOWN)),
   };
 
   handleKeyCommand(command, editorState) {

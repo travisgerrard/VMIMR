@@ -14,8 +14,9 @@ class RotationTopLevelView extends Component {
   };
 
   handleMenubarItemClick = (e, { name, id }) => {
-    this.setState({ activeItem: name });
-    this.setState({ activeItemId: id });
+    //this.setState({ activeItem: name });
+    //this.setState({ activeItemId: id });
+    this.props.history.push(`/rotations/${name}`);
   };
 
   handleRotationOnLanding = (name, id) => {
