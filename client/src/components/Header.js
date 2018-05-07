@@ -25,6 +25,9 @@ class Header extends Component {
     if (this.props.authenticated) {
       // show sign out
       return [
+        <Menu.Item key="1" position="right">
+          <Link to="/noonConference">NoonConference</Link>
+        </Menu.Item>,
         <Menu.Item key="2" position="right">
           <Link to="/conditions">Conditions</Link>
         </Menu.Item>,
