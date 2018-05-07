@@ -9,16 +9,7 @@ const PHYSICALEXAMMARKDOWN = `
   __Tmax__: 98 __HR__: 70 __BP__: 120/80  
   __...__  
   __Phyiscal Exam__  
-  __Const__: A&Ox3, NAD, well developed  
-  __HEENT__: NC/AT, EOMI, MMM  
-  __Neck__: Supple, no JVD  
-  __Heart__: RRR, no MRG  
-  __Lungs__: CTAB  
-  __Abd__: Soft, NT/ND  
-  __Extremities__: No LE edema, +ve peripheral pulses  
-  __Neuro__: Cranial nerves grossly intact, MAE spontaneously  
-  __Skin__: Warm, dry with no observable rahes  
-  __Psych__: Mood and behabiour normal  
+  
 `;
 
 const ROSMARKDOWN = `
@@ -64,7 +55,9 @@ class NoonConference extends Component {
     editorState: EditorState.createWithContent(
       stateFromMarkdown(PHYSICALEXAMMARKDOWN),
     ),
-    editorState2: EditorState.createWithContent(stateFromMarkdown(ROSMARKDOWN)),
+    editorState2: EditorState.createWithContent(
+      stateFromMarkdown('__Constitutional__...'),
+    ),
   };
 
   handleKeyCommand(command, editorState) {
