@@ -58,6 +58,9 @@ class NoonConference extends Component {
       stateFromMarkdown(PHYSICALEXAMMARKDOWN),
     ),
     editorState2: EditorState.createWithContent(stateFromMarkdown(ROSMARKDOWN)),
+    editorState3: EditorState.createWithContent(
+      stateFromMarkdown(`45F p/w ...`),
+    ),
   };
 
   handleKeyCommand(command, editorState) {
@@ -70,6 +73,28 @@ class NoonConference extends Component {
   }
 
   editorOnChange2 = editorState2 => this.setState({ editorState2 });
+  editorOnChange3 = editorState3 => this.setState({ editorState3 });
+
+  HPI = () => {
+    return (
+      <div>
+        <label style={{ fontWeight: 'bold' }}>HPI</label>
+        <div
+          style={{
+            border: '1px solid rgba(34, 36, 38, 0.15)',
+            borderRadius: '0.28571429rem',
+            padding: '0.67857143em 1em',
+          }}
+        >
+          <Editor
+            editorState={this.state.editorState3}
+            handleKeyCommand={this.handleKeyCommand}
+            onChange={this.editorOnChange3}
+          />
+        </div>
+      </div>
+    );
+  };
 
   ROS = () => {
     return (
@@ -211,17 +236,7 @@ class NoonConference extends Component {
           <Grid columns={3}>
             <Grid.Row stretched>
               <Grid.Column>
-                <Form.Field
-                  control={TextArea}
-                  label="HPI"
-                  placeholder="45F p/w ..."
-                  value={this.state.hpiValue}
-                  onChange={text =>
-                    this.setState({
-                      hpiValue: text.target.value,
-                    })
-                  }
-                />
+                <div>{this.HPI()}</div>
                 <div>{this.ROS()}</div>
                 <Grid columns={3} style={{ marginTop: 10 }}>
                   {this.listCreator(
