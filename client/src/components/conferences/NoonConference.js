@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import NoonConferenceInput from './NoonConferenceInput';
+import Questions from './Questions';
+import Slides from './NoonConferenceSlides';
+
 //import NoonConferenceQR from './NoonConferenceQR';
 
 class NoonConference extends Component {
@@ -9,6 +12,8 @@ class NoonConference extends Component {
     return (
       <div>
         <NoonConferenceInput />
+        <Questions />
+        <Slides />
       </div>
     );
   }

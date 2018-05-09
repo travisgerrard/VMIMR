@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Questions from './Questions';
 import { Form, Input, TextArea, List, Grid } from 'semantic-ui-react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
@@ -297,7 +296,6 @@ class NoonConference extends Component {
           </Grid>
           <br />
         </Form>
-        <Questions />
       </div>
     );
   }
