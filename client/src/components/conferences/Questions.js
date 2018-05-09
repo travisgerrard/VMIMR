@@ -15,19 +15,20 @@ class Question extends Component {
         <Container>
           <Segment>
             <h2>
-              Which of the following imaging studies has the highest sensitivity
-              and specificity for the diagnosis of bowel perforation?
+              Which of the following skin findings is typical of
+              dermatomyositis? (Choose all that are correct).
             </h2>
             <List as="ol">
-              <List.Item as="li">Ultrasound</List.Item>
-              <List.Item as="li">Chest x-ray</List.Item>
-              <List.Item as="li">Abdominal x-ray</List.Item>
               <List.Item as="li">
-                {this.state.answerFirstQuestion ? (
-                  <b>CT abdomen</b>
-                ) : (
-                  <p>CT abdomen</p>
-                )}
+                {this.state.answerFirstQuestion ? <b>A</b> : <p>A</p>}
+              </List.Item>
+              <List.Item as="li">
+                {this.state.answerFirstQuestion ? <b>B</b> : <p>B</p>}
+              </List.Item>
+              <List.Item as="li">C</List.Item>
+              <List.Item as="li">D</List.Item>
+              <List.Item as="li">
+                {this.state.answerFirstQuestion ? <b>E</b> : <p>E</p>}
               </List.Item>
             </List>
             <Button
@@ -55,22 +56,22 @@ class Question extends Component {
         <Container>
           <Segment>
             <h2>
-              Which of the following drug regimens is most appropriate for this
-              patient?
+              Which of the following is NOT a risk factor for statin induced
+              myopathy?
             </h2>
             <List as="ol">
-              <List.Item as="li">Isoniazid, rifampin</List.Item>
-              <List.Item as="li">Isoniazid, rifampin, ethambutol</List.Item>
-              <List.Item as="li">Isoniazid, rifampin, pyrazinadmide</List.Item>
+              <List.Item as="li">Female sex</List.Item>
+              <List.Item as="li">CKD</List.Item>
               <List.Item as="li">
                 {this.state.answerSecondQuestion ? (
-                  <b>Isoniazid, rifampin, pyrazinadmide, ethambutol</b>
+                  <b>{`Age < 50`}</b>
                 ) : (
-                  <p>Isoniazid, rifampin, pyrazinadmide, ethambutol</p>
+                  <p>{`Age < 50`}</p>
                 )}
               </List.Item>
+              <List.Item as="li">Excessive alcohol use</List.Item>
               <List.Item as="li">
-                Isoniazid, rifampin, pyrazinadmide, ethambutol, prednisone
+                Excessive grapefruit juice consumption
               </List.Item>
             </List>
             <Button

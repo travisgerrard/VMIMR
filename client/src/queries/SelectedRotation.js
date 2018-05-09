@@ -6,6 +6,7 @@ export default gql`
       id
       title
       generalInfo
+      dbname
       providers {
         id
         name

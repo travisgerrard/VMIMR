@@ -112,6 +112,10 @@ var RotationType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'Genral info regarding a rotation',
     },
+    dbname: {
+      type: GraphQLString,
+      description: 'what learning is stored as under given condition',
+    },
     providers: {
       type: GraphQLList(ProviderType),
       description: 'List of providers associated with rotation',
