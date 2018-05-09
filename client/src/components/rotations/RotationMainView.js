@@ -29,7 +29,7 @@ class RotationMainView extends Component {
 
           if (data.returnRotation === null) return <div>Pick a rotation</div>;
 
-          const { generalInfo, title, providers } = data.returnRotation;
+          const { generalInfo, title, providers, dbname } = data.returnRotation;
 
           return (
             <Container>
@@ -50,7 +50,7 @@ class RotationMainView extends Component {
               <h4>{title} learnings</h4>
               <Query
                 query={GET_ROTATION_LEARNING}
-                variables={{ id, rotation: title.toLowerCase() }}
+                variables={{ id, rotation: dbname }}
               >
                 {({ loading, error, data }) => {
                   if (loading) return <Loader active inline="centered" />;
