@@ -26,7 +26,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 
 const getListStyle = isDraggingOver => ({
-  background: isDraggingOver ? 'white' : 'white',
+  background: isDraggingOver ? 'Ivory' : 'Ivory',
   padding: grid,
 });
 
@@ -79,7 +79,7 @@ class DragAndDropList extends Component {
                       {item.struckThrough ? (
                         <s>{item.name}</s>
                       ) : (
-                        <p>{item.name}</p>
+                        <b>{item.name}</b>
                       )}
                     </div>
                   )}

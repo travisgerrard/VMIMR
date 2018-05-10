@@ -57,7 +57,7 @@ class Question extends Component {
       return (
         <Container textAlign="center">
           <Button onClick={() => this.setState({ revealFirstQuestion: true })}>
-            Reveal Qestion #1
+            Reveal Question #1
           </Button>{' '}
         </Container>
       );
@@ -90,7 +90,7 @@ class Question extends Component {
       return (
         <Container textAlign="center">
           <Button onClick={() => this.setState({ revealSecondQuestion: true })}>
-            Reveal Qestion #2
+            Reveal Question #2
           </Button>{' '}
         </Container>
       );
