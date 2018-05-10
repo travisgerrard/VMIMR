@@ -154,6 +154,7 @@ class NoonConference extends Component {
           <DragAndDropList
             data={this.state[arrayName]}
             arrayName={arrayName}
+            width={width ? width : 128}
             updateListOrder={(items, arrayName) =>
               this.updateListOrder(items, arrayName)
             }
