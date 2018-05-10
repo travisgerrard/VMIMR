@@ -118,18 +118,10 @@ class NoonConference extends Component {
     );
   };
 
-  listFromArray = arrayName => {
-    if (this.state[arrayName].length > 0) {
-      return this.state[arrayName].map(item => {
-        return <List.Item key={item}>{item}</List.Item>;
-      });
-    }
-  };
-
   enterPressed = (arrayName, valueName) => e => {
     if (e.key === 'Enter') {
       var tempArray = this.state[arrayName].slice();
-      tempArray.push(this.state[valueName]);
+      tempArray.push({ name: this.state[valueName], struckThrough: false });
       this.setState({ [arrayName]: tempArray });
       this.setState({ [valueName]: '' });
     }
@@ -158,12 +150,24 @@ class NoonConference extends Component {
             updateListOrder={(items, arrayName) =>
               this.updateListOrder(items, arrayName)
             }
+            strikeThroughItemAtIndex={(index, arrayName) =>
+              this.strikeThroughItemAtIndex(index, arrayName)
+            }
           />
         ) : (
           <div />
         )}
       </div>
     );
+  };
+
+  strikeThroughItemAtIndex = (index, arrayName) => {
+    var tempArray = this.state[arrayName].slice();
+    tempArray[index].struckThrough = !this.state[arrayName][index]
+      .struckThrough;
+    this.setState({ [arrayName]: tempArray });
+
+    //console.log(isStruckThrough);
   };
 
   updateListOrder = (items, arrayName) => {
