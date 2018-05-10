@@ -9,27 +9,41 @@ class Question extends Component {
     answerSecondQuestion: false,
   };
 
+  questionNotAnswer = text => {
+    return <List.Item as="li">{text}</List.Item>;
+  };
+
+  questionOneAnswer = text => {
+    return (
+      <List.Item as="li">
+        {this.state.answerFirstQuestion ? <b>{text}</b> : <p>{text}</p>}
+      </List.Item>
+    );
+  };
+
+  questionTwoAnswer = text => {
+    return (
+      <List.Item as="li">
+        {this.state.answerSecondQuestion ? <b>{text}</b> : <p>{text}</p>}
+      </List.Item>
+    );
+  };
+
   questionOne = () => {
     if (this.state.revealFirstQuestion) {
       return (
         <Container>
           <Segment>
             <h2>
-              Which of the following skin findings is typical of
-              dermatomyositis? (Choose all that are correct).
+              What of the following would NOT be an initial test to order for
+              chronic diarrhea?
             </h2>
             <List as="ol">
-              <List.Item as="li">
-                {this.state.answerFirstQuestion ? <b>A</b> : <p>A</p>}
-              </List.Item>
-              <List.Item as="li">
-                {this.state.answerFirstQuestion ? <b>B</b> : <p>B</p>}
-              </List.Item>
-              <List.Item as="li">C</List.Item>
-              <List.Item as="li">D</List.Item>
-              <List.Item as="li">
-                {this.state.answerFirstQuestion ? <b>E</b> : <p>E</p>}
-              </List.Item>
+              {this.questionNotAnswer('CBC, CMR')}
+              {this.questionNotAnswer('ESR, CRP')}
+              {this.questionOneAnswer('Colonoscopy')}
+              {this.questionNotAnswer('TSH')}
+              {this.questionNotAnswer(`Screen for celiac's dx`)}
             </List>
             <Button
               onClick={() => this.setState({ answerFirstQuestion: true })}
@@ -56,23 +70,13 @@ class Question extends Component {
         <Container>
           <Segment>
             <h2>
-              Which of the following is NOT a risk factor for statin induced
-              myopathy?
+              What percent of pt’s with IBS report physical or sexual abuse?
             </h2>
             <List as="ol">
-              <List.Item as="li">Female sex</List.Item>
-              <List.Item as="li">CKD</List.Item>
-              <List.Item as="li">
-                {this.state.answerSecondQuestion ? (
-                  <b>{`Age < 50`}</b>
-                ) : (
-                  <p>{`Age < 50`}</p>
-                )}
-              </List.Item>
-              <List.Item as="li">Excessive alcohol use</List.Item>
-              <List.Item as="li">
-                Excessive grapefruit juice consumption
-              </List.Item>
+              {this.questionNotAnswer('0 - 33%')}
+              {this.questionNotAnswer('33% - 50%')}
+              {this.questionTwoAnswer('50% - 66%')}
+              {this.questionNotAnswer('66% - 100%')}
             </List>
             <Button
               onClick={() => this.setState({ answerSecondQuestion: true })}
