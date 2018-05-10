@@ -3,6 +3,8 @@ import { Form, Input, TextArea, List, Grid } from 'semantic-ui-react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
 
+import DragAndDropList from './DragAndDropList';
+
 const PHYSICALEXAMMARKDOWN = `
   __Vitals__:  
   __Tmax__: xxx __HR__: xx __BP__: xxx/xx  
@@ -148,9 +150,26 @@ class NoonConference extends Component {
           onKeyPress={this.enterPressed(arrayName, valueName)}
           style={{ width: width ? width : 128 }}
         />
-        <List>{this.listFromArray(arrayName)}</List>
+        {this.state[arrayName].length > 0 ? (
+          <DragAndDropList
+            data={this.state[arrayName]}
+            arrayName={arrayName}
+            updateListOrder={(items, arrayName) =>
+              this.updateListOrder(items, arrayName)
+            }
+          />
+        ) : (
+          <div />
+        )}
       </div>
     );
+  };
+
+  updateListOrder = (items, arrayName) => {
+    console.log(items);
+    console.log(arrayName);
+
+    this.setState({ [arrayName]: items });
   };
 
   editorOnChange = editorState => this.setState({ editorState });
