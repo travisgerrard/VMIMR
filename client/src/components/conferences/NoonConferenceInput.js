@@ -166,9 +166,6 @@ class NoonConference extends Component {
   };
 
   updateListOrder = (items, arrayName) => {
-    console.log(items);
-    console.log(arrayName);
-
     this.setState({ [arrayName]: items });
   };
 

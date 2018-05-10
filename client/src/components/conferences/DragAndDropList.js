@@ -19,14 +19,14 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
-  background: isDragging ? 'lightgreen' : 'grey',
+  background: isDragging ? '#5E9B6A' : '#E8F4DF',
 
   // styles we need to apply on draggables
   ...draggableStyle,
 });
 
 const getListStyle = isDraggingOver => ({
-  background: isDraggingOver ? 'lightblue' : 'lightgrey',
+  background: isDraggingOver ? '#50B4DA' : '#50B4DA',
   padding: grid,
   width: 250,
 });
@@ -74,6 +74,7 @@ class DragAndDropList extends Component {
                         snapshot.isDragging,
                         provided.draggableProps.style,
                       )}
+                      onClick={() => console.log(`You clicked ${item}`)}
                     >
                       {item}
                     </div>
