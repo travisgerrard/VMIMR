@@ -166,8 +166,6 @@ class NoonConference extends Component {
     tempArray[index].struckThrough = !this.state[arrayName][index]
       .struckThrough;
     this.setState({ [arrayName]: tempArray });
-
-    //console.log(isStruckThrough);
   };
 
   updateListOrder = (items, arrayName) => {
