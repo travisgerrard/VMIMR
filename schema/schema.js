@@ -18,6 +18,8 @@ require('../models/rotation');
 require('../models/condition');
 require('../models/conditionLearning');
 require('../models/eastgate');
+require('../models/casePresentation');
+require('../models/mutlipleChoiceQuestion');
 
 const User = mongoose.model('users');
 const Rotation = mongoose.model('Rotation');
@@ -25,6 +27,8 @@ const Provider = mongoose.model('Provider');
 const Condition = mongoose.model('conditions');
 const ConditionLearning = mongoose.model('conditionLearnings');
 const Eastgate = mongoose.model('Eastgate');
+const CasePresentation = mongoose.model('CasePresentation');
+const MultipleChoiceQuestion = mongoose.model('MulitpleChoiceQuestion');
 
 const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -239,6 +243,175 @@ var EastgateType = new GraphQLObjectType({
   }),
 });
 
+var CasePresentationType = new GraphQLObjectType({
+  name: 'casePresentationType',
+  fields: () => ({
+    id: {
+      type: GraphQLID,
+      description: 'ID for casePresentationType',
+    },
+    _presentor: {
+      type: UserType,
+      description: 'Presentor of this presentation',
+    },
+    title: {
+      type: GraphQLString,
+      description: 'the title of the presentation',
+    },
+    presentationDate: {
+      type: GraphQLString,
+      description: 'the date one which a presentation was given',
+    },
+    hpi: {
+      type: GraphQLString,
+      description: 'hpi',
+    },
+    ros: {
+      type: GraphQLString,
+      description: 'ros',
+    },
+    physicalExam: {
+      type: GraphQLString,
+      description: 'physicalExam',
+    },
+    wbc: {
+      type: GraphQLString,
+      description: 'wbc',
+    },
+    hgb: {
+      type: GraphQLString,
+      description: 'hgb',
+    },
+    plt: {
+      type: GraphQLString,
+      description: 'plt',
+    },
+    Na: {
+      type: GraphQLString,
+      description: 'Na',
+    },
+    K: {
+      type: GraphQLString,
+      description: 'K',
+    },
+    Cl: {
+      type: GraphQLString,
+      description: 'Cl',
+    },
+    HC02: {
+      type: GraphQLString,
+      description: 'HC02',
+    },
+    BUN: {
+      type: GraphQLString,
+      description: 'BUN',
+    },
+    Cr: {
+      type: GraphQLString,
+      description: 'Cr',
+    },
+    Glu: {
+      type: GraphQLString,
+      description: 'Glu',
+    },
+    AP: {
+      type: GraphQLString,
+      description: 'AP',
+    },
+    ALT: {
+      type: GraphQLString,
+      description: 'ALT',
+    },
+    AST: {
+      type: GraphQLString,
+      description: 'AST',
+    },
+    Tbili: {
+      type: GraphQLString,
+      description: 'Tbili',
+    },
+    summAssessment: {
+      type: GraphQLString,
+      description: 'summAssessment',
+    },
+    embedPresentationSting: {
+      type: GraphQLString,
+      description: 'embedPresentationSting',
+    },
+    slideTextForSearch: {
+      type: GraphQLString,
+      description: 'slideTextForSearch',
+    },
+    tags: {
+      type: GraphQLList(GraphQLString),
+      description: 'list of tags associated with case',
+    },
+    meds: {
+      type: GraphQLList(GraphQLString),
+      description: 'list of tags associated with case',
+    },
+    medSurgHx: {
+      type: GraphQLList(GraphQLString),
+      description: 'list of tags associated with case',
+    },
+    social: {
+      type: GraphQLList(GraphQLString),
+      description: 'list of tags associated with case',
+    },
+    ddx: {
+      type: GraphQLList(GraphQLString),
+      description: 'list of tags associated with case',
+    },
+    questions: {
+      type: GraphQLList(MultipleChoiceQuestionType),
+      description: 'list of quetsions associated with this case',
+    },
+  }),
+});
+
+var MultipleChoiceQuestionType = new GraphQLObjectType({
+  name: 'multipleChoiceQuestionType',
+  fields: () => ({
+    id: {
+      type: GraphQLID,
+      description: 'ID for multiple choice question',
+    },
+    title: {
+      type: GraphQLString,
+      description: 'Question stem',
+    },
+    options: {
+      type: GraphQLList(GraphQLString),
+      description: 'List of possible answers',
+    },
+    answers: {
+      type: GraphQLList(GraphQLString),
+      description: 'Answers to the multiple choice question',
+    },
+    _creator: {
+      type: GraphQLID,
+      description: 'User who created this question',
+    },
+    _case: {
+      type: GraphQLID,
+      description: 'the case that this question is associated with',
+    },
+  }),
+});
+
+var listOfAllCasePresentations = {
+  type: GraphQLList(CasePresentationType),
+  description: 'List of all the case presentations',
+  resolve: (parentValues, args, req) => {
+    return CasePresentation.find()
+      .populate({
+        path: 'questions',
+        model: 'MulitpleChoiceQuestion',
+      })
+      .populate({ path: '_presentor', model: 'users' });
+  },
+};
+
 var currentUser = {
   type: UserType,
   description: 'The Current User',
@@ -421,6 +594,7 @@ var RootQueryType = new GraphQLObjectType({
     listOfLearningWithTag,
     returnLearning,
     listOfEastgateManual,
+    listOfAllCasePresentations,
   }),
 });
 
@@ -616,6 +790,27 @@ var addRotation = {
     });
 
     return newRotation;
+  },
+};
+
+var addCasePresentation = {
+  type: CasePresentationType,
+  args: {
+    _creator: { type: new GraphQLNonNull(GraphQLID) },
+  },
+  async resolve(parentValues, { _creator }) {
+    var newCasePresentation = new CasePresentation({
+      _creator,
+      title: 'No Title',
+    });
+
+    await newCasePresentation.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+    });
+
+    return newCasePresentation;
   },
 };
 
@@ -815,6 +1010,7 @@ var MutationType = new GraphQLObjectType({
     updateLearning,
     addEastgateManualSection,
     deleteEastgateManualSection,
+    addCasePresentation,
   }),
 });
 

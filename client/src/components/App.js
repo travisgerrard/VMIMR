@@ -13,7 +13,7 @@ import ListOfAllUsers from './users/ListOfAllUsers';
 import ModifyUser from './users/ModifyUser';
 import Messages from './messages';
 import ConditionPage from './conditions/rotation/ConditionPage';
-import NoonConference from './conferences/NoonConference';
+import NoonConference from './conferences/ConferenceTopLevel';
 import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
 import Eastgate from './eastgate/EastgateTopLevelView';
 import LoggedInLanding from './landing/LoggedInLanding';
@@ -64,6 +64,7 @@ class App extends Component {
           <Route path={`/users/newUser`} component={RequireAuth(ModifyUser)} />
           <Route path={`/messages`} component={RequireAuth(Messages)} />
           <Route
+            exact
             path={`/noonConference`}
             component={RequireAuth(NoonConference)}
           />

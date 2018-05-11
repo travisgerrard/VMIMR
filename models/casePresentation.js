@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
-const conferenceSchema = new Schema({
+const casePresentationSchema = new Schema({
   _presentor: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  presentationDate: String,
   hpi: String,
   ros: String,
   meds: [{ type: String }],
   medSurgHx: [{ type: String }],
-  Social: [{ type: String }],
+  social: [{ type: String }],
   physicalExam: String,
   wbc: String,
   hgb: String,
@@ -25,10 +27,16 @@ const conferenceSchema = new Schema({
   Tbili: String,
   summAssessment: String,
   ddx: [{ type: String }],
-  questionOne: { title: String, options: [{type: String}]},
-  questionTwo: { title: String, options: [{ type: String }] }
+  questions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'multipleChoiceQuestionSchema',
+    },
+  ],
+  title: String,
   embedPresentationSting: String,
   slideTextForSearch: String,
+  tags: [{ type: String }],
 });
 
-module.exports = mongoose.model('Conference', conferenceSchema);
+module.exports = mongoose.model('CasePresentation', casePresentationSchema);

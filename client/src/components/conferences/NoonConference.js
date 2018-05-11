@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NoonConferenceInput from './NoonConferenceInput';
 import Questions from './Questions';
 import Slides from './NoonConferenceSlides';
-
+import CatagorizationForSaving from './CategorizationForSaving';
 //import NoonConferenceQR from './NoonConferenceQR';
 
 class NoonConference extends Component {
@@ -14,6 +14,7 @@ class NoonConference extends Component {
         <NoonConferenceInput />
         <Questions />
         <Slides />
+        <CatagorizationForSaving />
       </div>
     );
   }
