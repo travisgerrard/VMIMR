@@ -412,6 +412,22 @@ var listOfAllCasePresentations = {
   },
 };
 
+var selectedCasePresentation = {
+  type: CasePresentationType,
+  description: 'Selected case presentations',
+  args: {
+    id: { type: GraphQLID },
+  },
+  async resolve(parentValues, { id }, req) {
+    return await CasePresentation.findById(id)
+      .populate({
+        path: 'questions',
+        model: 'MulitpleChoiceQuestion',
+      })
+      .populate({ path: '_presentor', model: 'users' });
+  },
+};
+
 var currentUser = {
   type: UserType,
   description: 'The Current User',
@@ -595,6 +611,7 @@ var RootQueryType = new GraphQLObjectType({
     returnLearning,
     listOfEastgateManual,
     listOfAllCasePresentations,
+    selectedCasePresentation,
   }),
 });
 
