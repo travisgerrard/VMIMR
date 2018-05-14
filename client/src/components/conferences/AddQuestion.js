@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Mutation } from 'react-apollo';
 import {
   Container,
   Segment,
@@ -9,11 +10,14 @@ import {
 } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
 
+import ADD_QUESTION from '../../mutations/AddQuestionToCase';
+import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
+
 class AddQuestion extends Component {
   state = {
-    addingQuestion: true,
+    addingQuestion: false,
     questionStem: '',
-    options: [{ text: 'one', answer: true }, { text: 'two', answer: false }],
+    options: [],
   };
 
   addQuestion = () => {
@@ -64,8 +68,36 @@ class AddQuestion extends Component {
     this.setState({ options: tempArray });
   };
 
-  saveTheQuestion = () => {
-    console.log(this.state);
+  saveTheQuestion = addQuestionToCase => {
+    var options = [];
+    var answers = [];
+    this.state.options.map(option => {
+      options.push(option.text);
+      if (option.answer) {
+        answers.push(option.text);
+      }
+    });
+    if (
+      options.length > 0 &&
+      answers.length > 0 &&
+      this.state.questionStem !== ''
+    ) {
+      addQuestionToCase({
+        variables: {
+          _case: this.props.caseId,
+          _creator: jwt_decode(localStorage.getItem('VMIMRToken')).sub,
+          questionStem: this.state.questionStem,
+          options,
+          answers,
+        },
+      });
+      this.setState({ addingQuestion: false });
+    } else {
+      console.log('There was an error saving the question');
+    }
+    console.log(options, answers);
+
+    //    console.log(this.state);
     console.log(this.props.caseId);
     console.log(jwt_decode(localStorage.getItem('VMIMRToken')).sub);
   };
@@ -90,7 +122,21 @@ class AddQuestion extends Component {
             <Button onClick={() => this.addAnswerChoice()}>
               Add Answer Choice
             </Button>
-            <Button onClick={() => this.saveTheQuestion()}>Save</Button>
+            <Mutation
+              mutation={ADD_QUESTION}
+              refetchQueries={[
+                {
+                  query: SELECTED_CASE_PRESENTATIONS,
+                  variables: { id: this.props.caseId },
+                },
+              ]}
+            >
+              {addQuestionToCase => (
+                <Button onClick={() => this.saveTheQuestion(addQuestionToCase)}>
+                  Save
+                </Button>
+              )}
+            </Mutation>
           </Form>
         </Segment>
       </Modal>

@@ -831,6 +831,43 @@ var addCasePresentation = {
   },
 };
 
+var addQuestionToCase = {
+  type: MultipleChoiceQuestionType,
+  args: {
+    _case: { type: new GraphQLNonNull(GraphQLID) },
+    _creator: { type: new GraphQLNonNull(GraphQLID) },
+    questionStem: { type: new GraphQLNonNull(GraphQLString) },
+    options: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
+    answers: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
+  },
+  async resolve(
+    parentValues,
+    { _case, _creator, questionStem, options, answers },
+  ) {
+    var newQuestion = new MultipleChoiceQuestion({
+      _case,
+      _creator,
+      questionStem,
+      options,
+      answers,
+    });
+
+    await newQuestion.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+    });
+
+    await CasePresentation.findByIdAndUpdate(
+      _case,
+      { $push: { questions: newQuestion._id } },
+      { new: true },
+    );
+
+    return newQuestion;
+  },
+};
+
 var updateRotation = {
   type: RotationType,
   args: {
@@ -1028,6 +1065,7 @@ var MutationType = new GraphQLObjectType({
     addEastgateManualSection,
     deleteEastgateManualSection,
     addCasePresentation,
+    addQuestionToCase,
   }),
 });
 

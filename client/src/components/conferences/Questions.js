@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Segment, Modal, List, Button } from 'semantic-ui-react';
 
 import AddQuestion from './AddQuestion';
+import ShowQuestions from './ShowQuestions';
 
 class Question extends Component {
   addQuestion = () => {
@@ -10,8 +11,12 @@ class Question extends Component {
 
   render() {
     return (
-      <Container textAlign="center" style={{ marginBottom: 10 }}>
-        <AddQuestion caseId={this.props.caseId} />
+      <Container textAlign="left" style={{ marginBottom: 10 }}>
+        <Segment>
+          <ShowQuestions questions={this.props.questions} />
+          <br />
+          <AddQuestion caseId={this.props.caseId} />
+        </Segment>
       </Container>
     );
   }
