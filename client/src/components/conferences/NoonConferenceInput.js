@@ -5,65 +5,7 @@ import { stateFromMarkdown } from 'draft-js-import-markdown';
 
 import DragAndDropList from './DragAndDropList';
 
-const PHYSICALEXAMMARKDOWN = `
-  __Vitals__:  
-  __Tmax__: xxx __HR__: xx __BP__: xxx/xx  
-  __...__  
-  __Physical Exam__  
-  __Const__:   
-  __HEENT__:   
-  __Neck__:  
-  __Heart__:   
-  __Lungs__:   
-  __Abd__:   
-  __Extremities__:   
-  __Neuro__:   
-  __Skin__:   
-  __Psych__:   
-`;
-
-const ROSMARKDOWN = `
-  __+ve__:  
-  ...  
-  __-ve__:  
- 
-`;
-
 class NoonConference extends Component {
-  state = {
-    hpiValue: '',
-    additionalText: '',
-    medValue: '',
-    medsArray: [],
-    hxValue: '',
-    hxArray: [],
-    socialValue: '',
-    socialArray: [],
-    ddxValue: '',
-    ddxArray: [],
-    wbc: '',
-    hgb: '',
-    plt: '',
-    Na: '',
-    K: '',
-    Cl: '',
-    HC02: '',
-    BUN: '',
-    Cr: '',
-    Glu: '',
-    AP: '',
-    ALT: '',
-    AST: '',
-    Tbili: '',
-    editorState: EditorState.createWithContent(
-      stateFromMarkdown(PHYSICALEXAMMARKDOWN),
-    ),
-    editorState2: EditorState.createWithContent(stateFromMarkdown(ROSMARKDOWN)),
-    editorState3: EditorState.createWithContent(
-      stateFromMarkdown(`45F p/w ...`),
-    ),
-  };
-
   handleKeyCommand(command, editorState) {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
@@ -73,8 +15,12 @@ class NoonConference extends Component {
     return 'not-handled';
   }
 
-  editorOnChange2 = editorState2 => this.setState({ editorState2 });
-  editorOnChange3 = editorState3 => this.setState({ editorState3 });
+  editorOnChange2 = editorState2 =>
+    this.props.updateConferenceInputState(false, `editorState2`, editorState2);
+  editorOnChange3 = editorState3 =>
+    this.props.updateConferenceInputState(false, `editorState3`, editorState3);
+  editorOnChange = editorState =>
+    this.props.updateConferenceInputState(false, `editorState`, editorState);
 
   HPI = () => {
     return (
@@ -88,7 +34,7 @@ class NoonConference extends Component {
           }}
         >
           <Editor
-            editorState={this.state.editorState3}
+            editorState={this.props.editorState3}
             handleKeyCommand={this.handleKeyCommand}
             onChange={this.editorOnChange3}
           />
@@ -109,7 +55,7 @@ class NoonConference extends Component {
           }}
         >
           <Editor
-            editorState={this.state.editorState2}
+            editorState={this.props.editorState2}
             handleKeyCommand={this.handleKeyCommand}
             onChange={this.editorOnChange2}
           />
@@ -118,12 +64,31 @@ class NoonConference extends Component {
     );
   };
 
+  physicalExam = () => {
+    // border: '1px solid rgba(34, 36, 38, 0.15)',
+    // borderRadius: '0.28571429rem',
+    // padding: '0.67857143em 1em',
+    return (
+      <div
+        style={{
+          marginBottom: 10,
+        }}
+      >
+        <Editor
+          editorState={this.props.editorState}
+          handleKeyCommand={this.handleKeyCommand}
+          onChange={this.editorOnChange}
+        />
+      </div>
+    );
+  };
+
   enterPressed = (arrayName, valueName) => e => {
     if (e.key === 'Enter') {
-      var tempArray = this.state[arrayName].slice();
-      tempArray.push({ name: this.state[valueName], struckThrough: false });
-      this.setState({ [arrayName]: tempArray });
-      this.setState({ [valueName]: '' });
+      var tempArray = this.props[arrayName].slice();
+      tempArray.push({ name: this.props[valueName], struckThrough: false });
+      this.props.updateConferenceInputState(arrayName, tempArray);
+      this.props.updateConferenceInputState(valueName, '');
     }
   };
 
@@ -133,18 +98,20 @@ class NoonConference extends Component {
         <Form.Input
           label={label}
           placeholder={placeholder}
-          value={this.state[valueName]}
+          value={this.props[valueName]}
           onChange={text =>
-            this.setState({
-              [valueName]: text.target.value,
-            })
+            this.props.updateConferenceInputState(
+              true,
+              valueName,
+              text.target.value,
+            )
           }
           onKeyPress={this.enterPressed(arrayName, valueName)}
           style={{ width: width ? width : 128 }}
         />
-        {this.state[arrayName].length > 0 ? (
+        {this.props[arrayName].length > 0 ? (
           <DragAndDropList
-            data={this.state[arrayName]}
+            data={this.props[arrayName]}
             arrayName={arrayName}
             width={width ? width : 128}
             updateListOrder={(items, arrayName) =>
@@ -162,35 +129,14 @@ class NoonConference extends Component {
   };
 
   strikeThroughItemAtIndex = (index, arrayName) => {
-    var tempArray = this.state[arrayName].slice();
-    tempArray[index].struckThrough = !this.state[arrayName][index]
+    var tempArray = this.props[arrayName].slice();
+    tempArray[index].struckThrough = !this.props[arrayName][index]
       .struckThrough;
-    this.setState({ [arrayName]: tempArray });
+    this.props.updateConferenceInputState(arrayName, tempArray);
   };
 
   updateListOrder = (items, arrayName) => {
-    this.setState({ [arrayName]: items });
-  };
-
-  editorOnChange = editorState => this.setState({ editorState });
-
-  physicalExam = () => {
-    // border: '1px solid rgba(34, 36, 38, 0.15)',
-    // borderRadius: '0.28571429rem',
-    // padding: '0.67857143em 1em',
-    return (
-      <div
-        style={{
-          marginBottom: 10,
-        }}
-      >
-        <Editor
-          editorState={this.state.editorState}
-          handleKeyCommand={this.handleKeyCommand}
-          onChange={this.editorOnChange}
-        />
-      </div>
-    );
+    this.props.updateConferenceInputState(arrayName, items);
   };
 
   labInput = inputValue => {
@@ -198,11 +144,13 @@ class NoonConference extends Component {
       <Input
         type="text"
         placeholder={inputValue}
-        value={this.state[inputValue]}
+        value={this.props[inputValue]}
         onChange={text =>
-          this.setState({
-            [inputValue]: text.target.value,
-          })
+          this.props.updateConferenceInputState(
+            true,
+            inputValue,
+            text.target.value,
+          )
         }
         size="mini"
         style={{ width: 55 }}
@@ -239,8 +187,14 @@ class NoonConference extends Component {
         <Form.Field
           control={TextArea}
           placeholder="Additional Labs"
-          value={this.state.additionalLabs}
-          onChange={text => console.log(text.target.value)}
+          value={this.props.additionalLabs}
+          onChange={text =>
+            this.props.updateConferenceInputState(
+              false,
+              `additionalLabs`,
+              text.target.value,
+            )
+          }
           style={{ marginTop: 10 }}
         />
       </div>
@@ -287,8 +241,14 @@ class NoonConference extends Component {
                   control={TextArea}
                   label="Imaging"
                   placeholder="CXR..."
-                  value={this.state.imaging}
-                  onChange={text => console.log(text.target.value)}
+                  value={this.props.imaging}
+                  onChange={text =>
+                    this.props.updateConferenceInputState(
+                      false,
+                      `imaging`,
+                      text.target.value,
+                    )
+                  }
                 />
               </Grid.Column>
               <Grid.Column>
@@ -296,11 +256,13 @@ class NoonConference extends Component {
                   control={TextArea}
                   label="Summary assessment"
                   placeholder="45M with ..."
-                  value={this.state.additionalText}
+                  value={this.props.sumAsses}
                   onChange={text =>
-                    this.setState({
-                      additionalText: text.target.value,
-                    })
+                    this.props.updateConferenceInputState(
+                      false,
+                      `sumAsses`,
+                      text.target.value,
+                    )
                   }
                 />
                 {this.listCreator(

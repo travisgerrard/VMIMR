@@ -1,3 +1,5 @@
+// Bottom of the creation of noon conference
+
 import React, { Component } from 'react';
 import { Form, Loader, Container } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
@@ -9,13 +11,6 @@ import rotations from '../conditions/rotations';
 import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
 
 class CatagorizationForSaving extends Component {
-  state = {
-    presenter: '',
-    title: '',
-    date: moment().format('MM/DD/YY'),
-    tags: [],
-  };
-
   render() {
     return (
       <Container>
@@ -37,17 +32,17 @@ class CatagorizationForSaving extends Component {
                 <Form.Input
                   label="Title"
                   placeholder=""
-                  value={this.state.title}
+                  value={this.props.title}
                   onChange={(params, data) =>
-                    this.setState({ title: data.value })
+                    this.props.updateConferenceInputState(`title`, data.value)
                   }
                 />
                 <Form.Input
                   label="Date of presentation"
                   placeholder=""
-                  value={this.state.date}
+                  value={this.props.date}
                   onChange={(params, data) =>
-                    this.setState({ date: data.value })
+                    this.props.updateConferenceInputState(`date`, data.value)
                   }
                 />
                 <Form.Select
@@ -56,7 +51,10 @@ class CatagorizationForSaving extends Component {
                   label="Presenter"
                   placeholder="The Presenter Is"
                   onChange={(params, data) =>
-                    this.setState({ presenter: data.value })
+                    this.props.updateConferenceInputState(
+                      `presenter`,
+                      data.value,
+                    )
                   }
                 />
                 <Form.Select
@@ -66,7 +64,7 @@ class CatagorizationForSaving extends Component {
                   label="Rotation tags"
                   placeholder="Rotation tags"
                   onChange={(params, data) =>
-                    this.setState({ tags: data.value })
+                    this.props.updateConferenceInputState(`tags`, data.value)
                   }
                 />
                 <Form.Button
@@ -75,9 +73,10 @@ class CatagorizationForSaving extends Component {
                   color="green"
                   onClick={() =>
                     console.log(
-                      this.state.presenter,
-                      this.state.title,
-                      this.state.tags,
+                      this.props.presenter,
+                      this.props.title,
+                      this.props.date,
+                      this.props.tags,
                     )
                   }
                 >

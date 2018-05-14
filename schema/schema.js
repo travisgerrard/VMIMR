@@ -800,7 +800,7 @@ var addRotation = {
   async resolve(parentValues, { title, _creator }) {
     var newRotation = new Rotation({ title, _creator });
 
-    await newRotation.save(function(err) {
+    awwotation.save(function(err) {
       if (err) {
         return next(err);
       }
