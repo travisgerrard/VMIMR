@@ -43,6 +43,7 @@ class NoonConference extends Component {
     Tbili: '',
     additionalLabs: '',
     imaging: '',
+    questions: [],
     physicalExam: EditorState.createWithContent(
       stateFromMarkdown(PHYSICALEXAMMARKDOWN),
     ),
@@ -125,7 +126,10 @@ class NoonConference extends Component {
                   Tbili={this.state.Tbili}
                   additionalLabs={this.state.additionalLabs}
                 />
-                <Questions />
+                <Questions
+                  questions={this.state.questions}
+                  caseId={data.selectedCasePresentation.id}
+                />
                 <Slides />
                 <CatagorizationForSaving
                   updateConferenceInputState={(name, value) =>

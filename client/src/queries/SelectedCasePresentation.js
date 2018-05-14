@@ -37,7 +37,7 @@ export default gql`
       ddx
       questions {
         id
-        title
+        questionStem
         options
         answers
       }

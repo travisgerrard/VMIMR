@@ -376,7 +376,7 @@ var MultipleChoiceQuestionType = new GraphQLObjectType({
       type: GraphQLID,
       description: 'ID for multiple choice question',
     },
-    title: {
+    questionStem: {
       type: GraphQLString,
       description: 'Question stem',
     },

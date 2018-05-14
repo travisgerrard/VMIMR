@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const multipleChoiceQuestionSchema = new Schema({
-  title: { type: String },
+  questionStem: { type: String },
   options: [{ type: String }],
   answers: [{ type: String }],
   _creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
