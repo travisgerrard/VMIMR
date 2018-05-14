@@ -330,6 +330,14 @@ var CasePresentationType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'Tbili',
     },
+    additionalLabs: {
+      type: GraphQLString,
+      description: 'additionalLabs',
+    },
+    imaging: {
+      type: GraphQLString,
+      description: 'imaging',
+    },
     summAssessment: {
       type: GraphQLString,
       description: 'summAssessment',
@@ -831,6 +839,65 @@ var addCasePresentation = {
   },
 };
 
+var updateCasePresentation = {
+  type: CasePresentationType,
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+    _presentor: { type: GraphQLID },
+    title: { type: GraphQLString },
+    presentationDate: { type: GraphQLString },
+    hpi: { type: GraphQLString },
+    ros: { type: GraphQLString },
+    physicalExam: { type: GraphQLString },
+    wbc: { type: GraphQLString },
+    hgb: { type: GraphQLString },
+    plt: { type: GraphQLString },
+    Na: { type: GraphQLString },
+    K: { type: GraphQLString },
+    Cl: { type: GraphQLString },
+    HC02: { type: GraphQLString },
+    BUN: { type: GraphQLString },
+    Cr: { type: GraphQLString },
+    Glu: { type: GraphQLString },
+    AP: { type: GraphQLString },
+    ALT: { type: GraphQLString },
+    AST: { type: GraphQLString },
+    Tbili: { type: GraphQLString },
+    imaging: { type: GraphQLString },
+    additionalLabs: { type: GraphQLString },
+    summAssessment: { type: GraphQLString },
+    embedPresentationSting: { type: GraphQLString },
+    slideTextForSearch: { type: GraphQLString },
+    tags: { type: GraphQLList(GraphQLString) },
+    meds: { type: GraphQLList(GraphQLString) },
+    medSurgHx: { type: GraphQLList(GraphQLString) },
+    social: { type: GraphQLList(GraphQLString) },
+    ddx: { type: GraphQLList(GraphQLString) },
+  },
+  async resolve(parentValues, { id, title }) {
+    console.log(title);
+    var caseToBeUpdated = await CasePresentation.findOneAndUpdate(
+      {
+        _id: id,
+      },
+      {
+        $set: {
+          title,
+        },
+      },
+      { new: true },
+    )
+      .populate({
+        path: 'questions',
+        model: 'MulitpleChoiceQuestion',
+      })
+      .populate({ path: '_presentor', model: 'users' });
+    await caseToBeUpdated.save();
+
+    return caseToBeUpdated;
+  },
+};
+
 var addQuestionToCase = {
   type: MultipleChoiceQuestionType,
   args: {
@@ -1066,6 +1133,7 @@ var MutationType = new GraphQLObjectType({
     deleteEastgateManualSection,
     addCasePresentation,
     addQuestionToCase,
+    updateCasePresentation,
   }),
 });
 

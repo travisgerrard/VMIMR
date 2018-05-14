@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Query } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import { Loader } from 'semantic-ui-react';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
 import { stateToMarkdown } from 'draft-js-export-markdown';
@@ -15,6 +15,7 @@ import CatagorizationForSaving from './CategorizationForSaving';
 //import NoonConferenceQR from './NoonConferenceQR';
 
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
+import UPDATE_CASE_PRESENTATION from '../../mutations/UpdateCasePresentation';
 
 class NoonConference extends Component {
   state = {
@@ -64,7 +65,14 @@ class NoonConference extends Component {
     this.setState({ [stateName]: value });
   };
 
-  saveClicked = () => {
+  saveClicked = updateCasePresentation => {
+    updateCasePresentation({
+      variables: {
+        id: this.state.id,
+        imaging: this.state.imaging,
+        title: this.state.title,
+      },
+    });
     console.log(this.state);
     console.log(stateToMarkdown(this.state.hpi.getCurrentContent()));
     console.log(stateToMarkdown(this.state.ros.getCurrentContent()));
@@ -97,61 +105,75 @@ class NoonConference extends Component {
             }
 
             return (
-              <div>
-                <NoonConferenceInput
-                  updateConferenceInputState={(name, value) =>
-                    this.updateConferenceInputState(name, value)
-                  }
-                  editorState3={this.state.hpi}
-                  editorState2={this.state.ros}
-                  editorState={this.state.physicalExam}
-                  medValue={this.state.medValue}
-                  meds={this.state.meds}
-                  medSurgHx={this.state.medSurgHx}
-                  hxValue={this.state.hxValue}
-                  social={this.state.social}
-                  socialValue={this.state.socialValue}
-                  ddx={this.state.ddx}
-                  ddxValue={this.state.ddxValue}
-                  imaging={this.state.imaging}
-                  summAssessment={this.state.summAssessment}
-                  wbc={this.state.wbc}
-                  hgb={this.state.hgb}
-                  plt={this.state.plt}
-                  Na={this.state.Na}
-                  K={this.state.K}
-                  Cl={this.state.Cl}
-                  HC02={this.state.HC02}
-                  BUN={this.state.BUN}
-                  Cr={this.state.Cr}
-                  Glu={this.state.Glu}
-                  AP={this.state.AP}
-                  ALT={this.state.ALT}
-                  AST={this.state.AST}
-                  Tbili={this.state.Tbili}
-                  additionalLabs={this.state.additionalLabs}
-                />
-                <Questions
-                  questions={this.state.questions}
-                  caseId={data.selectedCasePresentation.id}
-                />
-                <Slides
-                  embedPresentationSting={this.state.embedPresentationSting}
-                  updateConferenceInputState={(name, value) =>
-                    this.updateConferenceInputState(name, value)
-                  }
-                />
-                <CatagorizationForSaving
-                  updateConferenceInputState={(name, value) =>
-                    this.updateConferenceInputState(name, value)
-                  }
-                  _presentor={this.state._presentor}
-                  title={this.state.title}
-                  presentationDate={this.state.presentationDate}
-                  tags={this.state.tags}
-                  saveClicked={() => this.saveClicked()}
-                />
-              </div>
+              <Mutation
+                mutation={UPDATE_CASE_PRESENTATION}
+                refetchQueries={[
+                  {
+                    query: SELECTED_CASE_PRESENTATIONS,
+                    variables: { id: this.props.caseId },
+                  },
+                ]}
+              >
+                {updateCasePresentation => (
+                  <div>
+                    <NoonConferenceInput
+                      updateConferenceInputState={(name, value) =>
+                        this.updateConferenceInputState(name, value)
+                      }
+                      editorState3={this.state.hpi}
+                      editorState2={this.state.ros}
+                      editorState={this.state.physicalExam}
+                      medValue={this.state.medValue}
+                      meds={this.state.meds}
+                      medSurgHx={this.state.medSurgHx}
+                      hxValue={this.state.hxValue}
+                      social={this.state.social}
+                      socialValue={this.state.socialValue}
+                      ddx={this.state.ddx}
+                      ddxValue={this.state.ddxValue}
+                      imaging={this.state.imaging}
+                      summAssessment={this.state.summAssessment}
+                      wbc={this.state.wbc}
+                      hgb={this.state.hgb}
+                      plt={this.state.plt}
+                      Na={this.state.Na}
+                      K={this.state.K}
+                      Cl={this.state.Cl}
+                      HC02={this.state.HC02}
+                      BUN={this.state.BUN}
+                      Cr={this.state.Cr}
+                      Glu={this.state.Glu}
+                      AP={this.state.AP}
+                      ALT={this.state.ALT}
+                      AST={this.state.AST}
+                      Tbili={this.state.Tbili}
+                      additionalLabs={this.state.additionalLabs}
+                    />
+                    <Questions
+                      questions={this.state.questions}
+                      caseId={data.selectedCasePresentation.id}
+                    />
+                    <Slides
+                      embedPresentationSting={this.state.embedPresentationSting}
+                      updateConferenceInputState={(name, value) =>
+                        this.updateConferenceInputState(name, value)
+                      }
+                    />
+                    <CatagorizationForSaving
+                      updateConferenceInputState={(name, value) =>
+                        this.updateConferenceInputState(name, value)
+                      }
+                      _presentor={this.state._presentor}
+                      title={this.state.title}
+                      presentationDate={this.state.presentationDate}
+                      tags={this.state.tags}
+                      saveClicked={() =>
+                        this.saveClicked(updateCasePresentation)
+                      }
+                    />
+                  </div>
+                )}
+              </Mutation>
             );
           }}
         </Query>
