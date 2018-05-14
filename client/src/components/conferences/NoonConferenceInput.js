@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, TextArea, Grid } from 'semantic-ui-react';
-import { Editor, EditorState, RichUtils } from 'draft-js';
-import { stateFromMarkdown } from 'draft-js-import-markdown';
+import { Editor, RichUtils } from 'draft-js';
 
 import DragAndDropList from './DragAndDropList';
 

@@ -61,6 +61,10 @@ class NoonConference extends Component {
     this.setState({ [stateName]: value });
   };
 
+  saveClicked = () => {
+    console.log(this.state);
+  };
+
   render() {
     return (
       <div>
@@ -72,14 +76,18 @@ class NoonConference extends Component {
             if (loading) return <Loader active inline="centered" />;
             if (error) return `Error! ${error.message}`;
 
-            // set intiial state with value from mutation
+            // set intial state with value from mutation
             if (this.state.initialUpdate) {
+              _.forOwn(
+                data.selectedCasePresentation,
+                function(value, key) {
+                  if (value !== null) {
+                    //console.log(key, value);
+                    this.setState({ [key]: value });
+                  }
+                }.bind(this),
+              );
               this.setState({ initialUpdate: false });
-              _.forOwn(data.selectedCasePresentation, function(value, key) {
-                if (value !== null) {
-                  console.log(value, key);
-                }
-              });
             }
 
             return (
@@ -127,6 +135,7 @@ class NoonConference extends Component {
                   title={this.state.title}
                   presentationDate={this.state.presentationDate}
                   tags={this.state.tags}
+                  saveClicked={() => this.saveClicked()}
                 />
               </div>
             );

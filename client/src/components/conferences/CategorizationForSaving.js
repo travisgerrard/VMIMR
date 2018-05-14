@@ -73,14 +73,7 @@ class CatagorizationForSaving extends Component {
                   basic
                   fluid
                   color="green"
-                  onClick={() =>
-                    console.log(
-                      this.props.presenter,
-                      this.props.title,
-                      this.props.date,
-                      this.props.tags,
-                    )
-                  }
+                  onClick={() => this.props.saveClicked()}
                 >
                   Save
                 </Form.Button>
