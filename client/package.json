@@ -15,6 +15,7 @@
     "axios": "^0.17.1",
     "core-js": "^2.5.3",
     "draft-js": "^0.10.5",
+    "draft-js-export-markdown": "^1.2.0",
     "draft-js-import-markdown": "^1.2.1",
     "graphql-tag": "^2.8.0",
     "jwt-decode": "^2.2.0",

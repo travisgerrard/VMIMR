@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { Loader } from 'semantic-ui-react';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
+import { stateToMarkdown } from 'draft-js-export-markdown';
 import { EditorState } from 'draft-js';
 import moment from 'moment';
 import _ from 'lodash';
@@ -65,6 +66,9 @@ class NoonConference extends Component {
 
   saveClicked = () => {
     console.log(this.state);
+    console.log(stateToMarkdown(this.state.hpi.getCurrentContent()));
+    console.log(stateToMarkdown(this.state.ros.getCurrentContent()));
+    console.log(stateToMarkdown(this.state.physicalExam.getCurrentContent()));
   };
 
   render() {
