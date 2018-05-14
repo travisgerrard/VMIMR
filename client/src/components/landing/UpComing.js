@@ -3,7 +3,7 @@ import { Container } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import schedule from './amionSchedule';
-import GET_CURRENT_USER from '../../queries/CurrentUser';
+//import GET_CURRENT_USER from '../../queries/CurrentUser';
 
 const MONTH_NAMES = [
   'January',
@@ -37,8 +37,8 @@ class UpComing extends Component {
 
     console.log(dateToCompare);
 
-    var previousDate = '';
-    var previousRotation = '';
+    //var previousDate = '';
+    //var previousRotation = '';
     let arrayToDisplay = [];
 
     // Shorten to only next 5 days

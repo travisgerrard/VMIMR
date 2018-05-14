@@ -16,11 +16,11 @@ class NoonConference extends Component {
   }
 
   editorOnChange2 = editorState2 =>
-    this.props.updateConferenceInputState(false, `editorState2`, editorState2);
+    this.props.updateConferenceInputState(`ros`, editorState2);
   editorOnChange3 = editorState3 =>
-    this.props.updateConferenceInputState(false, `editorState3`, editorState3);
+    this.props.updateConferenceInputState(`hpi`, editorState3);
   editorOnChange = editorState =>
-    this.props.updateConferenceInputState(false, `editorState`, editorState);
+    this.props.updateConferenceInputState(`physicalExam`, editorState);
 
   HPI = () => {
     return (
@@ -100,11 +100,7 @@ class NoonConference extends Component {
           placeholder={placeholder}
           value={this.props[valueName]}
           onChange={text =>
-            this.props.updateConferenceInputState(
-              true,
-              valueName,
-              text.target.value,
-            )
+            this.props.updateConferenceInputState(valueName, text.target.value)
           }
           onKeyPress={this.enterPressed(arrayName, valueName)}
           style={{ width: width ? width : 128 }}
@@ -146,11 +142,7 @@ class NoonConference extends Component {
         placeholder={inputValue}
         value={this.props[inputValue]}
         onChange={text =>
-          this.props.updateConferenceInputState(
-            true,
-            inputValue,
-            text.target.value,
-          )
+          this.props.updateConferenceInputState(inputValue, text.target.value)
         }
         size="mini"
         style={{ width: 55 }}
@@ -190,7 +182,6 @@ class NoonConference extends Component {
           value={this.props.additionalLabs}
           onChange={text =>
             this.props.updateConferenceInputState(
-              false,
               `additionalLabs`,
               text.target.value,
             )
@@ -211,24 +202,18 @@ class NoonConference extends Component {
                 <div>{this.HPI()}</div>
                 <div>{this.ROS()}</div>
                 <Grid columns={3} style={{ marginTop: 10 }}>
-                  {this.listCreator(
-                    'Meds',
-                    'Xanax',
-                    'medsArray',
-                    'medValue',
-                    110,
-                  )}
+                  {this.listCreator('Meds', 'Xanax', 'meds', 'medValue', 110)}
                   {this.listCreator(
                     'Med/Surg hx',
                     'Diabetes',
-                    'hxArray',
+                    'medSurgHx',
                     'hxValue',
                     110,
                   )}
                   {this.listCreator(
                     'Social',
                     'EtOH',
-                    'socialArray',
+                    'social',
                     'socialValue2',
                     110,
                   )}
@@ -244,7 +229,6 @@ class NoonConference extends Component {
                   value={this.props.imaging}
                   onChange={text =>
                     this.props.updateConferenceInputState(
-                      false,
                       `imaging`,
                       text.target.value,
                     )
@@ -256,11 +240,10 @@ class NoonConference extends Component {
                   control={TextArea}
                   label="Summary assessment"
                   placeholder="45M with ..."
-                  value={this.props.sumAsses}
+                  value={this.props.summAssessment}
                   onChange={text =>
                     this.props.updateConferenceInputState(
-                      false,
-                      `sumAsses`,
+                      `summAssessment`,
                       text.target.value,
                     )
                   }
@@ -268,7 +251,7 @@ class NoonConference extends Component {
                 {this.listCreator(
                   'Differential diagnosis',
                   'ACS...',
-                  'ddxArray',
+                  'ddx',
                   'ddxValue',
                   '225',
                 )}

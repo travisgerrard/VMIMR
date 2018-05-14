@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { Form, Loader, Container } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import _ from 'lodash';
-import moment from 'moment';
 
 import rotations from '../conditions/rotations';
 
@@ -40,9 +39,12 @@ class CatagorizationForSaving extends Component {
                 <Form.Input
                   label="Date of presentation"
                   placeholder=""
-                  value={this.props.date}
+                  value={this.props.presentationDate}
                   onChange={(params, data) =>
-                    this.props.updateConferenceInputState(`date`, data.value)
+                    this.props.updateConferenceInputState(
+                      `presentationDate`,
+                      data.value,
+                    )
                   }
                 />
                 <Form.Select
@@ -52,7 +54,7 @@ class CatagorizationForSaving extends Component {
                   placeholder="The Presenter Is"
                   onChange={(params, data) =>
                     this.props.updateConferenceInputState(
-                      `presenter`,
+                      `_presentor`,
                       data.value,
                     )
                   }

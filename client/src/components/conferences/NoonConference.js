@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Query, Mutation } from 'react-apollo';
+import { Query } from 'react-apollo';
 import { Loader } from 'semantic-ui-react';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
-import { Editor, EditorState, RichUtils } from 'draft-js';
+import { EditorState } from 'draft-js';
 import moment from 'moment';
+import _ from 'lodash';
 
 import { PHYSICALEXAMMARKDOWN, ROSMARKDOWN } from './conferenceDefaults';
 import NoonConferenceInput from './NoonConferenceInput';
@@ -16,16 +17,16 @@ import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation'
 
 class NoonConference extends Component {
   state = {
-    hpiValue: '',
-    sumAsses: '',
+    id: '',
+    summAssessment: '',
     medValue: '',
-    medsArray: [],
+    meds: [],
     hxValue: '',
-    hxArray: [],
+    medSurgHx: [],
     socialValue: '',
-    socialArray: [],
+    social: [],
     ddxValue: '',
-    ddxArray: [],
+    ddx: [],
     wbc: '',
     hgb: '',
     plt: '',
@@ -42,20 +43,21 @@ class NoonConference extends Component {
     Tbili: '',
     additionalLabs: '',
     imaging: '',
-    editorState: EditorState.createWithContent(
+    physicalExam: EditorState.createWithContent(
       stateFromMarkdown(PHYSICALEXAMMARKDOWN),
     ),
-    editorState2: EditorState.createWithContent(stateFromMarkdown(ROSMARKDOWN)),
-    editorState3: EditorState.createWithContent(
-      stateFromMarkdown(`45F p/w ...`),
-    ),
-    presenter: '',
+    ros: EditorState.createWithContent(stateFromMarkdown(ROSMARKDOWN)),
+    hpi: EditorState.createWithContent(stateFromMarkdown(`45F p/w ...`)),
+    _presentor: '',
     title: '',
-    date: moment().format('MM/DD/YY'),
+    presentationDate: moment().format('MM/DD/YY'),
     tags: [],
+    initialUpdate: true,
   };
 
   updateConferenceInputState = (stateName, value) => {
+    //console.log(stateName, value);
+
     this.setState({ [stateName]: value });
   };
 
@@ -70,7 +72,15 @@ class NoonConference extends Component {
             if (loading) return <Loader active inline="centered" />;
             if (error) return `Error! ${error.message}`;
 
-            console.log(data);
+            // set intiial state with value from mutation
+            if (this.state.initialUpdate) {
+              this.setState({ initialUpdate: false });
+              _.forOwn(data.selectedCasePresentation, function(value, key) {
+                if (value !== null) {
+                  console.log(value, key);
+                }
+              });
+            }
 
             return (
               <div>
@@ -78,19 +88,19 @@ class NoonConference extends Component {
                   updateConferenceInputState={(name, value) =>
                     this.updateConferenceInputState(name, value)
                   }
-                  editorState3={this.state.editorState3}
-                  editorState2={this.state.editorState2}
-                  editorState={this.state.editorState}
+                  editorState3={this.state.hpi}
+                  editorState2={this.state.ros}
+                  editorState={this.state.physicalExam}
                   medValue={this.state.medValue}
-                  medsArray={this.state.medsArray}
-                  hxArray={this.state.hxArray}
+                  meds={this.state.meds}
+                  medSurgHx={this.state.medSurgHx}
                   hxValue={this.state.hxValue}
-                  socialArray={this.state.socialArray}
+                  social={this.state.social}
                   socialValue={this.state.socialValue}
-                  ddxArray={this.state.ddxArray}
+                  ddx={this.state.ddx}
                   ddxValue={this.state.ddxValue}
                   imaging={this.state.imaging}
-                  sumAsses={this.state.sumAsses}
+                  summAssessment={this.state.summAssessment}
                   wbc={this.state.wbc}
                   hgb={this.state.hgb}
                   plt={this.state.plt}
@@ -113,9 +123,9 @@ class NoonConference extends Component {
                   updateConferenceInputState={(name, value) =>
                     this.updateConferenceInputState(name, value)
                   }
-                  presenter={this.state.presenter}
+                  _presentor={this.state._presentor}
                   title={this.state.title}
-                  date={this.state.date}
+                  presentationDate={this.state.presentationDate}
                   tags={this.state.tags}
                 />
               </div>
