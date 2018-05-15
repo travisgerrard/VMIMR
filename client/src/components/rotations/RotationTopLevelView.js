@@ -67,17 +67,28 @@ class RotationTopLevelView extends Component {
             />
           ) : (
             <div>
+              <h1>Welcome to VMIMR rotations section</h1>
               <h2>Select a rotation</h2>
+              <p>Each rotation it broken out into 1. general info, 2. Providers you'll work with on this rotation, 3. Learning you've documented regarding a rotation and 4. A general comment section regarding a rotation.</p>
               <Query query={GET_LIST_OF_ROTATIONS}>
                 {({ loading, error, data }) => {
                   if (loading) return 'Loading...';
                   if (error) return `Error! ${error.message}`;
 
-                  return data.listOfRotations.map(rotation => {
+                  var sortedArray = data.listOfRotations.slice();
+                    sortedArray.sort(function(a,b) {
+                      if ( a.title < b.title )
+                          return -1;
+                      if ( a.title > b.title )
+                          return 1;
+                      return 0;
+                  } );
+
+                  return sortedArray.map(rotation => {
                     return (
                       <div key={rotation.id}>
-                        <List.Item>
-                          <Link to={`/rotations/${rotation.title}`}>
+                        <List.Item style={{marginTop: 5, fontSize: '18px'}}>
+                          <Link to={`/rotations/${rotation.title}`} >
                             {rotation.title}
                           </Link>
                         </List.Item>

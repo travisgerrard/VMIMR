@@ -67,18 +67,19 @@ class NoonConference extends Component {
   };
 
   saveClicked = updateCasePresentation => {
-    console.log(this.state.ddx);
     
+    var meds = this.state.meds.map(theMeds => {return theMeds.name});
+    var medSurgHx = this.state.medSurgHx.map(theMedSurgHx => {return theMedSurgHx.name});
+    var social = this.state.social.map(theSocial => {return theSocial.name});
     var ddx = this.state.ddx.map(theDdx => {return theDdx.name});
-    console.log(ddx);
     
     updateCasePresentation({
       variables: {
         id: this.state.id,
         summAssessment: this.state.summAssessment,
-        meds: this.state.meds,
-        medSurgHx: this.state.medSurgHx,
-        social: this.state.social,
+        meds,
+        medSurgHx,
+        social,
         ddx,
         wbc: this.state.wbc,
         hgb: this.state.hgb,
@@ -140,7 +141,10 @@ class NoonConference extends Component {
                         ),
                       });
                     } else if (
-                      key === 'ddx'
+                      key === 'ddx' ||
+                      key === 'meds' ||
+                      key === 'medSurgHx' ||
+                      key === 'social'
                     ) {
                       
                       this.setState({

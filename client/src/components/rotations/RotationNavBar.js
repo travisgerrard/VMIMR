@@ -20,7 +20,17 @@ class RotationTopLevelView extends Component {
 
           const { activeItem } = this.props;
 
-          return data.listOfRotations.map(rotation => {
+          var sortedArray = data.listOfRotations.slice();
+          sortedArray.sort(function(a,b) {
+            if ( a.title < b.title )
+                return -1;
+            if ( a.title > b.title )
+                return 1;
+            return 0;
+        } );
+        
+
+          return sortedArray.map(rotation => {
             if (
               this.props.rotationOnLanding === rotation.title &&
               this.props.initialLoad
@@ -103,8 +113,8 @@ class RotationTopLevelView extends Component {
 
   render() {
     return (
-      <Menu secondary vertical style={{ width: '160px' }}>
-        {this.addRotationInput()}
+      <Menu secondary vertical style={{ width: '160px', marginTop: 20 }}>
+        {/*this.addRotationInput()*/}
         {this.listOfRotations()}
       </Menu>
     );
