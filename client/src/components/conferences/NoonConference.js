@@ -16,6 +16,7 @@ import CatagorizationForSaving from './CategorizationForSaving';
 
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
 import UPDATE_CASE_PRESENTATION from '../../mutations/UpdateCasePresentation';
+import { stat } from 'fs';
 
 class NoonConference extends Component {
   state = {
@@ -66,6 +67,11 @@ class NoonConference extends Component {
   };
 
   saveClicked = updateCasePresentation => {
+    console.log(this.state.ddx);
+    
+    var ddx = this.state.ddx.map(theDdx => {return theDdx.name});
+    console.log(ddx);
+    
     updateCasePresentation({
       variables: {
         id: this.state.id,
@@ -73,7 +79,7 @@ class NoonConference extends Component {
         meds: this.state.meds,
         medSurgHx: this.state.medSurgHx,
         social: this.state.social,
-        ddx: this.state.ddx,
+        ddx,
         wbc: this.state.wbc,
         hgb: this.state.hgb,
         plt: this.state.plt,
@@ -132,6 +138,13 @@ class NoonConference extends Component {
                         [key]: EditorState.createWithContent(
                           stateFromMarkdown(value),
                         ),
+                      });
+                    } else if (
+                      key === 'ddx'
+                    ) {
+                      
+                      this.setState({
+                        [key]: value.map(name => {return {name, struckThrough: false}})
                       });
                     } else {
                       this.setState({ [key]: value });
