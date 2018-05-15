@@ -213,7 +213,9 @@ class EastgateManual extends Component {
                       )}
                     </Grid.Column>
                   </Grid>
-                  <ReactMarkdown source={sectionContent} />
+                  <span style={{ whiteSpace: 'pre-wrap' }}>
+                  <ReactMarkdown source={sectionContent} style={{whiteSpace: 'pre-wrap'}}/>
+                  </span>
                 </section>
               </div>
             );
