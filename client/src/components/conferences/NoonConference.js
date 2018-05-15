@@ -69,14 +69,40 @@ class NoonConference extends Component {
     updateCasePresentation({
       variables: {
         id: this.state.id,
+        summAssessment: this.state.summAssessment,
+        meds: this.state.meds,
+        medSurgHx: this.state.medSurgHx,
+        social: this.state.social,
+        ddx: this.state.ddx,
+        wbc: this.state.wbc,
+        hgb: this.state.hgb,
+        plt: this.state.plt,
+        Na: this.state.Na,
+        K: this.state.K,
+        Cl: this.state.Cl,
+        HC02: this.state.HC02,
+        BUN: this.state.BUN,
+        Cr: this.state.Cr,
+        Glu: this.state.Glu,
+        AP: this.state.AP,
+        ALT: this.state.ALT,
+        AST: this.state.AST,
+        Tbili: this.state.Tbili,
+        additionalLabs: this.state.additionalLabs,
         imaging: this.state.imaging,
+        embedPresentationSting: this.state.embedPresentationSting,
+        physicalExam: stateToMarkdown(
+          this.state.physicalExam.getCurrentContent(),
+        ),
+        ros: stateToMarkdown(this.state.ros.getCurrentContent()),
+        hpi: stateToMarkdown(this.state.hpi.getCurrentContent()),
+        _presentor: this.state._presentor,
         title: this.state.title,
+        presentationDate: this.state.presentationDate,
+        tags: this.state.tags,
+        initialUpdate: true,
       },
     });
-    console.log(this.state);
-    console.log(stateToMarkdown(this.state.hpi.getCurrentContent()));
-    console.log(stateToMarkdown(this.state.ros.getCurrentContent()));
-    console.log(stateToMarkdown(this.state.physicalExam.getCurrentContent()));
   };
 
   render() {
@@ -97,7 +123,19 @@ class NoonConference extends Component {
                 function(value, key) {
                   if (value !== null) {
                     //console.log(key, value);
-                    this.setState({ [key]: value });
+                    if (
+                      key === 'physicalExam' ||
+                      key === 'ros' ||
+                      key === 'hpi'
+                    ) {
+                      this.setState({
+                        [key]: EditorState.createWithContent(
+                          stateFromMarkdown(value),
+                        ),
+                      });
+                    } else {
+                      this.setState({ [key]: value });
+                    }
                   }
                 }.bind(this),
               );
