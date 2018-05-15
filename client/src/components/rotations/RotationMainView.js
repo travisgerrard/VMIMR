@@ -1,31 +1,31 @@
 // The top level of the rotation view
 // Handles displaying general info...
 
-import React, { Component } from 'react';
-import { Query, withApollo } from 'react-apollo';
-import { Container, Loader } from 'semantic-ui-react';
-import DisplayConditionCards from '../conditionGraphQl/DisplayConditionCards';
+import React, { Component } from "react";
+import { Query, withApollo } from "react-apollo";
+import { Container, Loader } from "semantic-ui-react";
+import DisplayConditionCards from "../conditionGraphQl/DisplayConditionCards";
+import jwt_decode from "jwt-decode";
 
-import GET_CURRENT_USER from '../../queries/CurrentUser';
-import SELECTED_ROTATION from '../../queries/SelectedRotation';
-import GET_ROTATION_LEARNING from '../../queries/ListOfLearningWithTag';
+import GET_CURRENT_USER from "../../queries/CurrentUser";
+import SELECTED_ROTATION from "../../queries/SelectedRotation";
+import GET_ROTATION_LEARNING from "../../queries/ListOfLearningWithTag";
 
-import RotationGeneralInfo from './RotationGeneralInfo';
-import RotationProviders from './RotationProviders';
+import RotationGeneralInfo from "./RotationGeneralInfo";
+import RotationProviders from "./RotationProviders";
 
 class RotationMainView extends Component {
   getTitleInfoProviders = () => {
     return (
       <Query query={SELECTED_ROTATION} variables={{ id: this.props.id }}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
+          if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
 
-          const currentUserQuery = this.props.client.readQuery({
-            query: GET_CURRENT_USER,
-          });
+          const currentUser = jwt_decode(localStorage.getItem("VMIMRToken"));
 
-          const { admin, id } = currentUserQuery.currentUser;
+          const { admin, sub } = currentUser;
+          console.log(sub);
 
           if (data.returnRotation === null) return <div>Pick a rotation</div>;
 
@@ -44,13 +44,13 @@ class RotationMainView extends Component {
                 providers={providers}
                 admin={admin}
                 id={this.props.id}
-                creator={id}
+                creator={sub}
               />
               <br />
               <h4>{title} learnings</h4>
               <Query
                 query={GET_ROTATION_LEARNING}
-                variables={{ id, rotation: dbname }}
+                variables={{ id: sub, rotation: dbname }}
               >
                 {({ loading, error, data }) => {
                   if (loading) return <Loader active inline="centered" />;
@@ -62,7 +62,7 @@ class RotationMainView extends Component {
                     return (
                       <DisplayConditionCards
                         learnings={data.listOfLearningWithTag}
-                        currentUser={currentUserQuery.currentUser}
+                        currentUser={currentUser}
                         editLearning={learningId =>
                           this.editingLearning(learningId)
                         }

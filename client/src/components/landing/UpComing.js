@@ -3,7 +3,6 @@ import { Container } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import schedule from './amionSchedule';
-//import GET_CURRENT_USER from '../../queries/CurrentUser';
 
 const MONTH_NAMES = [
   'January',

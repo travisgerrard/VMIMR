@@ -1,34 +1,32 @@
-import React, { Component } from 'react';
-import { Menu, Input } from 'semantic-ui-react';
-import { Query, withApollo, graphql } from 'react-apollo';
-import GET_CURRENT_USER from '../../queries/CurrentUser';
-import GET_LIST_OF_ROTATIONS from '../../queries/ListOfRotations';
-import ADD_ROTATION from '../../mutations/AddRotation';
+import React, { Component } from "react";
+import { Menu, Input } from "semantic-ui-react";
+import { Query, withApollo, graphql } from "react-apollo";
+import jwt_decode from "jwt-decode";
+
+import GET_LIST_OF_ROTATIONS from "../../queries/ListOfRotations";
+import ADD_ROTATION from "../../mutations/AddRotation";
 
 class RotationTopLevelView extends Component {
   state = {
-    rotationInput: '',
-    errors: '',
+    rotationInput: "",
+    errors: ""
   };
 
   listOfRotations = () => {
     return (
       <Query query={GET_LIST_OF_ROTATIONS}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
+          if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
 
           const { activeItem } = this.props;
 
           var sortedArray = data.listOfRotations.slice();
-          sortedArray.sort(function(a,b) {
-            if ( a.title < b.title )
-                return -1;
-            if ( a.title > b.title )
-                return 1;
+          sortedArray.sort(function(a, b) {
+            if (a.title < b.title) return -1;
+            if (a.title > b.title) return 1;
             return 0;
-        } );
-        
+          });
 
           return sortedArray.map(rotation => {
             if (
@@ -57,19 +55,17 @@ class RotationTopLevelView extends Component {
   };
 
   addRotation = () => {
-    const currentUserQuery = this.props.client.readQuery({
-      query: GET_CURRENT_USER,
-    });
+    const currentUser = jwt_decode(localStorage.getItem("VMIMRToken"));
 
     this.props
       .mutate({
         variables: {
           title: this.state.rotationInput,
-          _creator: currentUserQuery.currentUser.id,
+          _creator: currentUser.sub
         },
-        refetchQueries: [{ query: GET_LIST_OF_ROTATIONS }],
+        refetchQueries: [{ query: GET_LIST_OF_ROTATIONS }]
       })
-      .then(this.setState({ rotationInput: '' }))
+      .then(this.setState({ rotationInput: "" }))
       .catch(res => {
         const errors = res.graphQLErrors.map(error => error.message);
         this.setState({ errors });
@@ -77,43 +73,33 @@ class RotationTopLevelView extends Component {
   };
 
   handleKeyPress = e => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       this.addRotation();
     }
   };
 
   addRotationInput = () => {
-    return (
-      <Query query={GET_CURRENT_USER}>
-        {({ loading, error, data }) => {
-          if (loading) return '';
-          if (error) return `Error! ${error.message}`;
-
-          if (data.currentUser.admin) {
-            return (
-              <Menu.Item>
-                <Input
-                  placeholder="Add Rotation"
-                  value={this.state.rotationInput}
-                  onChange={e =>
-                    this.setState({ rotationInput: e.target.value })
-                  }
-                  onKeyPress={this.handleKeyPress}
-                  style={{ width: '160px' }}
-                />
-              </Menu.Item>
-            );
-          } else {
-            return <div />;
-          }
-        }}
-      </Query>
-    );
+    const currentUser = jwt_decode(localStorage.getItem("VMIMRToken"));
+    if (currentUser.admin) {
+      return (
+        <Menu.Item>
+          <Input
+            placeholder="Add Rotation"
+            value={this.state.rotationInput}
+            onChange={e => this.setState({ rotationInput: e.target.value })}
+            onKeyPress={this.handleKeyPress}
+            style={{ width: "160px" }}
+          />
+        </Menu.Item>
+      );
+    } else {
+      return <div />;
+    }
   };
 
   render() {
     return (
-      <Menu secondary vertical style={{ width: '160px', marginTop: 20 }}>
+      <Menu secondary vertical style={{ width: "160px", marginTop: 20 }}>
         {/*this.addRotationInput()*/}
         {this.listOfRotations()}
       </Menu>
