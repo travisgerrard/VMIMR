@@ -1,5 +1,3 @@
-// Add condition form
-
 import React, { Component } from 'react';
 import { Segment, Form, Loader, Message } from 'semantic-ui-react';
 import moment from 'moment';
@@ -12,12 +10,20 @@ import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
 import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
 import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
 import ADD_LEARNING from '../../mutations/AddLearning';
+import GET_ROTATION_LEARNING from '../../queries/ListOfLearningWithTag';
 import { validateInputs } from './validation';
 
-class AddCondition extends Component {
+/* Props
+cancelAddingcondition
+doneAddingLearning
+id
+dbname
+*/
+
+class AddConditionFromRotation extends Component {
   state = {
-    conditionTitle: this.props.conditionTitle,
-    tags: [],
+    conditionTitle: '',
+    tags: [this.props.dbname],
     attending: '',
     date: moment().format('MM/DD/YY'),
     userTags: [],
@@ -50,6 +56,7 @@ class AddCondition extends Component {
                 multiple
                 label="Rotation tags"
                 placeholder="Rotation tags"
+                value={this.state.tags}
                 onChange={(params, data) => this.setState({ tags: data.value })}
               />
             </Form.Group>
@@ -152,51 +159,34 @@ class AddCondition extends Component {
               return { key: id, text: name, value: id };
             });
 
-            // If statement so that proper query can be refetched
-            if (this.props.sortingBy === 'Your Personal Learning') {
-              return (
-                <Mutation
-                  mutation={ADD_LEARNING}
-                  refetchQueries={[
-                    {
-                      query: GET_PERSONAL_LEARNING,
-                      variables: { id: this.props.currentUser.id },
+            return (
+              <Mutation
+                mutation={ADD_LEARNING}
+                // Will need to change this to reflect rotation...
+                refetchQueries={[
+                  {
+                    query: GET_ROTATION_LEARNING,
+                    variables: {
+                      id: this.props.id,
+                      rotation: this.props.dbname,
                     },
-                  ]}
-                  onCompleted={() => this.props.doneAddingLearning()}
-                  onError={() => console.log(error)}
-                >
-                  {(addLearning, { data, loading, error }) => (
-                    <div>
-                      {this.gutsOfAddLearning(
-                        options,
-                        listOfUsers,
-                        addLearning,
-                        loading,
-                      )}
-                    </div>
-                  )}
-                </Mutation>
-              );
-            } else {
-              return (
-                <Mutation
-                  mutation={ADD_LEARNING}
-                  refetchQueries={[{ query: GET_ALL_LEARNING }]}
-                >
-                  {(addLearning, { data, loading, error }) => (
-                    <div>
-                      {this.gutsOfAddLearning(
-                        options,
-                        listOfUsers,
-                        addLearning,
-                        loading,
-                      )}
-                    </div>
-                  )}
-                </Mutation>
-              );
-            }
+                  },
+                ]}
+                onCompleted={() => this.props.doneAddingLearning()}
+                onError={() => console.log(error)}
+              >
+                {(addLearning, { data, loading, error }) => (
+                  <div>
+                    {this.gutsOfAddLearning(
+                      options,
+                      listOfUsers,
+                      addLearning,
+                      loading,
+                    )}
+                  </div>
+                )}
+              </Mutation>
+            );
           }}
         </Query>
         {this.state.error ? (
@@ -240,4 +230,4 @@ class AddCondition extends Component {
   }
 }
 
-export default AddCondition;
+export default AddConditionFromRotation;

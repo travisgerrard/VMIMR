@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Segment, List, Button } from 'semantic-ui-react';
+import { Segment, List, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 
 class ShowQuestion extends Component {
