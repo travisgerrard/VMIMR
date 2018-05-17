@@ -548,6 +548,27 @@ var listOfLearningWithTag = {
     rotation: { type: GraphQLString },
   },
   resolve: (parentValues, { id, rotation }, req) => {
+    if (rotation === '') {
+      var learnings = ConditionLearning.find({
+        $or: [
+          {
+            usersTagged: id,
+          },
+          { _creator: id },
+        ],
+      })
+        .limit(3)
+        .sort({
+          dateUpdated: -1,
+        })
+        .populate({ path: '_condition', model: 'conditions' })
+        .populate({ path: '_creator', model: 'users' })
+        .populate({ path: 'usersTagged', model: 'users' });
+
+      return learnings;
+    }
+    console.log(rotation);
+
     var learnings = ConditionLearning.find({
       $or: [
         {

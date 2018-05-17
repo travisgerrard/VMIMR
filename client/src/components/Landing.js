@@ -1,6 +1,7 @@
 import React from 'react';
 //import LastFiveConditions from './landing/LastFiveConditions';
-import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
+//import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
+import LandingPage from './landing/LoggedInLanding';
 
 //import Conditions from './conditions/ConditionTopLevelView';
 import { Container } from 'semantic-ui-react';
@@ -11,7 +12,7 @@ const Landing = () => {
   if (localStorage.getItem('VMIMRToken') !== null) {
     landingPage = (
       <div>
-        <ConditionTopLevelViewGQL />
+        <LandingPage />
       </div>
     );
   } else {

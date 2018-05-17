@@ -23,7 +23,7 @@ dbname
 class AddConditionFromRotation extends Component {
   state = {
     conditionTitle: '',
-    tags: [this.props.dbname],
+    tags: this.props.dbname ? [this.props.dbname] : [],
     attending: '',
     date: moment().format('MM/DD/YY'),
     userTags: [],

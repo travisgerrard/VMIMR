@@ -14,6 +14,7 @@ import GET_ROTATION_LEARNING from '../../queries/ListOfLearningWithTag';
 import RotationGeneralInfo from './RotationGeneralInfo';
 import RotationProviders from './RotationProviders';
 import AddConditionFromRotation from '../conditionGraphQl/AddConditionFromRotation';
+import LastThreeLearnings from './LastThreeLearnings';
 
 class RotationMainView extends Component {
   state = {
@@ -86,29 +87,12 @@ class RotationMainView extends Component {
                   </Button>
                 )}
               </h4>
-
-              <Query
-                query={GET_ROTATION_LEARNING}
-                variables={{ id: sub, rotation: dbname }}
-              >
-                {({ loading, error, data }) => {
-                  if (loading) return <Loader active inline="centered" />;
-                  if (error) return `Error! ${error.message}`;
-
-                  if (data.listOfLearningWithTag.length) {
-                    return (
-                      <DisplayConditionCards
-                        learnings={data.listOfLearningWithTag}
-                        currentUser={currentUser}
-                        editLearning={learningId =>
-                          this.editingLearning(learningId)
-                        }
-                      />
-                    );
-                  }
-                  return <div>No learning associated with {title} yet</div>;
-                }}
-              </Query>
+              <LastThreeLearnings
+                userId={sub}
+                dbname={dbname}
+                currentUser={currentUser}
+                title={title}
+              />
 
               <h4>General Comments</h4>
               <p>Will put in general comments section regarding the rotation</p>

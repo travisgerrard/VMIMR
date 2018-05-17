@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Container, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import schedule from './amionSchedule';
@@ -94,23 +94,34 @@ class UpComing extends Component {
         }
       }
     }
-    // console.log(arrayToDisplay);
-    // console.log(shortenedArray);
 
     return (
-      <Container style={{ paddingLeft: 15 }}>
-        <h3>Upcoming</h3>
-        <h4 style={{ marginTop: 0 }}>{monthName}</h4>
+      <Segment.Group style={{ paddingLeft: 15 }}>
+        <Segment>
+          <h4>Here's whats coming up on your schedule</h4>
+        </Segment>
+        <Segment.Group>
+          {shortenedArray.map(data => {
+            var linkText;
+            if (data.rotation === 'Id') {
+              linkText = 'Infectious%20Disease';
+            } else if (data.rotation === 'GASTRO') {
+              linkText = 'Gastroenterology%20(GI)';
+            } else if (data.rotation === 'Eastgate') {
+              linkText = 'General%20Internal%20Medicine%20(GIM)';
+            } else {
+              linkText = data.rotation;
+            }
 
-        {shortenedArray.map(data => {
-          return (
-            <div key={Math.random()}>
-              {data.day}:{' '}
-              <Link to={`/rotations/${data.rotation}`}>{data.rotation}</Link>
-            </div>
-          );
-        })}
-      </Container>
+            return (
+              <Segment key={Math.random()}>
+                {monthName} {data.day}:{' '}
+                <Link to={`/rotations/${linkText}`}>{data.rotation}</Link>
+              </Segment>
+            );
+          })}
+        </Segment.Group>
+      </Segment.Group>
     );
   }
 }
