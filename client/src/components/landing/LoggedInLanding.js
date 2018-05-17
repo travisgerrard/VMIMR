@@ -13,6 +13,13 @@ class LoggedInLanding extends Component {
       <Container style={{ marginTop: '4em' }}>
         <Segment>
           <h3>Hey there Dr. {name}, you're awesome</h3>
+          <h4>
+            Welcome to the{' '}
+            <span style={{ color: '#5E9B6A' }}>
+              Virginia Mason: Internal Medicine Residency
+            </span>{' '}
+            website
+          </h4>
         </Segment>
         <UpComing name={name} />
         <LearningLanding currentUser={currentUser} />
