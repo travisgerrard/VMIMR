@@ -37,16 +37,14 @@ class ListOfAllUsers extends Component {
 
   render() {
     return (
-      <div>
-        <Container>
-          <List divided relaxed>
-            {this.listOfUsers()}
-          </List>
-          <Link to="/users/newUser" style={{ color: 'white' }}>
-            <Button color="green">New User</Button>
-          </Link>
-        </Container>
-      </div>
+      <Container style={{ marginTop: 15, marginBottom: 10 }}>
+        <List divided relaxed>
+          {this.listOfUsers()}
+        </List>
+        <Link to="/users/newUser" style={{ color: 'white' }}>
+          <Button color="green">New User</Button>
+        </Link>
+      </Container>
     );
   }
 }
