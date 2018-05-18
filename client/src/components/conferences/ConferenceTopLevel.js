@@ -9,7 +9,6 @@ import LIST_ALL_CASE_PRESENTATIONS from '../../queries/ListOfAllCasePresentation
 class ConferenceTopLevel extends Component {
   render() {
     const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
-    console.log(currentUser);
 
     return (
       <Container style={{ marginTop: '4.5em' }}>

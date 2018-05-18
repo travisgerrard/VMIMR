@@ -26,6 +26,8 @@ class CatagorizationForSaving extends Component {
               return { key: name, text: name, value: dbname };
             });
 
+            console.log(this.props.tags);
+
             return (
               <Form>
                 <Form.Input
@@ -52,6 +54,7 @@ class CatagorizationForSaving extends Component {
                   search
                   label="Presenter"
                   placeholder="The Presenter Is"
+                  defaultValue={this.props._presentor.id}
                   onChange={(params, data) =>
                     this.props.updateConferenceInputState(
                       `_presentor`,
@@ -65,6 +68,7 @@ class CatagorizationForSaving extends Component {
                   multiple
                   label="Rotation tags"
                   placeholder="Rotation tags"
+                  value={this.props.tags}
                   onChange={(params, data) =>
                     this.props.updateConferenceInputState(`tags`, data.value)
                   }

@@ -3,13 +3,10 @@
 
 import React, { Component } from 'react';
 import { Query, withApollo } from 'react-apollo';
-import { Container, Loader, Button, Modal } from 'semantic-ui-react';
-import DisplayConditionCards from '../conditionGraphQl/DisplayConditionCards';
+import { Container, Button, Modal } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
 
-import GET_CURRENT_USER from '../../queries/CurrentUser';
 import SELECTED_ROTATION from '../../queries/SelectedRotation';
-import GET_ROTATION_LEARNING from '../../queries/ListOfLearningWithTag';
 
 import RotationGeneralInfo from './RotationGeneralInfo';
 import RotationProviders from './RotationProviders';

@@ -16,7 +16,6 @@ import CatagorizationForSaving from './CategorizationForSaving';
 
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
 import UPDATE_CASE_PRESENTATION from '../../mutations/UpdateCasePresentation';
-import { stat } from 'fs';
 
 class NoonConference extends Component {
   state = {
@@ -67,12 +66,19 @@ class NoonConference extends Component {
   };
 
   saveClicked = updateCasePresentation => {
-    
-    var meds = this.state.meds.map(theMeds => {return theMeds.name});
-    var medSurgHx = this.state.medSurgHx.map(theMedSurgHx => {return theMedSurgHx.name});
-    var social = this.state.social.map(theSocial => {return theSocial.name});
-    var ddx = this.state.ddx.map(theDdx => {return theDdx.name});
-    
+    var meds = this.state.meds.map(theMeds => {
+      return theMeds.name;
+    });
+    var medSurgHx = this.state.medSurgHx.map(theMedSurgHx => {
+      return theMedSurgHx.name;
+    });
+    var social = this.state.social.map(theSocial => {
+      return theSocial.name;
+    });
+    var ddx = this.state.ddx.map(theDdx => {
+      return theDdx.name;
+    });
+
     updateCasePresentation({
       variables: {
         id: this.state.id,
@@ -110,6 +116,8 @@ class NoonConference extends Component {
         initialUpdate: true,
       },
     });
+
+    this.props.history.goBack();
   };
 
   render() {
@@ -146,9 +154,10 @@ class NoonConference extends Component {
                       key === 'medSurgHx' ||
                       key === 'social'
                     ) {
-                      
                       this.setState({
-                        [key]: value.map(name => {return {name, struckThrough: false}})
+                        [key]: value.map(name => {
+                          return { name, struckThrough: false };
+                        }),
                       });
                     } else {
                       this.setState({ [key]: value });

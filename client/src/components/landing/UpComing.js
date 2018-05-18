@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import schedule from './amionSchedule';
@@ -96,8 +96,8 @@ class UpComing extends Component {
     }
 
     return (
-      <Segment.Group style={{ paddingLeft: 15 }}>
-        <Segment>
+      <Segment.Group style={{ paddingLeft: 15, backgroundColor: '#F5F5F5' }}>
+        <Segment style={{ backgroundColor: '#F5F5F5' }}>
           <h4>Here's whats coming up on your schedule</h4>
         </Segment>
         <Segment.Group>
@@ -109,6 +109,13 @@ class UpComing extends Component {
               linkText = 'Gastroenterology%20(GI)';
             } else if (data.rotation === 'Eastgate') {
               linkText = 'General%20Internal%20Medicine%20(GIM)';
+            } else if (
+              data.rotation === 'Wards - team a' ||
+              data.rotation === 'Wards - team b' ||
+              data.rotation === 'Wards - team c' ||
+              data.rotation === 'Wards - team d'
+            ) {
+              linkText = 'Wards';
             } else {
               linkText = data.rotation;
             }

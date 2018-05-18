@@ -8,7 +8,15 @@ class Footer extends Component {
         style={{ marginTop: 25, backgroundColor: '#479E65' }}
       >
         <div className="ui center aligned container">
-          <h4 className="ui inverted header">This is the bottom of VMIMR</h4>
+          <h4 className="ui inverted header">
+            This is the bottom of VMIMR | Questions, Complaints? Email{' '}
+            <a
+              href="mailto:travis.gerrard@virginiamason.org"
+              style={{ color: 'white', textDecoration: 'underline' }}
+            >
+              travis.gerrard@virginiamason.org
+            </a>
+          </h4>
         </div>
       </div>
     );

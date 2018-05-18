@@ -7,8 +7,6 @@ import rotations from '../conditions/rotations';
 import ReactMarkdown from 'react-markdown';
 import './markdown.css';
 import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
-import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
-import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
 import ADD_LEARNING from '../../mutations/AddLearning';
 import GET_ROTATION_LEARNING from '../../queries/ListOfLearningWithTag';
 import { validateInputs } from './validation';

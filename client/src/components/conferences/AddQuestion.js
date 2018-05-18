@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import {
-  Container,
-  Segment,
-  Modal,
-  List,
-  Button,
-  Form,
-} from 'semantic-ui-react';
+import { Segment, Modal, Button, Form } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
 
 import ADD_QUESTION from '../../mutations/AddQuestionToCase';
@@ -76,6 +69,7 @@ class AddQuestion extends Component {
       if (option.answer) {
         answers.push(option.text);
       }
+      return true;
     });
     if (
       options.length > 0 &&

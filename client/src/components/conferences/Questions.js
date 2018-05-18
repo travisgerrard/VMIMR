@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Segment, Modal, List, Button } from 'semantic-ui-react';
+import { Container, Segment } from 'semantic-ui-react';
 
 import AddQuestion from './AddQuestion';
 import ShowQuestions from './ShowQuestions';
