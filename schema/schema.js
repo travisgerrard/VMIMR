@@ -475,7 +475,6 @@ var listOfUsersThatAreVisible = {
       ],
     });
 
-    console.log(user);
     return user;
   },
 };
