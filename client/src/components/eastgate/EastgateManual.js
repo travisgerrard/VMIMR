@@ -30,6 +30,7 @@ class EastgateManual extends Component {
     confirmOpen: false,
     idToDelete: '',
     modalHeader: 'Add Eastgate Manual Content',
+    visible: false,
   };
 
   submitAddContent = e => {
@@ -214,7 +215,10 @@ class EastgateManual extends Component {
                     </Grid.Column>
                   </Grid>
                   <span style={{ whiteSpace: 'pre-wrap' }}>
-                  <ReactMarkdown source={sectionContent} style={{whiteSpace: 'pre-wrap'}}/>
+                    <ReactMarkdown
+                      source={sectionContent}
+                      style={{ whiteSpace: 'pre-wrap' }}
+                    />
                   </span>
                 </section>
               </div>
@@ -225,7 +229,13 @@ class EastgateManual extends Component {
     );
   };
 
+  changeVisibleMenu = () => {
+    this.setState({ visible: !this.state.visible });
+  };
+
   render() {
+    const { visible } = this.state;
+
     return (
       <div>
         <Menu
@@ -234,15 +244,21 @@ class EastgateManual extends Component {
           vertical
           style={{
             position: 'fixed',
-            top: '0px',
-            bottom: '0px',
+            top: '75px',
             overflowY: 'auto',
-            width: '180px',
+            padding: 0,
+            width: visible ? '180px' : '0px',
           }}
         >
           <EastgateNavBar content={this.props.content} />
         </Menu>
-        <Segment basic style={{ position: 'relative', marginLeft: '200px' }}>
+        <Segment
+          basic
+          style={{
+            position: 'relative',
+            marginLeft: visible ? '190px' : '25px',
+          }}
+        >
           {this.returnContent()}
           <Divider />
           {this.addContentSection()}
@@ -260,6 +276,22 @@ class EastgateManual extends Component {
             this.setState({ confirmOpen: false });
           }}
         />
+        <Button
+          size="mini"
+          onClick={() => this.changeVisibleMenu()}
+          style={{
+            top: '80px',
+            paddingTop: 10,
+            paddingBottom: 10,
+            paddingLeft: 5,
+            paddingRight: 5,
+            position: 'fixed',
+            marginLeft: visible ? '180px' : 0,
+            float: 'left',
+          }}
+        >
+          {visible ? '<' : '>'}
+        </Button>
       </div>
     );
   }
