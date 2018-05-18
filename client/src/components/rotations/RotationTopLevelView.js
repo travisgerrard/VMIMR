@@ -38,16 +38,8 @@ class RotationTopLevelView extends Component {
     const { visible } = this.state;
 
     return (
-      <Sidebar.Pushable as={Segment}>
-        <Sidebar
-          as={Menu}
-          borderless
-          vertical
-          visible={visible}
-          style={{
-            top: '3.3em',
-          }}
-        >
+      <Sidebar.Pushable as={Segment} style={{ marginTop: 0 }}>
+        <Sidebar as={Menu} borderless vertical visible={visible}>
           <RotationNavBar
             rotationOnLanding={this.props.match.params.id}
             initialLoad={this.state.initialLoad}
@@ -57,16 +49,11 @@ class RotationTopLevelView extends Component {
           />
         </Sidebar>
         <Sidebar.Pusher>
-          <Segment
-            basic
-            style={{
-              marginTop: '3.3em',
-            }}
-          >
+          <Segment basic>
             {this.state.activeItemId ? (
               <div>
                 <Button
-                  size="tiny"
+                  size="mini"
                   onClick={() => this.changeVisibleMenu()}
                   style={{
                     marginLeft: -14,

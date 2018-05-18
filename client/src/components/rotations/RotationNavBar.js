@@ -1,22 +1,22 @@
-import React, { Component } from "react";
-import { Menu, Input } from "semantic-ui-react";
-import { Query, withApollo, graphql } from "react-apollo";
-import jwt_decode from "jwt-decode";
+import React, { Component } from 'react';
+import { Menu, Input } from 'semantic-ui-react';
+import { Query, withApollo, graphql } from 'react-apollo';
+import jwt_decode from 'jwt-decode';
 
-import GET_LIST_OF_ROTATIONS from "../../queries/ListOfRotations";
-import ADD_ROTATION from "../../mutations/AddRotation";
+import GET_LIST_OF_ROTATIONS from '../../queries/ListOfRotations';
+import ADD_ROTATION from '../../mutations/AddRotation';
 
 class RotationTopLevelView extends Component {
   state = {
-    rotationInput: "",
-    errors: ""
+    rotationInput: '',
+    errors: '',
   };
 
   listOfRotations = () => {
     return (
       <Query query={GET_LIST_OF_ROTATIONS}>
         {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+          if (loading) return 'Loading...';
           if (error) return `Error! ${error.message}`;
 
           const { activeItem } = this.props;
@@ -55,17 +55,17 @@ class RotationTopLevelView extends Component {
   };
 
   addRotation = () => {
-    const currentUser = jwt_decode(localStorage.getItem("VMIMRToken"));
+    const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
 
     this.props
       .mutate({
         variables: {
           title: this.state.rotationInput,
-          _creator: currentUser.sub
+          _creator: currentUser.sub,
         },
-        refetchQueries: [{ query: GET_LIST_OF_ROTATIONS }]
+        refetchQueries: [{ query: GET_LIST_OF_ROTATIONS }],
       })
-      .then(this.setState({ rotationInput: "" }))
+      .then(this.setState({ rotationInput: '' }))
       .catch(res => {
         const errors = res.graphQLErrors.map(error => error.message);
         this.setState({ errors });
@@ -73,13 +73,13 @@ class RotationTopLevelView extends Component {
   };
 
   handleKeyPress = e => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       this.addRotation();
     }
   };
 
   addRotationInput = () => {
-    const currentUser = jwt_decode(localStorage.getItem("VMIMRToken"));
+    const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
     if (currentUser.admin) {
       return (
         <Menu.Item>
@@ -88,7 +88,7 @@ class RotationTopLevelView extends Component {
             value={this.state.rotationInput}
             onChange={e => this.setState({ rotationInput: e.target.value })}
             onKeyPress={this.handleKeyPress}
-            style={{ width: "160px" }}
+            style={{ width: '160px' }}
           />
         </Menu.Item>
       );
@@ -99,7 +99,7 @@ class RotationTopLevelView extends Component {
 
   render() {
     return (
-      <Menu secondary vertical style={{ width: "160px", marginTop: 20 }}>
+      <Menu secondary vertical style={{ width: '160px' }}>
         {/*this.addRotationInput()*/}
         {this.listOfRotations()}
       </Menu>

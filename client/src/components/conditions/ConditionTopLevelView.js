@@ -19,7 +19,7 @@ class ConditionTopLevelView extends Component {
 
     return (
       <div>
-        <Container style={{ marginTop: '4.5em' }}>
+        <Container style={{ marginTop: 10 }}>
           <Menu pointing secondary>
             <Menu.Item
               name="all"

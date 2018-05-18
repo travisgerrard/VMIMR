@@ -10,7 +10,7 @@ class EastgateNavBar extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: '4.5em' }}>
+      <div>
         <ul style={{ paddingLeft: 0 }}>
           <Scrollspy
             items={this.props.content.map(({ sectionIndex }) => {

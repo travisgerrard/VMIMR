@@ -10,14 +10,10 @@ import Signin from './auth/Signin';
 const Landing = () => {
   var landingPage;
   if (localStorage.getItem('VMIMRToken') !== null) {
-    landingPage = (
-      <div>
-        <LandingPage />
-      </div>
-    );
+    landingPage = <LandingPage />;
   } else {
     landingPage = (
-      <Container style={{ marginTop: '4.5em' }} textAlign="center">
+      <Container textAlign="center">
         <h1>Virginia Mason: Internal Medicine Residency</h1>
         <p>Welcome to VM:IMR, the homepage for IM residents at VM</p>
         <p>Aiming to help organize your residency life and learning</p>

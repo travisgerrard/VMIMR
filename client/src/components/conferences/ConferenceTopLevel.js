@@ -11,7 +11,7 @@ class ConferenceTopLevel extends Component {
     const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
 
     return (
-      <Container style={{ marginTop: '4.5em' }}>
+      <Container>
         <Mutation
           mutation={ADD_CASE_PRESENTATION}
           refetchQueries={[{ query: LIST_ALL_CASE_PRESENTATIONS }]}

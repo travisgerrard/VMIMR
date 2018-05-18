@@ -66,7 +66,7 @@ class App extends Component {
           <Route path={`/messages`} component={RequireAuth(Messages)} />
           <Route
             exact
-            path={`/noonConference`}
+            path={`/Conference`}
             component={RequireAuth(ConferenceList)}
           />
           <Route

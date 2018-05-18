@@ -156,7 +156,7 @@ class ConditionTopLevelViewGQL extends Component {
 
   render() {
     return (
-      <Container style={{ marginTop: '4.5em' }}>
+      <Container style={{ marginTop: 10 }}>
         <SortConditionCards
           handleItemClick={this.handleSortItemClick}
           activeItem={this.state.sortActiveItem}

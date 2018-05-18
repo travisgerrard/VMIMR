@@ -19,7 +19,7 @@ class ModifyUser extends Component {
 
   render() {
     return (
-      <Container style={{ marginTop: '4.5em' }}>
+      <Container>
         <Query
           query={USER_WITH_ID}
           variables={{ id: this.props.match.params.id }}

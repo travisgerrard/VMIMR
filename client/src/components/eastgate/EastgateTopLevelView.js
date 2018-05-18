@@ -67,7 +67,7 @@ class EastgateTopLevelView extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: '4.5em' }}>
+      <div>
         <Query query={GET_ALL_EASTGATE_CONTENT}>
           {({ loading, error, data }) => {
             if (loading) return 'Loading...';

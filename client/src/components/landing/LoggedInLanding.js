@@ -10,7 +10,7 @@ class LoggedInLanding extends Component {
     var currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
     var name = currentUser.name.split(' ')[1];
     return (
-      <Container style={{ marginTop: '4em' }}>
+      <Container style={{ marginTop: 10 }}>
         <Segment>
           <h3>Hey there Dr. {name}, you're awesome</h3>
           <h4>

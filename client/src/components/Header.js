@@ -68,7 +68,10 @@ class Header extends Component {
 
   render() {
     return (
-      <Menu style={{ background: '#00b6de', borderRadius: '0px' }} inverted>
+      <Menu
+        style={{ background: '#00b6de', borderRadius: '0px', marginBottom: 0 }}
+        inverted
+      >
         <Menu.Item>
           <Link to="/">VM:IMR</Link>
         </Menu.Item>

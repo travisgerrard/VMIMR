@@ -40,7 +40,7 @@ class ConditionPage extends Component {
 
     if (condition !== undefined) {
       return (
-        <Container style={{ marginTop: '4.5em' }}>
+        <Container>
           <div>
             <h1>
               {condition.condition}
