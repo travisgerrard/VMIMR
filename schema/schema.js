@@ -937,7 +937,7 @@ var updateCasePresentation = {
       ddx,
     },
   ) {
-    console.log(title);
+    console.log(slideTextForSearch);
     var caseToBeUpdated = await CasePresentation.findOneAndUpdate(
       {
         _id: id,

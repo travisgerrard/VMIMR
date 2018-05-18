@@ -80,6 +80,8 @@ class NoonConference extends Component {
       return theDdx.name;
     });
 
+    console.log(this.state.slideTextForSearch);
+
     updateCasePresentation({
       variables: {
         id: this.state.id,
@@ -118,8 +120,6 @@ class NoonConference extends Component {
         initialUpdate: true,
       },
     });
-
-    this.props.history.goBack();
   };
 
   render() {
@@ -161,6 +161,8 @@ class NoonConference extends Component {
                           return { name, struckThrough: false };
                         }),
                       });
+                    } else if (key === '_presentor') {
+                      this.setState({ _presentor: value.id });
                     } else {
                       this.setState({ [key]: value });
                     }
@@ -179,6 +181,7 @@ class NoonConference extends Component {
                     variables: { id: this.props.caseId },
                   },
                 ]}
+                onCompleted={() => this.props.history.goBack()}
               >
                 {updateCasePresentation => (
                   <div>

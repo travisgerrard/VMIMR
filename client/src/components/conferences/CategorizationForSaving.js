@@ -54,7 +54,7 @@ class CatagorizationForSaving extends Component {
                   search
                   label="Presenter"
                   placeholder="The Presenter Is"
-                  defaultValue={this.props._presentor.id}
+                  defaultValue={this.props._presentor}
                   onChange={(params, data) =>
                     this.props.updateConferenceInputState(
                       `_presentor`,
