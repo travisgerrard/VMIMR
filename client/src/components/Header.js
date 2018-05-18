@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Menu, Icon } from 'semantic-ui-react';
+import { Menu, Icon, Grid } from 'semantic-ui-react';
 import * as actions from '../actions';
 import jwt_decode from 'jwt-decode';
 
 class Header extends Component {
+  state = {
+    mobileMenuVisible: false,
+  };
+
   adminLinks() {
     if (localStorage.getItem('VMIMRToken') !== null) {
       if (jwt_decode(localStorage.getItem('VMIMRToken')).admin) {
         return [
-          <Menu.Item key="1" position="right">
+          <Menu.Item key="1" position="right" style={{ cursor: 'pointer' }}>
             <Link to="/users">Users</Link>
           </Menu.Item>,
         ];
@@ -22,7 +26,7 @@ class Header extends Component {
     if (localStorage.getItem('VMIMRToken') !== null) {
       if (jwt_decode(localStorage.getItem('VMIMRToken')).eastgate) {
         return [
-          <Menu.Item key="1" position="right">
+          <Menu.Item key="1" position="right" style={{ cursor: 'pointer' }}>
             <Link to="/eastgate">Eastgate</Link>
           </Menu.Item>,
         ];
@@ -34,26 +38,24 @@ class Header extends Component {
     if (this.props.authenticated) {
       // show sign out
       return [
-        <Menu.Item key="4" position="right">
+        <Menu.Item key="4" position="right" style={{ cursor: 'pointer' }}>
           <a href="/rotations">Rotations</a>
         </Menu.Item>,
-        <Menu.Item key="1" position="right">
+        <Menu.Item key="1" position="right" style={{ cursor: 'pointer' }}>
           <Link to="/Conference">Conference</Link>
         </Menu.Item>,
-        <Menu.Item key="2" position="right">
+        <Menu.Item key="2" position="right" style={{ cursor: 'pointer' }}>
           <Link to="/conditions">Learning</Link>
         </Menu.Item>,
 
-        <Menu.Item key="3" position="right">
-          <a href="/">
-            <Icon
-              name="x"
-              size="large"
-              onClick={() => {
-                this.props.signoutUser();
-              }}
-            />
-          </a>
+        <Menu.Item
+          key="3"
+          position="right"
+          onClick={() => {
+            this.props.signoutUser();
+          }}
+        >
+          <a href="/">Sign Out</a>
         </Menu.Item>,
       ];
     } else {
@@ -66,22 +68,86 @@ class Header extends Component {
     }
   }
 
+  expandMobileMenu = () => {
+    this.setState({ mobileMenuVisible: !this.state.mobileMenuVisible });
+  };
+
   render() {
     return (
-      <Menu
-        style={{ background: '#00b6de', borderRadius: '0px', marginBottom: 0 }}
-        inverted
-      >
-        <Menu.Item>
-          <Link to="/">VM:IMR</Link>
-        </Menu.Item>
+      <Grid>
+        <Grid.Row columns={1} only="mobile">
+          <Grid.Column>
+            <Menu
+              style={{
+                background: '#00b6de',
+                borderRadius: '0px',
+                marginBottom: 0,
+              }}
+              inverted
+            >
+              <Menu.Item>
+                <Link to="/">VM:IMR</Link>
+              </Menu.Item>
 
-        <Menu.Menu position="right">
-          {this.adminLinks()}
-          {this.eastgateLink()}
-          {this.renderLinks()}
-        </Menu.Menu>
-      </Menu>
+              <Menu.Menu position="right">
+                <Menu.Item
+                  key="3"
+                  position="right"
+                  style={{ cursor: 'pointer' }}
+                >
+                  <Icon
+                    name="sidebar"
+                    size="large"
+                    onClick={() => {
+                      this.expandMobileMenu();
+                    }}
+                  />
+                </Menu.Item>
+              </Menu.Menu>
+            </Menu>
+            {this.state.mobileMenuVisible && (
+              <Menu
+                style={{
+                  background: '#00b6de',
+                  borderRadius: '0px',
+                  marginBottom: 0,
+                  marginTop: 0,
+                }}
+                inverted
+                stackable
+              >
+                <Menu.Menu position="right">
+                  {this.adminLinks()}
+                  {this.eastgateLink()}
+                  {this.renderLinks()}
+                </Menu.Menu>{' '}
+              </Menu>
+            )}
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1} only="tablet computer">
+          <Grid.Column>
+            <Menu
+              style={{
+                background: '#00b6de',
+                borderRadius: '0px',
+                marginBottom: 0,
+              }}
+              inverted
+            >
+              <Menu.Item>
+                <Link to="/">VM:IMR</Link>
+              </Menu.Item>
+
+              <Menu.Menu position="right">
+                {this.adminLinks()}
+                {this.eastgateLink()}
+                {this.renderLinks()}
+              </Menu.Menu>
+            </Menu>{' '}
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }
