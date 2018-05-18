@@ -47,6 +47,7 @@ class NoonConference extends Component {
     imaging: '',
     questions: [],
     embedPresentationSting: '',
+    slideTextForSearch: '',
     physicalExam: EditorState.createWithContent(
       stateFromMarkdown(PHYSICALEXAMMARKDOWN),
     ),
@@ -104,6 +105,7 @@ class NoonConference extends Component {
         additionalLabs: this.state.additionalLabs,
         imaging: this.state.imaging,
         embedPresentationSting: this.state.embedPresentationSting,
+        slideTextForSearch: this.state.slideTextForSearch,
         physicalExam: stateToMarkdown(
           this.state.physicalExam.getCurrentContent(),
         ),
@@ -222,6 +224,7 @@ class NoonConference extends Component {
                       updateConferenceInputState={(name, value) =>
                         this.updateConferenceInputState(name, value)
                       }
+                      slideTextForSearch={this.state.slideTextForSearch}
                     />
                     <CatagorizationForSaving
                       updateConferenceInputState={(name, value) =>

@@ -142,7 +142,7 @@ class AddCondition extends Component {
     });
 
     return (
-      <div>
+      <Segment>
         <Query query={LIST_ALL_USERS}>
           {({ loading, error, data }) => {
             if (loading) return <Loader active inline="centered" />;
@@ -206,9 +206,12 @@ class AddCondition extends Component {
         ) : (
           ''
         )}
-        <p>
+        <p style={{ marginTop: 10 }}>
           FYI: This site uses{' '}
-          <a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">
+          <a
+            href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf"
+            target="_blank"
+          >
             Markdown
           </a>{' '}
           to style text
@@ -235,7 +238,7 @@ class AddCondition extends Component {
           )}
         </Segment>
         <br />
-      </div>
+      </Segment>
     );
   }
 }

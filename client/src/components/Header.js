@@ -10,9 +10,7 @@ class Header extends Component {
     if (localStorage.getItem('VMIMRToken') !== null) {
       if (jwt_decode(localStorage.getItem('VMIMRToken')).admin) {
         return [
-          <Menu.Item key="2" position="right">
-            <a href="/rotations">Rotations</a>
-          </Menu.Item>,
+          ,
           <Menu.Item key="1" position="right">
             <Link to="/users">Users</Link>
           </Menu.Item>,
@@ -25,11 +23,14 @@ class Header extends Component {
     if (this.props.authenticated) {
       // show sign out
       return [
+        <Menu.Item key="4" position="right">
+          <a href="/rotations">Rotations</a>
+        </Menu.Item>,
         <Menu.Item key="1" position="right">
-          <Link to="/noonConference">NoonConference</Link>
+          <Link to="/Conference">Conference</Link>
         </Menu.Item>,
         <Menu.Item key="2" position="right">
-          <Link to="/conditions">Conditions</Link>
+          <Link to="/conditions">Learning</Link>
         </Menu.Item>,
 
         <Menu.Item key="3" position="right">

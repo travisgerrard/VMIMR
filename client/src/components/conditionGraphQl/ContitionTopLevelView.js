@@ -1,6 +1,6 @@
 // Top level view for adding / searching learning
 import React, { Component } from 'react';
-import { Container, Loader, Message } from 'semantic-ui-react';
+import { Container, Loader, Message, Modal } from 'semantic-ui-react';
 import { Query, withApollo } from 'react-apollo';
 import _ from 'lodash';
 
@@ -94,44 +94,6 @@ class ConditionTopLevelViewGQL extends Component {
 
   // Decideds what user should see depending on if user is creating/editing learning or looking for past learing
   isAddingCondition = (queryDataToDisplay, currentUser) => {
-    if (this.state.addingLearning) {
-      return (
-        <AddCondition
-          conditionTitle={this.state.searchTerm}
-          doneAddingLearning={() => this.learningAdded()}
-          cancelAddingcondition={() =>
-            this.setState({
-              addingLearning: false,
-            })
-          }
-          currentUser={currentUser}
-          sortingBy={this.state.sortActiveItem}
-        />
-      );
-    } else if (this.state.editingLearning) {
-      return (
-        <Query
-          query={LEARNING_TO_EDIT}
-          variables={{ id: this.state.learningIdToEdit }}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return <Loader active inline="centered" />;
-            if (error) return `Error! ${error.message}`;
-
-            return (
-              <EditCondition
-                conditionTitle={this.state.searchTerm}
-                doneEditingLearning={() => this.doneEditingLearning()}
-                cancelAddingcondition={() => this.doneEditingLearning()}
-                currentUser={currentUser}
-                learning={data.returnLearning}
-                sortingBy={this.state.sortActiveItem}
-              />
-            );
-          }}
-        </Query>
-      );
-    }
     return (
       <div>
         <SearchBox
@@ -145,6 +107,49 @@ class ConditionTopLevelViewGQL extends Component {
           currentUser={currentUser}
           editLearning={learningId => this.editingLearning(learningId)}
         />
+        <Modal open={this.state.editingLearning} size="large">
+          <Modal.Header>Edit learning</Modal.Header>
+
+          <Query
+            query={LEARNING_TO_EDIT}
+            variables={{ id: this.state.learningIdToEdit }}
+          >
+            {({ loading, error, data }) => {
+              if (loading)
+                return (
+                  <div style={{ marginTop: 50 }}>
+                    <Loader active inline="centered" />
+                  </div>
+                );
+              if (error) return `Error! ${error.message}`;
+
+              return (
+                <EditCondition
+                  conditionTitle={this.state.searchTerm}
+                  doneEditingLearning={() => this.doneEditingLearning()}
+                  cancelAddingcondition={() => this.doneEditingLearning()}
+                  currentUser={currentUser}
+                  learning={data.returnLearning}
+                  sortingBy={this.state.sortActiveItem}
+                />
+              );
+            }}
+          </Query>
+        </Modal>
+        <Modal open={this.state.addingLearning} size="large">
+          <Modal.Header>Add learning</Modal.Header>
+          <AddCondition
+            conditionTitle={this.state.searchTerm}
+            doneAddingLearning={() => this.learningAdded()}
+            cancelAddingcondition={() =>
+              this.setState({
+                addingLearning: false,
+              })
+            }
+            currentUser={currentUser}
+            sortingBy={this.state.sortActiveItem}
+          />
+        </Modal>
       </div>
     );
   };

@@ -165,7 +165,7 @@ class EditCondition extends Component {
     });
 
     return (
-      <div>
+      <Segment>
         <Query query={LIST_ALL_USERS}>
           {({ loading, error, data }) => {
             if (loading) return <Loader active inline="centered" />;
@@ -285,7 +285,7 @@ class EditCondition extends Component {
           )}
         </Segment>
         <br />
-      </div>
+      </Segment>
     );
   }
 }
