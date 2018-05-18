@@ -8,6 +8,7 @@ export default gql`
     $email: String!
     $admin: Boolean!
     $eastgate: Boolean!
+    $visible: Boolean!
   ) {
     addUser(
       id: $id
@@ -16,6 +17,7 @@ export default gql`
       email: $email
       admin: $admin
       eastgate: $eastgate
+      visible: $visible
     ) {
       id
       name
@@ -23,6 +25,7 @@ export default gql`
       email
       admin
       eastgate
+      visible
     }
   }
 `;

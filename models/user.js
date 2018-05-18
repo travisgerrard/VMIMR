@@ -9,6 +9,7 @@ const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   phoneNumber: { type: String, unique: true },
   eastgate: { type: Boolean, default: false },
+  visible: { type: Boolean, default: true },
   pushToken: String,
   password: String,
   creationTime: Date,

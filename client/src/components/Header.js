@@ -54,8 +54,9 @@ class Header extends Component {
           onClick={() => {
             this.props.signoutUser();
           }}
+          style={{ cursor: 'pointer' }}
         >
-          <a href="/">Sign Out</a>
+          Sign Out
         </Menu.Item>,
       ];
     } else {

@@ -6,7 +6,7 @@ import { Query, Mutation } from 'react-apollo';
 import rotations from '../conditions/rotations';
 import ReactMarkdown from 'react-markdown';
 import './markdown.css';
-import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
+import LIST_ALL_USERS_THAT_ARE_VISIBLE from '../../queries/ListOfAllUsersThatAreVisible';
 import ADD_LEARNING from '../../mutations/AddLearning';
 import GET_ROTATION_LEARNING from '../../queries/ListOfLearningWithTag';
 import { validateInputs } from './validation';
@@ -148,14 +148,17 @@ class AddConditionFromRotation extends Component {
 
     return (
       <Segment>
-        <Query query={LIST_ALL_USERS}>
+        <Query query={LIST_ALL_USERS_THAT_ARE_VISIBLE}>
           {({ loading, error, data }) => {
             if (loading) return <Loader active inline="centered" />;
             if (error) return `Error! ${error.message}`;
 
-            const listOfUsers = _.map(data.listOfUsers, ({ name, id }) => {
-              return { key: id, text: name, value: id };
-            });
+            const listOfUsers = _.map(
+              data.listOfUsersThatAreVisible,
+              ({ name, id }) => {
+                return { key: id, text: name, value: id };
+              },
+            );
 
             return (
               <Mutation

@@ -76,6 +76,10 @@ var UserType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'does user goto eastgate?',
     },
+    visible: {
+      type: GraphQLBoolean,
+      description: 'Should this user be taggable in learning?',
+    },
   }),
 });
 
@@ -456,6 +460,26 @@ var listOfUsers = {
   },
 };
 
+var listOfUsersThatAreVisible = {
+  type: GraphQLList(UserType),
+  description: 'List of all the users',
+  async resolve(parentValues, args, req) {
+    var user = await User.find({
+      $or: [
+        {
+          visible: 'true',
+        },
+        {
+          visible: true,
+        },
+      ],
+    });
+
+    console.log(user);
+    return user;
+  },
+};
+
 var userWithId = {
   type: UserType,
   description: 'User with respeictive ID',
@@ -633,6 +657,7 @@ var RootQueryType = new GraphQLObjectType({
   fields: () => ({
     currentUser,
     listOfUsers,
+    listOfUsersThatAreVisible,
     userWithId,
     listOfProviders,
     listOfRotations,
@@ -665,8 +690,12 @@ var addUser = {
     email: { type: new GraphQLNonNull(GraphQLString) },
     admin: { type: new GraphQLNonNull(GraphQLBoolean) },
     eastgate: { type: new GraphQLNonNull(GraphQLBoolean) },
+    visible: { type: new GraphQLNonNull(GraphQLBoolean) },
   },
-  async resolve(parentValues, { id, name, username, email, admin, eastgate }) {
+  async resolve(
+    parentValues,
+    { id, name, username, email, admin, eastgate, visible },
+  ) {
     if (id === '12345') {
       var newUser = new User({
         name,
@@ -674,6 +703,7 @@ var addUser = {
         email,
         admin,
         eastgate,
+        visible,
         creationTime: Date.now(),
       });
 
@@ -688,7 +718,7 @@ var addUser = {
 
     return await User.findByIdAndUpdate(
       id,
-      { name, username, email, admin, eastgate },
+      { name, username, email, admin, eastgate, visible },
       { new: true },
     );
   },

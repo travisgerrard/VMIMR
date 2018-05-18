@@ -14,6 +14,7 @@ class ModifyUser extends Component {
     email: '',
     admin: false,
     eastgate: false,
+    visible: false,
     initialLoad: true,
   };
 
@@ -37,6 +38,7 @@ class ModifyUser extends Component {
                   email: data.userWithId.email,
                   admin: data.userWithId.admin,
                   eastgate: data.userWithId.eastgate,
+                  visible: data.userWithId.visible,
                   initialLoad: false,
                 });
               }
@@ -86,7 +88,15 @@ class ModifyUser extends Component {
                         this.setState({ eastgate: !this.state.eastgate })
                       }
                     />
-
+                    <Form.Field
+                      label="visible"
+                      control="input"
+                      type="checkbox"
+                      checked={this.state.visible}
+                      onChange={e =>
+                        this.setState({ visible: !this.state.visible })
+                      }
+                    />
                     <Form.Group>
                       <Form.Button
                         color="green"
@@ -101,6 +111,7 @@ class ModifyUser extends Component {
                               email: this.state.email,
                               admin: this.state.admin,
                               eastgate: this.state.eastgate,
+                              visible: this.state.visible,
                             },
                           });
                         }}
