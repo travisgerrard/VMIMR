@@ -13,6 +13,7 @@ class ModifyUser extends Component {
     username: '',
     email: '',
     admin: false,
+    eastgate: false,
     initialLoad: true,
   };
 
@@ -35,6 +36,7 @@ class ModifyUser extends Component {
                   username: data.userWithId.username,
                   email: data.userWithId.email,
                   admin: data.userWithId.admin,
+                  eastgate: data.userWithId.eastgate,
                   initialLoad: false,
                 });
               }
@@ -75,11 +77,22 @@ class ModifyUser extends Component {
                         this.setState({ admin: !this.state.admin })
                       }
                     />
+                    <Form.Field
+                      label="eastgate"
+                      control="input"
+                      type="checkbox"
+                      checked={this.state.eastgate}
+                      onChange={e =>
+                        this.setState({ eastgate: !this.state.eastgate })
+                      }
+                    />
 
                     <Form.Group>
                       <Form.Button
                         color="green"
                         onClick={() => {
+                          console.log(this.state.eastgate);
+
                           addUser({
                             variables: {
                               id: this.state.id,
@@ -87,6 +100,7 @@ class ModifyUser extends Component {
                               username: this.state.username,
                               email: this.state.email,
                               admin: this.state.admin,
+                              eastgate: this.state.eastgate,
                             },
                           });
                         }}

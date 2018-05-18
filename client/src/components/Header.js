@@ -19,6 +19,19 @@ class Header extends Component {
     }
   }
 
+  eastgateLink() {
+    if (localStorage.getItem('VMIMRToken') !== null) {
+      if (jwt_decode(localStorage.getItem('VMIMRToken')).eastgate) {
+        return [
+          ,
+          <Menu.Item key="1" position="right">
+            <Link to="/eastgate">Eastgate</Link>
+          </Menu.Item>,
+        ];
+      }
+    }
+  }
+
   renderLinks() {
     if (this.props.authenticated) {
       // show sign out
@@ -68,6 +81,7 @@ class Header extends Component {
 
         <Menu.Menu position="right">
           {this.adminLinks()}
+          {this.eastgateLink()}
           {this.renderLinks()}
         </Menu.Menu>
       </Menu>

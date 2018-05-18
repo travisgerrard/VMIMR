@@ -7,8 +7,14 @@ const User = mongoose.model('users');
 function tokenForUser(user) {
   const timestamp = new Date().getTime();
   return jwt.encode(
-    { sub: user.id, iat: timestamp, admin: user.admin, name: user.name },
-    keys.tokenKey
+    {
+      sub: user.id,
+      iat: timestamp,
+      admin: user.admin,
+      name: user.name,
+      eastgate: user.eastgate,
+    },
+    keys.tokenKey,
   );
 }
 
@@ -20,13 +26,13 @@ exports.signin = function(req, res, next) {
       user,
       {
         $set: {
-          lastSignInTime: Date.now()
-        }
+          lastSignInTime: Date.now(),
+        },
       },
       function(err, numAffected, raw) {
         if (err) console.log(err);
         console.log('updated ' + JSON.stringify(numAffected));
-      }
+      },
     );
   });
   // User has already had their email and password auth'd
@@ -59,7 +65,7 @@ exports.signup = function(req, res, next) {
     // If a uer with email does NOT exist, create and save user
     const user = new User({
       email: email,
-      password: password
+      password: password,
     });
 
     user.save(function(err) {

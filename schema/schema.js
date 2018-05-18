@@ -72,6 +72,10 @@ var UserType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'Is user an admin?',
     },
+    eastgate: {
+      type: GraphQLBoolean,
+      description: 'does user goto eastgate?',
+    },
   }),
 });
 
@@ -660,14 +664,16 @@ var addUser = {
     username: { type: new GraphQLNonNull(GraphQLString) },
     email: { type: new GraphQLNonNull(GraphQLString) },
     admin: { type: new GraphQLNonNull(GraphQLBoolean) },
+    eastgate: { type: new GraphQLNonNull(GraphQLBoolean) },
   },
-  async resolve(parentValues, { id, name, username, email, admin }) {
+  async resolve(parentValues, { id, name, username, email, admin, eastgate }) {
     if (id === '12345') {
       var newUser = new User({
         name,
         username,
         email,
         admin,
+        eastgate,
         creationTime: Date.now(),
       });
 
@@ -682,7 +688,7 @@ var addUser = {
 
     return await User.findByIdAndUpdate(
       id,
-      { name, username, email, admin },
+      { name, username, email, admin, eastgate },
       { new: true },
     );
   },

@@ -7,6 +7,7 @@ export default gql`
     $username: String!
     $email: String!
     $admin: Boolean!
+    $eastgate: Boolean!
   ) {
     addUser(
       id: $id
@@ -14,12 +15,14 @@ export default gql`
       username: $username
       email: $email
       admin: $admin
+      eastgate: $eastgate
     ) {
       id
       name
       username
       email
       admin
+      eastgate
     }
   }
 `;

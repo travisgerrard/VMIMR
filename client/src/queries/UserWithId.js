@@ -8,6 +8,7 @@ export default gql`
       username
       email
       admin
+      eastgate
     }
   }
 `;
