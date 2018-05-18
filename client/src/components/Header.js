@@ -10,7 +10,6 @@ class Header extends Component {
     if (localStorage.getItem('VMIMRToken') !== null) {
       if (jwt_decode(localStorage.getItem('VMIMRToken')).admin) {
         return [
-          ,
           <Menu.Item key="1" position="right">
             <Link to="/users">Users</Link>
           </Menu.Item>,
@@ -23,7 +22,6 @@ class Header extends Component {
     if (localStorage.getItem('VMIMRToken') !== null) {
       if (jwt_decode(localStorage.getItem('VMIMRToken')).eastgate) {
         return [
-          ,
           <Menu.Item key="1" position="right">
             <Link to="/eastgate">Eastgate</Link>
           </Menu.Item>,

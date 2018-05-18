@@ -211,6 +211,7 @@ class AddCondition extends Component {
           <a
             href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf"
             target="_blank"
+            rel="noreferrer noopener"
           >
             Markdown
           </a>{' '}
