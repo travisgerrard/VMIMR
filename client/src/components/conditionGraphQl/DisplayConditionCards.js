@@ -96,7 +96,7 @@ class DisplayConditionCards extends Component {
         {this.returnUsersTagged(usersTagged)}
         <Card.Description>
           <span style={{ whiteSpace: 'pre-wrap' }}>
-            <ReactMarkdown source={whatWasLearned} />
+            <ReactMarkdown source={whatWasLearned} escapeHtml={false} />
           </span>
         </Card.Description>
       </Card.Content>

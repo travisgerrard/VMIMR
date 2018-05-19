@@ -51,7 +51,7 @@ class RotationGeneralInfo extends Component {
             Edit
           </Button>
           <Segment stacked style={{ marginRight: 25, whiteSpace: 'pre-wrap' }}>
-            <ReactMarkdown source={this.state.generalInfo} />
+            <ReactMarkdown source={this.state.generalInfo} escapeHtml={false} />
           </Segment>
         </div>
       );
@@ -76,7 +76,7 @@ class RotationGeneralInfo extends Component {
         <div>
           <h4>General Info</h4>
           <Segment stacked style={{ marginRight: 25, whiteSpace: 'pre-wrap' }}>
-            <ReactMarkdown source={generalInfo} />
+            <ReactMarkdown source={generalInfo} escapeHtml={false} />
           </Segment>
         </div>
       );

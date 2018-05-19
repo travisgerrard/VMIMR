@@ -235,7 +235,7 @@ class AddCondition extends Component {
         <Segment>
           {this.state.wwl ? (
             <span style={{ whiteSpace: 'pre-wrap' }}>
-              <ReactMarkdown source={this.state.wwl} />
+              <ReactMarkdown source={this.state.wwl} escapeHtml={false} />
             </span>
           ) : (
             <p>Start typeing above to see preview</p>

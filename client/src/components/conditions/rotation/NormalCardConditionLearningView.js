@@ -9,7 +9,7 @@ class NormalCardConditionLearningView extends Component {
   state = { showAllText: false };
 
   learningText = text => {
-    return <ReactMarkdown source={text} />;
+    return <ReactMarkdown source={text} escapeHtml={false} />;
   };
 
   showEdit = () => {
