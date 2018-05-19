@@ -1,44 +1,53 @@
-// Add condition form
+// Edit condition form
 
 import React, { Component } from 'react';
 import { Segment, Form, Loader, Message } from 'semantic-ui-react';
-import moment from 'moment';
 import _ from 'lodash';
 import { Query, Mutation } from 'react-apollo';
 import rotations from '../conditions/rotations';
 import ReactMarkdown from 'react-markdown';
 import './markdown.css';
-import LIST_ALL_USERS_THAT_ARE_VISIBLE from '../../queries/ListOfAllUsersThatAreVisible';
+import LIST_ALL_USERS from '../../queries/ListOfAllUsers';
 import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
 import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
-import ADD_LEARNING from '../../mutations/AddLearning';
+import UPDATE_LEARNING from '../../mutations/UpdateLearning';
+import DELETE_LEARNING from '../../mutations/DeleteLearning';
 import { validateInputs } from './validation';
 
-class AddCondition extends Component {
+class EditConditionFromRotation extends Component {
   state = {
-    conditionTitle: this.props.conditionTitle,
-    tags: [],
-    attending: '',
-    date: moment().format('MM/DD/YY'),
-    userTags: [],
-    wwl: '',
+    conditionTitle: this.props.learning._condition.condition,
+    tags: this.props.learning.tags,
+    attending: this.props.learning.seenWith,
+    date: this.props.learning.dateField,
+    userTags: _.map(this.props.learning.usersTagged, ({ id }) => {
+      return id;
+    }),
+    wwl: this.props.learning.whatWasLearned,
     error: '',
-    formError: false,
   };
 
   cancelClicked = () => {
     this.props.cancelAddingcondition();
   };
 
-  gutsOfAddLearning = (options, listOfUsers, addLearning, loading) => {
+  deleteClicked = () => {};
+
+  gutsOfeditLearning = (
+    options,
+    listOfUsers,
+    editLearning,
+    deleteLearning,
+    loading,
+  ) => {
     return (
       <div>
         <Segment stacked>
           <Form loading={loading}>
             <Form.Group widths="equal">
               <Form.Input
-                label="Title"
-                placeholder="Intial managment of angina"
+                label="Name"
+                placeholder="Ex: ARDS"
                 value={this.state.conditionTitle}
                 onChange={(params, data) =>
                   this.setState({ conditionTitle: data.value })
@@ -101,11 +110,11 @@ class AddCondition extends Component {
                   );
 
                   const { error } = isValid;
-                  if (!error) {
-                    console.log('adding learning');
 
-                    addLearning({
+                  if (!error) {
+                    editLearning({
                       variables: {
+                        id: this.props.learning.id,
                         condition: this.state.conditionTitle,
                         tags: this.state.tags,
                         attending: this.state.attending,
@@ -115,7 +124,7 @@ class AddCondition extends Component {
                       },
                     });
                   } else {
-                    this.setState({ error: error });
+                    this.setState({ error });
                   }
                 }}
               >
@@ -128,6 +137,20 @@ class AddCondition extends Component {
                 onClick={() => this.cancelClicked()}
               >
                 Cancel
+              </Form.Button>
+              <Form.Button
+                basic
+                fluid
+                color="red"
+                onClick={() => {
+                  deleteLearning({
+                    variables: {
+                      id: this.props.learning.id,
+                    },
+                  });
+                }}
+              >
+                Delete
               </Form.Button>
             </Form.Group>
           </Form>
@@ -143,59 +166,83 @@ class AddCondition extends Component {
 
     return (
       <Segment>
-        <Query query={LIST_ALL_USERS_THAT_ARE_VISIBLE}>
+        <Query query={LIST_ALL_USERS}>
           {({ loading, error, data }) => {
             if (loading) return <Loader active inline="centered" />;
             if (error) return `Error! ${error.message}`;
 
-            const listOfUsers = _.map(
-              data.listOfUsersThatAreVisible,
-              ({ name, id }) => {
-                return { key: id, text: name, value: id };
-              },
-            );
+            const listOfUsers = _.map(data.listOfUsers, ({ name, id }) => {
+              return { key: id, text: name, value: id };
+            });
 
-            // If statement so that proper query can be refetched
             if (this.props.sortingBy === 'Your Personal Learning') {
               return (
                 <Mutation
-                  mutation={ADD_LEARNING}
+                  mutation={UPDATE_LEARNING}
                   refetchQueries={[
                     {
                       query: GET_PERSONAL_LEARNING,
                       variables: { id: this.props.currentUser.id },
                     },
                   ]}
-                  onCompleted={() => this.props.doneAddingLearning()}
-                  onError={() => console.log(error)}
+                  onCompleted={() => this.props.doneEditingLearning()}
                 >
-                  {(addLearning, { data, loading, error }) => (
-                    <div>
-                      {this.gutsOfAddLearning(
-                        options,
-                        listOfUsers,
-                        addLearning,
-                        loading,
+                  {(editLearning, { data, loading, error }) => (
+                    <Mutation
+                      mutation={DELETE_LEARNING}
+                      variables={{ id: this.props.learning.id }}
+                      refetchQueries={[
+                        {
+                          query: GET_PERSONAL_LEARNING,
+                          variables: { id: this.props.currentUser.id },
+                        },
+                      ]}
+                      onCompleted={() => this.props.doneEditingLearning()}
+                    >
+                      {(deleteLearning, { data, loading, error }) => (
+                        <div>
+                          {this.gutsOfeditLearning(
+                            options,
+                            listOfUsers,
+                            editLearning,
+                            deleteLearning,
+                            loading,
+                          )}
+                        </div>
                       )}
-                    </div>
+                    </Mutation>
                   )}
                 </Mutation>
               );
             } else {
               return (
                 <Mutation
-                  mutation={ADD_LEARNING}
+                  mutation={UPDATE_LEARNING}
                   refetchQueries={[{ query: GET_ALL_LEARNING }]}
                 >
-                  {(addLearning, { data, loading, error }) => (
-                    <div>
-                      {this.gutsOfAddLearning(
-                        options,
-                        listOfUsers,
-                        addLearning,
-                        loading,
+                  {(editLearning, { data }) => (
+                    <Mutation
+                      mutation={DELETE_LEARNING}
+                      variables={{ id: this.props.learning.id }}
+                      refetchQueries={[
+                        {
+                          query: GET_PERSONAL_LEARNING,
+                          variables: { id: this.props.currentUser.id },
+                        },
+                      ]}
+                      onCompleted={() => this.props.doneEditingLearning()}
+                    >
+                      {(deleteLearning, { data, loading, error }) => (
+                        <div>
+                          {this.gutsOfeditLearning(
+                            options,
+                            listOfUsers,
+                            editLearning,
+                            deleteLearning,
+                          )}
+                        </div>
                       )}
-                    </div>
+                    </Mutation>
                   )}
                 </Mutation>
               );
@@ -209,13 +256,9 @@ class AddCondition extends Component {
         ) : (
           ''
         )}
-        <p style={{ marginTop: 10 }}>
+        <p>
           FYI: This site uses{' '}
-          <a
-            href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
+          <a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">
             Markdown
           </a>{' '}
           to style text
@@ -247,4 +290,4 @@ class AddCondition extends Component {
   }
 }
 
-export default AddCondition;
+export default EditConditionFromRotation;

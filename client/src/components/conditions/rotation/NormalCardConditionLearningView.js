@@ -14,7 +14,7 @@ class NormalCardConditionLearningView extends Component {
 
   showEdit = () => {
     const didUserCreate =
-      this.props._creator === this.props.auth.userDetails.sub;
+      this.props._creator === this.props.auth.userDetails.id;
     if (didUserCreate) return true;
     return false;
   };

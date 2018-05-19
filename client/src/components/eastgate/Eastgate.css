@@ -1,9 +1,4 @@
-:target:before {
-  content:"";
-  display:block;
-  height:3.5em; /* fixed header height*/
-  margin:3.5em 0 0; /* negative fixed header height */
-}
+
 
 .is-current {
     font-weight: bold;  

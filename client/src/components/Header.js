@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { Query } from 'react-apollo';
+
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Menu, Icon, Grid } from 'semantic-ui-react';
+import { Menu, Icon, Grid, Dropdown } from 'semantic-ui-react';
 import * as actions from '../actions';
 import jwt_decode from 'jwt-decode';
+
+import GET_LIST_OF_ROTATIONS from '../queries/ListOfRotations';
 
 class Header extends Component {
   state = {
@@ -34,29 +38,67 @@ class Header extends Component {
     }
   }
 
+  returnRotations = () => {
+    return (
+      <Query query={GET_LIST_OF_ROTATIONS}>
+        {({ loading, error, data }) => {
+          if (loading) return 'Loading...';
+          if (error) return `Error! ${error.message}`;
+
+          var sortedArray = data.listOfRotations.slice();
+          sortedArray.sort(function(a, b) {
+            if (a.title < b.title) return -1;
+            if (a.title > b.title) return 1;
+            return 0;
+          });
+
+          return sortedArray.map(rotation => {
+            return (
+              <Dropdown.Item
+                name={rotation.title}
+                id={rotation.id}
+                key={rotation.title}
+              >
+                <Link
+                  to={`/rotations/${rotation.title}`}
+                  style={{ color: 'black' }}
+                >
+                  {rotation.title}
+                </Link>
+              </Dropdown.Item>
+            );
+          });
+        }}
+      </Query>
+    );
+  };
+
   renderLinks() {
     if (this.props.authenticated) {
       // show sign out
       return [
-        <Menu.Item key="4" position="right" style={{ cursor: 'pointer' }}>
-          <a href="/rotations">Rotations</a>
-        </Menu.Item>,
+        <Dropdown key="4" item text="Rotations">
+          <Dropdown.Menu>{this.returnRotations()}</Dropdown.Menu>
+        </Dropdown>,
+
         <Menu.Item key="1" position="right" style={{ cursor: 'pointer' }}>
           <Link to="/Conference">Conference</Link>
         </Menu.Item>,
         <Menu.Item key="2" position="right" style={{ cursor: 'pointer' }}>
           <Link to="/conditions">Learning</Link>
         </Menu.Item>,
-
-        <Menu.Item
-          key="3"
-          position="right"
-          onClick={() => {
-            this.props.signoutUser();
-          }}
-          style={{ cursor: 'pointer' }}
-        >
-          Sign Out
+        <Menu.Item key="5" position="right" style={{ cursor: 'pointer' }}>
+          <Link to="/">Home</Link>
+        </Menu.Item>,
+        <Menu.Item key="3" position="right" style={{ cursor: 'pointer' }}>
+          <Link
+            to="/"
+            onClick={() => {
+              this.props.signoutUser();
+            }}
+          >
+            Sign Out
+          </Link>
         </Menu.Item>,
       ];
     } else {

@@ -8,7 +8,7 @@ function tokenForUser(user) {
   const timestamp = new Date().getTime();
   return jwt.encode(
     {
-      sub: user.id,
+      id: user.id,
       iat: timestamp,
       admin: user.admin,
       name: user.name,

@@ -40,7 +40,7 @@ class RotationMainView extends Component {
 
           const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
 
-          const { admin, sub } = currentUser;
+          const { id } = currentUser;
 
           if (data.returnRotation === null) return <div>Pick a rotation</div>;
 
@@ -51,15 +51,15 @@ class RotationMainView extends Component {
               <h1>{title}</h1>
               <RotationGeneralInfo
                 generalInfo={generalInfo}
-                admin={admin}
+                admin={true}
                 id={this.props.id}
               />
               <br />
               <RotationProviders
                 providers={providers}
-                admin={admin}
+                admin={true}
                 id={this.props.id}
-                creator={sub}
+                creator={id}
               />
               <br />
               <h4>
@@ -70,7 +70,7 @@ class RotationMainView extends Component {
                     <AddConditionFromRotation
                       cancelAddingcondition={() => this.cancelAddLearning()}
                       doneAddingLearning={() => this.learningAdded()}
-                      id={sub}
+                      id={id}
                       dbname={dbname}
                     />
                   </Modal>
@@ -85,7 +85,7 @@ class RotationMainView extends Component {
                 )}
               </h4>
               <LastThreeLearnings
-                userId={sub}
+                userId={id}
                 dbname={dbname}
                 currentUser={currentUser}
                 title={title}

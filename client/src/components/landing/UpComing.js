@@ -105,7 +105,7 @@ class UpComing extends Component {
             var linkText;
             if (data.rotation === 'Id') {
               linkText = 'Infectious%20Disease';
-            } else if (data.rotation === 'GASTRO') {
+            } else if (data.rotation === 'Gastro') {
               linkText = 'Gastroenterology%20(GI)';
             } else if (data.rotation === 'Eastgate') {
               linkText = 'General%20Internal%20Medicine%20(GIM)';

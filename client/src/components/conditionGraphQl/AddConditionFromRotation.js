@@ -41,8 +41,8 @@ class AddConditionFromRotation extends Component {
           <Form loading={loading}>
             <Form.Group widths="equal">
               <Form.Input
-                label="Name"
-                placeholder="Ex: ARDS"
+                label="Title"
+                placeholder="Intial managment of angina"
                 value={this.state.conditionTitle}
                 onChange={(params, data) =>
                   this.setState({ conditionTitle: data.value })

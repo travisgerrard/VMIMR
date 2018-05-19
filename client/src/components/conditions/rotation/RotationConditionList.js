@@ -39,7 +39,7 @@ class RotationConditionList extends Component {
       });
     } else {
       // if we are filtering for only conditions where current user has learning
-      var userNumber = this.props.auth.userDetails.sub;
+      var userNumber = this.props.auth.userDetails.id;
 
       //First filter conditions to only show places where user has learning
       var personalList = _.filter(filteredConditions, condition => {

@@ -32,7 +32,8 @@ class LearningLanding extends Component {
               <AddConditionFromRotation
                 cancelAddingcondition={() => this.cancelAddLearning()}
                 doneAddingLearning={() => this.learningAdded()}
-                id={this.props.currentUser.sub}
+                id={this.props.currentUser.id}
+                currentUser={this.props.currentUser}
                 dbname={''}
               />
             </Modal>
@@ -43,7 +44,7 @@ class LearningLanding extends Component {
           )}
         </h4>
         <LastThreeLearnings
-          userId={this.props.currentUser.sub}
+          userId={this.props.currentUser.id}
           dbname={''}
           currentUser={this.props.currentUser}
           title={''}

@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { Card, Image, Icon } from "semantic-ui-react";
-import ReactMarkdown from "react-markdown";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { Link } from "react-router-dom";
-import "./markdown.css";
+import React, { Component } from 'react';
+import { Card, Image, Icon } from 'semantic-ui-react';
+import ReactMarkdown from 'react-markdown';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { Link } from 'react-router-dom';
+import './markdown.css';
 
 class DisplayConditionCards extends Component {
   state = {
     items: this.props.learnings.slice(0, 10),
-    hasMore: true
+    hasMore: true,
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -18,18 +18,20 @@ class DisplayConditionCards extends Component {
   }
 
   showIcons = (createdById, conditionId, learningId) => {
+    console.log(this.props.currentUser);
+
     if (createdById === this.props.currentUser.id) {
       return (
         <Image floated="right">
           <Icon
             name="edit"
-            style={{ cursor: "pointer", color: "#00824d" }}
+            style={{ cursor: 'pointer', color: '#00824d' }}
             onClick={() => this.props.editLearning(learningId)}
           />
           <Link to={`/conditions/condition/${conditionId}`}>
             <Icon
               name="expand"
-              style={{ cursor: "pointer", color: "#00824d" }}
+              style={{ cursor: 'pointer', color: '#00824d' }}
             />
           </Link>
         </Image>
@@ -40,9 +42,9 @@ class DisplayConditionCards extends Component {
           <Link to={`/conditions/condition/${conditionId}`}>
             <Icon
               name="expand"
-              style={{ cursor: "pointer", color: "#00824d" }}
+              style={{ cursor: 'pointer', color: '#00824d' }}
             />
-          </Link>{" "}
+          </Link>{' '}
         </Image>
       );
     }
@@ -50,10 +52,10 @@ class DisplayConditionCards extends Component {
 
   cardHeader = ({ condition, tags, id }, createdById, learningId) => {
     return (
-      <Card.Content style={{ background: "#E5F5DD" }}>
+      <Card.Content style={{ background: '#E5F5DD' }}>
         {this.showIcons(createdById, id, learningId)}
         <Card.Header>{condition}</Card.Header>
-        <Card.Meta>Tags: {tags.join(", ")}</Card.Meta>
+        <Card.Meta>Tags: {tags.join(', ')}</Card.Meta>
       </Card.Content>
     );
   };
@@ -63,9 +65,9 @@ class DisplayConditionCards extends Component {
       const userTaggedLen = usersTagged.length;
       return (
         <Card.Meta>
-          Learned With:{" "}
+          Learned With:{' '}
           {usersTagged.map((user, i) => {
-            var userFirstName = user.name.split(" ")[0];
+            var userFirstName = user.name.split(' ')[0];
             if (userTaggedLen !== i + 1) {
               userFirstName = `${userFirstName}, `;
             }
@@ -83,7 +85,7 @@ class DisplayConditionCards extends Component {
       dateField,
       whatWasLearned,
       _creator,
-      usersTagged
+      usersTagged,
     } = learning;
     return (
       <Card.Content key={id}>
@@ -93,7 +95,7 @@ class DisplayConditionCards extends Component {
         </Card.Meta>
         {this.returnUsersTagged(usersTagged)}
         <Card.Description>
-          <span style={{ whiteSpace: "pre-wrap" }}>
+          <span style={{ whiteSpace: 'pre-wrap' }}>
             <ReactMarkdown source={whatWasLearned} />
           </span>
         </Card.Description>
@@ -118,12 +120,12 @@ class DisplayConditionCards extends Component {
 
     if (itemLength + 5 >= this.props.learnings.length) {
       this.setState({ hasMore: false });
-      console.log("fetchMoreData called");
+      console.log('fetchMoreData called');
     }
     this.setState({
       items: this.state.items.concat(
-        this.props.learnings.slice(itemLength, itemLength + 5)
-      )
+        this.props.learnings.slice(itemLength, itemLength + 5),
+      ),
     });
   };
 
@@ -135,7 +137,7 @@ class DisplayConditionCards extends Component {
         hasMore={this.state.hasMore}
         loader={<div />}
         endMessage={
-          <p style={{ textAlign: "center" }}>
+          <p style={{ textAlign: 'center' }}>
             <b>You've learned so much</b>
           </p>
         }
@@ -148,7 +150,7 @@ class DisplayConditionCards extends Component {
             marginLeft: 0,
             marginRight: 0,
             marginBottom: 0,
-            marginTop: 5
+            marginTop: 5,
           }}
         >
           {this.showCondition(this.state.items)}

@@ -1,7 +1,7 @@
 // Top level view that displayes menu as well as content
 
 import React, { Component } from 'react';
-import { Segment, Menu, List, Sidebar, Button } from 'semantic-ui-react';
+import { Segment, Menu, List, Sidebar } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
@@ -52,18 +52,18 @@ class RotationTopLevelView extends Component {
           <Segment basic>
             {this.state.activeItemId ? (
               <div>
-                <Button
+                {/*<Button
                   size="mini"
                   onClick={() => this.changeVisibleMenu()}
                   style={{
-                    marginLeft: -14,
+                    marginLeft: -50,
                     padding: 5,
                     display: 'inline-block',
                     float: 'left',
                   }}
                 >
                   Menu {visible ? '<' : '>'}
-                </Button>
+                </Button>*/}
                 <RotationMainView
                   rotation={this.state.activeItem}
                   id={this.state.activeItemId}

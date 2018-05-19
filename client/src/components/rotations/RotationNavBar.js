@@ -61,7 +61,7 @@ class RotationTopLevelView extends Component {
       .mutate({
         variables: {
           title: this.state.rotationInput,
-          _creator: currentUser.sub,
+          _creator: currentUser.id,
         },
         refetchQueries: [{ query: GET_LIST_OF_ROTATIONS }],
       })

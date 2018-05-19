@@ -79,7 +79,7 @@ class AddQuestion extends Component {
       addQuestionToCase({
         variables: {
           _case: this.props.caseId,
-          _creator: jwt_decode(localStorage.getItem('VMIMRToken')).sub,
+          _creator: jwt_decode(localStorage.getItem('VMIMRToken')).id,
           questionStem: this.state.questionStem,
           options,
           answers,
@@ -93,7 +93,7 @@ class AddQuestion extends Component {
 
     //    console.log(this.state);
     console.log(this.props.caseId);
-    console.log(jwt_decode(localStorage.getItem('VMIMRToken')).sub);
+    console.log(jwt_decode(localStorage.getItem('VMIMRToken')).id);
   };
 
   showModal = () => {

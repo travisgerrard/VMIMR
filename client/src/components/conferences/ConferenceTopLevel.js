@@ -23,7 +23,7 @@ class ConferenceTopLevel extends Component {
                   onClick={() =>
                     addCasePresentation({
                       variables: {
-                        id: currentUser.sub,
+                        id: currentUser.id,
                       },
                     })
                   }
