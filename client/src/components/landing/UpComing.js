@@ -98,7 +98,7 @@ class UpComing extends Component {
     return (
       <Segment.Group style={{ paddingLeft: 15, backgroundColor: '#F5F5F5' }}>
         <Segment style={{ backgroundColor: '#F5F5F5' }}>
-          <h4>Here's whats coming up on your schedule</h4>
+          <h4>Here's whats coming up on your schedule Dr. {this.props.name}</h4>
         </Segment>
         <Segment.Group>
           {shortenedArray.map(data => {

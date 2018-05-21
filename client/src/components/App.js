@@ -18,6 +18,7 @@ import NoonConference from './conferences/NoonConference';
 import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
 import Eastgate from './eastgate/EastgateTopLevelView';
 import LoggedInLanding from './landing/LoggedInLanding';
+import MasterSchedule from './landing/MasterScheduleView';
 
 class App extends Component {
   render() {
@@ -75,6 +76,11 @@ class App extends Component {
             component={RequireAuth(NoonConference)}
           />
           <Route path={`/eastgate`} component={RequireAuth(Eastgate)} />
+          <Route
+            path={`/masterSchedule`}
+            component={RequireAuth(MasterSchedule)}
+          />
+
           <Footer />
         </div>
       </BrowserRouter>

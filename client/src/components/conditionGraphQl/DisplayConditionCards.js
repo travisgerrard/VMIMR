@@ -118,7 +118,6 @@ class DisplayConditionCards extends Component {
 
     if (itemLength + 5 >= this.props.learnings.length) {
       this.setState({ hasMore: false });
-      console.log('fetchMoreData called');
     }
     this.setState({
       items: this.state.items.concat(
