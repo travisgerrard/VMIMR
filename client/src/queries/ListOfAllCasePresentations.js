@@ -10,6 +10,7 @@ export default gql`
         name
       }
       presentationDate
+      presentationType
       hpi
       ros
       physicalExam

@@ -18,8 +18,6 @@ class DisplayConditionCards extends Component {
   }
 
   showIcons = (createdById, conditionId, learningId) => {
-    console.log(this.props.currentUser);
-
     if (createdById === this.props.currentUser.id) {
       return (
         <Image floated="right">

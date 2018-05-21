@@ -6,6 +6,7 @@ export default gql`
     $_presentor: ID
     $title: String
     $presentationDate: String
+    $presentationType: String
     $hpi: String
     $ros: String
     $physicalExam: String
@@ -39,6 +40,7 @@ export default gql`
       _presentor: $_presentor
       title: $title
       presentationDate: $presentationDate
+      presentationType: $presentationType
       hpi: $hpi
       ros: $ros
       physicalExam: $physicalExam
@@ -74,6 +76,7 @@ export default gql`
         name
       }
       presentationDate
+      presentationType
       hpi
       ros
       physicalExam

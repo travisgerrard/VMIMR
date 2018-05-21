@@ -14,6 +14,11 @@ class NoonConferenceSlides extends Component {
     return (
       <Container textAlign="center">
         <Segment>
+          <div
+            style={{ marginTop: 10 }}
+            dangerouslySetInnerHTML={this.iframe()}
+          />
+
           <label>{`Link to slides `}</label>
           <Form>
             <Form.TextArea
@@ -26,13 +31,9 @@ class NoonConferenceSlides extends Component {
               }
             />
           </Form>
-
-          <div
-            style={{ marginTop: 10 }}
-            dangerouslySetInnerHTML={this.iframe()}
-          />
-
-          <label>{`Text for search (copided from slideshare) `}</label>
+          <label
+            style={{ marginTop: 20 }}
+          >{`Text for search (copided from slideshare) `}</label>
           <Form>
             <Form.TextArea
               value={this.props.slideTextForSearch}

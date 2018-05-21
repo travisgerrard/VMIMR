@@ -26,8 +26,6 @@ class CatagorizationForSaving extends Component {
               return { key: name, text: name, value: dbname };
             });
 
-            console.log(this.props.tags);
-
             return (
               <Form>
                 <Form.Input

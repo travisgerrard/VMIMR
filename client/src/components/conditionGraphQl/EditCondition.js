@@ -1,7 +1,7 @@
 // Edit condition form
 
 import React, { Component } from 'react';
-import { Segment, Form, Loader, Message } from 'semantic-ui-react';
+import { Segment, Form, Loader, Message, Confirm } from 'semantic-ui-react';
 import _ from 'lodash';
 import { Query, Mutation } from 'react-apollo';
 import rotations from '../conditions/rotations';
@@ -24,6 +24,7 @@ class EditCondition extends Component {
       return id;
     }),
     wwl: this.props.learning.whatWasLearned,
+    confirmOpen: false,
     error: '',
   };
 
@@ -143,15 +144,26 @@ class EditCondition extends Component {
                 fluid
                 color="red"
                 onClick={() => {
+                  this.setState({ confirmOpen: true });
+                }}
+              >
+                Delete
+              </Form.Button>
+              <Confirm
+                open={this.state.confirmOpen}
+                content={`Are you sure you want to delete this learning, "${
+                  this.state.conditionTitle
+                }"?`}
+                onCancel={() => this.setState({ confirmOpen: false })}
+                onConfirm={() => {
                   deleteLearning({
                     variables: {
                       id: this.props.learning.id,
                     },
                   });
+                  this.setState({ confirmOpen: false });
                 }}
-              >
-                Delete
-              </Form.Button>
+              />
             </Form.Group>
           </Form>
         </Segment>
