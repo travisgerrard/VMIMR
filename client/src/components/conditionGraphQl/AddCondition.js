@@ -192,6 +192,8 @@ class AddCondition extends Component {
                       fetchPolicy: 'network-only',
                     },
                   ]}
+                  onCompleted={() => this.props.doneAddingLearning()}
+                  onError={() => console.log(error)}
                 >
                   {(addLearning, { data, loading, error }) => (
                     <div>
