@@ -19,6 +19,7 @@ class DisplayConditionCards extends Component {
     if (nextProps.learnings !== prevState.learnings) {
       return { items: nextProps.learnings.slice(0, prevState.itemLength) };
     }
+    return null;
   }
 
   showIcons = (createdById, conditionId, learningId) => {
