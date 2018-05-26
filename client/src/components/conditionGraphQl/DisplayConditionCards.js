@@ -19,7 +19,10 @@ class DisplayConditionCards extends Component {
     console.log(prevState);
 
     if (nextProps.learnings !== prevState.allLearning) {
-      return { items: nextProps.learnings.slice(0, prevState.itemLength) };
+      return {
+        items: nextProps.learnings.slice(0, prevState.itemLength),
+        allLearning: nextProps.learnings,
+      };
     }
     return null;
   }
