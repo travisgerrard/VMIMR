@@ -125,10 +125,12 @@ class DisplayConditionCards extends Component {
     console.log(this.props.learnings);
     console.log(this.state.items);
 
+    const newItems = this.state.items.concat(
+      this.props.learnings.slice(itemLength, itemLength + 5),
+    );
+
     this.setState({
-      items: this.state.items.concat(
-        this.props.learnings.slice(itemLength, itemLength + 5),
-      ),
+      items: newItems,
     });
     console.log(this.state.items);
   };
