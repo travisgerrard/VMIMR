@@ -11,11 +11,12 @@ class DisplayConditionCards extends Component {
     hasMore: true,
   };
 
+  /*
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.learnings !== prevState.learnings) {
       return { items: nextProps.learnings.slice(0, 10) };
     }
-  }
+  }*/
 
   showIcons = (createdById, conditionId, learningId) => {
     if (createdById === this.props.currentUser.id) {
@@ -131,14 +132,13 @@ class DisplayConditionCards extends Component {
     this.setState({
       items: newItems,
     });
-    console.log(this.state.items);
   };
 
   render() {
     return (
       <InfiniteScroll
         dataLength={this.state.items.length}
-        next={this.fetchMoreData}
+        next={() => this.fetchMoreData()}
         hasMore={this.state.hasMore}
         loader={<div>Loading</div>}
         endMessage={
