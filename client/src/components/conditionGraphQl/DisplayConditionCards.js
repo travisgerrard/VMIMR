@@ -7,7 +7,7 @@ import './markdown.css';
 
 class DisplayConditionCards extends Component {
   state = {
-    items: this.props.learnings.slice(0, 10),
+    items: this.props.learnings.slice(0, 5),
     hasMore: true,
   };
 
