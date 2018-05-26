@@ -8,13 +8,14 @@ import './markdown.css';
 class DisplayConditionCards extends Component {
   state = {
     items: this.props.learnings.slice(0, 10),
+    itemLength: 10,
     hasMore: true,
   };
 
   // getDerivedStateFromProps updates items after refectchQueries is run.
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.learnings !== prevState.learnings) {
-      return { items: nextProps.learnings.slice(0, 10) };
+      return { items: nextProps.learnings.slice(0, prevState.itemLength) };
     }
   }
 
@@ -127,6 +128,7 @@ class DisplayConditionCards extends Component {
 
     this.setState({
       items: newItems,
+      itemLength,
     });
   };
 

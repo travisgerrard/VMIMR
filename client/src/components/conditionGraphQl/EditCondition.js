@@ -227,7 +227,12 @@ class EditCondition extends Component {
               return (
                 <Mutation
                   mutation={UPDATE_LEARNING}
-                  refetchQueries={[{ query: GET_ALL_LEARNING }]}
+                  refetchQueries={[
+                    {
+                      query: GET_ALL_LEARNING,
+                      fetchPolicy: 'network-only',
+                    },
+                  ]}
                   onCompleted={() => this.props.doneEditingLearning()}
                 >
                   {(editLearning, { data }) => (
