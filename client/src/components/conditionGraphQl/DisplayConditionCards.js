@@ -132,7 +132,7 @@ class DisplayConditionCards extends Component {
         dataLength={this.state.items.length}
         next={this.fetchMoreData}
         hasMore={this.state.hasMore}
-        loader={<div />}
+        loader={<div>Loading</div>}
         endMessage={
           <p style={{ textAlign: 'center' }}>
             <b>You've learned so much</b>

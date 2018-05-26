@@ -3,6 +3,7 @@ import { Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import schedule from './amionSchedule';
+import { link } from 'fs';
 
 const MONTH_NAMES = [
   'January',
@@ -223,7 +224,7 @@ class UpComing extends Component {
               return (
                 <Segment key={Math.random()}>
                   {monthName} {data.day}:{' '}
-                  <Link to={`/rotations/${linkText}`}>Nephrology</Link>
+                  <Link to={`/rotations/${linkText}`}>CCU</Link>
                 </Segment>
               );
             } else if (data.rotation === 'Allergy') {
@@ -262,13 +263,21 @@ class UpComing extends Component {
                   </Link>
                 </Segment>
               );
+            } else if (data.rotation === 'Neuro') {
+              linkText = 'Neurology';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>{linkText}</Link>
+                </Segment>
+              );
             } else if (data.rotation === 'Ed') {
               linkText = 'Emergency%20Department';
               return (
                 <Segment key={Math.random()}>
                   {monthName} {data.day}:{' '}
                   <Link to={`/rotations/${linkText}`}>
-                    /Emergency Department
+                    Emergency Department
                   </Link>
                 </Segment>
               );
