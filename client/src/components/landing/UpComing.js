@@ -3,7 +3,6 @@ import { Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import schedule from './amionSchedule';
-import { link } from 'fs';
 
 const MONTH_NAMES = [
   'January',

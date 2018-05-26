@@ -7,16 +7,9 @@ import './markdown.css';
 
 class DisplayConditionCards extends Component {
   state = {
-    items: this.props.learnings.slice(0, 5),
+    items: this.props.learnings.slice(0, 10),
     hasMore: true,
   };
-
-  /*
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.learnings !== prevState.learnings) {
-      return { items: nextProps.learnings.slice(0, 10) };
-    }
-  }*/
 
   showIcons = (createdById, conditionId, learningId) => {
     if (createdById === this.props.currentUser.id) {
@@ -121,13 +114,9 @@ class DisplayConditionCards extends Component {
       this.setState({ hasMore: false });
     }
 
-    console.log('before', this.state.items);
-
     const newItems = this.state.items.concat(
       this.props.learnings.slice(itemLength, itemLength + 5),
     );
-
-    console.log('after', newItems);
 
     this.setState({
       items: newItems,
