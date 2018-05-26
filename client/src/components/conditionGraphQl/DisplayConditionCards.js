@@ -14,6 +14,8 @@ class DisplayConditionCards extends Component {
 
   // getDerivedStateFromProps updates items after refectchQueries is run.
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps);
+
     if (nextProps.learnings !== prevState.learnings) {
       return { items: nextProps.learnings.slice(0, prevState.itemLength) };
     }
