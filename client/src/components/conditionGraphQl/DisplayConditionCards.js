@@ -115,19 +115,18 @@ class DisplayConditionCards extends Component {
 
   fetchMoreData = () => {
     var itemLength = this.state.items.length;
-    console.log(itemLength);
-    console.log(this.props.learnings.length);
 
     if (itemLength + 5 >= this.props.learnings.length) {
       this.setState({ hasMore: false });
     }
 
-    console.log(this.props.learnings);
-    console.log(this.state.items);
+    console.log('before', this.state.items);
 
     const newItems = this.state.items.concat(
       this.props.learnings.slice(itemLength, itemLength + 5),
     );
+
+    console.log('after', newItems);
 
     this.setState({
       items: newItems,
@@ -136,8 +135,6 @@ class DisplayConditionCards extends Component {
   };
 
   render() {
-    console.log(this.state.items);
-
     return (
       <InfiniteScroll
         dataLength={this.state.items.length}
