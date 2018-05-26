@@ -77,18 +77,17 @@ class Header extends Component {
     if (this.props.authenticated) {
       // show sign out
       return [
+        <Menu.Item key="5" position="right" style={{ cursor: 'pointer' }}>
+          <Link to="/">Home</Link>
+        </Menu.Item>,
         <Dropdown key="4" item text="Rotations">
           <Dropdown.Menu>{this.returnRotations()}</Dropdown.Menu>
         </Dropdown>,
-
         <Menu.Item key="1" position="right" style={{ cursor: 'pointer' }}>
           <Link to="/Conference">Conference</Link>
         </Menu.Item>,
         <Menu.Item key="2" position="right" style={{ cursor: 'pointer' }}>
           <Link to="/conditions">Learning</Link>
-        </Menu.Item>,
-        <Menu.Item key="5" position="right" style={{ cursor: 'pointer' }}>
-          <Link to="/">Home</Link>
         </Menu.Item>,
         <Menu.Item key="3" position="right" style={{ cursor: 'pointer' }}>
           <Link
@@ -160,9 +159,9 @@ class Header extends Component {
                 stackable
               >
                 <Menu.Menu position="right">
+                  {this.renderLinks()}
                   {this.adminLinks()}
                   {this.eastgateLink()}
-                  {this.renderLinks()}
                 </Menu.Menu>{' '}
               </Menu>
             )}

@@ -133,7 +133,7 @@ class NoonConference extends Component {
             if (loading) return <Loader active inline="centered" />;
             if (error) return `Error! ${error.message}`;
 
-            // set intial state with value from mutation
+            // set initial state with value from mutation
             if (this.state.initialUpdate) {
               _.forOwn(
                 data.selectedCasePresentation,

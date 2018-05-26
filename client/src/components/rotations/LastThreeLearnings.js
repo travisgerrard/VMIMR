@@ -80,7 +80,13 @@ class LastThreeLearnings extends Component {
               </div>
             );
           }
-          return <div>No learning associated with {this.props.title} yet</div>;
+          return (
+            <div>
+              {this.props.title
+                ? `No learning associated with ${this.props.title} yet`
+                : `You don't have any learning yet`}
+            </div>
+          );
         }}
       </Query>
     );
