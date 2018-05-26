@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Segment, Button, Modal } from 'semantic-ui-react';
 import AddConditionFromRotation from '../conditionGraphQl/AddConditionFromRotation';
 import LastThreeLearnings from '../rotations/LastThreeLearnings';
+import { Link } from 'react-router-dom';
 
 class LearningLanding extends Component {
   state = {
@@ -42,6 +43,11 @@ class LearningLanding extends Component {
               Add Some Learning
             </Button>
           )}
+          <Button size="tiny" style={{ backgroundColor: '#5E9B6A' }} primary>
+            <Link to="/conditions" style={{ color: 'white' }}>
+              Goto Learning Section
+            </Link>
+          </Button>
         </h4>
         <LastThreeLearnings
           userId={this.props.currentUser.id}
