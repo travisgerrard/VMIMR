@@ -11,6 +11,13 @@ class DisplayConditionCards extends Component {
     hasMore: true,
   };
 
+  // getDerivedStateFromProps updates items after refectchQueries is run.
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.learnings !== prevState.learnings) {
+      return { items: nextProps.learnings.slice(0, 10) };
+    }
+  }
+
   showIcons = (createdById, conditionId, learningId) => {
     if (createdById === this.props.currentUser.id) {
       return (

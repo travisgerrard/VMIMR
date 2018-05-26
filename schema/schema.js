@@ -598,7 +598,6 @@ var listOfLearningWithTag = {
 
       return learnings;
     }
-    console.log(rotation);
 
     var learnings = ConditionLearning.find({
       $or: [
@@ -972,7 +971,6 @@ var updateCasePresentation = {
       ddx,
     },
   ) {
-    console.log(slideTextForSearch);
     var caseToBeUpdated = await CasePresentation.findOneAndUpdate(
       {
         _id: id,

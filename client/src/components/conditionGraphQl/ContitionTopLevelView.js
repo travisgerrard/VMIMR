@@ -172,6 +172,7 @@ class ConditionTopLevelViewGQL extends Component {
                 <Query
                   query={GET_PERSONAL_LEARNING}
                   variables={{ id: data.currentUser.id }}
+                  fetchPolicy="network-only"
                 >
                   {({ loading, error, data }) => {
                     if (loading) return <Loader active inline="centered" />;
@@ -203,7 +204,7 @@ class ConditionTopLevelViewGQL extends Component {
               );
             } else {
               return (
-                <Query query={GET_ALL_LEARNING}>
+                <Query query={GET_ALL_LEARNING} fetchPolicy="network-only">
                   {({ loading, error, data }) => {
                     if (loading) return <Loader active inline="centered" />;
                     if (error) return `Error! ${error.message}`;

@@ -164,6 +164,7 @@ class AddCondition extends Component {
                     {
                       query: GET_PERSONAL_LEARNING,
                       variables: { id: this.props.currentUser.id },
+                      fetchPolicy: 'network-only',
                     },
                   ]}
                   onCompleted={() => this.props.doneAddingLearning()}
@@ -185,7 +186,12 @@ class AddCondition extends Component {
               return (
                 <Mutation
                   mutation={ADD_LEARNING}
-                  refetchQueries={[{ query: GET_ALL_LEARNING }]}
+                  refetchQueries={[
+                    {
+                      query: GET_ALL_LEARNING,
+                      fetchPolicy: 'network-only',
+                    },
+                  ]}
                 >
                   {(addLearning, { data, loading, error }) => (
                     <div>

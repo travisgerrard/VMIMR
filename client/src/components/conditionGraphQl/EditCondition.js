@@ -146,7 +146,9 @@ class EditCondition extends Component {
                 onClick={() => {
                   if (
                     window.confirm(
-                      'Are you sure you want to save this thing into the database?',
+                      `Are you sure you want to delete ${
+                        this.state.conditionTitle
+                      }?`,
                     )
                   ) {
                     deleteLearning({
