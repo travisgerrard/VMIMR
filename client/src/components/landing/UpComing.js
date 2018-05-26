@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 import schedule from './amionSchedule';
 
@@ -18,6 +19,23 @@ const MONTH_NAMES = [
   'November',
   'December',
 ];
+
+const MONTH_DAYS = [
+  '31',
+  '28',
+  '31',
+  '30',
+  '31',
+  '30',
+  '31',
+  '31',
+  '30',
+  '31',
+  '30',
+  '31',
+];
+
+const DAYS_AHEAD = 10;
 
 class UpComing extends Component {
   render() {
@@ -44,12 +62,25 @@ class UpComing extends Component {
     schedule.forEach(data => {
       if (data.Name === name) {
         var dateArray = data.Date.split('-');
-        const [changingMonth, changingDay] = dateArray; //using destructuring
+        const [changingMonth, changingDay, changingYear] = dateArray; //using destructuring
+
+        const aMoment = moment()
+          .year(`20${data.Date.split('-')[2]}`)
+          .month(data.Date.split('-')[0] - 1)
+          .date(data.Date.split('-')[1]);
+
+        console.log(aMoment.format('YYYY-MM-DD'));
+        console.log(moment().format('YYYY-MM-DD'));
+
+        if (aMoment.isSameOrAfter(moment())) {
+          console.log(aMoment.format('dddd, MMMM Do'));
+        }
         if (changingMonth === staticMonth) {
-          // If date is within 5 days
+          //same month
+          // If date is greater than today, and within the next DAYS_AHEAD days
           if (
             parseInt(changingDay, 10) >= parseInt(staticDay, 10) &&
-            parseInt(changingDay, 10) < parseInt(staticDay, 10) + 5
+            parseInt(changingDay, 10) < parseInt(staticDay, 10) + DAYS_AHEAD
           ) {
             arrayToDisplay.push({
               day: changingDay,
