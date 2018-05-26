@@ -15155,231 +15155,231 @@ export default [
     "EndTime": "0700"
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NEURO",
     "Date": "5-1-18",
     "StartTime": "0700",
     "EndTime": "0700"
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Eastgate, am",
     "Date": "5-1-18",
     "StartTime": "0800",
     "EndTime": 1200
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Eastgate, pm",
     "Date": "5-1-18",
     "StartTime": 1300,
     "EndTime": 1700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NEURO",
     "Date": "5-2-18",
     "StartTime": "0700",
     "EndTime": "0700"
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NEURO",
     "Date": "5-3-18",
     "StartTime": "0700",
     "EndTime": "0700"
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NEURO",
     "Date": "5-4-18",
     "StartTime": "0700",
     "EndTime": "0700"
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NEURO",
     "Date": "5-5-18",
     "StartTime": "0700",
     "EndTime": "0700"
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NEURO",
     "Date": "5-6-18",
     "StartTime": "0700",
     "EndTime": "0700"
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-7-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-8-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-9-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-10-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-11-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-12-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-13-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-14-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-15-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-16-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-17-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-18-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-19-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-20-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-21-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-22-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-23-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-24-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-25-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-26-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-27-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-28-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-29-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-30-18",
     "StartTime": 1900,
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "5-31-18",
     "StartTime": 1900,
@@ -25109,7 +25109,7 @@ export default [
     "EndTime": 700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "6-1-18",
     "StartTime": 1900,
@@ -25851,7 +25851,7 @@ export default [
     "EndTime": 700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "6-2-18",
     "StartTime": 1900,
@@ -26586,7 +26586,7 @@ export default [
     "EndTime": 700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "NIGHTS",
     "Date": "6-3-18",
     "StartTime": 1900,
@@ -27307,7 +27307,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-4-18",
     "StartTime": 700,
@@ -27902,7 +27902,7 @@ export default [
     "EndTime": 700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Back-Up SENIOR",
     "Date": "6-4-18",
     "StartTime": 1800,
@@ -28091,7 +28091,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-5-18",
     "StartTime": 700,
@@ -28693,7 +28693,7 @@ export default [
     "EndTime": 700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Back-Up SENIOR",
     "Date": "6-5-18",
     "StartTime": 1800,
@@ -28714,7 +28714,7 @@ export default [
     "EndTime": 1200
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Eastgate, am",
     "Date": "6-5-18",
     "StartTime": 800,
@@ -28756,7 +28756,7 @@ export default [
     "EndTime": 1700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Eastgate, pm",
     "Date": "6-5-18",
     "StartTime": 1300,
@@ -28910,7 +28910,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-6-18",
     "StartTime": 700,
@@ -29512,7 +29512,7 @@ export default [
     "EndTime": 700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Back-Up SENIOR",
     "Date": "6-6-18",
     "StartTime": 1800,
@@ -29673,7 +29673,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-7-18",
     "StartTime": 700,
@@ -30275,7 +30275,7 @@ export default [
     "EndTime": 700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Back-Up SENIOR",
     "Date": "6-7-18",
     "StartTime": 1800,
@@ -30499,7 +30499,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-8-18",
     "StartTime": 700,
@@ -31101,7 +31101,7 @@ export default [
     "EndTime": 700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Back-Up SENIOR",
     "Date": "6-8-18",
     "StartTime": 1800,
@@ -31269,7 +31269,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-9-18",
     "StartTime": 700,
@@ -31871,7 +31871,7 @@ export default [
     "EndTime": 700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Back-Up SENIOR",
     "Date": "6-9-18",
     "StartTime": 600,
@@ -31997,7 +31997,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-10-18",
     "StartTime": 700,
@@ -32599,7 +32599,7 @@ export default [
     "EndTime": 700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Back-Up SENIOR",
     "Date": "6-10-18",
     "StartTime": 600,
@@ -32725,7 +32725,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-11-18",
     "StartTime": 700,
@@ -33530,7 +33530,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-12-18",
     "StartTime": 700,
@@ -34160,7 +34160,7 @@ export default [
     "EndTime": 1200
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Eastgate, am",
     "Date": "6-12-18",
     "StartTime": 800,
@@ -34195,7 +34195,7 @@ export default [
     "EndTime": 1700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Eastgate, pm",
     "Date": "6-12-18",
     "StartTime": 1300,
@@ -34342,7 +34342,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-13-18",
     "StartTime": 700,
@@ -35161,7 +35161,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-14-18",
     "StartTime": 700,
@@ -35980,7 +35980,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-15-18",
     "StartTime": 700,
@@ -36757,7 +36757,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-16-18",
     "StartTime": 700,
@@ -37492,7 +37492,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-17-18",
     "StartTime": 700,
@@ -38220,7 +38220,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-18-18",
     "StartTime": 700,
@@ -39025,7 +39025,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-19-18",
     "StartTime": 700,
@@ -39655,7 +39655,7 @@ export default [
     "EndTime": 1200
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Eastgate, am",
     "Date": "6-19-18",
     "StartTime": 800,
@@ -39690,7 +39690,7 @@ export default [
     "EndTime": 1700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Eastgate, pm",
     "Date": "6-19-18",
     "StartTime": 1300,
@@ -39837,7 +39837,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-20-18",
     "StartTime": 700,
@@ -40614,7 +40614,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-21-18",
     "StartTime": 700,
@@ -41426,7 +41426,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-22-18",
     "StartTime": 700,
@@ -42189,7 +42189,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-23-18",
     "StartTime": 700,
@@ -42924,7 +42924,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-24-18",
     "StartTime": 700,
@@ -43652,7 +43652,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-25-18",
     "StartTime": 700,
@@ -44282,7 +44282,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-26-18",
     "StartTime": 700,
@@ -44730,7 +44730,7 @@ export default [
     "EndTime": 1700
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Eastgate, pm",
     "Date": "6-26-18",
     "StartTime": 1300,
@@ -44863,7 +44863,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-27-18",
     "StartTime": 700,
@@ -45444,7 +45444,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-28-18",
     "StartTime": 700,
@@ -46039,7 +46039,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-29-18",
     "StartTime": 700,
@@ -46620,7 +46620,7 @@ export default [
     "EndTime": 1900
   },
   {
-    "Name": "Moore, M.",
+    "Name": "Moore",
     "Rotation": "Geriatrics",
     "Date": "6-30-18",
     "StartTime": 700,

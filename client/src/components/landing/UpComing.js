@@ -78,11 +78,22 @@ class UpComing extends Component {
               day: arrayToDisplay[i].day,
               rotation: 'Eastgate',
             });
-          } else {
-            shortenedArray.push({
-              day: arrayToDisplay[i].day,
-              rotation: capitalizeFirstLetter(arrayToDisplay[i].rotation),
-            });
+          }
+          if (
+            arrayToDisplay[i + 1].rotation !== 'Vm u.village, am' &&
+            arrayToDisplay[i + 1].rotation !== 'Vm u.village, pm'
+          ) {
+            if (arrayToDisplay[i].rotation === 'Vm u.village, pm') {
+              shortenedArray.push({
+                day: arrayToDisplay[i].day,
+                rotation: 'Vm u.village',
+              });
+            } else {
+              shortenedArray.push({
+                day: arrayToDisplay[i].day,
+                rotation: capitalizeFirstLetter(arrayToDisplay[i].rotation),
+              });
+            }
           }
         }
       } else {
@@ -105,10 +116,162 @@ class UpComing extends Component {
             var linkText;
             if (data.rotation === 'Id') {
               linkText = 'Infectious%20Disease';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>Infectious Disease</Link>
+                </Segment>
+              );
             } else if (data.rotation === 'Gastro') {
               linkText = 'Gastroenterology%20(GI)';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>
+                    Gastroenterology (GI)
+                  </Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Ent') {
+              linkText = 'Ears%20Nose%20Throat%20(ENT)';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>
+                    Ears Nose Throat (ENT)
+                  </Link>
+                </Segment>
+              );
             } else if (data.rotation === 'Eastgate') {
               linkText = 'General%20Internal%20Medicine%20(GIM)';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>{data.rotation}</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Card') {
+              linkText = 'Cardiology';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>{linkText}</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Endo') {
+              linkText = 'Endocrinology';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>{linkText}</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Sys-base') {
+              linkText = 'Systems%20based%20practice';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>
+                    Systems based practice
+                  </Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Rheum') {
+              linkText = 'Rheumatology';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>{linkText}</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Ip-psych') {
+              linkText = 'Psychiatry%20-%20Inpatient';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>
+                    Psychiatry - Inpatient
+                  </Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Hyperbaric') {
+              linkText = 'Hyperbarics';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>{linkText}</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Pulm') {
+              linkText = 'Pulmonology';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>{linkText}</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Neph') {
+              linkText = 'Nephrology';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>Nephrology</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Ccu') {
+              linkText = 'CCU';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>Nephrology</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Allergy') {
+              linkText = 'Allergy%20and%20immunology';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>
+                    Allergy and immunology
+                  </Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Derm') {
+              linkText = 'Dermatology';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>{linkText}</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Palliative') {
+              linkText = 'Palliative%20Care';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>Palliative Care</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Hem onc') {
+              linkText = 'Hematology%20and%20Oncology';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>
+                    Hematology and Oncology
+                  </Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Ed') {
+              linkText = 'Emergency%20Department';
+              return (
+                <Segment key={Math.random()}>
+                  {monthName} {data.day}:{' '}
+                  <Link to={`/rotations/${linkText}`}>
+                    /Emergency Department
+                  </Link>
+                </Segment>
+              );
             } else if (
               data.rotation === 'Wards - team a' ||
               data.rotation === 'Wards - team b' ||
