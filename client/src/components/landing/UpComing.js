@@ -1,66 +1,40 @@
 import React, { Component } from 'react';
-import { Segment } from 'semantic-ui-react';
+import { Segment, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 import schedule from './amionSchedule';
 
-const MONTH_NAMES = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+const DAYS_TO_ADD = 7;
 
-const MONTH_DAYS = [
-  '31',
-  '28',
-  '31',
-  '30',
-  '31',
-  '30',
-  '31',
-  '31',
-  '30',
-  '31',
-  '30',
-  '31',
+const dayOptions = [
+  {
+    text: '5 days',
+    value: 5,
+  },
+  {
+    text: '7 days',
+    value: 7,
+  },
+  {
+    text: '14 days',
+    value: 14,
+  },
 ];
-
-const DAYS_AHEAD = 10;
 
 class UpComing extends Component {
-  render() {
-    var name = this.props.name;
-
-    const today = new Date();
-    const staticDay = today.getDate().toString();
-    const staticMonth = (today.getMonth() + 1).toString();
-    const yy = today
-      .getFullYear()
-      .toString()
-      .substr(-2);
-    const dateToCompare = `${staticDay}-${staticMonth}-${yy}`;
-
-    const monthName = MONTH_NAMES[today.getMonth()];
-
-    console.log(dateToCompare);
-
-    //var previousDate = '';
-    //var previousRotation = '';
+  state = {
+    days_to_add: 5,
+  };
+  returnArrayDataOfDatesWithinTimePeriod() {
+    // Returns an array with a moment depicting date
+    // and the name of the rotation on a date
+    // Only returns data forrect current user
+    // And only returns the number of days
     let arrayToDisplay = [];
 
-    // Shorten to only next 5 days
     schedule.forEach(data => {
-      if (data.Name === name) {
+      if (data.Name === this.props.name) {
         var dateArray = data.Date.split('-');
         const [changingMonth, changingDay, changingYear] = dateArray; //using destructuring
 
@@ -69,78 +43,80 @@ class UpComing extends Component {
           .month(data.Date.split('-')[0] - 1)
           .date(data.Date.split('-')[1]);
 
-        console.log(aMoment.format('YYYY-MM-DD'));
-        console.log(moment().format('YYYY-MM-DD'));
-
-        if (aMoment.isSameOrAfter(moment())) {
-          console.log(aMoment.format('dddd, MMMM Do'));
-        }
-        if (changingMonth === staticMonth) {
-          //same month
-          // If date is greater than today, and within the next DAYS_AHEAD days
-          if (
-            parseInt(changingDay, 10) >= parseInt(staticDay, 10) &&
-            parseInt(changingDay, 10) < parseInt(staticDay, 10) + DAYS_AHEAD
-          ) {
-            arrayToDisplay.push({
-              day: changingDay,
-              rotation: data.Rotation,
-            });
-          }
-        }
-      }
-    });
-
-    let shortenedArray = [];
-
-    function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-    }
-
-    // take out duplicate rotations
-    for (var i = 0; i < arrayToDisplay.length; i++) {
-      if (arrayToDisplay[i + 1]) {
         if (
-          arrayToDisplay[i + 1].rotation !== 'Eastgate, am' &&
-          arrayToDisplay[i + 1].rotation !== 'Eastgate, pm'
+          aMoment.isSameOrAfter(moment()) &&
+          aMoment.isBefore(moment().add(this.state.days_to_add, 'd'))
         ) {
-          if (arrayToDisplay[i].rotation === 'Eastgate, pm') {
-            shortenedArray.push({
-              day: arrayToDisplay[i].day,
-              rotation: 'Eastgate',
-            });
-          }
-          if (
-            arrayToDisplay[i + 1].rotation !== 'Vm u.village, am' &&
-            arrayToDisplay[i + 1].rotation !== 'Vm u.village, pm'
-          ) {
-            if (arrayToDisplay[i].rotation === 'Vm u.village, pm') {
-              shortenedArray.push({
-                day: arrayToDisplay[i].day,
-                rotation: 'Vm u.village',
-              });
-            } else {
-              shortenedArray.push({
-                day: arrayToDisplay[i].day,
-                rotation: capitalizeFirstLetter(arrayToDisplay[i].rotation),
-              });
-            }
-          }
-        }
-      } else {
-        if (arrayToDisplay[i].rotation !== 'Eastgate, pm') {
-          shortenedArray.push({
-            day: arrayToDisplay[i].day,
-            rotation: capitalizeFirstLetter(arrayToDisplay[i].rotation),
+          console.log(aMoment.format('ddd, MMMM Do'));
+          arrayToDisplay.push({
+            moment: aMoment,
+            rotation: data.Rotation,
           });
         }
       }
+    });
+    return arrayToDisplay;
+  }
+
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
+
+  cleanedUpArrayToDisplay(arrayToDisplay) {
+    // Remove duplicate entries
+    let shortenedArray = [];
+    for (var i = 0; i < arrayToDisplay.length; i++) {
+      if (arrayToDisplay[i + 1]) {
+        if (arrayToDisplay[i].rotation === 'Eastgate, am') {
+          shortenedArray.push({
+            moment: arrayToDisplay[i].moment,
+            rotation: 'Eastgate',
+          });
+          i++;
+        } else if (arrayToDisplay[i].rotation === 'Vm u.village, am') {
+          shortenedArray.push({
+            moment: arrayToDisplay[i].moment,
+            rotation: 'Vm u.village',
+          });
+          i++;
+        } else {
+          shortenedArray.push({
+            moment: arrayToDisplay[i].moment,
+            rotation: this.capitalizeFirstLetter(arrayToDisplay[i].rotation),
+          });
+        }
+      } else {
+        shortenedArray.push({
+          moment: arrayToDisplay[i].moment,
+          rotation: this.capitalizeFirstLetter(arrayToDisplay[i].rotation),
+        });
+      }
     }
+    return shortenedArray;
+  }
+
+  render() {
+    // Shorten to only next 5 days
+    const arrayToDisplay = this.returnArrayDataOfDatesWithinTimePeriod();
+    const shortenedArray = this.cleanedUpArrayToDisplay(arrayToDisplay);
 
     return (
       <Segment.Group style={{ paddingLeft: 15, backgroundColor: '#F5F5F5' }}>
         <Segment style={{ backgroundColor: '#F5F5F5' }}>
-          <h4>Here's whats coming up on your schedule Dr. {this.props.name}</h4>
+          <h4>
+            <span>
+              Here's what your next{' '}
+              <Dropdown
+                inline
+                options={dayOptions}
+                defaultValue={dayOptions[0].value}
+                onChange={(params, data) =>
+                  this.setState({ days_to_add: data.value })
+                }
+              />{' '}
+              look like Dr. {this.props.name}
+            </span>
+          </h4>
         </Segment>
         <Segment.Group>
           {shortenedArray.map(data => {
@@ -149,7 +125,7 @@ class UpComing extends Component {
               linkText = 'Infectious%20Disease';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>Infectious Disease</Link>
                 </Segment>
               );
@@ -157,7 +133,7 @@ class UpComing extends Component {
               linkText = 'Gastroenterology%20(GI)';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>
                     Gastroenterology (GI)
                   </Link>
@@ -167,7 +143,7 @@ class UpComing extends Component {
               linkText = 'Ears%20Nose%20Throat%20(ENT)';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>
                     Ears Nose Throat (ENT)
                   </Link>
@@ -177,7 +153,7 @@ class UpComing extends Component {
               linkText = 'General%20Internal%20Medicine%20(GIM)';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>{data.rotation}</Link>
                 </Segment>
               );
@@ -185,7 +161,7 @@ class UpComing extends Component {
               linkText = 'Cardiology';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>{linkText}</Link>
                 </Segment>
               );
@@ -193,7 +169,7 @@ class UpComing extends Component {
               linkText = 'Endocrinology';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>{linkText}</Link>
                 </Segment>
               );
@@ -201,7 +177,7 @@ class UpComing extends Component {
               linkText = 'Systems%20based%20practice';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>
                     Systems based practice
                   </Link>
@@ -211,7 +187,7 @@ class UpComing extends Component {
               linkText = 'Rheumatology';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>{linkText}</Link>
                 </Segment>
               );
@@ -219,7 +195,7 @@ class UpComing extends Component {
               linkText = 'Psychiatry%20-%20Inpatient';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>
                     Psychiatry - Inpatient
                   </Link>
@@ -229,7 +205,7 @@ class UpComing extends Component {
               linkText = 'Hyperbarics';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>{linkText}</Link>
                 </Segment>
               );
@@ -237,7 +213,7 @@ class UpComing extends Component {
               linkText = 'Pulmonology';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>{linkText}</Link>
                 </Segment>
               );
@@ -245,7 +221,7 @@ class UpComing extends Component {
               linkText = 'Nephrology';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>Nephrology</Link>
                 </Segment>
               );
@@ -253,7 +229,7 @@ class UpComing extends Component {
               linkText = 'CCU';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>CCU</Link>
                 </Segment>
               );
@@ -261,7 +237,7 @@ class UpComing extends Component {
               linkText = 'Allergy%20and%20immunology';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>
                     Allergy and immunology
                   </Link>
@@ -271,7 +247,7 @@ class UpComing extends Component {
               linkText = 'Dermatology';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>{linkText}</Link>
                 </Segment>
               );
@@ -279,7 +255,7 @@ class UpComing extends Component {
               linkText = 'Palliative%20Care';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>Palliative Care</Link>
                 </Segment>
               );
@@ -287,17 +263,17 @@ class UpComing extends Component {
               linkText = 'Hematology%20and%20Oncology';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>
                     Hematology and Oncology
                   </Link>
                 </Segment>
               );
-            } else if (data.rotation === 'Neuro') {
+            } else if (data.rotation === 'NEURO') {
               linkText = 'Neurology';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>{linkText}</Link>
                 </Segment>
               );
@@ -305,7 +281,7 @@ class UpComing extends Component {
               linkText = 'Emergency%20Department';
               return (
                 <Segment key={Math.random()}>
-                  {monthName} {data.day}:{' '}
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
                   <Link to={`/rotations/${linkText}`}>
                     Emergency Department
                   </Link>
@@ -324,7 +300,7 @@ class UpComing extends Component {
 
             return (
               <Segment key={Math.random()}>
-                {monthName} {data.day}:{' '}
+                {data.moment.format('ddd, MMMM Do')}:{' '}
                 <Link to={`/rotations/${linkText}`}>{data.rotation}</Link>
               </Segment>
             );
