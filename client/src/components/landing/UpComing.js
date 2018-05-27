@@ -79,6 +79,12 @@ class UpComing extends Component {
             rotation: 'Vm u.village',
           });
           i++;
+        } else if (arrayToDisplay[i].rotation === 'Vm downtown, am') {
+          shortenedArray.push({
+            moment: arrayToDisplay[i].moment,
+            rotation: 'Vm downtown',
+          });
+          i++;
         } else {
           shortenedArray.push({
             moment: arrayToDisplay[i].moment,
