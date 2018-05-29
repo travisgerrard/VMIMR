@@ -19,6 +19,7 @@ import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
 import Eastgate from './eastgate/EastgateTopLevelView';
 import LoggedInLanding from './landing/LoggedInLanding';
 import MasterSchedule from './landing/MasterScheduleView';
+import SurveyTopLevel from './survey/SurveyTopLevel';
 
 class App extends Component {
   render() {
@@ -80,6 +81,7 @@ class App extends Component {
             path={`/masterSchedule`}
             component={RequireAuth(MasterSchedule)}
           />
+          <Route path={'/survey'} component={RequireAuth(SurveyTopLevel)} />
 
           <Footer />
         </div>

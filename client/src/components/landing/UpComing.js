@@ -5,8 +5,6 @@ import moment from 'moment';
 
 import schedule from './amionSchedule';
 
-const DAYS_TO_ADD = 7;
-
 const dayOptions = [
   {
     text: '5 days',
@@ -34,10 +32,8 @@ class UpComing extends Component {
     let arrayToDisplay = [];
 
     schedule.forEach(data => {
+      // data comes from amionSchedule right now....
       if (data.Name === this.props.name) {
-        var dateArray = data.Date.split('-');
-        const [changingMonth, changingDay, changingYear] = dateArray; //using destructuring
-
         const aMoment = moment()
           .year(`20${data.Date.split('-')[2]}`)
           .month(data.Date.split('-')[0] - 1)
