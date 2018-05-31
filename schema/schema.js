@@ -20,6 +20,7 @@ require('../models/conditionLearning');
 require('../models/eastgate');
 require('../models/casePresentation');
 require('../models/mutlipleChoiceQuestion');
+require('../models/survey');
 
 const User = mongoose.model('users');
 const Rotation = mongoose.model('Rotation');
@@ -29,6 +30,7 @@ const ConditionLearning = mongoose.model('conditionLearnings');
 const Eastgate = mongoose.model('Eastgate');
 const CasePresentation = mongoose.model('CasePresentation');
 const MultipleChoiceQuestion = mongoose.model('MulitpleChoiceQuestion');
+const Survey = mongoose.model('Survey');
 
 const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -419,6 +421,40 @@ var MultipleChoiceQuestionType = new GraphQLObjectType({
   }),
 });
 
+var SurveyType = new GraphQLObjectType({
+  name: 'surveyType',
+  fields: () => ({
+    id: {
+      type: GraphQLID,
+      description: 'ID for survey',
+    },
+    _surveyTaker: {
+      type: GraphQLID,
+      description: 'ID for user who submitted survey',
+    },
+    valueOne: {
+      type: GraphQLString,
+      description: 'The value of the first 0-10 question',
+    },
+    valueTwo: {
+      type: GraphQLString,
+      description: 'The value of the second 0-10 question',
+    },
+    valueThree: {
+      type: GraphQLString,
+      description: 'The value of the third 0-10 question',
+    },
+    valueFour: {
+      type: GraphQLString,
+      description: 'The value of free text question',
+    },
+    dateCreated: {
+      type: GraphQLString,
+      description: 'the date that the survey was answered',
+    },
+  }),
+});
+
 var listOfAllCasePresentations = {
   type: GraphQLList(CasePresentationType),
   description: 'List of all the case presentations',
@@ -654,6 +690,17 @@ var returnLearning = {
   },
 };
 
+var doseSurveyWithUserIdExist = {
+  type: SurveyType,
+  description: 'doseSurveyWithUserIdExist',
+  args: {
+    id: { type: GraphQLID },
+  },
+  async resolve(parentValues, { id }, req) {
+    return await Survey.findOne({ _surveyTaker: id });
+  },
+};
+
 var RootQueryType = new GraphQLObjectType({
   name: 'RootQuery',
   fields: () => ({
@@ -672,6 +719,7 @@ var RootQueryType = new GraphQLObjectType({
     listOfEastgateManual,
     listOfAllCasePresentations,
     selectedCasePresentation,
+    doseSurveyWithUserIdExist,
   }),
 });
 
@@ -1242,6 +1290,34 @@ var updateLearning = {
   },
 };
 
+var submitSurvey = {
+  type: SurveyType,
+  description: 'Submit a survey',
+  args: {
+    valueOne: { type: new GraphQLNonNull(GraphQLString) },
+    valueTwo: { type: new GraphQLNonNull(GraphQLString) },
+    valueThree: { type: new GraphQLNonNull(GraphQLString) },
+    valueFour: { type: new GraphQLNonNull(GraphQLString) },
+  },
+  async resolve(
+    parentValues,
+    { valueOne, valueTwo, valueThree, valueFour },
+    req,
+  ) {
+    var newSurvey = new Survey({
+      valueOne,
+      valueTwo,
+      valueThree,
+      valueFour,
+      _surveyTaker: req.user.id,
+      dateCreated: Date.now(),
+    });
+    await newSurvey.save();
+
+    return newSurvey;
+  },
+};
+
 var MutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
@@ -1259,6 +1335,7 @@ var MutationType = new GraphQLObjectType({
     addCasePresentation,
     addQuestionToCase,
     updateCasePresentation,
+    submitSurvey,
   }),
 });
 

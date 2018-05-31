@@ -4,6 +4,7 @@ import jwt_decode from 'jwt-decode';
 
 import UpComing from './UpComing';
 import LearningLanding from './LearningLanding';
+import ShowSurveyMessage from './SurveyMessage';
 
 class LoggedInLanding extends Component {
   render() {
@@ -21,6 +22,7 @@ class LoggedInLanding extends Component {
             website
           </h4>
         </Segment>
+        <ShowSurveyMessage />
         <UpComing name={name} />
         <LearningLanding currentUser={currentUser} />
       </Container>

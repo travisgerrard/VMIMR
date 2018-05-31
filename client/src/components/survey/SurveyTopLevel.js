@@ -1,20 +1,40 @@
 import React, { Component } from 'react';
-import { Container, Segment, Button } from 'semantic-ui-react';
+import { Container, Segment, Button, Message } from 'semantic-ui-react';
 
 import OneToTenQuestion from './OneToTenQuestion';
 import OpenEndedQuestion from './OpenEndedQuestion';
 
 class SurveyTopLevel extends Component {
-  state = { valueOne: '', valueTwo: '', valueThree: '', valueFour: '' };
+  state = {
+    valueOne: '',
+    valueTwo: '',
+    valueThree: '',
+    valueFour: '',
+    error: '',
+  };
 
   submitClicked = () => {
     const { valueOne, valueTwo, valueThree, valueFour } = this.state;
-    console.log(valueOne, valueTwo, valueThree, valueFour);
+    if (valueOne === '' || valueTwo === '' || valueThree === '') {
+      this.setState({
+        error: 'Need to select a number from 0 to 10 in all three fields.',
+      });
+    } else {
+      // Need to use prop/mutation submitSurvey here.
+      this.props.submitSurvey({
+        variables: {
+          valueOne,
+          valueTwo,
+          valueThree,
+          valueFour,
+        },
+      });
+    }
   };
 
   render() {
     return (
-      <Container textAlign="center" style={{ marginTop: 10 }}>
+      <Container textAlign="center" style={{ marginTop: 10, marginBottom: 10 }}>
         <Segment>
           <h1>VMIMR Survey</h1>
           <OneToTenQuestion
@@ -37,7 +57,16 @@ class SurveyTopLevel extends Component {
             value={this.state.valueFour}
             question={`Currently, how do you keep track of what you've learned? (i.e. Memory alone, notebook, note cards, application)`}
           />
-          <Button onClick={() => this.submitClicked()}>Submit</Button>
+          {this.state.error && (
+            <Message negative>
+              <Message.Header>Field missing</Message.Header>
+              {this.state.error}
+            </Message>
+          )}
+          <Button primary onClick={() => this.submitClicked()}>
+            Submit
+          </Button>
+          <Button onClick={() => this.props.cancel()}>Cancel</Button>
         </Segment>
       </Container>
     );
