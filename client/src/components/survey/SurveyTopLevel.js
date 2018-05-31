@@ -45,12 +45,12 @@ class SurveyTopLevel extends Component {
           <OneToTenQuestion
             onChange={value => this.setState({ valueTwo: value })}
             value={this.state.valueTwo}
-            question={`From 0 - 10 how satisfied are you with the work to learning ratio on Wards`}
+            question={`From 0 - 10 how satisfied are you with the work to learning ratio on Wards? (0 = Not at all satisfied, 10 = Very satisfied)`}
           />
           <OneToTenQuestion
             onChange={value => this.setState({ valueThree: value })}
             value={this.state.valueThree}
-            question={`From 0 - 10, how accurate do you feel you are you in gauging how much you learn?`}
+            question={`From 0 - 10, how accurate do you feel you are in gauging how much you learn? (0 = I do not realize when I am learning something, 10 = I am always aware of when I am learning something)`}
           />
           <OpenEndedQuestion
             onChange={e => this.setState({ valueFour: e.target.value })}
