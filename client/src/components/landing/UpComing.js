@@ -150,7 +150,11 @@ class UpComing extends Component {
                   </Link>
                 </Segment>
               );
-            } else if (data.rotation === 'Eastgate') {
+            } else if (
+              data.rotation === 'Eastgate' ||
+              data.rotation === `Vm downtown, am` ||
+              data.rotation === `Vm downtown, pm`
+            ) {
               linkText = 'General%20Internal%20Medicine%20(GIM)';
               return (
                 <Segment key={Math.random()}>
