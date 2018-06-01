@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
-import { Loader, Message, Button, Modal } from 'semantic-ui-react';
+import { Message, Button, Modal } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
 
 import HAS_USER_FILLED_OUT_SURVEY from '../../queries/HasUserFilledOutSuevey';
@@ -23,8 +23,6 @@ class SurveyMessage extends Component {
 
   render() {
     const currentUserId = jwt_decode(localStorage.getItem('VMIMRToken')).id;
-    console.log(currentUserId);
-
     return (
       <div>
         <Query
@@ -34,8 +32,6 @@ class SurveyMessage extends Component {
           {({ loading, error, data }) => {
             if (loading) return <div />;
             if (error) return `Error! ${error.message}`;
-
-            console.log(data);
 
             if (data.doseSurveyWithUserIdExist) {
               return <div />;

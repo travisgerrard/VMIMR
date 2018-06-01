@@ -1273,6 +1273,7 @@ var updateLearning = {
         $set: {
           whatWasLearned: wwl,
           dateField: date,
+          tags: tags,
           seenWith: attending,
           usersTagged: userTags,
           dateUpdated: Date.now(),

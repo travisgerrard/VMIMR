@@ -55,7 +55,7 @@ class DisplayConditionCards extends Component {
     }
   };
 
-  cardHeader = ({ condition, tags, id }, createdById, learningId) => {
+  cardHeader = ({ condition, id }, tags, createdById, learningId) => {
     return (
       <Card.Content style={{ background: '#E5F5DD' }}>
         {this.showIcons(createdById, id, learningId)}
@@ -113,7 +113,12 @@ class DisplayConditionCards extends Component {
       const { _condition } = learning;
       return (
         <Card centered key={learning.id}>
-          {this.cardHeader(_condition, learning._creator.id, learning.id)}
+          {this.cardHeader(
+            _condition,
+            learning.tags,
+            learning._creator.id,
+            learning.id,
+          )}
           {this.conditionLearnings(learning)}
         </Card>
       );

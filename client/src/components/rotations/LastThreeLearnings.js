@@ -62,6 +62,8 @@ class LastThreeLearnings extends Component {
                         );
                       if (error) return `Error! ${error.message}`;
 
+                      console.log(data.returnLearning);
+
                       return (
                         <EditCondition
                           conditionTitle={this.state.searchTerm}

@@ -60,6 +60,7 @@ class EditCondition extends Component {
                 multiple
                 label="Rotation tags"
                 placeholder="Rotation tags"
+                value={this.state.tags}
                 onChange={(params, data) => this.setState({ tags: data.value })}
               />
             </Form.Group>
@@ -84,6 +85,7 @@ class EditCondition extends Component {
                 multiple
                 label="Learned With (Not required)"
                 placeholder="Learned With"
+                value={this.state.userTags}
                 onChange={(params, data) =>
                   this.setState({ userTags: data.value })
                 }

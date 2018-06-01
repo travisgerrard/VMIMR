@@ -43,7 +43,6 @@ class UpComing extends Component {
           aMoment.isSameOrAfter(moment()) &&
           aMoment.isBefore(moment().add(this.state.days_to_add, 'd'))
         ) {
-          console.log(aMoment.format('ddd, MMMM Do'));
           arrayToDisplay.push({
             moment: aMoment,
             rotation: data.Rotation,
