@@ -74,7 +74,7 @@ class UpComing extends Component {
             rotation: 'Vm u.village',
           });
           i++;
-        } else if (arrayToDisplay[i].rotation === 'Vm downtown, am') {
+        } else if (arrayToDisplay[i].rotation === `Vm downtown, am`) {
           shortenedArray.push({
             moment: arrayToDisplay[i].moment,
             rotation: 'Vm downtown',
@@ -270,7 +270,7 @@ class UpComing extends Component {
                   </Link>
                 </Segment>
               );
-            } else if (data.rotation === 'NEURO') {
+            } else if (data.rotation === 'Neuro') {
               linkText = 'Neurology';
               return (
                 <Segment key={Math.random()}>
