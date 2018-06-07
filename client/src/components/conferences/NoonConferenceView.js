@@ -8,10 +8,7 @@ import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation'
 
 class NoonConferenceView extends Component {
   render() {
-    console.log(this.props.match.params.id);
-
     if (this.props.match.params.id) {
-      console.log('has params');
       return (
         <Query
           query={SELECTED_CASE_PRESENTATIONS}

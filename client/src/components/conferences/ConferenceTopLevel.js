@@ -72,17 +72,19 @@ class ConferenceTopLevel extends Component {
             if (error) return `Error! ${error.message}`;
 
             if (data.listOfAllCasePresentations.length > 0) {
-              console.log(data.listOfAllCasePresentations);
-
               return (
                 <div>
                   {data.listOfAllCasePresentations.map(presentationData => {
-                    return (
-                      <NoonConferenceView
-                        key={presentationData.id}
-                        presentationData={presentationData}
-                      />
-                    );
+                    if (presentationData._presentor) {
+                      return (
+                        <NoonConferenceView
+                          key={presentationData.id}
+                          presentationData={presentationData}
+                        />
+                      );
+                    } else {
+                      return <div key={presentationData.id} />;
+                    }
                   })}
                 </div>
               );
