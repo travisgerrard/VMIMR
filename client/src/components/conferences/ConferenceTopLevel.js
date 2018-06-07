@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import jwt_decode from 'jwt-decode';
 import { Button, Loader, Card, Container, Segment } from 'semantic-ui-react';
-import ReactMarkdown from 'react-markdown';
 
 import ADD_CASE_PRESENTATION from '../../mutations/AddCasePresentation';
 import LIST_ALL_CASE_PRESENTATIONS from '../../queries/ListOfAllCasePresentations';
@@ -97,8 +96,6 @@ class ConferenceTopLevel extends Component {
   };
 
   render() {
-    const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
-
     return (
       <Container style={{ marginTop: 10 }}>
         <Segment>{this.renderList()}</Segment>
