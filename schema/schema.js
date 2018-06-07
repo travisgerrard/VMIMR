@@ -270,7 +270,7 @@ var CasePresentationType = new GraphQLObjectType({
     },
     presentationType: {
       type: GraphQLString,
-      description: 'Types: morning, case, specialist, primaryCare',
+      description: 'Types: morning, case, specialist, primaryCare, general',
     },
     presentationDate: {
       type: GraphQLString,

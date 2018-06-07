@@ -12,7 +12,7 @@ import NoonConferenceInput from './NoonConferenceInput';
 import Questions from './Questions';
 import Slides from './NoonConferenceSlides';
 import CatagorizationForSaving from './CategorizationForSaving';
-//import NoonConferenceQR from './NoonConferenceQR';
+import PresentationType from './PresentationType';
 
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
 import UPDATE_CASE_PRESENTATION from '../../mutations/UpdateCasePresentation';
@@ -48,6 +48,7 @@ class NoonConference extends Component {
     questions: [],
     embedPresentationSting: '',
     slideTextForSearch: '',
+    presentationType: '',
     physicalExam: EditorState.createWithContent(
       stateFromMarkdown(PHYSICALEXAMMARKDOWN),
     ),
@@ -108,6 +109,7 @@ class NoonConference extends Component {
         imaging: this.state.imaging,
         embedPresentationSting: this.state.embedPresentationSting,
         slideTextForSearch: this.state.slideTextForSearch,
+        presentationType: this.state.presentationType,
         physicalExam: stateToMarkdown(
           this.state.physicalExam.getCurrentContent(),
         ),
@@ -185,39 +187,47 @@ class NoonConference extends Component {
               >
                 {updateCasePresentation => (
                   <div>
-                    <NoonConferenceInput
+                    <PresentationType
                       updateConferenceInputState={(name, value) =>
                         this.updateConferenceInputState(name, value)
                       }
-                      editorState3={this.state.hpi}
-                      editorState2={this.state.ros}
-                      editorState={this.state.physicalExam}
-                      medValue={this.state.medValue}
-                      meds={this.state.meds}
-                      medSurgHx={this.state.medSurgHx}
-                      hxValue={this.state.hxValue}
-                      social={this.state.social}
-                      socialValue={this.state.socialValue}
-                      ddx={this.state.ddx}
-                      ddxValue={this.state.ddxValue}
-                      imaging={this.state.imaging}
-                      summAssessment={this.state.summAssessment}
-                      wbc={this.state.wbc}
-                      hgb={this.state.hgb}
-                      plt={this.state.plt}
-                      Na={this.state.Na}
-                      K={this.state.K}
-                      Cl={this.state.Cl}
-                      HC02={this.state.HC02}
-                      BUN={this.state.BUN}
-                      Cr={this.state.Cr}
-                      Glu={this.state.Glu}
-                      AP={this.state.AP}
-                      ALT={this.state.ALT}
-                      AST={this.state.AST}
-                      Tbili={this.state.Tbili}
-                      additionalLabs={this.state.additionalLabs}
+                      presentationType={this.state.presentationType}
                     />
+                    {this.state.presentationType === 'case' && (
+                      <NoonConferenceInput
+                        updateConferenceInputState={(name, value) =>
+                          this.updateConferenceInputState(name, value)
+                        }
+                        editorState3={this.state.hpi}
+                        editorState2={this.state.ros}
+                        editorState={this.state.physicalExam}
+                        medValue={this.state.medValue}
+                        meds={this.state.meds}
+                        medSurgHx={this.state.medSurgHx}
+                        hxValue={this.state.hxValue}
+                        social={this.state.social}
+                        socialValue={this.state.socialValue}
+                        ddx={this.state.ddx}
+                        ddxValue={this.state.ddxValue}
+                        imaging={this.state.imaging}
+                        summAssessment={this.state.summAssessment}
+                        wbc={this.state.wbc}
+                        hgb={this.state.hgb}
+                        plt={this.state.plt}
+                        Na={this.state.Na}
+                        K={this.state.K}
+                        Cl={this.state.Cl}
+                        HC02={this.state.HC02}
+                        BUN={this.state.BUN}
+                        Cr={this.state.Cr}
+                        Glu={this.state.Glu}
+                        AP={this.state.AP}
+                        ALT={this.state.ALT}
+                        AST={this.state.AST}
+                        Tbili={this.state.Tbili}
+                        additionalLabs={this.state.additionalLabs}
+                      />
+                    )}
                     <Questions
                       questions={this.state.questions}
                       caseId={data.selectedCasePresentation.id}
