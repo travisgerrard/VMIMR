@@ -57,14 +57,6 @@ class NoonConferenceView extends Component {
         embedPresentationSting,
       } = this.props.presentationData;
 
-      console.log(
-        title,
-        _presentor,
-        presentationDate,
-        id,
-        embedPresentationSting,
-      );
-
       return (
         <Card fluid>
           <Card.Content href={`/Conference/${id}`}>
