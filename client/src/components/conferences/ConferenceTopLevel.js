@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import jwt_decode from 'jwt-decode';
-import { Button, Loader, Card, Container } from 'semantic-ui-react';
+import { Button, Loader, Card, Container, Segment } from 'semantic-ui-react';
 import ReactMarkdown from 'react-markdown';
 
 import ADD_CASE_PRESENTATION from '../../mutations/AddCasePresentation';
 import LIST_ALL_CASE_PRESENTATIONS from '../../queries/ListOfAllCasePresentations';
+
+import NoonConferenceView from './NoonConferenceView';
 
 class ConferenceTopLevel extends Component {
   renderList = () => {
@@ -74,34 +76,14 @@ class ConferenceTopLevel extends Component {
 
               return (
                 <div>
-                  {data.listOfAllCasePresentations.map(
-                    ({
-                      title,
-                      _presentor,
-                      presentationDate,
-                      id,
-                      embedPresentationSting,
-                    }) => {
-                      return (
-                        <Card key={id} fluid>
-                          <Card.Content>
-                            <Card.Header>{title}</Card.Header>
-                            <Card.Meta>{`By ${
-                              _presentor.name
-                            } on ${presentationDate}`}</Card.Meta>
-                          </Card.Content>
-                          <Card.Content>
-                            <span style={{ whiteSpace: 'pre-wrap' }}>
-                              <ReactMarkdown
-                                source={embedPresentationSting}
-                                escapeHtml={false}
-                              />
-                            </span>
-                          </Card.Content>
-                        </Card>
-                      );
-                    },
-                  )}
+                  {data.listOfAllCasePresentations.map(presentationData => {
+                    return (
+                      <NoonConferenceView
+                        key={presentationData.id}
+                        presentationData={presentationData}
+                      />
+                    );
+                  })}
                 </div>
               );
             }
@@ -115,7 +97,11 @@ class ConferenceTopLevel extends Component {
   render() {
     const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
 
-    return <Container style={{ marginTop: 10 }}>{this.renderList()}</Container>;
+    return (
+      <Container style={{ marginTop: 10 }}>
+        <Segment>{this.renderList()}</Segment>
+      </Container>
+    );
   }
 }
 

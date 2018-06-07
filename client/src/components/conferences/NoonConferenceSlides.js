@@ -13,7 +13,7 @@ class NoonConferenceSlides extends Component {
 
   render() {
     return (
-      <Container textAlign="center">
+      <Container>
         <Segment>
           <div>
             <span style={{ whiteSpace: 'pre-wrap' }}>

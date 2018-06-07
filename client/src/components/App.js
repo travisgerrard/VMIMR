@@ -15,6 +15,7 @@ import Messages from './messages';
 import ConditionPage from './conditions/rotation/ConditionPage';
 import ConferenceList from './conferences/ConferenceTopLevel';
 import NoonConferenceAdmin from './conferences/NoonConference';
+import NoonConferenceView from './conferences/NoonConferenceView';
 import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
 import Eastgate from './eastgate/EastgateTopLevelView';
 import LoggedInLanding from './landing/LoggedInLanding';
@@ -70,6 +71,11 @@ class App extends Component {
             exact
             path={`/Conference`}
             component={RequireAuth(ConferenceList)}
+          />
+          <Route
+            exact
+            path={`/Conference/:id`}
+            component={NoonConferenceView}
           />
           <Route
             exact

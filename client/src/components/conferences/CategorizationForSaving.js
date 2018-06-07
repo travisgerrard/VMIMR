@@ -79,6 +79,22 @@ class CatagorizationForSaving extends Component {
                 >
                   Save
                 </Form.Button>
+                <Form.Button
+                  basic
+                  fluid
+                  color="red"
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        `Are you sure you want to delete ${this.props.title}?`,
+                      )
+                    ) {
+                      this.props.deleteClicked();
+                    }
+                  }}
+                >
+                  Delete
+                </Form.Button>
               </Form>
             );
           }}

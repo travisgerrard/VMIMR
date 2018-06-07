@@ -464,7 +464,8 @@ var listOfAllCasePresentations = {
         path: 'questions',
         model: 'MulitpleChoiceQuestion',
       })
-      .populate({ path: '_presentor', model: 'users' });
+      .populate({ path: '_presentor', model: 'users' })
+      .sort('-presentationDate');
   },
 };
 

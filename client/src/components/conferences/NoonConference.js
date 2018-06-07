@@ -124,6 +124,10 @@ class NoonConference extends Component {
     });
   };
 
+  deleteClicked = () => {
+    console.log('placeholder');
+  };
+
   render() {
     return (
       <div>
@@ -250,6 +254,7 @@ class NoonConference extends Component {
                       saveClicked={() =>
                         this.saveClicked(updateCasePresentation)
                       }
+                      deleteClicked={() => this.deleteClicked()}
                     />
                   </div>
                 )}
