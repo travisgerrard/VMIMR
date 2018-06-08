@@ -22,8 +22,7 @@ class Blog extends Component {
                 <Container style={{ marginTop: 20 }}>
                   <Segment>
                     <h1 style={{ color: '#6AB2D6' }}>
-                      Kind of a blog... Rolling update of the latest group
-                      activities
+                      What's happening at VM:IMR
                     </h1>
                     <NoonConferenceView
                       key={data.listOfAllCasePresentations[0].id}
