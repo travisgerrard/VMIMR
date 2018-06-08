@@ -10,7 +10,12 @@ import NoonConferenceView from './NoonConferenceView';
 
 class ConferenceTopLevel extends Component {
   renderList = () => {
-    const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
+    let currentUser = '';
+    if (localStorage.getItem('VMIMRToken')) {
+      currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
+    }
+    console.log(currentUser);
+
     if (currentUser.admin) {
       return (
         <Mutation

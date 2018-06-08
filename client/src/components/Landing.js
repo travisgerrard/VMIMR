@@ -4,8 +4,9 @@ import React from 'react';
 import LandingPage from './landing/LoggedInLanding';
 
 //import Conditions from './conditions/ConditionTopLevelView';
-import { Container } from 'semantic-ui-react';
+import { Container, Segment } from 'semantic-ui-react';
 import Signin from './auth/Signin';
+import Blog from './conferences/Blog';
 
 const Landing = () => {
   var landingPage;
@@ -13,13 +14,17 @@ const Landing = () => {
     landingPage = <LandingPage />;
   } else {
     landingPage = (
-      <Container textAlign="center">
-        <h1>Virginia Mason: Internal Medicine Residency</h1>
-        <p>Welcome to VM:IMR, the homepage for IM residents at VM</p>
-        <p>Aiming to help organize your residency life and learning</p>
+      <div>
+        <Container textAlign="center">
+          <h1>Virginia Mason: Internal Medicine Residency</h1>
+          <p>Welcome to VM:IMR, the homepage for IM residents at VM</p>
+          <p>Aiming to help organize your residency life and learning</p>
 
-        <Signin />
-      </Container>
+          <Signin />
+        </Container>
+
+        <Blog />
+      </div>
     );
   }
 

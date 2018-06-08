@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 import UpComing from './UpComing';
 import LearningLanding from './LearningLanding';
 import ShowSurveyMessage from './SurveyMessage';
+import Blog from '../conferences/Blog';
 
 class LoggedInLanding extends Component {
   render() {
@@ -25,6 +26,7 @@ class LoggedInLanding extends Component {
         <ShowSurveyMessage />
         <UpComing name={name} />
         <LearningLanding currentUser={currentUser} />
+        <Blog />
       </Container>
     );
   }
