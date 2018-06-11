@@ -11,7 +11,7 @@ import UPDATE_ROTATION from '../../mutations/UpdateRotation';
 class RotationGeneralInfo extends Component {
   state = {
     editGeneralInfo: false,
-    generalInfo: '',
+    generalInfo: this.props.generalInfo,
     errors: '',
   };
   handleEditGeneralInfoClick = e => this.setState({ editGeneralInfo: true });
@@ -60,9 +60,6 @@ class RotationGeneralInfo extends Component {
 
   displayGeneralInfo = (generalInfo, isAdmin) => {
     if (isAdmin) {
-      if (this.state.generalInfo === '') {
-        this.setState({ generalInfo });
-      }
       return (
         <div>
           <h4 style={{ display: 'inline-block', float: 'left' }}>
