@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Loader } from 'semantic-ui-react';
 import { Query, Mutation } from 'react-apollo';
 import _ from 'lodash';
+import jwt_decode from 'jwt-decode';
 
 import EastgateManual from './EastgateManual';
 
@@ -16,52 +17,43 @@ class EastgateTopLevelView extends Component {
   };
 
   contentSection = eastgateContent => {
+    const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
+
     return (
-      <Query query={GET_CURRENT_USER}>
-        {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
-          if (error) return `Error! ${error.message}`;
-
-          const currentUser = data.currentUser;
-
-          return (
-            <Mutation
-              mutation={ADD_OR_UPDATE_EASTGATE_CONTENT}
-              refetchQueries={[
-                {
-                  query: GET_ALL_EASTGATE_CONTENT,
-                },
-              ]}
-            >
-              {(addContent, { data, loading, error }) => (
-                <Mutation
-                  mutation={DELETE_EASTGATE_CONTENT}
-                  refetchQueries={[
-                    {
-                      query: GET_ALL_EASTGATE_CONTENT,
-                    },
-                  ]}
-                >
-                  {(deleteContent, { data, loading, error }) => (
-                    <div>
-                      {loading && <Loader active inline="centered" />}
-                      <EastgateManual
-                        content={eastgateContent}
-                        addContent={addContent}
-                        deleteContent={deleteContent}
-                        currentUserId={currentUser.id}
-                        loading={loading}
-                        data={data}
-                        error={error}
-                      />
-                    </div>
-                  )}
-                </Mutation>
-              )}
-            </Mutation>
-          );
-        }}
-      </Query>
+      <Mutation
+        mutation={ADD_OR_UPDATE_EASTGATE_CONTENT}
+        refetchQueries={[
+          {
+            query: GET_ALL_EASTGATE_CONTENT,
+          },
+        ]}
+      >
+        {(addContent, { data, loading, error }) => (
+          <Mutation
+            mutation={DELETE_EASTGATE_CONTENT}
+            refetchQueries={[
+              {
+                query: GET_ALL_EASTGATE_CONTENT,
+              },
+            ]}
+          >
+            {(deleteContent, { data, loading, error }) => (
+              <div>
+                {loading && <Loader active inline="centered" />}
+                <EastgateManual
+                  content={eastgateContent}
+                  addContent={addContent}
+                  deleteContent={deleteContent}
+                  currentUserId={currentUser.id}
+                  loading={loading}
+                  data={data}
+                  error={error}
+                />
+              </div>
+            )}
+          </Mutation>
+        )}
+      </Mutation>
     );
   };
 

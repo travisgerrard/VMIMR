@@ -30,7 +30,7 @@ class EastgateManual extends Component {
     confirmOpen: false,
     idToDelete: '',
     modalHeader: 'Add Eastgate Manual Content',
-    visible: false,
+    visible: true,
   };
 
   submitAddContent = e => {
@@ -273,6 +273,7 @@ class EastgateManual extends Component {
             this.setState({ confirmOpen: false });
           }}
         />
+        {/** 
         <Button
           size="mini"
           onClick={() => this.changeVisibleMenu()}
@@ -288,7 +289,7 @@ class EastgateManual extends Component {
           }}
         >
           {visible ? '<' : '>'}
-        </Button>
+        </Button>**/}
       </div>
     );
   }
