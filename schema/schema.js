@@ -1132,10 +1132,11 @@ var addLearning = {
     date: { type: new GraphQLNonNull(GraphQLString) },
     userTags: { type: GraphQLList(GraphQLString) },
     wwl: { type: new GraphQLNonNull(GraphQLString) },
+    id: { type: new GraphQLNonNull(GraphQLID) },
   },
   async resolve(
     parentValues,
-    { condition, tags, attending, date, userTags, wwl },
+    { condition, tags, attending, date, userTags, wwl, id },
     req,
   ) {
     var conditionExists = await Condition.findOne({
@@ -1146,7 +1147,7 @@ var addLearning = {
       conditionExists = new Condition({
         tags,
         condition,
-        _creator: req.user.id,
+        _creator: id,
         dateCreated: Date.now(),
       });
     }
@@ -1163,7 +1164,7 @@ var addLearning = {
       dateCreated: Date.now(),
       dateUpdated: Date.now(),
       _condition: conditionExists._id,
-      _creator: req.user.id,
+      _creator: id,
     })
       .populate({ path: '_condition', model: 'conditions' })
       .populate({ path: '_creator', model: 'users' })
@@ -1232,10 +1233,11 @@ var updateLearning = {
     date: { type: new GraphQLNonNull(GraphQLString) },
     userTags: { type: GraphQLList(GraphQLString) },
     wwl: { type: new GraphQLNonNull(GraphQLString) },
+    userId: { type: new GraphQLNonNull(GraphQLID) },
   },
   async resolve(
     parentValues,
-    { condition, tags, attending, date, userTags, wwl, id },
+    { condition, tags, attending, date, userTags, wwl, id, userId },
     req,
   ) {
     var learningToBeUpdated = await ConditionLearning.findById(id).populate({
@@ -1257,7 +1259,7 @@ var updateLearning = {
         conditionToModify = new Condition({
           tags,
           condition,
-          _creator: req.user.id,
+          _creator: userId,
           dateCreated: Date.now(),
         });
         conditionToModify._learnings.push(id);
@@ -1300,10 +1302,11 @@ var submitSurvey = {
     valueTwo: { type: new GraphQLNonNull(GraphQLString) },
     valueThree: { type: new GraphQLNonNull(GraphQLString) },
     valueFour: { type: new GraphQLNonNull(GraphQLString) },
+    id: { type: new GraphQLNonNull(GraphQLID) },
   },
   async resolve(
     parentValues,
-    { valueOne, valueTwo, valueThree, valueFour },
+    { valueOne, valueTwo, valueThree, valueFour, id },
     req,
   ) {
     var newSurvey = new Survey({
@@ -1311,7 +1314,7 @@ var submitSurvey = {
       valueTwo,
       valueThree,
       valueFour,
-      _surveyTaker: req.user.id,
+      _surveyTaker: id,
       dateCreated: Date.now(),
     });
     await newSurvey.save();

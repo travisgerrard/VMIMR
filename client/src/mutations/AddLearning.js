@@ -8,6 +8,7 @@ export default gql`
     $date: String!
     $userTags: [String]!
     $wwl: String!
+    $id: ID!
   ) {
     addLearning(
       condition: $condition
@@ -16,6 +17,7 @@ export default gql`
       date: $date
       userTags: $userTags
       wwl: $wwl
+      id: $id
     ) {
       id
       whatWasLearned

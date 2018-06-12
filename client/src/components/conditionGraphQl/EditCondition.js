@@ -124,6 +124,7 @@ class EditCondition extends Component {
                         date: this.state.date,
                         userTags: this.state.userTags,
                         wwl: this.state.wwl,
+                        userId: this.props.currentUser.id,
                       },
                     });
                   } else {

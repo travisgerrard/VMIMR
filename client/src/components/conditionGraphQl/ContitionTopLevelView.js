@@ -172,6 +172,8 @@ class ConditionTopLevelViewGQL extends Component {
 
             const filteredQuery = this.filterQuery(data.listOfPersonalLearning);
 
+            console.log(currentUser);
+
             return (
               <div>
                 {!data.listOfPersonalLearning.length && (

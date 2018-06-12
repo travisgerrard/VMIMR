@@ -106,6 +106,7 @@ class AddCondition extends Component {
 
                     addLearning({
                       variables: {
+                        id: this.props.currentUser.id,
                         condition: this.state.conditionTitle,
                         tags: this.state.tags,
                         attending: this.state.attending,
@@ -140,7 +141,6 @@ class AddCondition extends Component {
     const options = _.map(rotations, ({ name, dbname }) => {
       return { key: name, text: name, value: dbname };
     });
-
     return (
       <Segment>
         <Query query={LIST_ALL_USERS_THAT_ARE_VISIBLE}>

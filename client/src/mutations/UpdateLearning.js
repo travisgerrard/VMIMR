@@ -9,6 +9,7 @@ export default gql`
     $date: String!
     $userTags: [String]!
     $wwl: String!
+    $userId: ID!
   ) {
     updateLearning(
       id: $id
@@ -18,6 +19,7 @@ export default gql`
       date: $date
       userTags: $userTags
       wwl: $wwl
+      userId: $userId
     ) {
       id
       whatWasLearned
