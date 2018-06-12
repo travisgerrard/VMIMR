@@ -14,7 +14,7 @@ import { validateInputs } from './validation';
 /* Props
 cancelAddingcondition
 doneAddingLearning
-id
+id = userId
 dbname
 */
 
@@ -111,6 +111,7 @@ class AddConditionFromRotation extends Component {
 
                     addLearning({
                       variables: {
+                        id: this.props.id,
                         condition: this.state.conditionTitle,
                         tags: this.state.tags,
                         attending: this.state.attending,
