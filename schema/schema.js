@@ -1323,6 +1323,26 @@ var submitSurvey = {
   },
 };
 
+var deleteConference = {
+  type: CasePresentationType,
+  description: 'Delete a conference',
+  args: {
+    id: { type: GraphQLID },
+  },
+  async resolve(parentValues, { id }, req) {
+    var conferenceToDelete = await CasePresentation.findByIdAndRemove(
+      id,
+      function(err, offer) {
+        if (err) {
+          throw err;
+        }
+      },
+    );
+
+    return conferenceToDelete;
+  },
+};
+
 var MutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
@@ -1341,6 +1361,7 @@ var MutationType = new GraphQLObjectType({
     addQuestionToCase,
     updateCasePresentation,
     submitSurvey,
+    deleteConference,
   }),
 });
 

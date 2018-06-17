@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const casePresentationSchema = new Schema({
   _presentor: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  presentationType: String,
+  presentationType: { type: String, default: 'general' },
   presentationDate: String,
   hpi: String,
   ros: String,

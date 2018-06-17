@@ -16,6 +16,7 @@ import PresentationType from './PresentationType';
 
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
 import UPDATE_CASE_PRESENTATION from '../../mutations/UpdateCasePresentation';
+import DELETE_CASE_PRESENTATION from '../../mutations/DeleteConference';
 
 class NoonConference extends Component {
   state = {
@@ -124,7 +125,12 @@ class NoonConference extends Component {
     });
   };
 
-  deleteClicked = () => {
+  deleteClicked = deleteConference => {
+    deleteConference({
+      variables: {
+        id: this.state.id,
+      },
+    });
     console.log('placeholder');
   };
 
@@ -243,19 +249,28 @@ class NoonConference extends Component {
                       }
                       slideTextForSearch={this.state.slideTextForSearch}
                     />
-                    <CatagorizationForSaving
-                      updateConferenceInputState={(name, value) =>
-                        this.updateConferenceInputState(name, value)
-                      }
-                      _presentor={this.state._presentor}
-                      title={this.state.title}
-                      presentationDate={this.state.presentationDate}
-                      tags={this.state.tags}
-                      saveClicked={() =>
-                        this.saveClicked(updateCasePresentation)
-                      }
-                      deleteClicked={() => this.deleteClicked()}
-                    />
+                    <Mutation
+                      mutation={DELETE_CASE_PRESENTATION}
+                      onCompleted={() => this.props.history.goBack()}
+                    >
+                      {deleteConference => (
+                        <CatagorizationForSaving
+                          updateConferenceInputState={(name, value) =>
+                            this.updateConferenceInputState(name, value)
+                          }
+                          _presentor={this.state._presentor}
+                          title={this.state.title}
+                          presentationDate={this.state.presentationDate}
+                          tags={this.state.tags}
+                          saveClicked={() =>
+                            this.saveClicked(updateCasePresentation)
+                          }
+                          deleteClicked={() =>
+                            this.deleteClicked(deleteConference)
+                          }
+                        />
+                      )}
+                    </Mutation>
                   </div>
                 )}
               </Mutation>

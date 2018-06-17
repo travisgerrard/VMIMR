@@ -27,6 +27,7 @@ class ConferenceTopLevel extends Component {
               <Button
                 onClick={() =>
                   addCasePresentation({
+                    // 'No Title' is added in the schema....
                     variables: {
                       id: currentUser.id,
                     },
