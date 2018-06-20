@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Segment, List, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 
+import DELETE_QUESTION from '../../mutations/DeleteQuestion';
+// Now need to delete the question - add in a button and wire it up...
+
 class ShowQuestion extends Component {
   state = {
     showAnswers: false,
