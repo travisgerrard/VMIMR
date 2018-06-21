@@ -8,8 +8,10 @@ import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation'
 
 class AddQuestion extends Component {
   state = {
-    addingQuestion: false,
-    questionStem: '',
+    addingQuestion: this.props.addingQuestion
+      ? this.props.addingQuestion
+      : false,
+    questionStem: this.props.questionStem ? this.props.questionStem : '',
     questionAnswerText: '',
     options: [],
   };

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Segment, List, Button } from 'semantic-ui-react';
 import _ from 'lodash';
+import ReactMarkdown from 'react-markdown';
+
+import AddQuestion from './AddQuestion';
 
 import DELETE_QUESTION from '../../mutations/DeleteQuestion';
 // Now need to delete the question - add in a button and wire it up...
@@ -45,13 +48,33 @@ class ShowQuestion extends Component {
     );
   };
 
+  editQuestion = () => {
+    console.log(this.props);
+    return (
+      <AddQuestion
+        caseId={this.props.caseId}
+        questionStem={this.props.questionStem}
+        addingQuestion={true}
+      />
+    );
+  };
+
   render() {
+    console.log(this.props.abilityToEdit);
+
     return (
       <Segment>
         {this.showQuestions()}
         {this.state.showAnswers &&
           this.props.questionAnswerText && (
-            <Segment>{this.props.questionAnswerText}</Segment>
+            <Segment>
+              <span style={{ whiteSpace: 'pre-wrap' }}>
+                <ReactMarkdown
+                  source={this.props.questionAnswerText}
+                  escapeHtml={false}
+                />
+              </span>
+            </Segment>
           )}
         <Button
           style={{ marginTop: 20 }}
@@ -61,6 +84,9 @@ class ShowQuestion extends Component {
         >
           {this.state.showAnswers ? 'Hide Answers' : 'Show Answers'}
         </Button>
+        {this.props.abilityToEdit && (
+          <Button onClick={() => this.editQuestion()}>Edit Question</Button>
+        )}
       </Segment>
     );
   }

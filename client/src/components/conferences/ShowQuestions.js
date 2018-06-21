@@ -14,6 +14,7 @@ class ShowQuestions extends Component {
                 questionAnswerText={questionAnswerText}
                 options={options}
                 answers={answers}
+                abilityToEdit={this.props.abilityToEdit}
               />
             );
           },
