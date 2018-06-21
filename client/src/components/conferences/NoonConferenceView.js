@@ -4,16 +4,16 @@ import { Query } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
+import Questions from './Questions';
+
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
 
 class NoonConferenceView extends Component {
   render() {
     if (this.props.match.params.id) {
+      const caseId = this.props.match.params.id;
       return (
-        <Query
-          query={SELECTED_CASE_PRESENTATIONS}
-          variables={{ id: this.props.match.params.id }}
-        >
+        <Query query={SELECTED_CASE_PRESENTATIONS} variables={{ id: caseId }}>
           {({ loading, error, data }) => {
             if (loading) return <Loader active inline="centered" />;
             if (error) return `Error! ${error.message}`;
@@ -24,6 +24,7 @@ class NoonConferenceView extends Component {
               _presentor,
               presentationDate,
               embedPresentationSting,
+              questions,
             } = data.selectedCasePresentation;
             return (
               <Container style={{ marginTop: 25 }}>
@@ -35,6 +36,11 @@ class NoonConferenceView extends Component {
                     } on ${presentationDate}`}</Card.Meta>
                   </Card.Content>
                   <Card.Content>
+                    <Questions
+                      questions={questions}
+                      caseId={caseId}
+                      abilityToEdit={false}
+                    />
                     <span style={{ whiteSpace: 'pre-wrap' }}>
                       <ReactMarkdown
                         source={embedPresentationSting}

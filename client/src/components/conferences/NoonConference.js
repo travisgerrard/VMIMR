@@ -240,6 +240,7 @@ class NoonConference extends Component {
                     <Questions
                       questions={this.state.questions}
                       caseId={data.selectedCasePresentation.id}
+                      abilityToEdit={true}
                     />
                     <Slides
                       embedPresentationSting={this.state.embedPresentationSting}
