@@ -23,7 +23,6 @@ class ConferenceTopLevel extends Component {
     if (localStorage.getItem('VMIMRToken')) {
       currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
     }
-
     const admin = currentUser.admin;
 
     return (

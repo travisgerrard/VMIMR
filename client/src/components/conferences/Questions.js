@@ -14,14 +14,18 @@ class Question extends Component {
   render() {
     console.log(this.props.abilityToEdit);
 
+    const { abilityToEdit } = this.props;
+
     return (
       <Container textAlign="left" style={{ marginBottom: 10 }}>
         <Segment>
-          <ShowQuestions questions={this.props.questions} />
+          <h2>Questions</h2>
+          <ShowQuestions
+            questions={this.props.questions}
+            abilityToEdit={abilityToEdit}
+          />
           <br />
-          {this.props.abilityToEdit && (
-            <AddQuestion caseId={this.props.caseId} />
-          )}
+          {abilityToEdit && <AddQuestion caseId={this.props.caseId} />}
         </Segment>
       </Container>
     );

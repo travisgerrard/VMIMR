@@ -49,6 +49,10 @@ class ShowQuestion extends Component {
     return (
       <Segment>
         {this.showQuestions()}
+        {this.state.showAnswers &&
+          this.props.questionAnswerText && (
+            <Segment>{this.props.questionAnswerText}</Segment>
+          )}
         <Button
           style={{ marginTop: 20 }}
           onClick={() =>

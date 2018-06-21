@@ -5,6 +5,7 @@ export default gql`
     $_case: ID!
     $_creator: ID!
     $questionStem: String!
+    $questionAnswerText: String!
     $options: [String]!
     $answers: [String]!
   ) {
@@ -12,6 +13,7 @@ export default gql`
       _case: $_case
       _creator: $_creator
       questionStem: $questionStem
+      questionAnswerText: $questionAnswerText
       options: $options
       answers: $answers
     ) {
@@ -19,6 +21,7 @@ export default gql`
       _case
       _creator
       questionStem
+      questionAnswerText
       options
       answers
     }

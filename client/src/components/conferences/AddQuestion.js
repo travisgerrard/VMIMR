@@ -10,11 +10,21 @@ class AddQuestion extends Component {
   state = {
     addingQuestion: false,
     questionStem: '',
+    questionAnswerText: '',
     options: [],
   };
 
   addQuestion = () => {
     this.setState({ addingQuestion: true });
+  };
+
+  cancelAddingQuestion = () => {
+    this.setState({
+      addingQuestion: false,
+      questionStem: '',
+      questionAnswerText: '',
+      options: [],
+    });
   };
 
   showButton = () => {
@@ -81,11 +91,17 @@ class AddQuestion extends Component {
           _case: this.props.caseId,
           _creator: jwt_decode(localStorage.getItem('VMIMRToken')).id,
           questionStem: this.state.questionStem,
+          questionAnswerText: this.state.questionAnswerText,
           options,
           answers,
         },
       });
-      this.setState({ addingQuestion: false });
+      this.setState({
+        addingQuestion: false,
+        questionStem: '',
+        questionAnswerText: '',
+        options: [],
+      });
     } else {
       console.log('There was an error saving the question');
     }
@@ -112,6 +128,17 @@ class AddQuestion extends Component {
                 })
               }
             />
+            <Form.TextArea
+              required={true}
+              label="Question Answer Text"
+              value={this.state.questionAnswerText}
+              placeHolder="What is shown when the answer is revealed"
+              onChange={e =>
+                this.setState({
+                  questionAnswerText: e.target.value,
+                })
+              }
+            />
             {this.displayAnswerChoices()}
             <Button onClick={() => this.addAnswerChoice()}>
               Add Answer Choice
@@ -131,6 +158,7 @@ class AddQuestion extends Component {
                 </Button>
               )}
             </Mutation>
+            <Button onClick={() => this.cancelAddingQuestion()}>Cancel</Button>
           </Form>
         </Segment>
       </Modal>

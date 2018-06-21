@@ -402,6 +402,10 @@ var MultipleChoiceQuestionType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'Question stem',
     },
+    questionAnswerText: {
+      type: GraphQLString,
+      description: 'What is shown when the answer is revealed',
+    },
     options: {
       type: GraphQLList(GraphQLString),
       description: 'List of possible answers',
@@ -1078,17 +1082,19 @@ var addQuestionToCase = {
     _case: { type: new GraphQLNonNull(GraphQLID) },
     _creator: { type: new GraphQLNonNull(GraphQLID) },
     questionStem: { type: new GraphQLNonNull(GraphQLString) },
+    questionAnswerText: { type: new GraphQLNonNull(GraphQLString) },
     options: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
     answers: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
   },
   async resolve(
     parentValues,
-    { _case, _creator, questionStem, options, answers },
+    { _case, _creator, questionStem, questionAnswerText, options, answers },
   ) {
     var newQuestion = new MultipleChoiceQuestion({
       _case,
       _creator,
       questionStem,
+      questionAnswerText,
       options,
       answers,
     });

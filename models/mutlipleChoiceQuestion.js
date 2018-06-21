@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const multipleChoiceQuestionSchema = new Schema({
   questionStem: { type: String },
+  questionAnswerText: { type: String },
   options: [{ type: String }],
   answers: [{ type: String }],
   _creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

@@ -39,6 +39,7 @@ export default gql`
       questions {
         id
         questionStem
+        questionAnswerText
         options
         answers
       }
