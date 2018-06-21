@@ -26,21 +26,31 @@ class NoonConferenceView extends Component {
               embedPresentationSting,
               questions,
             } = data.selectedCasePresentation;
+
+            let name;
+            if (_presentor) {
+              name = _presentor.name;
+            } else {
+              name = '';
+            }
+
+            console.log(questions.length);
+
             return (
               <Container style={{ marginTop: 25 }}>
                 <Card fluid>
                   <Card.Content>
                     <Card.Header>{title}</Card.Header>
-                    <Card.Meta>{`By ${
-                      _presentor.name
-                    } on ${presentationDate}`}</Card.Meta>
+                    <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
                   </Card.Content>
                   <Card.Content>
-                    <Questions
-                      questions={questions}
-                      caseId={caseId}
-                      abilityToEdit={false}
-                    />
+                    {questions.length && (
+                      <Questions
+                        questions={questions}
+                        caseId={caseId}
+                        abilityToEdit={false}
+                      />
+                    )}
                     <span style={{ whiteSpace: 'pre-wrap' }}>
                       <ReactMarkdown
                         source={embedPresentationSting}
@@ -63,13 +73,18 @@ class NoonConferenceView extends Component {
         embedPresentationSting,
       } = this.props.presentationData;
 
+      let name;
+      if (_presentor) {
+        name = _presentor.name;
+      } else {
+        name = '';
+      }
+
       return (
         <Card fluid>
           <Card.Content href={`/Conference/${id}`}>
             <Card.Header>{title}</Card.Header>
-            <Card.Meta>{`By ${
-              _presentor.name
-            } on ${presentationDate}`}</Card.Meta>
+            <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
           </Card.Content>
           <Card.Content>
             <span style={{ whiteSpace: 'pre-wrap' }}>
