@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import jwt_decode from 'jwt-decode';
-import { Button, Loader, Card, Container, Segment } from 'semantic-ui-react';
+import {
+  Button,
+  Loader,
+  Card,
+  Container,
+  Segment,
+  Image,
+  Icon,
+} from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 import ADD_CASE_PRESENTATION from '../../mutations/AddCasePresentation';
 import LIST_ALL_CASE_PRESENTATIONS from '../../queries/ListOfAllCasePresentations';
@@ -14,16 +23,17 @@ class ConferenceTopLevel extends Component {
     if (localStorage.getItem('VMIMRToken')) {
       currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
     }
-    console.log(currentUser);
 
-    if (currentUser.admin) {
-      return (
-        <Mutation
-          mutation={ADD_CASE_PRESENTATION}
-          refetchQueries={[{ query: LIST_ALL_CASE_PRESENTATIONS }]}
-        >
-          {(addCasePresentation, { data, loading, error }) => (
-            <div>
+    const admin = currentUser.admin;
+
+    return (
+      <Mutation
+        mutation={ADD_CASE_PRESENTATION}
+        refetchQueries={[{ query: LIST_ALL_CASE_PRESENTATIONS }]}
+      >
+        {(addCasePresentation, { data, loading, error }) => (
+          <div>
+            {admin && (
               <Button
                 onClick={() =>
                   addCasePresentation({
@@ -37,68 +47,58 @@ class ConferenceTopLevel extends Component {
               >
                 Add Noon Case Report
               </Button>
+            )}
 
-              <Query query={LIST_ALL_CASE_PRESENTATIONS}>
-                {({ loading, error, data }) => {
-                  if (loading) return <Loader active inline="centered" />;
-                  if (error) return `Error! ${error.message}`;
+            <Query query={LIST_ALL_CASE_PRESENTATIONS}>
+              {({ loading, error, data }) => {
+                if (loading) return <Loader active inline="centered" />;
+                if (error) return `Error! ${error.message}`;
 
-                  if (data.listOfAllCasePresentations.length > 0) {
-                    return (
-                      <div>
-                        {data.listOfAllCasePresentations.map(
-                          casePresentation => {
-                            return (
-                              <Card
-                                fluid
-                                key={casePresentation.id}
-                                href={`/ConferenceAdmin/${casePresentation.id}`}
-                                header={casePresentation.title}
-                              />
-                            );
-                          },
-                        )}
-                      </div>
-                    );
-                  }
-                  return <div />;
-                }}
-              </Query>
-            </div>
-          )}
-        </Mutation>
-      );
-    } else {
-      //Not an admin...
-      return (
-        <Query query={LIST_ALL_CASE_PRESENTATIONS}>
-          {({ loading, error, data }) => {
-            if (loading) return <Loader active inline="centered" />;
-            if (error) return `Error! ${error.message}`;
-
-            if (data.listOfAllCasePresentations.length > 0) {
-              return (
-                <div>
-                  {data.listOfAllCasePresentations.map(presentationData => {
-                    if (presentationData._presentor) {
-                      return (
-                        <NoonConferenceView
-                          key={presentationData.id}
-                          presentationData={presentationData}
-                        />
-                      );
-                    } else {
-                      return <div key={presentationData.id} />;
-                    }
-                  })}
-                </div>
-              );
-            }
-            return <div />;
-          }}
-        </Query>
-      );
-    }
+                if (data.listOfAllCasePresentations.length > 0) {
+                  return (
+                    <div>
+                      {data.listOfAllCasePresentations.map(casePresentation => {
+                        return (
+                          <Card
+                            fluid
+                            key={casePresentation.id}
+                            href={`/Conference/${casePresentation.id}`}
+                          >
+                            <Card.Content>
+                              {admin && (
+                                <Image floated="right">
+                                  <Link
+                                    to={`/ConferenceAdmin/${
+                                      casePresentation.id
+                                    }`}
+                                  >
+                                    <Icon
+                                      name="edit"
+                                      style={{
+                                        cursor: 'pointer',
+                                        color: '#00824d',
+                                      }}
+                                    />
+                                  </Link>
+                                </Image>
+                              )}
+                              <Card.Header>
+                                {casePresentation.title}
+                              </Card.Header>
+                            </Card.Content>
+                          </Card>
+                        );
+                      })}
+                    </div>
+                  );
+                }
+                return <div />;
+              }}
+            </Query>
+          </div>
+        )}
+      </Mutation>
+    );
   };
 
   render() {

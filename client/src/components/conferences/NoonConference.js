@@ -131,7 +131,6 @@ class NoonConference extends Component {
         id: this.state.id,
       },
     });
-    console.log('placeholder');
   };
 
   render() {
