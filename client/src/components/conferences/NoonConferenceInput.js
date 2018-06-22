@@ -18,6 +18,8 @@ class NoonConference extends Component {
     this.props.updateConferenceInputState(`ros`, editorState2);
   editorOnChange3 = editorState3 =>
     this.props.updateConferenceInputState(`hpi`, editorState3);
+  editorOnChange4 = editorState4 =>
+    this.props.updateConferenceInputState(`pmh`, editorState4);
   editorOnChange = editorState =>
     this.props.updateConferenceInputState(`physicalExam`, editorState);
 
@@ -57,6 +59,27 @@ class NoonConference extends Component {
             editorState={this.props.editorState2}
             handleKeyCommand={this.handleKeyCommand}
             onChange={this.editorOnChange2}
+          />
+        </div>
+      </div>
+    );
+  };
+
+  PMH = () => {
+    return (
+      <div>
+        <label style={{ fontWeight: 'bold' }}>ROS</label>
+        <div
+          style={{
+            border: '1px solid rgba(34, 36, 38, 0.15)',
+            borderRadius: '0.28571429rem',
+            padding: '0.67857143em 1em',
+          }}
+        >
+          <Editor
+            editorState={this.props.editorState4}
+            handleKeyCommand={this.handleKeyCommand}
+            onChange={this.editorOnChange4}
           />
         </div>
       </div>
@@ -200,23 +223,7 @@ class NoonConference extends Component {
               <Grid.Column>
                 <div>{this.HPI()}</div>
                 <div>{this.ROS()}</div>
-                <Grid columns={3} style={{ marginTop: 10 }}>
-                  {this.listCreator('Meds', 'Xanax', 'meds', 'medValue', 110)}
-                  {this.listCreator(
-                    'Med/Surg hx',
-                    'Diabetes',
-                    'medSurgHx',
-                    'hxValue',
-                    110,
-                  )}
-                  {this.listCreator(
-                    'Social',
-                    'EtOH',
-                    'social',
-                    'socialValue2',
-                    110,
-                  )}
-                </Grid>
+                <div>{this.PMH()}</div>
               </Grid.Column>
               <Grid.Column>
                 {this.physicalExam()}

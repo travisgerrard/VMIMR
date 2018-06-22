@@ -6,7 +6,6 @@ import { Container, Segment, Form, Grid } from 'semantic-ui-react';
 class PresentationType extends Component {
   render() {
     const { presentationType } = this.props;
-    console.log(presentationType);
 
     return (
       <Container>

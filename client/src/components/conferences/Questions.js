@@ -12,8 +12,6 @@ class Question extends Component {
   };
 
   render() {
-    console.log(this.props.abilityToEdit);
-
     const { abilityToEdit } = this.props;
 
     return (

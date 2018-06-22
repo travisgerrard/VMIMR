@@ -9,6 +9,7 @@ export default gql`
     $presentationType: String
     $hpi: String
     $ros: String
+    $pmh: String
     $physicalExam: String
     $wbc: String
     $hgb: String
@@ -30,9 +31,6 @@ export default gql`
     $embedPresentationSting: String
     $slideTextForSearch: String
     $tags: [String]
-    $meds: [String]
-    $medSurgHx: [String]
-    $social: [String]
     $ddx: [String]
   ) {
     updateCasePresentation(
@@ -43,6 +41,7 @@ export default gql`
       presentationType: $presentationType
       hpi: $hpi
       ros: $ros
+      pmh: $pmh
       physicalExam: $physicalExam
       wbc: $wbc
       hgb: $hgb
@@ -64,9 +63,6 @@ export default gql`
       embedPresentationSting: $embedPresentationSting
       slideTextForSearch: $slideTextForSearch
       tags: $tags
-      meds: $meds
-      medSurgHx: $medSurgHx
-      social: $social
       ddx: $ddx
     ) {
       id
@@ -79,6 +75,7 @@ export default gql`
       presentationType
       hpi
       ros
+      pmh
       physicalExam
       wbc
       hgb
@@ -98,9 +95,6 @@ export default gql`
       embedPresentationSting
       slideTextForSearch
       tags
-      meds
-      medSurgHx
-      social
       ddx
       questions {
         id

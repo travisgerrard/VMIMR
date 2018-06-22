@@ -284,6 +284,10 @@ var CasePresentationType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'ros',
     },
+    pmh: {
+      type: GraphQLString,
+      description: 'pmh',
+    },
     physicalExam: {
       type: GraphQLString,
       description: 'physicalExam',
@@ -365,18 +369,6 @@ var CasePresentationType = new GraphQLObjectType({
       description: 'slideTextForSearch',
     },
     tags: {
-      type: GraphQLList(GraphQLString),
-      description: 'list of tags associated with case',
-    },
-    meds: {
-      type: GraphQLList(GraphQLString),
-      description: 'list of tags associated with case',
-    },
-    medSurgHx: {
-      type: GraphQLList(GraphQLString),
-      description: 'list of tags associated with case',
-    },
-    social: {
       type: GraphQLList(GraphQLString),
       description: 'list of tags associated with case',
     },
@@ -961,6 +953,7 @@ var updateCasePresentation = {
     presentationType: { type: GraphQLString },
     hpi: { type: GraphQLString },
     ros: { type: GraphQLString },
+    pmh: { type: GraphQLString },
     physicalExam: { type: GraphQLString },
     wbc: { type: GraphQLString },
     hgb: { type: GraphQLString },
@@ -982,9 +975,6 @@ var updateCasePresentation = {
     embedPresentationSting: { type: GraphQLString },
     slideTextForSearch: { type: GraphQLString },
     tags: { type: GraphQLList(GraphQLString) },
-    meds: { type: GraphQLList(GraphQLString) },
-    medSurgHx: { type: GraphQLList(GraphQLString) },
-    social: { type: GraphQLList(GraphQLString) },
     ddx: { type: GraphQLList(GraphQLString) },
   },
   async resolve(
@@ -997,6 +987,7 @@ var updateCasePresentation = {
       presentationType,
       hpi,
       ros,
+      pmh,
       physicalExam,
       wbc,
       hgb,
@@ -1036,6 +1027,7 @@ var updateCasePresentation = {
           presentationType,
           hpi,
           ros,
+          pmh,
           physicalExam,
           wbc,
           hgb,

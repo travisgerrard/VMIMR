@@ -13,6 +13,7 @@ export default gql`
       presentationType
       hpi
       ros
+      pmh
       physicalExam
       wbc
       hgb
@@ -32,9 +33,6 @@ export default gql`
       embedPresentationSting
       slideTextForSearch
       tags
-      meds
-      medSurgHx
-      social
       ddx
       questions {
         id

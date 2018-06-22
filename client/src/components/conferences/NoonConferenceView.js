@@ -34,7 +34,7 @@ class NoonConferenceView extends Component {
               name = '';
             }
 
-            console.log(questions.length);
+            const questionsLength = questions.length ? true : false;
 
             return (
               <Container style={{ marginTop: 25 }}>
@@ -44,7 +44,7 @@ class NoonConferenceView extends Component {
                     <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
                   </Card.Content>
                   <Card.Content>
-                    {questions.length && (
+                    {questionsLength && (
                       <Questions
                         questions={questions}
                         caseId={caseId}

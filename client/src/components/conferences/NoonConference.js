@@ -22,12 +22,6 @@ class NoonConference extends Component {
   state = {
     id: '',
     summAssessment: '',
-    medValue: '',
-    meds: [],
-    hxValue: '',
-    medSurgHx: [],
-    socialValue: '',
-    social: [],
     ddxValue: '',
     ddx: [],
     wbc: '',
@@ -55,6 +49,7 @@ class NoonConference extends Component {
     ),
     ros: EditorState.createWithContent(stateFromMarkdown(ROSMARKDOWN)),
     hpi: EditorState.createWithContent(stateFromMarkdown(`45F p/w ...`)),
+    pmh: EditorState.createWithContent(stateFromMarkdown(`PMH/PSH`)),
     _presentor: '',
     title: '',
     presentationDate: moment().format('MM/DD/YY'),
@@ -69,15 +64,6 @@ class NoonConference extends Component {
   };
 
   saveClicked = updateCasePresentation => {
-    var meds = this.state.meds.map(theMeds => {
-      return theMeds.name;
-    });
-    var medSurgHx = this.state.medSurgHx.map(theMedSurgHx => {
-      return theMedSurgHx.name;
-    });
-    var social = this.state.social.map(theSocial => {
-      return theSocial.name;
-    });
     var ddx = this.state.ddx.map(theDdx => {
       return theDdx.name;
     });
@@ -88,9 +74,6 @@ class NoonConference extends Component {
       variables: {
         id: this.state.id,
         summAssessment: this.state.summAssessment,
-        meds,
-        medSurgHx,
-        social,
         ddx,
         wbc: this.state.wbc,
         hgb: this.state.hgb,
@@ -116,6 +99,7 @@ class NoonConference extends Component {
         ),
         ros: stateToMarkdown(this.state.ros.getCurrentContent()),
         hpi: stateToMarkdown(this.state.hpi.getCurrentContent()),
+        pmh: stateToMarkdown(this.state.pmh.getCurrentContent()),
         _presentor: this.state._presentor,
         title: this.state.title,
         presentationDate: this.state.presentationDate,
@@ -154,19 +138,15 @@ class NoonConference extends Component {
                     if (
                       key === 'physicalExam' ||
                       key === 'ros' ||
-                      key === 'hpi'
+                      key === 'hpi' ||
+                      key === 'pmh'
                     ) {
                       this.setState({
                         [key]: EditorState.createWithContent(
                           stateFromMarkdown(value),
                         ),
                       });
-                    } else if (
-                      key === 'ddx' ||
-                      key === 'meds' ||
-                      key === 'medSurgHx' ||
-                      key === 'social'
-                    ) {
+                    } else if (key === 'ddx') {
                       this.setState({
                         [key]: value.map(name => {
                           return { name, struckThrough: false };
@@ -209,13 +189,8 @@ class NoonConference extends Component {
                         }
                         editorState3={this.state.hpi}
                         editorState2={this.state.ros}
+                        editorState4={this.state.pmh}
                         editorState={this.state.physicalExam}
-                        medValue={this.state.medValue}
-                        meds={this.state.meds}
-                        medSurgHx={this.state.medSurgHx}
-                        hxValue={this.state.hxValue}
-                        social={this.state.social}
-                        socialValue={this.state.socialValue}
                         ddx={this.state.ddx}
                         ddxValue={this.state.ddxValue}
                         imaging={this.state.imaging}
