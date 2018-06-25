@@ -9,8 +9,8 @@ import SigninField from './UserInputField';
 class Signin extends Component {
   handleFormSubmit = ({ username, password }) => {
     this.props.signinUser({
-      username,
-      password: username,
+      username: username.toLowerCase(),
+      password: username.toLowerCase(),
       history: this.props.history,
     });
   };
@@ -76,4 +76,9 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   form: 'signin', // no fields array given
-})(connect(mapStateToProps, actions)(withRouter(Signin)));
+})(
+  connect(
+    mapStateToProps,
+    actions,
+  )(withRouter(Signin)),
+);
