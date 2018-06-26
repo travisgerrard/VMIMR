@@ -7,7 +7,7 @@ import { EditorState } from 'draft-js';
 import moment from 'moment';
 import _ from 'lodash';
 
-import { PHYSICALEXAMMARKDOWN, ROSMARKDOWN } from './conferenceDefaults';
+import { PHYSICALEXAMMARKDOWN, ROSMARKDOWN, PMH } from './conferenceDefaults';
 import NoonConferenceInput from './NoonConferenceInput';
 import Questions from './Questions';
 import Slides from './NoonConferenceSlides';
@@ -49,7 +49,7 @@ class NoonConference extends Component {
     ),
     ros: EditorState.createWithContent(stateFromMarkdown(ROSMARKDOWN)),
     hpi: EditorState.createWithContent(stateFromMarkdown(`45F p/w ...`)),
-    pmh: EditorState.createWithContent(stateFromMarkdown(`PMH/PSH`)),
+    pmh: EditorState.createWithContent(stateFromMarkdown(PMH)),
     _presentor: '',
     title: '',
     presentationDate: moment().format('MM/DD/YY'),

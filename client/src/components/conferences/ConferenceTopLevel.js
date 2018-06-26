@@ -44,7 +44,7 @@ class ConferenceTopLevel extends Component {
                 }
                 style={{ marginBottom: 20 }}
               >
-                Add Noon Case Report
+                Add Post
               </Button>
             )}
 
@@ -58,34 +58,10 @@ class ConferenceTopLevel extends Component {
                     <div>
                       {data.listOfAllCasePresentations.map(casePresentation => {
                         return (
-                          <Card
-                            fluid
+                          <NoonConferenceView
                             key={casePresentation.id}
-                            href={`/Conference/${casePresentation.id}`}
-                          >
-                            <Card.Content>
-                              {admin && (
-                                <Image floated="right">
-                                  <Link
-                                    to={`/ConferenceAdmin/${
-                                      casePresentation.id
-                                    }`}
-                                  >
-                                    <Icon
-                                      name="edit"
-                                      style={{
-                                        cursor: 'pointer',
-                                        color: '#00824d',
-                                      }}
-                                    />
-                                  </Link>
-                                </Image>
-                              )}
-                              <Card.Header>
-                                {casePresentation.title}
-                              </Card.Header>
-                            </Card.Content>
-                          </Card>
+                            presentationData={casePresentation}
+                          />
                         );
                       })}
                     </div>

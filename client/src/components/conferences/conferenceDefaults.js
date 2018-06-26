@@ -21,3 +21,10 @@ export const ROSMARKDOWN = `
   __-ve__:  
 
 `;
+
+export const PMH = `
+  __PMH/PSH__:   
+  __MEDS__:  
+  __SOCIAL__: Tobacco/EtOH/Illicits  
+  __Fam Hx__:  
+`;
