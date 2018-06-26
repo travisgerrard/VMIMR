@@ -9,6 +9,7 @@ export default gql`
       email
       admin
       eastgate
+      visible
     }
   }
 `;
