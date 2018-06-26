@@ -297,4 +297,12 @@ export default [
     exact: true,
     path: '/dotPhrase',
   },
+  {
+    name: 'Link',
+    amReportReq: true,
+    noonReportReq: true,
+    dbname: 'link',
+    exact: true,
+    path: '/link',
+  },
 ];

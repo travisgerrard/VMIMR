@@ -44,12 +44,12 @@ class SurveyTopLevel extends Component {
           <OneToTenQuestion
             onChange={value => this.setState({ valueOne: value })}
             value={this.state.valueOne}
-            question={`From 0 - 10, how much time do you feel you are learning on Wards (0 = not at all, 5 = just the right amount, 10 = as much as possible/too much)`}
+            question={`From 0 - 10, how much time do you feel you are learning on Wards (0 = N/A, 1 = not at all, 5 = just the right amount, 10 = as much as possible/too much)`}
           />
           <OneToTenQuestion
             onChange={value => this.setState({ valueTwo: value })}
             value={this.state.valueTwo}
-            question={`From 0 - 10 how satisfied are you with the work to learning ratio on Wards? (0 = Not at all satisfied, 10 = Very satisfied)`}
+            question={`From 0 - 10 how satisfied are you with the work to learning ratio on Wards? (0 = N/A, 1 = Not at all satisfied, 10 = Very satisfied)`}
           />
           <OneToTenQuestion
             onChange={value => this.setState({ valueThree: value })}

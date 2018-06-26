@@ -39,7 +39,7 @@ class App extends Component {
           <Route exact path="/signout" component={Signout} />
           <Route
             exact
-            path="/conditions"
+            path="/conditions/"
             component={RequireAuth(ConditionTopLevelViewGQL)}
           />
           <Route
@@ -47,11 +47,7 @@ class App extends Component {
             path={`/conditions/condition/:id`}
             component={RequireAuth(ConditionPage)}
           />
-          <Route
-            exact
-            path="/conditionGQL"
-            component={RequireAuth(ConditionTopLevelViewGQL)}
-          />
+
           <Route exact path="/rotations" component={RequireAuth(Rotations)} />
           <Route
             exact

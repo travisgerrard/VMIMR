@@ -41,8 +41,8 @@ class SurveyMessage extends Component {
                   <Message positive>
                     <Message.Header>Survey</Message.Header>
                     <p>
-                      Could you take a moment and fill out a survey? It should
-                      take less then a minutes and will be SUPER helpful. Thanks
+                      There is a QI project in place, would you take 30 seconds
+                      and fill out a survey? It will be SUPER helpful. Thanks
                     </p>
                     <Button primary onClick={() => this.surveyButtonClicked()}>
                       Fill Out Survey
