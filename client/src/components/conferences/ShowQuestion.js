@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Segment, List, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 import ReactMarkdown from 'react-markdown';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import AddQuestion from './AddQuestion';
 
@@ -61,15 +62,18 @@ class ShowQuestion extends Component {
 
   copyQuestion = () => {
     var pollyCopy = `[anon] "${this.props.questionStem}"`;
-    console.log(this.props.questionStem);
     this.props.options.forEach(option => {
       pollyCopy = pollyCopy + ` "${option}"`;
     });
-    console.log(pollyCopy);
+    return pollyCopy;
+  };
+
+  onCopy = () => {
+    this.setState({ copied: true });
   };
 
   render() {
-    console.log(this.props.abilityToEdit);
+    const pollyCopy = this.copyQuestion();
 
     return (
       <Segment>
@@ -97,7 +101,9 @@ class ShowQuestion extends Component {
           <Button onClick={() => this.editQuestion()}>Edit Question</Button>
         )}
         {this.props.abilityToEdit && (
-          <Button onClick={() => this.copyQuestion()}>Copy For Poll</Button>
+          <CopyToClipboard text={pollyCopy}>
+            <Button>Copy For Poll</Button>
+          </CopyToClipboard>
         )}
       </Segment>
     );
