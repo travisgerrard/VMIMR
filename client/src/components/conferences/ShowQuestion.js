@@ -59,6 +59,15 @@ class ShowQuestion extends Component {
     );
   };
 
+  copyQuestion = () => {
+    var pollyCopy = `[anon] "${this.props.questionStem}"`;
+    console.log(this.props.questionStem);
+    this.props.options.forEach(option => {
+      pollyCopy = pollyCopy + ` "${option}"`;
+    });
+    console.log(pollyCopy);
+  };
+
   render() {
     console.log(this.props.abilityToEdit);
 
@@ -86,6 +95,9 @@ class ShowQuestion extends Component {
         </Button>
         {this.props.abilityToEdit && (
           <Button onClick={() => this.editQuestion()}>Edit Question</Button>
+        )}
+        {this.props.abilityToEdit && (
+          <Button onClick={() => this.copyQuestion()}>Copy For Poll</Button>
         )}
       </Segment>
     );
