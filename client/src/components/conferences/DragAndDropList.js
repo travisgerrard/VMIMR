@@ -58,6 +58,7 @@ class DragAndDropList extends Component {
             <div
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
+              {...provided.droppableProps}
             >
               {this.props.data.map((item, index) => (
                 <Draggable
