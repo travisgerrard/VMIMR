@@ -162,7 +162,7 @@ class UpComing extends Component {
                   <Link to={`/rotations/${linkText}`}>{data.rotation}</Link>
                 </Segment>
               );
-            } else if (data.rotation === 'Cards') {
+            } else if (data.rotation === 'Cards' || data.rotation === 'Card') {
               linkText = 'Cardiology';
               return (
                 <Segment key={Math.random()}>
@@ -190,6 +190,22 @@ class UpComing extends Component {
               );
             } else if (data.rotation === 'Rheum') {
               linkText = 'Rheumatology';
+              return (
+                <Segment key={Math.random()}>
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
+                  <Link to={`/rotations/${linkText}`}>{linkText}</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Msk') {
+              linkText = 'Musculoskeletal';
+              return (
+                <Segment key={Math.random()}>
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
+                  <Link to={`/rotations/${linkText}`}>{linkText}</Link>
+                </Segment>
+              );
+            } else if (data.rotation === 'Path') {
+              linkText = 'Pathology';
               return (
                 <Segment key={Math.random()}>
                   {data.moment.format('ddd, MMMM Do')}:{' '}
