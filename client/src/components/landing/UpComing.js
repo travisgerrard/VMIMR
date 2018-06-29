@@ -162,7 +162,7 @@ class UpComing extends Component {
                   <Link to={`/rotations/${linkText}`}>{data.rotation}</Link>
                 </Segment>
               );
-            } else if (data.rotation === 'Card') {
+            } else if (data.rotation === 'Cards') {
               linkText = 'Cardiology';
               return (
                 <Segment key={Math.random()}>
