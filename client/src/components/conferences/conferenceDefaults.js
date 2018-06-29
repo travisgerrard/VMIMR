@@ -1,30 +1,30 @@
 export const PHYSICALEXAMMARKDOWN = `
-__Vitals__:  
-__Tmax__: xxx __HR__: xx __BP__: xxx/xx  
-__...__  
-__Physical Exam__  
-__Const__:  
-__HEENT__:  
-__Neck__:  
-__Heart__:  
-__Lungs__:  
-__Abd__:  
-__Extremities__:  
-__Neuro__:  
-__Skin__:  
-__Psych__:  
+__Vitals__:\n
+__Tmax__: xxx __HR__: xx __BP__: xxx/xx\n
+__...__\n
+__Physical Exam__\n
+__Const__:\n
+__HEENT__:\n
+__Neck__:\n
+__Heart__:\n
+__Lungs__:\n
+__Abd__:\n
+__Extremities__:\n
+__Neuro__:\n
+__Skin__:\n
+__Psych__:\n
 `;
 
 export const ROSMARKDOWN = `
-  __+ve__:  
-  ...  
-  __-ve__:  
+  __+ve__:\n
+  ...  \n
+  __-ve__:  \n
 
 `;
 
 export const PMH = `
-  __PMH/PSH__:   
-  __MEDS__:  
-  __SOCIAL__: Tobacco/EtOH/Illicits  
-  __Fam Hx__:  
+  __PMH/PSH__:\n
+  __MEDS__:\n
+  __SOCIAL__: Tobacco/EtOH/Illicits\n
+  __Fam Hx__:\n
 `;
