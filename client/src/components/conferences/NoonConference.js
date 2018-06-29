@@ -4,7 +4,6 @@ import { Loader } from 'semantic-ui-react';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
 import { stateToMarkdown } from 'draft-js-export-markdown';
 import { EditorState } from 'draft-js';
-import moment from 'moment';
 import _ from 'lodash';
 
 import { PHYSICALEXAMMARKDOWN, ROSMARKDOWN, PMH } from './conferenceDefaults';
@@ -52,7 +51,7 @@ class NoonConference extends Component {
     pmh: EditorState.createWithContent(stateFromMarkdown(PMH)),
     _presentor: '',
     title: '',
-    presentationDate: moment().format('MM/DD/YY'),
+    presentationDate: '',
     tags: [],
     initialUpdate: true,
   };
@@ -67,8 +66,6 @@ class NoonConference extends Component {
     var ddx = this.state.ddx.map(theDdx => {
       return theDdx.name;
     });
-
-    console.log(this.state.slideTextForSearch);
 
     updateCasePresentation({
       variables: {

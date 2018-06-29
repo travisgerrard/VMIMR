@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import jwt_decode from 'jwt-decode';
+import moment from 'moment';
 import {
   Button,
   Loader,
@@ -39,6 +40,8 @@ class ConferenceTopLevel extends Component {
                     // 'No Title' is added in the schema....
                     variables: {
                       id: currentUser.id,
+                      presentationDate: moment().format('MM/DD/YY'),
+                      _presentor: currentUser.id,
                     },
                   })
                 }
@@ -54,9 +57,18 @@ class ConferenceTopLevel extends Component {
                 if (error) return `Error! ${error.message}`;
 
                 if (data.listOfAllCasePresentations.length > 0) {
+                  var presentations = data.listOfAllCasePresentations.slice();
+                  presentations.sort(function(a, b) {
+                    return a.presentationDate < b.presentationDate
+                      ? 1
+                      : b.presentationDate < a.presentationDate
+                        ? -1
+                        : 0;
+                  });
+
                   return (
                     <div>
-                      {data.listOfAllCasePresentations.map(casePresentation => {
+                      {presentations.map(casePresentation => {
                         return (
                           <NoonConferenceView
                             key={casePresentation.id}

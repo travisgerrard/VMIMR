@@ -926,10 +926,14 @@ var addCasePresentation = {
   type: CasePresentationType,
   args: {
     _creator: { type: new GraphQLNonNull(GraphQLID) },
+    presentationDate: { type: new GraphQLNonNull(GraphQLString) },
+    _presentor: { type: new GraphQLNonNull(GraphQLID) },
   },
-  async resolve(parentValues, { _creator }) {
+  async resolve(parentValues, { _creator, presentationDate, _presentor }) {
     var newCasePresentation = new CasePresentation({
       _creator,
+      presentationDate,
+      _presentor,
       title: 'No Title',
     });
 

@@ -206,6 +206,14 @@ class UpComing extends Component {
                   </Link>
                 </Segment>
               );
+            } else if (data.rotation === 'Gyn') {
+              linkText = 'Gynecology';
+              return (
+                <Segment key={Math.random()}>
+                  {data.moment.format('ddd, MMMM Do')}:{' '}
+                  <Link to={`/rotations/${linkText}`}>{linkText}</Link>
+                </Segment>
+              );
             } else if (data.rotation === 'Hyperbaric') {
               linkText = 'Hyperbarics';
               return (
