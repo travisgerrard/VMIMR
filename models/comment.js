@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const replySchema = require('./reply');
 
-const formSchema = new Schema({
-  postTitle: String,
-  postContents: String,
-  postDate: String,
-  likes: Number,
+const commentSchema = new Schema({
+  subject: String,
+  body: String,
+  createdAt: Date,
+  updatedAt: Date,
+  replies: [replySchema],
   _creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
