@@ -19,6 +19,17 @@ import LIST_ALL_CASE_PRESENTATIONS from '../../queries/ListOfAllCasePresentation
 import NoonConferenceView from './NoonConferenceView';
 
 class ConferenceTopLevel extends Component {
+  state = {
+    searchTerm: '', // Tracks what is written in search box
+    category: 'all', // Sort conditions with regard to rotation
+  };
+
+  handleCategoryChanged = (e, { value }) => {
+    this.setState({ category: value });
+  };
+
+  filterQuery = query => {};
+
   renderList = () => {
     let currentUser = '';
     if (localStorage.getItem('VMIMRToken')) {
@@ -58,13 +69,13 @@ class ConferenceTopLevel extends Component {
 
                 if (data.listOfAllCasePresentations.length > 0) {
                   var presentations = data.listOfAllCasePresentations.slice();
-                  presentations.sort(function(a, b) {
-                    return a.presentationDate < b.presentationDate
-                      ? 1
-                      : b.presentationDate < a.presentationDate
-                        ? -1
-                        : 0;
-                  });
+                  // presentations.sort(function(a, b) {
+                  //   return a.presentationDate < b.presentationDate
+                  //     ? 1
+                  //     : b.presentationDate < a.presentationDate
+                  //       ? -1
+                  //       : 0;
+                  // });
 
                   return (
                     <div>
@@ -89,11 +100,7 @@ class ConferenceTopLevel extends Component {
   };
 
   render() {
-    return (
-      <Container style={{ marginTop: 10 }}>
-        <Segment>{this.renderList()}</Segment>
-      </Container>
-    );
+    return <Container style={{ marginTop: 10 }}>{this.renderList()}</Container>;
   }
 }
 

@@ -13,6 +13,7 @@ import Slides from './NoonConferenceSlides';
 import CatagorizationForSaving from './CategorizationForSaving';
 import PresentationType from './PresentationType';
 
+import ADD_QUESTION from '../../mutations/AddQuestionToCase';
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
 import UPDATE_CASE_PRESENTATION from '../../mutations/UpdateCasePresentation';
 import DELETE_CASE_PRESENTATION from '../../mutations/DeleteConference';
@@ -160,13 +161,17 @@ class NoonConference extends Component {
               this.setState({ initialUpdate: false });
             }
 
+            const questionsForConference =
+              data.selectedCasePresentation.questions;
+            const conferenceId = data.selectedCasePresentation.id;
+
             return (
               <Mutation
                 mutation={UPDATE_CASE_PRESENTATION}
                 refetchQueries={[
                   {
                     query: SELECTED_CASE_PRESENTATIONS,
-                    variables: { id: this.props.caseId },
+                    variables: { id: conferenceId },
                   },
                 ]}
                 onCompleted={() => this.props.history.goBack()}
@@ -209,11 +214,24 @@ class NoonConference extends Component {
                         additionalLabs={this.state.additionalLabs}
                       />
                     )}
-                    <Questions
-                      questions={this.state.questions}
-                      caseId={data.selectedCasePresentation.id}
-                      abilityToEdit={true}
-                    />
+                    <Mutation
+                      mutation={ADD_QUESTION}
+                      refetchQueries={[
+                        {
+                          query: SELECTED_CASE_PRESENTATIONS,
+                          variables: { id: conferenceId },
+                        },
+                      ]}
+                    >
+                      {addQuestionToCase => (
+                        <Questions
+                          questions={questionsForConference}
+                          caseId={conferenceId}
+                          abilityToEdit={true}
+                          addQuestionToCase={addQuestionToCase}
+                        />
+                      )}
+                    </Mutation>
                     <Slides
                       embedPresentationSting={this.state.embedPresentationSting}
                       updateConferenceInputState={(name, value) =>
@@ -221,6 +239,7 @@ class NoonConference extends Component {
                       }
                       slideTextForSearch={this.state.slideTextForSearch}
                     />
+
                     <Mutation
                       mutation={DELETE_CASE_PRESENTATION}
                       onCompleted={() => this.props.history.goBack()}

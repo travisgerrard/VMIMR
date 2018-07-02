@@ -107,11 +107,6 @@ class AddQuestion extends Component {
     } else {
       console.log('There was an error saving the question');
     }
-    console.log(options, answers);
-
-    //    console.log(this.state);
-    console.log(this.props.caseId);
-    console.log(jwt_decode(localStorage.getItem('VMIMRToken')).id);
   };
 
   showModal = () => {
@@ -134,7 +129,7 @@ class AddQuestion extends Component {
               required={true}
               label="Question Answer Text"
               value={this.state.questionAnswerText}
-              placeHolder="What is shown when the answer is revealed"
+              placeholder="What is shown when the answer is revealed"
               onChange={e =>
                 this.setState({
                   questionAnswerText: e.target.value,
@@ -145,21 +140,13 @@ class AddQuestion extends Component {
             <Button onClick={() => this.addAnswerChoice()}>
               Add Answer Choice
             </Button>
-            <Mutation
-              mutation={ADD_QUESTION}
-              refetchQueries={[
-                {
-                  query: SELECTED_CASE_PRESENTATIONS,
-                  variables: { id: this.props.caseId },
-                },
-              ]}
+
+            <Button
+              onClick={() => this.saveTheQuestion(this.props.addQuestionToCase)}
             >
-              {addQuestionToCase => (
-                <Button onClick={() => this.saveTheQuestion(addQuestionToCase)}>
-                  Save
-                </Button>
-              )}
-            </Mutation>
+              Save
+            </Button>
+
             <Button onClick={() => this.cancelAddingQuestion()}>Cancel</Button>
           </Form>
         </Segment>

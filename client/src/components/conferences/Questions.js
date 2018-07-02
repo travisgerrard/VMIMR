@@ -23,7 +23,12 @@ class Question extends Component {
             abilityToEdit={abilityToEdit}
           />
           <br />
-          {abilityToEdit && <AddQuestion caseId={this.props.caseId} />}
+          {abilityToEdit && (
+            <AddQuestion
+              caseId={this.props.caseId}
+              addQuestionToCase={this.props.addQuestionToCase}
+            />
+          )}
         </Segment>
       </Container>
     );
