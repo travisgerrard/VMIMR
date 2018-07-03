@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import { Segment, Modal, Button, Form } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
+import _ from 'lodash';
 
 import ADD_QUESTION from '../../mutations/AddQuestionToCase';
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
+import { statSync } from 'fs';
 
 class AddQuestion extends Component {
   state = {
@@ -12,8 +14,10 @@ class AddQuestion extends Component {
       ? this.props.addingQuestion
       : false,
     questionStem: this.props.questionStem ? this.props.questionStem : '',
+    questionId: this.props.questionId ? this.props.questionId : '12345',
     questionAnswerText: '',
-    options: [],
+    options: this.props.options ? this.props.options : [],
+    answers: this.props.answers ? this.props.answers : [],
   };
 
   addQuestion = () => {
@@ -21,16 +25,24 @@ class AddQuestion extends Component {
   };
 
   cancelAddingQuestion = () => {
-    this.setState({
-      addingQuestion: false,
-      questionStem: '',
-      questionAnswerText: '',
-      options: [],
-    });
+    if (!this.props.isEditing) {
+      this.setState({
+        addingQuestion: false,
+        questionStem: '',
+        questionAnswerText: '',
+        options: [],
+      });
+    } else {
+      this.setState({ addingQuestion: false });
+    }
   };
 
   showButton = () => {
-    return <Button onClick={() => this.addQuestion()}>Add Question</Button>;
+    return (
+      <Button onClick={() => this.addQuestion()}>
+        {this.props.buttonText}
+      </Button>
+    );
   };
 
   answerChoiceChanged = (index, answer) => {
@@ -45,7 +57,25 @@ class AddQuestion extends Component {
     this.setState({ options: tempArray });
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.answers) {
+      var tempArray = [];
+      nextProps.options.forEach(element => {
+        if (nextProps.answers.includes(element)) {
+          tempArray.push({ text: element, answer: true });
+        } else {
+          tempArray.push({ text: element, answer: false });
+        }
+      });
+      return { options: tempArray };
+    }
+    return null;
+  }
+
   displayAnswerChoices = () => {
+    // console.log(this.state.options);
+    // console.log(this.state.answers);
+
     if (this.state.options.length > 0) {
       return this.state.options.map(({ text, answer }, index) => {
         return (
@@ -83,6 +113,7 @@ class AddQuestion extends Component {
       }
       return true;
     });
+
     if (
       options.length > 0 &&
       answers.length > 0 &&
@@ -94,16 +125,21 @@ class AddQuestion extends Component {
           _creator: jwt_decode(localStorage.getItem('VMIMRToken')).id,
           questionStem: this.state.questionStem,
           questionAnswerText: this.state.questionAnswerText,
+          questionId: this.state.questionId,
           options,
           answers,
         },
       });
-      this.setState({
-        addingQuestion: false,
-        questionStem: '',
-        questionAnswerText: '',
-        options: [],
-      });
+      if (!this.props.isEditing) {
+        this.setState({
+          addingQuestion: false,
+          questionStem: '',
+          questionAnswerText: '',
+          options: [],
+        });
+      } else {
+        this.setState({ addingQuestion: false });
+      }
     } else {
       console.log('There was an error saving the question');
     }

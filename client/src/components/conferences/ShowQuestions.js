@@ -6,15 +6,18 @@ class ShowQuestions extends Component {
     return (
       <div>
         {this.props.questions.map(
-          ({ questionStem, options, answers, questionAnswerText }) => {
+          ({ questionStem, options, answers, questionAnswerText, id }) => {
             return (
               <ShowQuestion
-                key={questionStem}
+                key={id}
+                questionId={id}
                 questionStem={questionStem}
                 questionAnswerText={questionAnswerText}
                 options={options}
                 answers={answers}
+                caseId={this.props.caseId}
                 abilityToEdit={this.props.abilityToEdit}
+                addQuestionToCase={this.props.addQuestionToCase}
               />
             );
           },

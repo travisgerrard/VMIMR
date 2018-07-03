@@ -4,6 +4,7 @@ export default gql`
   mutation AddQuestionToCase(
     $_case: ID!
     $_creator: ID!
+    $questionId: ID!
     $questionStem: String!
     $questionAnswerText: String!
     $options: [String]!
@@ -12,6 +13,7 @@ export default gql`
     addQuestionToCase(
       _case: $_case
       _creator: $_creator
+      questionId: $questionId
       questionStem: $questionStem
       questionAnswerText: $questionAnswerText
       options: $options

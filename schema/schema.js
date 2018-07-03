@@ -1077,6 +1077,7 @@ var addQuestionToCase = {
   args: {
     _case: { type: new GraphQLNonNull(GraphQLID) },
     _creator: { type: new GraphQLNonNull(GraphQLID) },
+    questionId: { type: new GraphQLNonNull(GraphQLID) },
     questionStem: { type: new GraphQLNonNull(GraphQLString) },
     questionAnswerText: { type: new GraphQLNonNull(GraphQLString) },
     options: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
@@ -1084,30 +1085,53 @@ var addQuestionToCase = {
   },
   async resolve(
     parentValues,
-    { _case, _creator, questionStem, questionAnswerText, options, answers },
-  ) {
-    var newQuestion = new MultipleChoiceQuestion({
+    {
       _case,
       _creator,
+      questionId,
       questionStem,
       questionAnswerText,
       options,
       answers,
-    });
+    },
+  ) {
+    if (questionId === '12345') {
+      var newQuestion = new MultipleChoiceQuestion({
+        _case,
+        _creator,
+        questionStem,
+        questionAnswerText,
+        options,
+        answers,
+      });
 
-    await newQuestion.save(function(err) {
-      if (err) {
-        return next(err);
-      }
-    });
+      await newQuestion.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      });
 
-    await CasePresentation.findByIdAndUpdate(
-      _case,
-      { $push: { questions: newQuestion._id } },
-      { new: true },
-    );
+      await CasePresentation.findByIdAndUpdate(
+        _case,
+        { $push: { questions: newQuestion._id } },
+        { new: true },
+      );
 
-    return newQuestion;
+      return newQuestion;
+    } else {
+      return await MultipleChoiceQuestion.findByIdAndUpdate(
+        questionId,
+        {
+          _case,
+          _creator,
+          questionStem,
+          questionAnswerText,
+          options,
+          answers,
+        },
+        { new: true },
+      );
+    }
   },
 };
 

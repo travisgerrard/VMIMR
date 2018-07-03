@@ -7,10 +7,6 @@ import ShowQuestions from './ShowQuestions';
 // Props: abilityToEdit
 
 class Question extends Component {
-  addQuestion = () => {
-    console.log('was clicked');
-  };
-
   render() {
     const { abilityToEdit } = this.props;
 
@@ -21,10 +17,13 @@ class Question extends Component {
           <ShowQuestions
             questions={this.props.questions}
             abilityToEdit={abilityToEdit}
+            caseId={this.props.caseId}
+            addQuestionToCase={this.props.addQuestionToCase}
           />
           <br />
           {abilityToEdit && (
             <AddQuestion
+              buttonText={`Add Question`}
               caseId={this.props.caseId}
               addQuestionToCase={this.props.addQuestionToCase}
             />

@@ -74,7 +74,6 @@ class ShowQuestion extends Component {
 
   render() {
     const pollyCopy = this.copyQuestion();
-
     return (
       <Segment>
         {this.showQuestions()}
@@ -98,7 +97,11 @@ class ShowQuestion extends Component {
           {this.state.showAnswers ? 'Hide Answers' : 'Show Answers'}
         </Button>
         {this.props.abilityToEdit && (
-          <Button onClick={() => this.editQuestion()}>Edit Question</Button>
+          <AddQuestion
+            isEditing={true}
+            buttonText={`Edit Question`}
+            {...this.props}
+          />
         )}
         {this.props.abilityToEdit && (
           <CopyToClipboard text={pollyCopy}>
