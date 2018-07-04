@@ -8,7 +8,7 @@ import ShowQuestions from './ShowQuestions';
 
 class Question extends Component {
   render() {
-    const { abilityToEdit } = this.props;
+    const { abilityToEdit, deleteQuestion, addQuestionToCase } = this.props;
 
     return (
       <Container textAlign="left" style={{ marginBottom: 10 }}>
@@ -18,7 +18,8 @@ class Question extends Component {
             questions={this.props.questions}
             abilityToEdit={abilityToEdit}
             caseId={this.props.caseId}
-            addQuestionToCase={this.props.addQuestionToCase}
+            deleteQuestion={deleteQuestion}
+            addQuestionToCase={addQuestionToCase}
           />
           <br />
           {abilityToEdit && (

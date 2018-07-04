@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
 import { Segment, Modal, Button, Form } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
 import _ from 'lodash';
 
-import ADD_QUESTION from '../../mutations/AddQuestionToCase';
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
 import { statSync } from 'fs';
 
@@ -88,10 +86,22 @@ class AddQuestion extends Component {
               checked={answer}
               onChange={e => this.checkBoxChanged(index)}
             />
+            <Form.Button
+              size={`mini`}
+              onClick={() => this.deleteAnswerChoice(index)}
+            >
+              x
+            </Form.Button>
           </Form.Group>
         );
       });
     }
+  };
+
+  deleteAnswerChoice = index => {
+    var tempArray = this.state.options.slice();
+    tempArray.splice(index, 1);
+    this.setState({ options: tempArray });
   };
 
   addAnswerChoice = () => {
@@ -162,7 +172,6 @@ class AddQuestion extends Component {
               }
             />
             <Form.TextArea
-              required={true}
               label="Question Answer Text"
               value={this.state.questionAnswerText}
               placeholder="What is shown when the answer is revealed"

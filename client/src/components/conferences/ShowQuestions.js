@@ -18,6 +18,7 @@ class ShowQuestions extends Component {
                 caseId={this.props.caseId}
                 abilityToEdit={this.props.abilityToEdit}
                 addQuestionToCase={this.props.addQuestionToCase}
+                deleteQuestion={this.props.deleteQuestion}
               />
             );
           },

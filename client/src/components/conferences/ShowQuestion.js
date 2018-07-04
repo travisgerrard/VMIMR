@@ -6,7 +6,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import AddQuestion from './AddQuestion';
 
-import DELETE_QUESTION from '../../mutations/DeleteQuestion';
 // Now need to delete the question - add in a button and wire it up...
 
 class ShowQuestion extends Component {
@@ -73,6 +72,8 @@ class ShowQuestion extends Component {
   };
 
   render() {
+    console.log(this.props);
+
     const pollyCopy = this.copyQuestion();
     return (
       <Segment>
@@ -107,6 +108,17 @@ class ShowQuestion extends Component {
           <CopyToClipboard text={pollyCopy}>
             <Button>Copy For Poll</Button>
           </CopyToClipboard>
+        )}
+        {this.props.abilityToEdit && (
+          <Button
+            onClick={() =>
+              this.props.deleteQuestion({
+                variables: { id: this.props.questionId },
+              })
+            }
+          >
+            Delete Question
+          </Button>
         )}
       </Segment>
     );

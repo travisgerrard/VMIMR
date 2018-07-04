@@ -14,9 +14,12 @@ import CatagorizationForSaving from './CategorizationForSaving';
 import PresentationType from './PresentationType';
 
 import ADD_QUESTION from '../../mutations/AddQuestionToCase';
+import DELETE_QUESTION from '../../mutations/DeleteQuestion';
+
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
 import UPDATE_CASE_PRESENTATION from '../../mutations/UpdateCasePresentation';
 import DELETE_CASE_PRESENTATION from '../../mutations/DeleteConference';
+import DeleteQuestion from '../../mutations/DeleteQuestion';
 
 class NoonConference extends Component {
   state = {
@@ -224,12 +227,25 @@ class NoonConference extends Component {
                       ]}
                     >
                       {addQuestionToCase => (
-                        <Questions
-                          questions={questionsForConference}
-                          caseId={conferenceId}
-                          abilityToEdit={true}
-                          addQuestionToCase={addQuestionToCase}
-                        />
+                        <Mutation
+                          mutation={DeleteQuestion}
+                          refetchQueries={[
+                            {
+                              query: SELECTED_CASE_PRESENTATIONS,
+                              variables: { id: conferenceId },
+                            },
+                          ]}
+                        >
+                          {deleteQuestion => (
+                            <Questions
+                              questions={questionsForConference}
+                              caseId={conferenceId}
+                              abilityToEdit={true}
+                              addQuestionToCase={addQuestionToCase}
+                              deleteQuestion={deleteQuestion}
+                            />
+                          )}
+                        </Mutation>
                       )}
                     </Mutation>
                     <Slides
