@@ -64,6 +64,12 @@ class NoonConferenceView extends Component {
                     )}
                   </Card.Content>
                   <Card.Content>
+                    <span style={{ whiteSpace: 'pre-wrap' }}>
+                      <ReactMarkdown
+                        source={embedPresentationSting}
+                        escapeHtml={false}
+                      />
+                    </span>
                     {questionsLength && (
                       <Questions
                         questions={questions}
@@ -71,12 +77,6 @@ class NoonConferenceView extends Component {
                         abilityToEdit={false}
                       />
                     )}
-                    <span style={{ whiteSpace: 'pre-wrap' }}>
-                      <ReactMarkdown
-                        source={embedPresentationSting}
-                        escapeHtml={false}
-                      />
-                    </span>
                   </Card.Content>
                 </Card>
               </Container>
@@ -123,6 +123,12 @@ class NoonConferenceView extends Component {
               <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
             </Card.Content>
             <Card.Content>
+              <span style={{ whiteSpace: 'pre-wrap' }}>
+                <ReactMarkdown
+                  source={embedPresentationSting}
+                  escapeHtml={false}
+                />
+              </span>
               {questionsLength && (
                 <Questions
                   questions={questions}
@@ -130,12 +136,6 @@ class NoonConferenceView extends Component {
                   abilityToEdit={false}
                 />
               )}
-              <span style={{ whiteSpace: 'pre-wrap' }}>
-                <ReactMarkdown
-                  source={embedPresentationSting}
-                  escapeHtml={false}
-                />
-              </span>
             </Card.Content>
           </Card>
         </Container>
