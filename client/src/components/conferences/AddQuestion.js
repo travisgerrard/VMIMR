@@ -13,7 +13,9 @@ class AddQuestion extends Component {
       : false,
     questionStem: this.props.questionStem ? this.props.questionStem : '',
     questionId: this.props.questionId ? this.props.questionId : '12345',
-    questionAnswerText: '',
+    questionAnswerText: this.props.questionAnswerText
+      ? this.props.questionAnswerText
+      : '',
     options: this.props.options ? this.props.options : [],
     answers: this.props.answers ? this.props.answers : [],
   };

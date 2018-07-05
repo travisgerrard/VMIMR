@@ -167,6 +167,7 @@ class NoonConference extends Component {
             const questionsForConference =
               data.selectedCasePresentation.questions;
             const conferenceId = data.selectedCasePresentation.id;
+            console.log(questionsForConference);
 
             return (
               <Mutation

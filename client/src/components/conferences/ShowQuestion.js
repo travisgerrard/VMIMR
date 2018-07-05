@@ -49,7 +49,6 @@ class ShowQuestion extends Component {
   };
 
   editQuestion = () => {
-    console.log(this.props);
     return (
       <AddQuestion
         caseId={this.props.caseId}
@@ -72,9 +71,8 @@ class ShowQuestion extends Component {
   };
 
   render() {
-    console.log(this.props);
-
     const pollyCopy = this.copyQuestion();
+
     return (
       <Segment>
         {this.showQuestions()}
