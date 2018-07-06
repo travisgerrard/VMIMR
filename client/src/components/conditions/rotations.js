@@ -305,4 +305,12 @@ export default [
     exact: true,
     path: '/link',
   },
+  {
+    name: 'Mksap',
+    amReportReq: true,
+    noonReportReq: true,
+    dbname: 'mksap',
+    exact: true,
+    path: '/mksap',
+  },
 ];
