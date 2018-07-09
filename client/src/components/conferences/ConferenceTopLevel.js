@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
+import _ from 'lodash';
 import jwt_decode from 'jwt-decode';
 import moment from 'moment';
 import {
@@ -13,6 +14,7 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+import SortConferenceCards from './SortConferenceCards';
 import ADD_CASE_PRESENTATION from '../../mutations/AddCasePresentation';
 import LIST_ALL_CASE_PRESENTATIONS from '../../queries/ListOfAllCasePresentations';
 
@@ -21,14 +23,26 @@ import NoonConferenceView from './NoonConferenceView';
 class ConferenceTopLevel extends Component {
   state = {
     searchTerm: '', // Tracks what is written in search box
-    category: 'all', // Sort conditions with regard to rotation
+    sortActiveItem: 'all', // personal vs all to filter contents if user has made
   };
 
-  handleCategoryChanged = (e, { value }) => {
-    this.setState({ category: value });
+  handleSortItemClick = name => {
+    this.setState({ sortActiveItem: name });
   };
 
-  filterQuery = query => {};
+  filterQuery = query => {
+    const { sortActiveItem } = this.state;
+
+    var filteredQuery = _.filter(query, function(o) {
+      if (sortActiveItem === 'all') {
+        return o;
+      } else {
+        return _.includes(o.presentationType, sortActiveItem);
+      }
+    });
+
+    return filteredQuery;
+  };
 
   renderList = () => {
     let currentUser = '';
@@ -77,9 +91,15 @@ class ConferenceTopLevel extends Component {
                   //       : 0;
                   // });
 
+                  const filteredQuery = this.filterQuery(presentations);
+
                   return (
                     <div>
-                      {presentations.map(casePresentation => {
+                      <SortConferenceCards
+                        handleItemClick={this.handleSortItemClick}
+                        activeItem={this.state.sortActiveItem}
+                      />
+                      {filteredQuery.map(casePresentation => {
                         return (
                           <NoonConferenceView
                             key={casePresentation.id}
