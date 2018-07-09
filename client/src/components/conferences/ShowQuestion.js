@@ -60,8 +60,8 @@ class ShowQuestion extends Component {
 
   copyQuestion = () => {
     var pollyCopy = `[anon] "${this.props.questionStem}"`;
-    this.props.options.forEach(option => {
-      pollyCopy = pollyCopy + ` "${option}"`;
+    this.props.options.forEach((option, index) => {
+      pollyCopy = pollyCopy + ` "${index + 1}"`;
     });
     return pollyCopy;
   };
