@@ -30,6 +30,8 @@ export default gql`
       AST
       Tbili
       summAssessment
+      imaging
+      additionalLabs
       embedPresentationSting
       slideTextForSearch
       tags

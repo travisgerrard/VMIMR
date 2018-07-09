@@ -25,6 +25,8 @@ const casePresentationSchema = new Schema({
   AST: String,
   Tbili: String,
   summAssessment: String,
+  additionalLabs: String,
+  imaging: String,
   ddx: [{ type: String }],
   questions: [
     {

@@ -6,7 +6,12 @@ import { stateToMarkdown } from 'draft-js-export-markdown';
 import { EditorState } from 'draft-js';
 import _ from 'lodash';
 
-import { PHYSICALEXAMMARKDOWN, ROSMARKDOWN, PMH } from './conferenceDefaults';
+import {
+  PHYSICALEXAMMARKDOWN,
+  ROSMARKDOWN,
+  PMH,
+  HPI,
+} from './conferenceDefaults';
 import NoonConferenceInput from './NoonConferenceInput';
 import Questions from './Questions';
 import Slides from './NoonConferenceSlides';
@@ -51,7 +56,7 @@ class NoonConference extends Component {
       stateFromMarkdown(PHYSICALEXAMMARKDOWN),
     ),
     ros: EditorState.createWithContent(stateFromMarkdown(ROSMARKDOWN)),
-    hpi: EditorState.createWithContent(stateFromMarkdown(`45F p/w ...`)),
+    hpi: EditorState.createWithContent(stateFromMarkdown(HPI)),
     pmh: EditorState.createWithContent(stateFromMarkdown(PMH)),
     _presentor: '',
     title: '',

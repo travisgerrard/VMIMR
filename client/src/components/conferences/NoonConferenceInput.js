@@ -26,7 +26,6 @@ class NoonConference extends Component {
   HPI = () => {
     return (
       <div>
-        <label style={{ fontWeight: 'bold' }}>HPI</label>
         <div
           style={{
             border: '1px solid rgba(34, 36, 38, 0.15)',
@@ -224,8 +223,6 @@ class NoonConference extends Component {
             <Grid.Row stretched>
               <Grid.Column>
                 <div>{this.HPI()}</div>
-
-                <div>{this.PMH()}</div>
               </Grid.Column>
               <Grid.Column>
                 {this.physicalExam()}

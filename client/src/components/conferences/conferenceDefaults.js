@@ -1,6 +1,6 @@
 export const PHYSICALEXAMMARKDOWN = `
 __Vitals__:\n
-__Tmax__: xxx __HR__: xx __BP__: xxx/xx\n
+__Tmax__:  __HR__:  __BP__: / __RR__: \n
 __...__\n
 __Physical Exam__\n
 __Const__:\n
@@ -23,6 +23,21 @@ export const ROSMARKDOWN = `
 `;
 
 export const PMH = `
+  __HPI__:\n
+  45F p/w ...\n
+  \n
+  __PMH/PSH__:\n
+  __MEDS__:\n
+  __SOCIAL__: Tobacco/EtOH/Illicits\n
+  __Fam Hx__:\n
+`;
+
+export const HPI = `
+  __HPI__:\n
+  45F p/w ...\n 
+  .\n
+  .\n
+  .\n
   __PMH/PSH__:\n
   __MEDS__:\n
   __SOCIAL__: Tobacco/EtOH/Illicits\n
