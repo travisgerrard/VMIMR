@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import jwt_decode from 'jwt-decode';
-import { Button, Loader, Card, Container, Segment } from 'semantic-ui-react';
+import {
+  Button,
+  Loader,
+  Card,
+  Container,
+  Segment,
+  Divider,
+} from 'semantic-ui-react';
 
 import ADD_CASE_PRESENTATION from '../../mutations/AddCasePresentation';
 import LIST_ALL_CASE_PRESENTATIONS from '../../queries/ListOfAllCasePresentations';
@@ -19,21 +26,17 @@ class Blog extends Component {
           if (data.listOfAllCasePresentations.length > 0) {
             return (
               <Container style={{ marginTop: 20 }}>
-                <Segment>
-                  <h1 style={{ color: '#6AB2D6' }}>
-                    What's happening at VM:IMR
-                  </h1>
-                  {data.listOfAllCasePresentations.map(
-                    (presentation, index) => {
-                      return (
-                        <NoonConferenceView
-                          key={presentation.id}
-                          presentationData={presentation}
-                        />
-                      );
-                    },
-                  )}
-                </Segment>
+                <Divider />
+
+                <h1 style={{ color: '#6AB2D6' }}>What's happening at VM:IMR</h1>
+                {data.listOfAllCasePresentations.map((presentation, index) => {
+                  return (
+                    <NoonConferenceView
+                      key={presentation.id}
+                      presentationData={presentation}
+                    />
+                  );
+                })}
               </Container>
             );
           } else {

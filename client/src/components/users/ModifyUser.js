@@ -107,7 +107,7 @@ class ModifyUser extends Component {
                             variables: {
                               id: this.state.id,
                               name: this.state.name,
-                              username: this.state.username,
+                              username: this.state.username.toLocaleLowerCase(),
                               email: this.state.email,
                               admin: this.state.admin,
                               eastgate: this.state.eastgate,

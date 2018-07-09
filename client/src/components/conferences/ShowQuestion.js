@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, List, Button } from 'semantic-ui-react';
+import { Segment, List, Button, Message, Divider } from 'semantic-ui-react';
 import _ from 'lodash';
 import ReactMarkdown from 'react-markdown';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -74,18 +74,20 @@ class ShowQuestion extends Component {
     const pollyCopy = this.copyQuestion();
 
     return (
-      <Segment>
+      <div>
         {this.showQuestions()}
         {this.state.showAnswers &&
           this.props.questionAnswerText && (
-            <Segment>
+            <Message info>
+              <Message.Header>Answer</Message.Header>
+
               <span style={{ whiteSpace: 'pre-wrap' }}>
                 <ReactMarkdown
                   source={this.props.questionAnswerText}
                   escapeHtml={false}
                 />
               </span>
-            </Segment>
+            </Message>
           )}
         <Button
           style={{ marginTop: 20 }}
@@ -95,6 +97,7 @@ class ShowQuestion extends Component {
         >
           {this.state.showAnswers ? 'Hide Answers' : 'Show Answers'}
         </Button>
+        <Divider hidden />
         {this.props.abilityToEdit && (
           <AddQuestion
             isEditing={true}
@@ -118,7 +121,7 @@ class ShowQuestion extends Component {
             Delete Question
           </Button>
         )}
-      </Segment>
+      </div>
     );
   }
 }
