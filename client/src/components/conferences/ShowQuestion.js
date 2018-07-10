@@ -59,7 +59,11 @@ class ShowQuestion extends Component {
   };
 
   copyQuestion = () => {
-    var pollyCopy = `[anon] "${this.props.questionStem}"`;
+    var pollyCopy = `[anon] "${this.props.questionStem}`;
+    this.props.options.forEach((option, index) => {
+      pollyCopy = pollyCopy + `\n\n ${index + 1}. ${option} `;
+    });
+    pollyCopy = pollyCopy + `"`;
     this.props.options.forEach((option, index) => {
       pollyCopy = pollyCopy + ` "${index + 1}"`;
     });
@@ -97,7 +101,6 @@ class ShowQuestion extends Component {
         >
           {this.state.showAnswers ? 'Hide Answers' : 'Show Answers'}
         </Button>
-        <Divider hidden />
         {this.props.abilityToEdit && (
           <AddQuestion
             isEditing={true}
@@ -121,6 +124,7 @@ class ShowQuestion extends Component {
             Delete Question
           </Button>
         )}
+        <Divider hidden />
       </div>
     );
   }

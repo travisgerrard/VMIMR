@@ -203,9 +203,9 @@ class AddQuestion extends Component {
 
   render() {
     return (
-      <div>
+      <span>
         {this.state.addingQuestion ? this.showModal() : this.showButton()}
-      </div>
+      </span>
     );
   }
 }

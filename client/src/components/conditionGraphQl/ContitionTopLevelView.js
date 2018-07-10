@@ -168,11 +168,7 @@ class ConditionTopLevelViewGQL extends Component {
             if (loading) return <Loader active inline="centered" />;
             if (error) return `Error! ${error.message}`;
 
-            console.log(data);
-
             const filteredQuery = this.filterQuery(data.listOfPersonalLearning);
-
-            console.log(currentUser);
 
             return (
               <div>
