@@ -13,7 +13,7 @@ import {
 import ADD_CASE_PRESENTATION from '../../mutations/AddCasePresentation';
 import LIST_ALL_CASE_PRESENTATIONS from '../../queries/ListOfAllCasePresentations';
 
-import NoonConferenceView from './NoonConferenceView';
+import NoonConferenceViewBlog from './NoonConferenceViewBlog';
 
 class Blog extends Component {
   renderBlog = () => {
@@ -29,14 +29,16 @@ class Blog extends Component {
                 <Divider />
 
                 <h1 style={{ color: '#6AB2D6' }}>What's happening at VM:IMR</h1>
-                {data.listOfAllCasePresentations.map((presentation, index) => {
-                  return (
-                    <NoonConferenceView
-                      key={presentation.id}
-                      presentationData={presentation}
-                    />
-                  );
-                })}
+                {data.listOfAllCasePresentations
+                  .slice(0, 5)
+                  .map((presentation, index) => {
+                    return (
+                      <NoonConferenceViewBlog
+                        key={presentation.id}
+                        presentationData={presentation}
+                      />
+                    );
+                  })}
               </Container>
             );
           } else {
