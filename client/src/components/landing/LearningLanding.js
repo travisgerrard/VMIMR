@@ -4,6 +4,16 @@ import AddConditionFromRotation from '../conditionGraphQl/AddConditionFromRotati
 import LastThreeLearnings from '../rotations/LastThreeLearnings';
 import { Link } from 'react-router-dom';
 
+const titleStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'thin',
+  lineHeight: 'normal',
+  fontSize: '24px',
+  backgroundColor: '#E8F4F7',
+  padding: 10,
+};
+
 class LearningLanding extends Component {
   state = {
     showLearningModal: false,
@@ -24,9 +34,10 @@ class LearningLanding extends Component {
 
   render() {
     return (
-      <Segment>
-        <h4>
-          Most recent learnings:{' '}
+      <Segment.Group>
+        <Segment style={titleStyle}>
+          Most recent learning
+          <br />
           {this.state.showLearningModal ? (
             <Modal open={this.state.showLearningModal} size="large">
               <Modal.Header>Add learning</Modal.Header>
@@ -48,14 +59,14 @@ class LearningLanding extends Component {
               Goto Learning Section
             </Link>
           </Button>
-        </h4>
+        </Segment>
         <LastThreeLearnings
           userId={this.props.currentUser.id}
           dbname={''}
           currentUser={this.props.currentUser}
           title={''}
         />
-      </Segment>
+      </Segment.Group>
     );
   }
 }

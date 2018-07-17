@@ -6,6 +6,8 @@ import UpComing from './UpComing';
 import LearningLanding from './LearningLanding';
 import ShowSurveyMessage from './SurveyMessage';
 import Blog from '../conferences/Blog';
+import InternSurvival from '../conferences/InternSurvivalTopLevel';
+import ConferenceLanding from './ConferenceLanding';
 
 const ADJECTIVES = [
   'awesome',
@@ -23,6 +25,16 @@ const ADJECTIVES = [
   'astounding',
 ];
 
+const titleStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'thin',
+  lineHeight: 'normal',
+  fontSize: '24px',
+  backgroundColor: '#E8F4DF',
+  padding: 10,
+};
+
 class LoggedInLanding extends Component {
   adjectiveMaker = () => {
     return ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
@@ -37,18 +49,12 @@ class LoggedInLanding extends Component {
           <h3 style={{ marginBottom: 0 }}>
             Hey there Dr. {name}, you're <b>{this.adjectiveMaker()}</b>!
           </h3>
-          <h3 style={{ marginTop: 3 }}>
-            Welcome to the{' '}
-            <span style={{ color: '#5E9B6A' }}>
-              Virginia Mason: Internal Medicine Residency
-            </span>{' '}
-            website
-          </h3>
         </div>
+        <InternSurvival />
+        <ConferenceLanding />
         <LearningLanding currentUser={currentUser} />
         <ShowSurveyMessage />
         <UpComing name={name} />
-        <Blog />
       </Container>
     );
   }

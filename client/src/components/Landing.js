@@ -7,6 +7,7 @@ import LandingPage from './landing/LoggedInLanding';
 import { Container, Segment } from 'semantic-ui-react';
 import Signin from './auth/Signin';
 import Blog from './conferences/Blog';
+import InternSurvival from './conferences/InternSurvivalTopLevel';
 
 const Landing = () => {
   var landingPage;
@@ -23,7 +24,7 @@ const Landing = () => {
           <Signin />
         </Container>
 
-        <Blog />
+        <InternSurvival />
       </div>
     );
   }

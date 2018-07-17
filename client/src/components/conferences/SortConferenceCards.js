@@ -32,6 +32,11 @@ class SortConferenceCards extends Component {
           active={activeItem === 'morning'}
           onClick={() => this.props.handleItemClick('morning')}
         />
+        <Menu.Item
+          name="Intern Survival Guide"
+          active={activeItem === 'internSurvival'}
+          onClick={() => this.props.handleItemClick('internSurvival')}
+        />
       </Menu>
     );
   }

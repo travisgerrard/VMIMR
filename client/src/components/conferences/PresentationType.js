@@ -71,6 +71,17 @@ class PresentationType extends Component {
                         )
                       }
                     />
+                    <Form.Radio
+                      label="Intern Survival"
+                      value={presentationType}
+                      checked={presentationType === 'internSurvival'}
+                      onChange={() =>
+                        this.props.updateConferenceInputState(
+                          'presentationType',
+                          'internSurvival',
+                        )
+                      }
+                    />
                   </Form.Group>
                 </Grid.Column>
               </Grid.Row>
