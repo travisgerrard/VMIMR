@@ -28,6 +28,12 @@ class InternSurvivalTopLevel extends Component {
         <Segment style={titleStyle}>Wards Survival Skills</Segment>
         <Segment style={sectionStyle}>
           The Page:{' '}
+          <a href="http://bit.ly/WSG_ABX" target="_blank">
+            Patient w/ sepsis, ABX plz!
+          </a>
+        </Segment>
+        <Segment style={sectionStyle}>
+          The Page:{' '}
           <a href="http://bit.ly/WSG_BP" target="_blank">
             Patient has BP of 190/100
           </a>
