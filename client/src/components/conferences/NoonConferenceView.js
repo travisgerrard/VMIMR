@@ -16,6 +16,18 @@ import Questions from './Questions';
 
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
 
+const fontStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'lighter',
+};
+
+const fontStyleTitle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'normal',
+};
+
 class NoonConferenceView extends Component {
   state = {
     expanded: false,
@@ -29,6 +41,7 @@ class NoonConferenceView extends Component {
     const admin = currentUser.admin;
 
     if (this.props.match.params.id) {
+      //Looking at a specific conference
       const caseId = this.props.match.params.id;
       return (
         <Query query={SELECTED_CASE_PRESENTATIONS} variables={{ id: caseId }}>
@@ -55,9 +68,9 @@ class NoonConferenceView extends Component {
             const questionsLength = questions.length ? true : false;
 
             return (
-              <Card fluid>
+              <Card fluid style={fontStyle}>
                 <Card.Content>
-                  <Card.Header>{title}</Card.Header>
+                  <Card.Header style={fontStyleTitle}>{title}</Card.Header>
                   <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
                   {admin && (
                     <Image floated="right">
@@ -114,7 +127,7 @@ class NoonConferenceView extends Component {
 
       if (this.state.expanded) {
         return (
-          <Card fluid>
+          <Card fluid style={fontStyle}>
             <Card.Content>
               <Image floated="right">
                 <Icon
@@ -151,7 +164,7 @@ class NoonConferenceView extends Component {
                   </span>
                 )}
               </Image>
-              <Card.Header>{title}</Card.Header>
+              <Card.Header style={fontStyleTitle}>{title}</Card.Header>
               <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
             </Card.Content>
             <Card.Content>
@@ -173,13 +186,14 @@ class NoonConferenceView extends Component {
         );
       } else {
         return (
-          <Card fluid>
+          <Card fluid style={fontStyle}>
             <Card.Content>
               <Image floated="right">
                 <Button
                   primary
                   onClick={() => this.setState({ expanded: true })}
                   size="mini"
+                  style={fontStyle}
                 >
                   <Icon name="resize vertical" />View content
                 </Button>
@@ -210,7 +224,7 @@ class NoonConferenceView extends Component {
                 )}
               </Image>
 
-              <Card.Header>{title}</Card.Header>
+              <Card.Header style={fontStyleTitle}>{title}</Card.Header>
               <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
               <Card.Meta
               >{`Type of presentation: ${presentationType}`}</Card.Meta>

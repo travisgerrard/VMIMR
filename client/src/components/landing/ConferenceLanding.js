@@ -26,6 +26,12 @@ const sectionStyle = {
   padding: 10,
 };
 
+const fontStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'lighter',
+};
+
 class ConferenceLanding extends Component {
   render() {
     return (
@@ -33,7 +39,16 @@ class ConferenceLanding extends Component {
         <Segment style={titleStyle}>
           Latests Conferences
           <br />
-          <Button size="tiny" style={{ backgroundColor: '#5E9B6A' }} primary>
+          <Button
+            size="tiny"
+            style={{
+              backgroundColor: '#5E9B6A',
+              fontFamily: 'Lato',
+              fontStyle: 'normal',
+              fontWeight: 'lighter',
+            }}
+            primary
+          >
             <Link to="/Conference" style={{ color: 'white' }}>
               Goto Conference Section
             </Link>

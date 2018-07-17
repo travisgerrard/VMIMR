@@ -26,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter forceRefresh={true}>
-        <div>
+        <div style={{ backgroundColor: '#F1F7FF' }}>
           <Header />
           <Route exact path="/" component={Landing} />
           <Route

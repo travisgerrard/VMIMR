@@ -5,6 +5,12 @@ import { Select, Input, Button } from 'semantic-ui-react';
 import rotations from '../conditions/rotations';
 import _ from 'lodash';
 
+const fontStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'lighter',
+};
+
 class SearchBox extends Component {
   render() {
     const options = _.map(rotations, ({ name, dbname }) => {
@@ -16,12 +22,16 @@ class SearchBox extends Component {
         <Button
           fluid
           primary
-          style={{ marginBottom: 10 }}
+          style={{
+            marginBottom: 10,
+            fontFamily: 'Lato',
+            fontWeight: 'lighter',
+          }}
           onClick={this.props.handleAddButtonPressed}
         >
           Add New Learning
         </Button>
-        <label>Search Learnings</label>
+        <label style={fontStyle}>Search Learnings</label>
         <Input
           style={{ marginBottom: 10 }}
           type="text"
@@ -30,7 +40,7 @@ class SearchBox extends Component {
           value={this.props.searchTerm}
           onChange={this.props.searchTermChanged}
         />
-        <label>Filter By Rotation</label>
+        <label style={fontStyle}>Filter By Rotation</label>
         <Select
           fluid
           style={{ marginBottom: 25 }}

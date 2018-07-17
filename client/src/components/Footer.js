@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 
+const fontStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'lighter',
+};
+
 class Footer extends Component {
   render() {
     return (
@@ -8,7 +14,7 @@ class Footer extends Component {
         style={{ marginTop: 25, backgroundColor: '#479E65' }}
       >
         <div className="ui center aligned container">
-          <h4 className="ui inverted header">
+          <h4 className="ui inverted header" style={fontStyle}>
             This is the bottom of VMIMR | Questions, Complaints? Email{' '}
             <a
               href="mailto:travis.gerrard@virginiamason.org"

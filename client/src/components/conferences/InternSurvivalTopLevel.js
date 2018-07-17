@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const titleStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'thin',
+  fontWeight: 'lighter',
   lineHeight: 'normal',
   fontSize: '24px',
   backgroundColor: '#E8F4F7',
@@ -15,7 +15,7 @@ const titleStyle = {
 const sectionStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'thin',
+  fontWeight: 'lighter',
   lineHeight: 'normal',
   fontSize: '18px',
   padding: 10,

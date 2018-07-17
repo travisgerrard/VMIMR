@@ -6,6 +6,16 @@ import * as actions from '../../actions';
 import { Form, Button, Grid, Header, Segment } from 'semantic-ui-react';
 import SigninField from './UserInputField';
 
+const titleStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'lighter',
+  lineHeight: 'normal',
+  fontSize: '24px',
+  backgroundColor: '#E8F4F7',
+  padding: 10,
+};
+
 class Signin extends Component {
   handleFormSubmit = ({ username, password }) => {
     this.props.signinUser({
@@ -41,26 +51,34 @@ class Signin extends Component {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as="h2" style={{ color: '#50B4DA' }} textAlign="center">
-              Log-in to your account
-            </Header>
             <Form
               size="large"
               onSubmit={this.props.handleSubmit(this.handleFormSubmit)}
             >
-              <Segment stacked>
-                <Field
-                  component={SigninField}
-                  label="Username (what you use to login to cerner)"
-                  name="username"
-                  placeholder="j12345"
-                  autoCapitalize="none"
-                />
-
-                <Button style={{ background: '#E8F4DF' }} fluid size="large">
-                  Login
-                </Button>
-              </Segment>
+              <Segment.Group stacked>
+                <Segment style={titleStyle}>Username (Cerner login)</Segment>
+                <Segment>
+                  <Field
+                    component={SigninField}
+                    name="username"
+                    placeholder="j12345"
+                    autoCapitalize="none"
+                  />
+                </Segment>
+                <Segment>
+                  <Button
+                    style={{
+                      background: '#E8F4DF',
+                      fontWeight: 'lighter',
+                      fontFamily: 'Lato',
+                    }}
+                    fluid
+                    size="large"
+                  >
+                    Login
+                  </Button>
+                </Segment>
+              </Segment.Group>
             </Form>
             {this.renderAlert()}
           </Grid.Column>

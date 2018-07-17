@@ -9,6 +9,12 @@ import jwt_decode from 'jwt-decode';
 
 import GET_LIST_OF_ROTATIONS from '../queries/ListOfRotations';
 
+const fontStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'lighter',
+};
+
 class Header extends Component {
   state = {
     mobileMenuVisible: false,
@@ -19,7 +25,9 @@ class Header extends Component {
       if (jwt_decode(localStorage.getItem('VMIMRToken')).admin) {
         return [
           <Menu.Item key="1" position="right" style={{ cursor: 'pointer' }}>
-            <Link to="/users">Users</Link>
+            <Link to="/users" style={fontStyle}>
+              Users
+            </Link>
           </Menu.Item>,
         ];
       }
@@ -31,7 +39,9 @@ class Header extends Component {
       if (jwt_decode(localStorage.getItem('VMIMRToken')).eastgate) {
         return [
           <Menu.Item key="1" position="right" style={{ cursor: 'pointer' }}>
-            <Link to="/eastgate">Eastgate</Link>
+            <Link to="/eastgate" style={fontStyle}>
+              Eastgate
+            </Link>
           </Menu.Item>,
         ];
       }
@@ -61,7 +71,11 @@ class Header extends Component {
               >
                 <Link
                   to={`/rotations/${rotation.title}`}
-                  style={{ color: 'black' }}
+                  style={{
+                    color: '#00b6de',
+                    fontFamily: 'Lato',
+                    fontWeight: 'lighter',
+                  }}
                 >
                   {rotation.title}
                 </Link>
@@ -78,20 +92,27 @@ class Header extends Component {
       // show sign out
       return [
         <Menu.Item key="5" position="right" style={{ cursor: 'pointer' }}>
-          <Link to="/">Home</Link>
+          <Link to="/" style={fontStyle}>
+            Home
+          </Link>
         </Menu.Item>,
-        <Dropdown key="4" item text="Rotations">
+        <Dropdown key="4" item text="Rotations" style={fontStyle}>
           <Dropdown.Menu>{this.returnRotations()}</Dropdown.Menu>
         </Dropdown>,
         <Menu.Item key="1" position="right" style={{ cursor: 'pointer' }}>
-          <Link to="/Conference">Conference</Link>
+          <Link to="/Conference" style={fontStyle}>
+            Conference
+          </Link>
         </Menu.Item>,
         <Menu.Item key="2" position="right" style={{ cursor: 'pointer' }}>
-          <Link to="/conditions">Learning</Link>
+          <Link to="/conditions" style={fontStyle}>
+            Learning
+          </Link>
         </Menu.Item>,
         <Menu.Item key="3" position="right" style={{ cursor: 'pointer' }}>
           <Link
             to="/"
+            style={fontStyle}
             onClick={() => {
               this.props.signoutUser();
             }}
@@ -104,7 +125,9 @@ class Header extends Component {
       //show sign in
       return [
         <Menu.Item key="signin">
-          <Link to="/signin">Sign in</Link>
+          <Link to="/signin" style={fontStyle}>
+            Sign in
+          </Link>
         </Menu.Item>,
       ];
     }
@@ -116,7 +139,7 @@ class Header extends Component {
 
   render() {
     return (
-      <Grid>
+      <Grid style={{ backgroundColor: '#F1F7FF' }}>
         <Grid.Row columns={1} only="mobile">
           <Grid.Column>
             <Menu
@@ -128,7 +151,9 @@ class Header extends Component {
               inverted
             >
               <Menu.Item>
-                <Link to="/">VM:IMR</Link>
+                <Link to="/" style={fontStyle}>
+                  VM:IMR
+                </Link>
               </Menu.Item>
 
               <Menu.Menu position="right">
@@ -178,7 +203,9 @@ class Header extends Component {
               inverted
             >
               <Menu.Item>
-                <Link to="/">VM:IMR</Link>
+                <Link to="/" style={fontStyle}>
+                  VM:IMR
+                </Link>
               </Menu.Item>
 
               <Menu.Menu position="right">
@@ -200,4 +227,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(
+  mapStateToProps,
+  actions,
+)(Header);

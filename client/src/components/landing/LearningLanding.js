@@ -14,6 +14,12 @@ const titleStyle = {
   padding: 10,
 };
 
+const fontStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'lighter',
+};
+
 class LearningLanding extends Component {
   state = {
     showLearningModal: false,
@@ -50,22 +56,34 @@ class LearningLanding extends Component {
               />
             </Modal>
           ) : (
-            <Button onClick={() => this.addLearning()} size="tiny" primary>
+            <Button
+              onClick={() => this.addLearning()}
+              size="tiny"
+              style={fontStyle}
+              primary
+            >
               Add Some Learning
             </Button>
           )}
-          <Button size="tiny" style={{ backgroundColor: '#5E9B6A' }} primary>
+          <Button
+            size="tiny"
+            style={{ backgroundColor: '#5E9B6A' }}
+            style={fontStyle}
+            primary
+          >
             <Link to="/conditions" style={{ color: 'white' }}>
               Goto Learning Section
             </Link>
           </Button>
         </Segment>
-        <LastThreeLearnings
-          userId={this.props.currentUser.id}
-          dbname={''}
-          currentUser={this.props.currentUser}
-          title={''}
-        />
+        <Segment>
+          <LastThreeLearnings
+            userId={this.props.currentUser.id}
+            dbname={''}
+            currentUser={this.props.currentUser}
+            title={''}
+          />
+        </Segment>
       </Segment.Group>
     );
   }

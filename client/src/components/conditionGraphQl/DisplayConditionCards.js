@@ -5,6 +5,18 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import './markdown.css';
 
+const fontStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'lighter',
+};
+
+const fontStyleTitle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'normal',
+};
+
 class DisplayConditionCards extends Component {
   state = {
     allLearning: this.props.learnings,
@@ -59,7 +71,7 @@ class DisplayConditionCards extends Component {
     return (
       <Card.Content style={{ background: '#E5F5DD' }}>
         {this.showIcons(createdById, id, learningId)}
-        <Card.Header>{condition}</Card.Header>
+        <Card.Header style={fontStyleTitle}>{condition}</Card.Header>
         <Card.Meta>Tags: {tags.join(', ')}</Card.Meta>
       </Card.Content>
     );
@@ -112,7 +124,7 @@ class DisplayConditionCards extends Component {
     return listOfConditions.map(learning => {
       const { _condition } = learning;
       return (
-        <Card centered key={learning.id}>
+        <Card centered key={learning.id} style={fontStyle}>
           {this.cardHeader(
             _condition,
             learning.tags,

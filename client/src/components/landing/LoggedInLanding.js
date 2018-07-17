@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Segment } from 'semantic-ui-react';
+import { Container, Segment, Divider } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
 
 import UpComing from './UpComing';
@@ -34,7 +34,11 @@ const titleStyle = {
   backgroundColor: '#E8F4DF',
   padding: 10,
 };
-
+const fontStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontWeight: 'lighter',
+};
 class LoggedInLanding extends Component {
   adjectiveMaker = () => {
     return ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
@@ -46,12 +50,15 @@ class LoggedInLanding extends Component {
     return (
       <Container style={{ marginTop: 10 }}>
         <div style={{ marginTop: 10, marginBottom: 10 }}>
-          <h3 style={{ marginBottom: 0 }}>
+          <h3 style={({ marginBottom: 0 }, fontStyle)}>
             Hey there Dr. {name}, you're <b>{this.adjectiveMaker()}</b>!
           </h3>
         </div>
         <InternSurvival />
+        <Divider />
         <ConferenceLanding />
+        <Divider />
+
         <LearningLanding currentUser={currentUser} />
         <ShowSurveyMessage />
         <UpComing name={name} />
