@@ -22,9 +22,8 @@ const Landing = () => {
           <p>Aiming to help organize your residency life and learning</p>
 
           <Signin />
+          <InternSurvival />
         </Container>
-
-        <InternSurvival />
       </div>
     );
   }
