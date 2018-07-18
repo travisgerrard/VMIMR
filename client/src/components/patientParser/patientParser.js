@@ -270,6 +270,7 @@ class patientParser extends Component {
         >
           List Formatter
         </h1>
+        <p>NOTE: Not working in Internet Explorer</p>
         <Form>
           <TextArea
             rows={4}
@@ -333,7 +334,7 @@ class patientParser extends Component {
             fontWeight: 'lighter',
           }}
         >
-          <h2>Disclamer</h2>
+          <h2>Disclaimer</h2>
           <p>
             The information entered above is only manipulated locally on your
             device (i.e. never sent over the internet in any way) and is erased
