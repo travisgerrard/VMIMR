@@ -136,13 +136,12 @@ class InternSurvivalTopLevel extends Component {
           </a>
         </Segment>
         <Segment style={sectionStyle}>
-          BONUS!{' '}
           <a
             href="http://bit.ly/WSG_LF"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Organize your list
+            Format your list to make it more usable
           </a>
         </Segment>
       </Segment.Group>
