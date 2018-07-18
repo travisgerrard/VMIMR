@@ -21,6 +21,7 @@ import Eastgate from './eastgate/EastgateTopLevelView';
 import LoggedInLanding from './landing/LoggedInLanding';
 import MasterSchedule from './landing/MasterScheduleView';
 import SurveyTopLevel from './survey/SurveyTopLevel';
+import ListFormatter from './patientParser/patientParser';
 
 class App extends Component {
   render() {
@@ -84,7 +85,7 @@ class App extends Component {
             component={RequireAuth(MasterSchedule)}
           />
           <Route path={'/survey'} component={RequireAuth(SurveyTopLevel)} />
-
+          <Route path={`/listFormatter`} component={ListFormatter} />
           <Footer />
         </div>
       </BrowserRouter>

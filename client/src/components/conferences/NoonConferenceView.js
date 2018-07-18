@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Card,
-  Loader,
-  Container,
-  Image,
-  Icon,
-} from 'semantic-ui-react';
+import { Button, Card, Loader, Image, Icon } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import { withRouter, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';

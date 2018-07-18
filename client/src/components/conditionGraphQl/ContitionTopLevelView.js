@@ -7,7 +7,6 @@ import jwt_decode from 'jwt-decode';
 
 import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
 import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
-import GET_CURRENT_USER from '../../queries/CurrentUser';
 import LEARNING_TO_EDIT from '../../queries/SelectedLearning';
 
 import SortConditionCards from './SortConditionCards';

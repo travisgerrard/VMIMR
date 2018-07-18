@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Segment, Divider } from 'semantic-ui-react';
+import { Container, Divider } from 'semantic-ui-react';
 
 import AddQuestion from './AddQuestion';
 import ShowQuestions from './ShowQuestions';

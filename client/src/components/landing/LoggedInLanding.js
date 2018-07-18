@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Segment, Divider } from 'semantic-ui-react';
+import { Container, Divider } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
 
 import UpComing from './UpComing';
 import LearningLanding from './LearningLanding';
 import ShowSurveyMessage from './SurveyMessage';
-import Blog from '../conferences/Blog';
 import InternSurvival from '../conferences/InternSurvivalTopLevel';
 import ConferenceLanding from './ConferenceLanding';
 
@@ -25,15 +24,6 @@ const ADJECTIVES = [
   'astounding',
 ];
 
-const titleStyle = {
-  fontFamily: 'Lato',
-  fontStyle: 'normal',
-  fontWeight: 'thin',
-  lineHeight: 'normal',
-  fontSize: '24px',
-  backgroundColor: '#E8F4DF',
-  padding: 10,
-};
 const fontStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',

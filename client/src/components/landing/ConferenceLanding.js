@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Button, Modal, Loader } from 'semantic-ui-react';
+import { Segment, Button, Loader } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
@@ -24,12 +24,6 @@ const sectionStyle = {
   lineHeight: 'normal',
   fontSize: '18px',
   padding: 10,
-};
-
-const fontStyle = {
-  fontFamily: 'Lato',
-  fontStyle: 'normal',
-  fontWeight: 'lighter',
 };
 
 class ConferenceLanding extends Component {

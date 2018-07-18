@@ -19,7 +19,6 @@ import CatagorizationForSaving from './CategorizationForSaving';
 import PresentationType from './PresentationType';
 
 import ADD_QUESTION from '../../mutations/AddQuestionToCase';
-import DELETE_QUESTION from '../../mutations/DeleteQuestion';
 
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
 import UPDATE_CASE_PRESENTATION from '../../mutations/UpdateCasePresentation';

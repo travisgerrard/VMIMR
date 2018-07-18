@@ -4,9 +4,8 @@ import React from 'react';
 import LandingPage from './landing/LoggedInLanding';
 
 //import Conditions from './conditions/ConditionTopLevelView';
-import { Container, Segment, Divider } from 'semantic-ui-react';
+import { Container, Divider } from 'semantic-ui-react';
 import Signin from './auth/Signin';
-import Blog from './conferences/Blog';
 import InternSurvival from './conferences/InternSurvivalTopLevel';
 
 const lineOne = {

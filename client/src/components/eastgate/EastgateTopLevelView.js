@@ -9,7 +9,6 @@ import EastgateManual from './EastgateManual';
 import GET_ALL_EASTGATE_CONTENT from '../../queries/ListOfEastgateContent';
 import ADD_OR_UPDATE_EASTGATE_CONTENT from '../../mutations/AddEastgateContent';
 import DELETE_EASTGATE_CONTENT from '../../mutations/DeleteEastgateContent';
-import GET_CURRENT_USER from '../../queries/CurrentUser';
 
 class EastgateTopLevelView extends Component {
   state = {

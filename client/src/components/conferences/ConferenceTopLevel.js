@@ -3,16 +3,7 @@ import { Query, Mutation } from 'react-apollo';
 import _ from 'lodash';
 import jwt_decode from 'jwt-decode';
 import moment from 'moment';
-import {
-  Button,
-  Loader,
-  Card,
-  Container,
-  Segment,
-  Image,
-  Icon,
-} from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Button, Loader, Container } from 'semantic-ui-react';
 
 import SortConferenceCards from './SortConferenceCards';
 import ADD_CASE_PRESENTATION from '../../mutations/AddCasePresentation';

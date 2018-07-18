@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
-import { Form, Button, Grid, Header, Segment } from 'semantic-ui-react';
+import { Form, Button, Grid, Segment } from 'semantic-ui-react';
 import SigninField from './UserInputField';
 
 const titleStyle = {

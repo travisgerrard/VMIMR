@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Segment, Modal, Button, Form } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
-import _ from 'lodash';
-
-import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
-import { statSync } from 'fs';
 
 class AddQuestion extends Component {
   state = {

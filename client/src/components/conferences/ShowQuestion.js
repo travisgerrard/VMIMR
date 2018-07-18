@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, List, Button, Message, Divider } from 'semantic-ui-react';
+import { List, Button, Message, Divider } from 'semantic-ui-react';
 import _ from 'lodash';
 import ReactMarkdown from 'react-markdown';
 import { CopyToClipboard } from 'react-copy-to-clipboard';

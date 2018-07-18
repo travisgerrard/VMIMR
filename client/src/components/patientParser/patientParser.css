@@ -1,0 +1,59 @@
+#patientTotalInfo {
+  width: 100%;
+  text-align: left;
+}
+
+#patientInfo {
+  width: 200px;
+  /*float: left;*/
+  display: inline-block;
+  zoom: 1;
+}
+
+#dailyTodo {
+  width: 225px;
+  /*font-size: 12px;*/
+  /*float: left;*/
+  display: inline-block;
+  zoom: 1;
+}
+
+#dailyTodo li:before {
+  content: "\2610";
+  margin-right: 5px;
+}
+
+#followUps {
+  width: 150px;
+  /*float: left;*/
+  display: inline-block;
+  zoom: 1;
+}
+
+#followUps li:before {
+  content: "\2610";
+  margin-right: 5px;
+}
+
+#cbcAndBmr {
+  width: 140px;
+  /*float: left;*/
+  display: inline-block;
+  zoom: 1;
+}
+
+ul {
+  list-style: none;
+}
+/*
+li:before {
+  content: "\2610";
+  margin-right: 5px;
+}
+*/
+
+#nameText {
+  font-weight: bold;
+}
+
+;
