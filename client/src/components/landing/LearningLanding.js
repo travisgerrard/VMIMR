@@ -67,9 +67,12 @@ class LearningLanding extends Component {
           )}
           <Button
             size="tiny"
-            style={{ backgroundColor: '#5E9B6A' }}
-            style={fontStyle}
-            primary
+            style={{
+              backgroundColor: '#5E9B6A',
+              fontFamily: 'Lato',
+              fontStyle: 'normal',
+              fontWeight: 'lighter',
+            }}
           >
             <Link to="/conditions" style={{ color: 'white' }}>
               Goto Learning Section

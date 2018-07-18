@@ -59,7 +59,7 @@ class InternSurvivalTopLevel extends Component {
         <Segment style={sectionStyle}>
           The Page:{' '}
           <a href="http://bit.ly/WSG_AMS" target="_blank">
-            Patient's delerius, need restraints
+            Patient's delirious, need restraints
           </a>
         </Segment>
         <Segment style={sectionStyle}>
