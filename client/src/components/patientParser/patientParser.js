@@ -249,7 +249,7 @@ class patientParser extends Component {
       elementFour.appendChild(this.makeUL(dailyToDos));
       elementOne.appendChild(elementFour);
 
-      // creat and add some blanks for followups
+      // create and add some blanks for followups
       var elementFive = document.createElement('div');
       elementFive.id = 'followUps';
       elementFive.appendChild(this.makeUL(followUps));

@@ -74,13 +74,6 @@ class ConferenceTopLevel extends Component {
 
                 if (data.listOfAllCasePresentations.length > 0) {
                   var presentations = data.listOfAllCasePresentations.slice();
-                  // presentations.sort(function(a, b) {
-                  //   return a.presentationDate < b.presentationDate
-                  //     ? 1
-                  //     : b.presentationDate < a.presentationDate
-                  //       ? -1
-                  //       : 0;
-                  // });
 
                   const filteredQuery = this.filterQuery(presentations);
 

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Card, Loader, Image, Icon } from 'semantic-ui-react';
+import { Button, Card, Loader, Image, Icon, Divider } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import { withRouter, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import jwt_decode from 'jwt-decode';
+import NoonConference from './NoonConference';
 
 import Questions from './Questions';
 
@@ -108,6 +109,7 @@ class NoonConferenceView extends Component {
         id,
         embedPresentationSting,
         questions,
+        summAssessment,
       } = this.props.presentationData;
 
       let name;
@@ -117,6 +119,7 @@ class NoonConferenceView extends Component {
         name = '';
       }
       const questionsLength = questions.length ? true : false;
+      const isCaseReport = presentationType === 'case' ? true : false;
 
       if (this.state.expanded) {
         return (
@@ -174,6 +177,13 @@ class NoonConferenceView extends Component {
                   abilityToEdit={false}
                 />
               )}
+              {isCaseReport && (
+                <div>
+                  <Divider />
+                  <h2>The Case</h2>
+                  <NoonConference viewOnly={true} {...this.props} />
+                </div>
+              )}
             </Card.Content>
           </Card>
         );
@@ -222,6 +232,11 @@ class NoonConferenceView extends Component {
               <Card.Meta
               >{`Type of presentation: ${presentationType}`}</Card.Meta>
             </Card.Content>
+            {isCaseReport && (
+              <Card.Content>
+                <p>{summAssessment}</p>
+              </Card.Content>
+            )}
           </Card>
         );
       }

@@ -25,7 +25,7 @@ class NoonConference extends Component {
 
   HPI = () => {
     return (
-      <div>
+      <div style={{ backgroundColor: '#ffffff' }}>
         <div
           style={{
             border: '1px solid rgba(34, 36, 38, 0.15)',
@@ -95,6 +95,10 @@ class NoonConference extends Component {
       <div
         style={{
           marginBottom: 10,
+          backgroundColor: '#ffffff',
+          border: '1px solid rgba(34, 36, 38, 0.15)',
+          borderRadius: '0.28571429rem',
+          padding: '0.67857143em 1em',
         }}
       >
         <Editor
@@ -218,8 +222,8 @@ class NoonConference extends Component {
   render() {
     return (
       <div>
-        <Form style={{ marginLeft: 25, marginRight: 25, marginTop: '4.5em' }}>
-          <Grid columns={3}>
+        <Form style={{ marginLeft: 25, marginRight: 25, marginTop: '1em' }}>
+          <Grid columns={3} stackable>
             <Grid.Row stretched>
               <Grid.Column>
                 <div>{this.HPI()}</div>
@@ -243,6 +247,7 @@ class NoonConference extends Component {
               <Grid.Column>
                 <Form.Field
                   control={TextArea}
+                  autoHeight
                   label="Summary assessment"
                   placeholder="45M with ..."
                   value={this.props.summAssessment}

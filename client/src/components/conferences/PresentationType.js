@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Segment, Form, Grid } from 'semantic-ui-react';
+import { Container, Segment, Form, Grid, Divider } from 'semantic-ui-react';
 
 //morning, case, specialist, primaryCare
 
@@ -88,6 +88,7 @@ class PresentationType extends Component {
             </Grid>
           </Form>
         </Segment>
+        <Divider />
       </Container>
     );
   }
