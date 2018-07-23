@@ -27,7 +27,6 @@ const ADJECTIVES = [
 const fontStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
 };
 class LoggedInLanding extends Component {
   adjectiveMaker = () => {

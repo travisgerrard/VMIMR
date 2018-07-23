@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 const fontStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
 };
 
 class Footer extends Component {

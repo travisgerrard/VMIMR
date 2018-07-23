@@ -43,7 +43,6 @@ const cbcAndBmr = [
 const fontStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
 };
 
 class patientParser extends Component {
@@ -264,7 +263,6 @@ class patientParser extends Component {
           style={{
             fontFamily: 'Lato',
             fontStyle: 'normal',
-            fontWeight: 'lighter',
             marginTop: 10,
           }}
         >
@@ -309,7 +307,6 @@ class patientParser extends Component {
             marginTop: 10,
             fontFamily: 'Lato',
             fontStyle: 'normal',
-            fontWeight: 'lighter',
           }}
           textAlign="center"
         >
@@ -331,7 +328,6 @@ class patientParser extends Component {
           style={{
             fontFamily: 'Lato',
             fontStyle: 'normal',
-            fontWeight: 'lighter',
           }}
         >
           <h2>Disclaimer</h2>

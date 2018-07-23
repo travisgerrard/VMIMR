@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 const titleStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'thin',
   lineHeight: 'normal',
   fontSize: '24px',
   backgroundColor: '#E8F4F7',
@@ -17,7 +16,6 @@ const titleStyle = {
 const fontStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
 };
 
 class LearningLanding extends Component {
@@ -71,7 +69,6 @@ class LearningLanding extends Component {
               backgroundColor: '#5E9B6A',
               fontFamily: 'Lato',
               fontStyle: 'normal',
-              fontWeight: 'lighter',
             }}
           >
             <Link to="/conditions" style={{ color: 'white' }}>

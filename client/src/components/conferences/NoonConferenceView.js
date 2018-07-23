@@ -13,13 +13,11 @@ import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation'
 const fontStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
 };
 
 const fontStyleTitle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'normal',
 };
 
 class NoonConferenceView extends Component {

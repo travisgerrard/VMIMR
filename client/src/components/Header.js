@@ -12,7 +12,6 @@ import GET_LIST_OF_ROTATIONS from '../queries/ListOfRotations';
 const fontStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
 };
 
 class Header extends Component {
@@ -74,7 +73,6 @@ class Header extends Component {
                   style={{
                     color: '#00b6de',
                     fontFamily: 'Lato',
-                    fontWeight: 'lighter',
                   }}
                 >
                   {rotation.title}

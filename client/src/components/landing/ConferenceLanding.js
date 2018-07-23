@@ -10,7 +10,6 @@ import NoonConferenceView from '../conferences/NoonConferenceView';
 const titleStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'thin',
   lineHeight: 'normal',
   fontSize: '24px',
   backgroundColor: '#E8F4F7',
@@ -20,7 +19,6 @@ const titleStyle = {
 const sectionStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'thin',
   lineHeight: 'normal',
   fontSize: '18px',
   padding: 10,
@@ -39,7 +37,6 @@ class ConferenceLanding extends Component {
               backgroundColor: '#5E9B6A',
               fontFamily: 'Lato',
               fontStyle: 'normal',
-              fontWeight: 'lighter',
             }}
             primary
           >

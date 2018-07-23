@@ -11,7 +11,6 @@ import InternSurvival from './conferences/InternSurvivalTopLevel';
 const lineOne = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
   lineHeight: 'normal',
   fontSize: '36px',
   padding: 3,
@@ -20,7 +19,6 @@ const lineOne = {
 const lineTwo = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
   lineHeight: 'normal',
   fontSize: '28px',
   padding: 5,
@@ -29,7 +27,6 @@ const lineTwo = {
 const lineThree = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
   lineHeight: 'normal',
   fontSize: '16px',
   padding: 5,

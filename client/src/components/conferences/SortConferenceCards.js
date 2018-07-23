@@ -4,7 +4,6 @@ import { Menu } from 'semantic-ui-react';
 const fontStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
 };
 
 class SortConferenceCards extends Component {

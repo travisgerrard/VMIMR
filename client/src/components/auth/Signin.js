@@ -9,7 +9,6 @@ import SigninField from './UserInputField';
 const titleStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
   lineHeight: 'normal',
   fontSize: '24px',
   backgroundColor: '#E8F4F7',
@@ -69,7 +68,6 @@ class Signin extends Component {
                   <Button
                     style={{
                       background: '#E8F4DF',
-                      fontWeight: 'lighter',
                       fontFamily: 'Lato',
                     }}
                     fluid

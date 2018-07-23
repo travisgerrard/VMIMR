@@ -8,13 +8,11 @@ import './markdown.css';
 const fontStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
 };
 
 const fontStyleTitle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'normal',
 };
 
 class DisplayConditionCards extends Component {

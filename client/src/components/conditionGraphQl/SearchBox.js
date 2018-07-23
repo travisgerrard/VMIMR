@@ -8,7 +8,6 @@ import _ from 'lodash';
 const fontStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
-  fontWeight: 'lighter',
 };
 
 class SearchBox extends Component {
@@ -25,7 +24,6 @@ class SearchBox extends Component {
           style={{
             marginBottom: 10,
             fontFamily: 'Lato',
-            fontWeight: 'lighter',
           }}
           onClick={this.props.handleAddButtonPressed}
         >
