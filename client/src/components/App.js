@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+
+import ReactGA from 'react-ga';
+
 import Header from './Header';
 import Footer from './Footer';
 import Landing from './Landing';
@@ -23,12 +26,25 @@ import MasterSchedule from './landing/MasterScheduleView';
 import SurveyTopLevel from './survey/SurveyTopLevel';
 import ListFormatter from './patientParser/patientParser';
 
+ReactGA.initialize('UA-122837373-1');
+
+/**
+ * @return {null}
+ */
+function Analytics(props) {
+  ReactGA.set({ page: props.location.pathname + props.location.search });
+  ReactGA.pageview(props.location.pathname + props.location.search);
+  return null;
+}
+
 class App extends Component {
   render() {
     return (
       <BrowserRouter forceRefresh={true}>
         <div style={{ backgroundColor: '#F1F7FF' }}>
           <Header />
+          <Route path="/" component={Analytics} />
+
           <Route exact path="/" component={Landing} />
           <Route
             exact
