@@ -25,6 +25,7 @@ import LoggedInLanding from './landing/LoggedInLanding';
 import MasterSchedule from './landing/MasterScheduleView';
 import SurveyTopLevel from './survey/SurveyTopLevel';
 import ListFormatter from './patientParser/patientParser';
+import InternSurvivalTopLevel from './conferences/InternSurvivalTopLevel';
 
 ReactGA.initialize('UA-122837373-1');
 
@@ -102,6 +103,7 @@ class App extends Component {
           />
           <Route path={'/survey'} component={RequireAuth(SurveyTopLevel)} />
           <Route path={`/listFormatter`} component={ListFormatter} />
+          <Route path={`/survivalGuide`} component={InternSurvivalTopLevel} />
           <Footer />
         </div>
       </BrowserRouter>

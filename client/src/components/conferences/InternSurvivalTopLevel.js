@@ -30,7 +30,7 @@ class InternSurvivalTopLevel extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Patient w/ sepsis, ABX plz!
+            Patient w/ sepsis, ABX plz! (Guide to Beta-Lactams)
           </a>
         </Segment>
         <Segment style={sectionStyle}>
@@ -40,7 +40,7 @@ class InternSurvivalTopLevel extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Patient has BP of 190/100
+            Patient has BP of 190/100 (Guide to hypertension)
           </a>
         </Segment>
         <Segment style={sectionStyle}>
@@ -50,7 +50,7 @@ class InternSurvivalTopLevel extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Patient has chest pain!
+            Patient has chest pain! (Guide to chest pain)
           </a>
         </Segment>
         <Segment style={sectionStyle}>
@@ -60,7 +60,7 @@ class InternSurvivalTopLevel extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Back pain, need vit D!
+            Back pain, need vit D! (Guide to general pain)
           </a>
         </Segment>
         <Segment style={sectionStyle}>
@@ -70,7 +70,7 @@ class InternSurvivalTopLevel extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Patient wants to leave AMA!
+            Patient wants to leave AMA! (Guide to patient leaving AMA)
           </a>
         </Segment>
         <Segment style={sectionStyle}>
@@ -80,7 +80,7 @@ class InternSurvivalTopLevel extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Patient's delirious, need restraints
+            Patient's delirious, need restraints (Guide to AMS)
           </a>
         </Segment>
         <Segment style={sectionStyle}>
@@ -90,7 +90,7 @@ class InternSurvivalTopLevel extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Patient's K & Mag are low!
+            Patient's K & Mag are low! (Guide to replacing electrolytes)
           </a>
         </Segment>
         <Segment style={sectionStyle}>
@@ -100,7 +100,7 @@ class InternSurvivalTopLevel extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            The patient is seizing!
+            The patient is seizing! (Guide to seizures)
           </a>
         </Segment>
         <Segment style={sectionStyle}>
@@ -110,7 +110,7 @@ class InternSurvivalTopLevel extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            The patient is vomiting!
+            The patient is vomiting! (Guide to nausea and vomiting)
           </a>
         </Segment>
         <Segment style={sectionStyle}>
@@ -120,7 +120,7 @@ class InternSurvivalTopLevel extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            What's patient's code status
+            What's patient's code status (Guide to the code status talk)
           </a>
         </Segment>
         <Segment style={sectionStyle}>
@@ -130,7 +130,7 @@ class InternSurvivalTopLevel extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Patient needs blood!
+            Patient needs blood! (Guide to RBC transfusion)
           </a>
         </Segment>
         <Segment style={sectionStyle}>
