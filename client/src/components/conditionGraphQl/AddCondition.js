@@ -102,8 +102,6 @@ class AddCondition extends Component {
 
                   const { error } = isValid;
                   if (!error) {
-                    console.log('adding learning');
-
                     addLearning({
                       variables: {
                         id: this.props.currentUser.id,
