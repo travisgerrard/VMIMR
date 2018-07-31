@@ -3,7 +3,7 @@ import { Query, Mutation } from 'react-apollo';
 import _ from 'lodash';
 import jwt_decode from 'jwt-decode';
 import moment from 'moment';
-import { Button, Loader, Container } from 'semantic-ui-react';
+import { Button, Loader, Container, Input, Divider } from 'semantic-ui-react';
 
 import SortConferenceCards from './SortConferenceCards';
 import ADD_CASE_PRESENTATION from '../../mutations/AddCasePresentation';
@@ -21,16 +21,35 @@ class ConferenceTopLevel extends Component {
     this.setState({ sortActiveItem: name });
   };
 
+  handleSearchTermChanged = value => {
+    this.setState({ searchTerm: value });
+  };
+
   filterQuery = query => {
     const { sortActiveItem } = this.state;
 
-    var filteredQuery = _.filter(query, function(o) {
-      if (sortActiveItem === 'all') {
-        return o;
-      } else {
-        return _.includes(o.presentationType, sortActiveItem);
-      }
-    });
+    var filteredQuery = _.filter(
+      query,
+      function(o) {
+        if (sortActiveItem === 'all') {
+          return (
+            o.title
+              .toLowerCase()
+              .includes(this.state.searchTerm.toLowerCase()) ||
+            o.embedPresentationSting
+              .toLowerCase()
+              .includes(this.state.searchTerm.toLowerCase())
+          );
+        } else {
+          return (
+            o.title
+              .toLowerCase()
+              .includes(this.state.searchTerm.toLowerCase()) &&
+            _.includes(o.presentationType, sortActiveItem)
+          );
+        }
+      }.bind(this),
+    );
 
     return filteredQuery;
   };
@@ -82,6 +101,17 @@ class ConferenceTopLevel extends Component {
                       <SortConferenceCards
                         handleItemClick={this.handleSortItemClick}
                         activeItem={this.state.sortActiveItem}
+                      />
+                      <Input
+                        style={{ marginBottom: 10 }}
+                        type="text"
+                        fluid
+                        placeholder="Search Confereces"
+                        icon="search"
+                        value={this.state.searchTerm}
+                        onChange={e =>
+                          this.handleSearchTermChanged(e.target.value)
+                        }
                       />
                       {filteredQuery.map(casePresentation => {
                         return (

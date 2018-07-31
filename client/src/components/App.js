@@ -33,8 +33,12 @@ ReactGA.initialize('UA-122837373-1');
  * @return {null}
  */
 function Analytics(props) {
-  ReactGA.set({ page: props.location.pathname + props.location.search });
-  ReactGA.pageview(props.location.pathname + props.location.search);
+  const prod = document.location.hostname.search('vmimr.com') !== -1;
+
+  if (prod) {
+    ReactGA.set({ page: props.location.pathname + props.location.search });
+    ReactGA.pageview(props.location.pathname + props.location.search);
+  }
   return null;
 }
 
