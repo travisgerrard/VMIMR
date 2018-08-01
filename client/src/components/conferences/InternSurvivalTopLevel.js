@@ -134,6 +134,16 @@ class InternSurvivalTopLevel extends Component {
           </a>
         </Segment>
         <Segment style={sectionStyle}>
+          The Page:{' '}
+          <a
+            href="http://bit.ly/WSG_Insulin"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Blood sugar 500, orders?! (Guide to DKA/Insulin/Diabetes)
+          </a>
+        </Segment>{' '}
+        <Segment style={sectionStyle}>
           <a
             href="http://bit.ly/WSG_LF"
             target="_blank"

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 import { Loader } from 'semantic-ui-react';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
 import { stateToMarkdown } from 'draft-js-export-markdown';
@@ -247,7 +248,7 @@ class NoonConference extends Component {
                       variables: { id: conferenceId },
                     },
                   ]}
-                  onCompleted={() => this.props.history.goBack()}
+                  onCompleted={() => this.props.history.push('/Conference')}
                 >
                   {updateCasePresentation => (
                     <div>
@@ -362,4 +363,4 @@ class NoonConference extends Component {
   }
 }
 
-export default NoonConference;
+export default withRouter(NoonConference);

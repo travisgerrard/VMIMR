@@ -41,7 +41,6 @@ class NoonConferenceView extends Component {
             if (loading) return <Loader active inline="centered" />;
             if (error) return `Error! ${error.message}`;
 
-            console.log(data.selectedCasePresentation);
             const {
               title,
               _presentor,
