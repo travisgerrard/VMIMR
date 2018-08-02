@@ -12,22 +12,30 @@ const reorder = (list, startIndex, endIndex) => {
 
 const grid = 8;
 
+const ddxMargin = '7px';
+
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
   padding: grid * 0.75,
-  margin: `0 0 ${grid}px 0`,
+  margin: `0 0 ${ddxMargin} 0`,
   height: 30,
+  fontSize: 'large',
+  fontFamily: 'Lato',
+  borderRadius: '0.28571429rem',
+  border: '1px solid rgba(34, 36, 38, 0.15)',
+
   // change background colour if dragging
-  background: isDragging ? '#5E9B6A' : '#E8F4DF',
+  background: isDragging ? '#E8F4DF' : '#ffffff',
 
   // styles we need to apply on draggables
   ...draggableStyle,
 });
 
 const getListStyle = isDraggingOver => ({
-  background: isDraggingOver ? 'Ivory' : 'Ivory',
-  padding: grid,
+  border: '1px solid rgba(34, 36, 38, 0.15)',
+  borderRadius: '0.28571429rem',
+  padding: `${ddxMargin} ${ddxMargin} 0px ${ddxMargin}`,
 });
 
 class DragAndDropList extends Component {

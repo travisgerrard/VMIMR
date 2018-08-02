@@ -4,6 +4,12 @@ import { Editor, RichUtils } from 'draft-js';
 
 import DragAndDropList from './DragAndDropList';
 
+const fontStyle = {
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  fontSize: 'large',
+};
+
 class NoonConference extends Component {
   handleKeyCommand(command, editorState) {
     const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -31,6 +37,7 @@ class NoonConference extends Component {
             border: '1px solid rgba(34, 36, 38, 0.15)',
             borderRadius: '0.28571429rem',
             padding: '0.67857143em 1em',
+            fontSize: 'large',
           }}
         >
           <Editor
@@ -99,6 +106,7 @@ class NoonConference extends Component {
           border: '1px solid rgba(34, 36, 38, 0.15)',
           borderRadius: '0.28571429rem',
           padding: '0.67857143em 1em',
+          fontSize: 'large',
         }}
       >
         <Editor
@@ -130,7 +138,10 @@ class NoonConference extends Component {
             this.props.updateConferenceInputState(valueName, text.target.value)
           }
           onKeyPress={this.enterPressed(arrayName, valueName)}
-          style={{ width: width ? width : 128 }}
+          style={{
+            width: width ? width : 128,
+            fontSize: 'large',
+          }}
         />
         {this.props[arrayName].length > 0 ? (
           <DragAndDropList
@@ -172,14 +183,19 @@ class NoonConference extends Component {
           this.props.updateConferenceInputState(inputValue, text.target.value)
         }
         size="mini"
-        style={{ width: 55 }}
+        style={{ width: 75 }}
       />
     );
   };
 
   labs = () => {
     return (
-      <div>
+      <div
+        style={{
+          fontSize: 'large',
+          fontFamily: 'Lato',
+        }}
+      >
         <label>CBC</label>
         <br />
         {this.labInput('wbc')} /
@@ -213,7 +229,18 @@ class NoonConference extends Component {
               text.target.value,
             )
           }
-          style={{ marginTop: 10 }}
+          style={{
+            marginTop: 10,
+          }}
+        />
+        <Form.Field
+          control={TextArea}
+          label="Imaging"
+          placeholder="CXR..."
+          value={this.props.imaging}
+          onChange={text =>
+            this.props.updateConferenceInputState(`imaging`, text.target.value)
+          }
         />
       </div>
     );
@@ -231,21 +258,10 @@ class NoonConference extends Component {
               <Grid.Column>
                 {this.physicalExam()}
                 {this.labs()}
-                <Form.Field
-                  control={TextArea}
-                  label="Imaging"
-                  placeholder="CXR..."
-                  value={this.props.imaging}
-                  onChange={text =>
-                    this.props.updateConferenceInputState(
-                      `imaging`,
-                      text.target.value,
-                    )
-                  }
-                />
               </Grid.Column>
               <Grid.Column>
                 <Form.Field
+                  style={fontStyle}
                   control={TextArea}
                   autoHeight
                   label="Summary assessment"
