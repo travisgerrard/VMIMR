@@ -7,6 +7,7 @@ import LearningLanding from './LearningLanding';
 import ShowSurveyMessage from './SurveyMessage';
 import InternSurvival from '../conferences/InternSurvivalTopLevel';
 import ConferenceLanding from './ConferenceLanding';
+import InstragramInset from '../InstagramInset';
 
 const ADJECTIVES = [
   'awesome',
@@ -50,6 +51,7 @@ class LoggedInLanding extends Component {
 
         <LearningLanding currentUser={currentUser} />
         <ShowSurveyMessage />
+        <InstragramInset />
         <UpComing name={name} />
       </Container>
     );

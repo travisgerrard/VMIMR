@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 //import LastFiveConditions from './landing/LastFiveConditions';
 //import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
 import LandingPage from './landing/LoggedInLanding';
 
 //import Conditions from './conditions/ConditionTopLevelView';
-import { Container, Divider } from 'semantic-ui-react';
+import { Container, Divider, Icon } from 'semantic-ui-react';
 import Signin from './auth/Signin';
 import InternSurvival from './conferences/InternSurvivalTopLevel';
+
+import InstragramInset from './InstagramInset';
 
 const lineOne = {
   fontFamily: 'Lato',
@@ -33,30 +35,42 @@ const lineThree = {
   margin: 5,
 };
 
-const Landing = () => {
-  var landingPage;
-  if (localStorage.getItem('VMIMRToken') !== null) {
-    landingPage = <LandingPage />;
-  } else {
-    landingPage = (
-      <div>
-        <Container textAlign="center">
-          <div>
-            <p style={lineOne}>Virginia Mason</p>
-            <p style={lineTwo}>Internal Medicine Residency</p>
-            <p style={lineThree}>Organizing your residency life and learning</p>
-          </div>
-          <Divider />
+class Landing extends Component {
+  renderTheHomePage = () => {
+    var landingPage;
+    if (localStorage.getItem('VMIMRToken') !== null) {
+      landingPage = <LandingPage />;
+    } else {
+      landingPage = (
+        <div>
+          <Container textAlign="center">
+            <div>
+              <p style={lineOne}>Virginia Mason</p>
+              <p style={lineTwo}>Internal Medicine Residency</p>
+              <p style={lineThree}>
+                Organizing your residency life and learning
+              </p>
+            </div>
 
-          <Signin />
-          <Divider />
-          <InternSurvival />
-        </Container>
-      </div>
-    );
+            <Divider />
+
+            <Signin />
+
+            <Divider />
+            <InternSurvival />
+            <Divider />
+            <InstragramInset />
+          </Container>
+        </div>
+      );
+    }
+
+    return landingPage;
+  };
+
+  render() {
+    return <div>{this.renderTheHomePage()}</div>;
   }
-
-  return <div>{landingPage}</div>;
-};
+}
 
 export default Landing;
