@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Image } from 'semantic-ui-react';
 
 class InstagramInset extends Component {
   render() {
@@ -31,15 +32,9 @@ class InstagramInset extends Component {
             />
           </a>
 
-          <div
-            style={{
-              background:
-                'url("https://scontent-sea1-1.cdninstagram.com/vp/2f99aae89fb44481a27c07a2b973b2e6/5BF65B83/t51.2885-15/sh0.08/e35/s640x640/37589425_470735430004441_751618658324709376_n.jpg")',
-              lineHeight: '0',
-              padding: '50.0% 0',
-              textAlign: 'center',
-              width: '100%',
-            }}
+          <Image
+            src="https://scontent-sea1-1.cdninstagram.com/vp/2f99aae89fb44481a27c07a2b973b2e6/5BF65B83/t51.2885-15/sh0.08/e35/s640x640/37589425_470735430004441_751618658324709376_n.jpg"
+            fluid
           />
         </div>
       </div>
