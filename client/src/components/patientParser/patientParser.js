@@ -6,6 +6,7 @@ import {
   TextArea,
   Image,
   Segment,
+  Divider,
 } from 'semantic-ui-react';
 
 import './patientParser.css';
@@ -323,6 +324,15 @@ class patientParser extends Component {
             <br />
             <Image src={patientParserOrderSetup} size="medium" />
           </Image.Group>
+          <Divider />
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/aNylnBs8NGM"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+          />
         </Segment>
         <Segment
           style={{

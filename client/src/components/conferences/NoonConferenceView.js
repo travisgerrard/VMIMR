@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Card, Loader, Image, Icon, Divider } from 'semantic-ui-react';
+import {
+  Button,
+  Card,
+  Loader,
+  Image,
+  Icon,
+  Divider,
+  Container,
+} from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import { withRouter, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
@@ -45,9 +53,14 @@ class NoonConferenceView extends Component {
               title,
               _presentor,
               presentationDate,
+              presentationType,
               embedPresentationSting,
               questions,
             } = data.selectedCasePresentation;
+
+            const isCaseReport = presentationType === 'case' ? true : false;
+
+            console.log(data.selectedCasePresentation);
 
             let name;
             if (_presentor) {
@@ -59,40 +72,52 @@ class NoonConferenceView extends Component {
             const questionsLength = questions.length ? true : false;
 
             return (
-              <Card fluid style={fontStyle}>
-                <Card.Content>
-                  <Card.Header style={fontStyleTitle}>{title}</Card.Header>
-                  <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
-                  {admin && (
-                    <Image floated="right">
-                      <Link to={`/ConferenceAdmin/${caseId}`}>
-                        <Icon
-                          name="edit"
-                          style={{
-                            cursor: 'pointer',
-                            color: '#00824d',
-                          }}
+              <Container>
+                <Card fluid style={fontStyle}>
+                  <Card.Content>
+                    <Card.Header style={fontStyleTitle}>{title}</Card.Header>
+                    <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
+                    {admin && (
+                      <Image floated="right">
+                        <Link to={`/ConferenceAdmin/${caseId}`}>
+                          <Icon
+                            name="edit"
+                            style={{
+                              cursor: 'pointer',
+                              color: '#00824d',
+                            }}
+                          />
+                        </Link>
+                      </Image>
+                    )}
+                  </Card.Content>
+                  <Card.Content>
+                    <span style={{ whiteSpace: 'pre-wrap' }}>
+                      <ReactMarkdown
+                        source={embedPresentationSting}
+                        escapeHtml={false}
+                      />
+                    </span>
+                    {questionsLength && (
+                      <Questions
+                        questions={questions}
+                        caseId={caseId}
+                        abilityToEdit={false}
+                      />
+                    )}
+                    {isCaseReport && (
+                      <div>
+                        <Divider />
+                        <h2>The Case</h2>
+                        <NoonConference
+                          viewOnly={true}
+                          presentationData={data.selectedCasePresentation}
                         />
-                      </Link>
-                    </Image>
-                  )}
-                </Card.Content>
-                <Card.Content>
-                  <span style={{ whiteSpace: 'pre-wrap' }}>
-                    <ReactMarkdown
-                      source={embedPresentationSting}
-                      escapeHtml={false}
-                    />
-                  </span>
-                  {questionsLength && (
-                    <Questions
-                      questions={questions}
-                      caseId={caseId}
-                      abilityToEdit={false}
-                    />
-                  )}
-                </Card.Content>
-              </Card>
+                      </div>
+                    )}
+                  </Card.Content>
+                </Card>
+              </Container>
             );
           }}
         </Query>
@@ -195,7 +220,8 @@ class NoonConferenceView extends Component {
                   size="mini"
                   style={fontStyle}
                 >
-                  <Icon name="resize vertical" />View content
+                  <Icon name="resize vertical" />
+                  View content
                 </Button>
 
                 {admin && (
