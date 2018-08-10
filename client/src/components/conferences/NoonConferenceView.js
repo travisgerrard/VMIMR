@@ -72,7 +72,7 @@ class NoonConferenceView extends Component {
             const questionsLength = questions.length ? true : false;
 
             return (
-              <Container>
+              <Container style={{ marginTop: '15px' }}>
                 <Card fluid style={fontStyle}>
                   <Card.Content>
                     <Card.Header style={fontStyleTitle}>{title}</Card.Header>
