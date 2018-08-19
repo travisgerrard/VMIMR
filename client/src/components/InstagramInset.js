@@ -33,7 +33,7 @@ class InstagramInset extends Component {
           </a>
 
           <Image
-            src="https://scontent-sea1-1.cdninstagram.com/vp/2f99aae89fb44481a27c07a2b973b2e6/5BF65B83/t51.2885-15/sh0.08/e35/s640x640/37589425_470735430004441_751618658324709376_n.jpg"
+            src="https://scontent-sea1-1.cdninstagram.com/vp/deac22e07c91319acaa1fb70bfea987a/5BFDED8D/t51.2885-15/sh0.08/e35/s640x640/38194780_278966566256834_96743446852665344_n.jpg"
             fluid
           />
         </div>
