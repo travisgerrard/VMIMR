@@ -12,77 +12,69 @@ const titleStyle = {
   padding: 10,
 };
 
-const sectionStyle = {
-  fontFamily: 'Lato',
-  fontStyle: 'normal',
-  lineHeight: 'normal',
-  fontSize: '18px',
-  padding: 10,
-};
-
 var survivalGuideLinks = [
   {
     id: '07',
     linkURL: 'http://bit.ly/WSG_Lytes',
-    linkText: `Patient's K & Mag are low! (Guide to replacing electrolytes)`,
+    linkText: `Replacing electrolytes`,
   },
   {
     id: '01',
     linkURL: 'http://bit.ly/WSG_ABX',
-    linkText: `Patient w/ sepsis, ABX plz! (Guide to Beta-Lactams & Fluoroquinolones)`,
+    linkText: `ABx - Beta-Lactams & Fluoroquinolones`,
   },
   {
     id: '03',
     linkURL: 'http://bit.ly/WSG_CP',
-    linkText: `Patient has chest pain! (Guide to chest pain)`,
+    linkText: `Chest pain`,
   },
   {
     id: '12',
     linkURL: 'http://bit.ly/WSG_Insulin',
-    linkText: `Blood sugar 500, orders?! (Guide to DKA/Insulin/Diabetes)`,
+    linkText: `DKA/Insulin/Diabetes in the hospital`,
   },
   {
     id: '05',
     linkURL: 'http://bit.ly/WSG_AMA',
-    linkText: `Patient wants to leave AMA! (Guide to patient leaving AMA)`,
+    linkText: `Guide to patient leaving AMA`,
   },
   {
     id: '02',
     linkURL: 'http://bit.ly/WSG_BP',
-    linkText: `Patient has BP of 190/100 (Guide to hypertension)`,
+    linkText: `Hypertension in the hospital`,
   },
 
   {
     id: '04',
     linkURL: 'http://bit.ly/WSG_Pain',
-    linkText: `Back pain, need vit D! (Guide to general pain)`,
+    linkText: `Pain (non-cardiac) in the hospitalized patient`,
   },
 
   {
     id: '06',
     linkURL: 'http://bit.ly/WSG_AMS',
-    linkText: `Patient's delirious, need restraints (Guide to AMS)`,
+    linkText: `Altered Mental Status`,
   },
 
   {
     id: '08',
     linkURL: 'http://bit.ly/WSG_Seizure',
-    linkText: `The patient is seizing! (Guide to seizures)`,
+    linkText: `Seizures in the hospital`,
   },
   {
     id: '09',
     linkURL: 'http://bit.ly/WSG_NV',
-    linkText: `The patient is vomiting! (Guide to nausea and vomiting)`,
+    linkText: `Nausea and vomiting`,
   },
   {
     id: '10',
     linkURL: 'http://bit.ly/WSG_CodeStatus',
-    linkText: `What's patient's code status (Guide to the code status talk)`,
+    linkText: `The code status talk`,
   },
   {
     id: '11',
     linkURL: 'http://bit.ly/WSG_RBC',
-    linkText: `Patient needs blood! (Guide to RBC transfusion)`,
+    linkText: `RBC transfusions`,
   },
 
   {

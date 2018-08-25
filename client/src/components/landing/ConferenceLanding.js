@@ -22,6 +22,7 @@ const sectionStyle = {
   lineHeight: 'normal',
   fontSize: '18px',
   padding: 10,
+  background: '#FDFDFD',
 };
 
 class ConferenceLanding extends Component {

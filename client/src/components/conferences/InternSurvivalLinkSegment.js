@@ -5,8 +5,12 @@ const sectionStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
   lineHeight: 'normal',
-  fontSize: '18px',
-  padding: 10,
+  fontSize: '22px',
+  paddingTop: 12,
+  paddingBottom: 3,
+  paddingLeft: 6,
+  color: '#25015B',
+  background: '#FDFDFD',
 };
 
 class InternSurvivalLinkSegment extends Component {
@@ -15,7 +19,6 @@ class InternSurvivalLinkSegment extends Component {
 
     return (
       <Segment style={sectionStyle}>
-        The Page:{' '}
         <a href={this.props.linkURL} target="_blank" rel="noopener noreferrer">
           {this.props.linkText}
         </a>

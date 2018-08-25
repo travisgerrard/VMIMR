@@ -3,6 +3,7 @@ import { Card, Image, Icon } from 'semantic-ui-react';
 import ReactMarkdown from 'react-markdown';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
+
 import './markdown.css';
 
 const fontStyle = {
@@ -103,7 +104,7 @@ class DisplayConditionCards extends Component {
       usersTagged,
     } = learning;
     return (
-      <Card.Content key={id}>
+      <Card.Content key={id} style={{ backgroundColor: '#FDFDFD' }}>
         <Card.Meta>Created by: {_creator.name}</Card.Meta>
         <Card.Meta>
           Seen With: {seenWith} on {dateField}
@@ -166,12 +167,12 @@ class DisplayConditionCards extends Component {
         }
       >
         <Card.Group
-          itemsPerRow={3}
+          itemsPerRow={this.props.numItemsPerRow ? 1 : 3}
           stackable
           doubling
           style={{
-            marginLeft: 0,
-            marginRight: 0,
+            marginLeft: 2,
+            marginRight: 2,
             marginBottom: 0,
             marginTop: 5,
           }}
@@ -184,3 +185,8 @@ class DisplayConditionCards extends Component {
 }
 
 export default DisplayConditionCards;
+
+/*
+itemsPerRow={this.props.numItemsPerRow ? 1 : 3}
+Terinary is so that last 3 load as column, but main page display's 3
+*/

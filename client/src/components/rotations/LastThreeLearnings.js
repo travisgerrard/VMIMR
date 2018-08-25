@@ -40,8 +40,9 @@ class LastThreeLearnings extends Component {
 
           if (data.listOfLearningWithTag.length) {
             return (
-              <div>
+              <div style={{ backgroundColor: '#FDFDFD' }}>
                 <DisplayConditionCards
+                  numItemsPerRow={true}
                   learnings={data.listOfLearningWithTag}
                   currentUser={this.props.currentUser}
                   editLearning={learningId => this.editingLearning(learningId)}

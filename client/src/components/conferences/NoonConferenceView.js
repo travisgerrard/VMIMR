@@ -21,6 +21,7 @@ import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation'
 const fontStyle = {
   fontFamily: 'Lato',
   fontStyle: 'normal',
+  background: '#FDFDFD',
 };
 
 const fontStyleTitle = {
