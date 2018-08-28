@@ -125,7 +125,6 @@ class NoonConference extends Component {
 
   render() {
     if (this.props.viewOnly) {
-      console.log(this.props.presentationData);
       // set initial state with value from mutation
       if (this.state.initialUpdate) {
         _.forOwn(

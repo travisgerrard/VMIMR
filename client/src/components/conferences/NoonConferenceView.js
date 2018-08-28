@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Button,
   Card,
   Loader,
   Image,
@@ -60,8 +59,6 @@ class NoonConferenceView extends Component {
             } = data.selectedCasePresentation;
 
             const isCaseReport = presentationType === 'case' ? true : false;
-
-            console.log(data.selectedCasePresentation);
 
             let name;
             if (_presentor) {
@@ -215,28 +212,19 @@ class NoonConferenceView extends Component {
           <Card fluid style={fontStyle}>
             <Card.Content>
               <Image floated="right">
-                <Button
-                  primary
-                  onClick={() => this.setState({ expanded: true })}
-                  size="mini"
-                  style={fontStyle}
-                >
-                  <Icon name="resize vertical" />
-                  View content
-                </Button>
+                <Link to={`/Conference/${id}`}>
+                  <Icon
+                    name="window maximize"
+                    style={{
+                      marginLeft: 6,
+                      cursor: 'pointer',
+                      color: '#00824d',
+                    }}
+                  />
+                </Link>
 
                 {admin && (
                   <span>
-                    <Link to={`/Conference/${id}`}>
-                      <Icon
-                        name="window maximize"
-                        style={{
-                          marginLeft: 6,
-                          cursor: 'pointer',
-                          color: '#00824d',
-                        }}
-                      />
-                    </Link>
                     <Link to={`/ConferenceAdmin/${id}`}>
                       <Icon
                         name="edit"
@@ -251,14 +239,24 @@ class NoonConferenceView extends Component {
                 )}
               </Image>
 
-              <Card.Header style={fontStyleTitle}>{title}</Card.Header>
+              <Card.Header style={fontStyleTitle}>
+                <Link to={`/ConferenceAdmin/${id}`} style={{ color: 'black' }}>
+                  {title}
+                </Link>
+              </Card.Header>
+              <hr />
               <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
               <Card.Meta
               >{`Type of presentation: ${presentationType}`}</Card.Meta>
             </Card.Content>
             {isCaseReport && (
-              <Card.Content>
-                <p>{summAssessment}</p>
+              <Card.Content
+                style={{
+                  fontFamily: 'Lato',
+                  fontStyle: 'thin',
+                }}
+              >
+                {summAssessment}
               </Card.Content>
             )}
           </Card>
