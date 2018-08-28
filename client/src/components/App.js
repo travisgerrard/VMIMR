@@ -31,7 +31,7 @@ class App extends Component {
     const prod = document.location.hostname.search('vmimr.com') !== -1;
 
     return (
-      <BrowserRouter forceRefresh={true}>
+      <BrowserRouter>
         <div style={{ backgroundColor: '#F1F7FF' }}>
           <Header />
 
