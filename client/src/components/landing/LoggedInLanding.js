@@ -57,7 +57,6 @@ class LoggedInLanding extends Component {
             <LearningLanding currentUser={currentUser} />
           </Grid.Column>
         </Grid>
-        <ShowSurveyMessage />
         <InstragramInset />
         <UpComing name={name} />
       </div>
