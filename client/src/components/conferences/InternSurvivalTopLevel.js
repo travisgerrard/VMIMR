@@ -87,8 +87,6 @@ var survivalGuideLinks = [
 class InternSurvivalTopLevel extends Component {
   returnLinkSegments = () => {
     return survivalGuideLinks.map(element => {
-      console.log(element);
-
       return (
         <LinkSegment
           key={element.id}

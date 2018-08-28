@@ -4,16 +4,12 @@ import jwt_decode from 'jwt-decode';
 
 class AddQuestion extends Component {
   state = {
-    addingQuestion: this.props.addingQuestion
-      ? this.props.addingQuestion
-      : false,
-    questionStem: this.props.questionStem ? this.props.questionStem : '',
-    questionId: this.props.questionId ? this.props.questionId : '12345',
-    questionAnswerText: this.props.questionAnswerText
-      ? this.props.questionAnswerText
-      : '',
-    options: this.props.options ? this.props.options : [],
-    answers: this.props.answers ? this.props.answers : [],
+    addingQuestion: this.props.addingQuestion || false,
+    questionStem: this.props.questionStem || '',
+    questionId: this.props.questionId || '12345',
+    questionAnswerText: this.props.questionAnswerText || '',
+    options: this.props.options || [],
+    answers: this.props.answers || [],
   };
 
   addQuestion = () => {

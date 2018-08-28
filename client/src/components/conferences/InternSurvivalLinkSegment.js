@@ -15,8 +15,6 @@ const sectionStyle = {
 
 class InternSurvivalLinkSegment extends Component {
   render() {
-    console.log('this ran');
-
     return (
       <Segment style={sectionStyle}>
         <a href={this.props.linkURL} target="_blank" rel="noopener noreferrer">

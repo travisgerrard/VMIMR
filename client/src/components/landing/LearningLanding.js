@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Button, Modal } from 'semantic-ui-react';
+import { Segment, Modal } from 'semantic-ui-react';
 import AddConditionFromRotation from '../conditionGraphQl/AddConditionFromRotation';
 import LastThreeLearnings from '../rotations/LastThreeLearnings';
 import { Link } from 'react-router-dom';
@@ -11,11 +11,6 @@ const titleStyle = {
   fontSize: '24px',
   backgroundColor: '#E8F4F7',
   padding: 10,
-};
-
-const fontStyle = {
-  fontFamily: 'Lato',
-  fontStyle: 'normal',
 };
 
 class LearningLanding extends Component {
@@ -40,8 +35,10 @@ class LearningLanding extends Component {
     return (
       <Segment.Group>
         <Segment style={titleStyle}>
-          Most recent learning
-          <br />
+          <Link to="/conditions" style={{ color: 'black' }}>
+            Latest learning
+          </Link>
+
           {this.state.showLearningModal ? (
             <Modal open={this.state.showLearningModal} size="large">
               <Modal.Header>Add learning</Modal.Header>
@@ -54,27 +51,13 @@ class LearningLanding extends Component {
               />
             </Modal>
           ) : (
-            <Button
+            <span
               onClick={() => this.addLearning()}
-              size="tiny"
-              style={fontStyle}
-              primary
+              style={{ position: 'absolute', right: '2rem', cursor: 'pointer' }}
             >
-              Add Some Learning
-            </Button>
+              +
+            </span>
           )}
-          <Button
-            size="tiny"
-            style={{
-              backgroundColor: '#5E9B6A',
-              fontFamily: 'Lato',
-              fontStyle: 'normal',
-            }}
-          >
-            <Link to="/conditions" style={{ color: 'white' }}>
-              Goto Learning Section
-            </Link>
-          </Button>
         </Segment>
         <Segment>
           <LastThreeLearnings

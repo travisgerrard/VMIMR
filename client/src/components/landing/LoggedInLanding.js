@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Divider, Grid, Header } from 'semantic-ui-react';
+import { Divider, Grid, Header } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
 
 import UpComing from './UpComing';

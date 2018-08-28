@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Button, Loader } from 'semantic-ui-react';
+import { Segment, Loader } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
@@ -30,21 +30,9 @@ class ConferenceLanding extends Component {
     return (
       <Segment.Group>
         <Segment style={titleStyle}>
-          Latests Conferences
-          <br />
-          <Button
-            size="tiny"
-            style={{
-              backgroundColor: '#5E9B6A',
-              fontFamily: 'Lato',
-              fontStyle: 'normal',
-            }}
-            primary
-          >
-            <Link to="/Conference" style={{ color: 'white' }}>
-              Goto Conference Section
-            </Link>
-          </Button>
+          <Link to="/Conference" style={{ color: 'black' }}>
+            Latests Conferences
+          </Link>
         </Segment>
         <Segment style={sectionStyle}>
           <Query query={LIST_ALL_CASE_PRESENTATIONS}>

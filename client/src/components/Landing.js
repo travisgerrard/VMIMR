@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import LandingPage from './landing/LoggedInLanding';
 
 //import Conditions from './conditions/ConditionTopLevelView';
-import { Container, Divider, Icon } from 'semantic-ui-react';
+import { Container, Divider } from 'semantic-ui-react';
 import Signin from './auth/Signin';
 import InternSurvival from './conferences/InternSurvivalTopLevel';
 

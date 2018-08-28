@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import ReactGA from 'react-ga';
-
 import Header from './Header';
 import Footer from './Footer';
 import Landing from './Landing';
@@ -26,29 +24,16 @@ import MasterSchedule from './landing/MasterScheduleView';
 import SurveyTopLevel from './survey/SurveyTopLevel';
 import ListFormatter from './patientParser/patientParser';
 import InternSurvivalTopLevel from './conferences/InternSurvivalTopLevel';
-
-ReactGA.initialize('UA-122837373-1');
-
-/**
- * @return {null}
- */
-function Analytics(props) {
-  const prod = document.location.hostname.search('vmimr.com') !== -1;
-
-  if (prod) {
-    ReactGA.set({ page: props.location.pathname + props.location.search });
-    ReactGA.pageview(props.location.pathname + props.location.search);
-  }
-  return null;
-}
+import GoogleAnalytics from './GoogleAnalytics';
 
 class App extends Component {
   render() {
+    const prod = document.location.hostname.search('vmimr.com') !== -1;
+
     return (
       <BrowserRouter forceRefresh={true}>
         <div style={{ backgroundColor: '#F1F7FF' }}>
           <Header />
-          <Route path="/" component={Analytics} />
 
           <Route exact path="/" component={Landing} />
           <Route
@@ -109,6 +94,7 @@ class App extends Component {
           <Route path={`/listFormatter`} component={ListFormatter} />
           <Route path={`/survivalGuide`} component={InternSurvivalTopLevel} />
           <Footer />
+          {prod && <GoogleAnalytics />}
         </div>
       </BrowserRouter>
     );

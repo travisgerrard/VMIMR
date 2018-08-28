@@ -16,8 +16,6 @@ class InstagramInset extends Component {
           minWidth: '326px',
           padding: '0',
           width: '99.375%',
-          width: '-webkit-calc(100% - 2px)',
-          width: 'calc(100% - 2px)',
         }}
       >
         <div style={{ padding: '8px' }}>
@@ -27,6 +25,7 @@ class InstagramInset extends Component {
             rel="noopener noreferrer"
           >
             <img
+              alt="instagram"
               src="https://protectyoungeyes.com/wp-content/uploads/2015/04/2475.new-instagram-text-logo.png"
               style={{ width: '40%' }}
             />
