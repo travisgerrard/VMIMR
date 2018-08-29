@@ -4,7 +4,6 @@ import jwt_decode from 'jwt-decode';
 
 import UpComing from './UpComing';
 import LearningLanding from './LearningLanding';
-import ShowSurveyMessage from './SurveyMessage';
 import InternSurvival from '../conferences/InternSurvivalTopLevel';
 import ConferenceLanding from './ConferenceLanding';
 import InstragramInset from '../InstagramInset';
@@ -51,13 +50,16 @@ class LoggedInLanding extends Component {
           </Grid.Column>
           <Grid.Column>
             <ConferenceLanding />
-            <Divider />
           </Grid.Column>
           <Grid.Column>
             <LearningLanding currentUser={currentUser} />
           </Grid.Column>
         </Grid>
+        <Divider />
+
         <InstragramInset />
+        <Divider />
+
         <UpComing name={name} />
       </div>
     );

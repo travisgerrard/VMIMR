@@ -11,6 +11,10 @@ import { AUTH_USER } from './actions/types';
 import App from './components/App';
 import reducers from './reducers';
 
+const defaultState = {
+  isEditMode: false,
+};
+
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 

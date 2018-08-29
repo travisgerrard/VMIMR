@@ -127,8 +127,6 @@ class NoonConferenceView extends Component {
         presentationDate,
         presentationType,
         id,
-        embedPresentationSting,
-        questions,
         summAssessment,
       } = this.props.presentationData;
 
@@ -138,130 +136,60 @@ class NoonConferenceView extends Component {
       } else {
         name = '';
       }
-      const questionsLength = questions.length ? true : false;
       const isCaseReport = presentationType === 'case' ? true : false;
 
-      if (this.state.expanded) {
-        return (
-          <Card fluid style={fontStyle}>
-            <Card.Content>
-              <Image floated="right">
+      return (
+        <Card fluid style={fontStyle}>
+          <Card.Content>
+            <Image floated="right">
+              <Link to={`/Conference/${id}`}>
                 <Icon
-                  name="compress"
+                  name="window maximize"
                   style={{
+                    marginLeft: 6,
                     cursor: 'pointer',
                     color: '#00824d',
                   }}
-                  onClick={() => this.setState({ expanded: false })}
                 />
+              </Link>
 
-                {admin && (
-                  <span>
-                    <Link to={`/Conference/${id}`}>
-                      <Icon
-                        name="window maximize"
-                        style={{
-                          marginLeft: 6,
-                          cursor: 'pointer',
-                          color: '#00824d',
-                        }}
-                      />
-                    </Link>
-                    <Link to={`/ConferenceAdmin/${id}`}>
-                      <Icon
-                        name="edit"
-                        style={{
-                          marginLeft: 6,
-                          cursor: 'pointer',
-                          color: '#00824d',
-                        }}
-                      />
-                    </Link>
-                  </span>
-                )}
-              </Image>
-              <Card.Header style={fontStyleTitle}>{title}</Card.Header>
-              <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
-            </Card.Content>
-            <Card.Content>
-              <span style={{ whiteSpace: 'pre-wrap' }}>
-                <ReactMarkdown
-                  source={embedPresentationSting}
-                  escapeHtml={false}
-                />
-              </span>
-              {questionsLength && (
-                <Questions
-                  questions={questions}
-                  caseId={id}
-                  abilityToEdit={false}
-                />
+              {admin && (
+                <span>
+                  <Link to={`/ConferenceAdmin/${id}`}>
+                    <Icon
+                      name="edit"
+                      style={{
+                        marginLeft: 6,
+                        cursor: 'pointer',
+                        color: '#00824d',
+                      }}
+                    />
+                  </Link>
+                </span>
               )}
-              {isCaseReport && (
-                <div>
-                  <Divider />
-                  <h2>The Case</h2>
-                  <NoonConference viewOnly={true} {...this.props} />
-                </div>
-              )}
-            </Card.Content>
-          </Card>
-        );
-      } else {
-        return (
-          <Card fluid style={fontStyle}>
-            <Card.Content>
-              <Image floated="right">
-                <Link to={`/Conference/${id}`}>
-                  <Icon
-                    name="window maximize"
-                    style={{
-                      marginLeft: 6,
-                      cursor: 'pointer',
-                      color: '#00824d',
-                    }}
-                  />
-                </Link>
+            </Image>
 
-                {admin && (
-                  <span>
-                    <Link to={`/ConferenceAdmin/${id}`}>
-                      <Icon
-                        name="edit"
-                        style={{
-                          marginLeft: 6,
-                          cursor: 'pointer',
-                          color: '#00824d',
-                        }}
-                      />
-                    </Link>
-                  </span>
-                )}
-              </Image>
-
-              <Card.Header style={fontStyleTitle}>
-                <Link to={`/ConferenceAdmin/${id}`} style={{ color: 'black' }}>
-                  {title}
-                </Link>
-              </Card.Header>
-              <hr />
-              <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
-              <Card.Meta
-              >{`Type of presentation: ${presentationType}`}</Card.Meta>
+            <Card.Header style={fontStyleTitle}>
+              <Link to={`/Conference/${id}`} style={{ color: 'black' }}>
+                {title}
+              </Link>
+            </Card.Header>
+            <hr />
+            <Card.Meta>{`By ${name} on ${presentationDate}`}</Card.Meta>
+            <Card.Meta>{`Type of presentation: ${presentationType}`}</Card.Meta>
+          </Card.Content>
+          {isCaseReport && (
+            <Card.Content
+              style={{
+                fontFamily: 'Lato',
+                fontStyle: 'thin',
+              }}
+            >
+              {summAssessment}
             </Card.Content>
-            {isCaseReport && (
-              <Card.Content
-                style={{
-                  fontFamily: 'Lato',
-                  fontStyle: 'thin',
-                }}
-              >
-                {summAssessment}
-              </Card.Content>
-            )}
-          </Card>
-        );
-      }
+          )}
+        </Card>
+      );
     }
   }
 }
