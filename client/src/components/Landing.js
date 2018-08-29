@@ -9,7 +9,7 @@ import Signin from './auth/Signin';
 //import SigninApollo from './auth/SignInApollo';
 import InternSurvival from './conferences/InternSurvivalTopLevel';
 
-import InstragramInset from './InstagramInset';
+import PhotoInset from './PhotoInset';
 
 const lineOne = {
   fontFamily: 'Lato',
@@ -37,11 +37,14 @@ const lineThree = {
 };
 
 class Landing extends Component {
+
   renderTheHomePage = () => {
     var landingPage;
     if (localStorage.getItem('VMIMRToken') !== null) {
       landingPage = <LandingPage />;
     } else {
+      const scheduleImage = "http://res.cloudinary.com/dehixvgdv/image/upload/v1535561149/Schedules/ConferenceSchedule.png";
+
       landingPage = (
         <div>
           <Container textAlign="center">
@@ -52,6 +55,13 @@ class Landing extends Component {
                 Organizing your residency life and learning
               </p>
             </div>
+            <Divider />
+
+            <PhotoInset
+              link={scheduleImage}
+              headerPhoto="http://files.constantcontact.com/6f3956be401/f4017f76-fc6d-4977-b6e7-dc02ac5ebff8.jpg?a=1128943245496"
+              mainPhoto={scheduleImage}
+            />
 
             <Divider />
 
@@ -60,7 +70,7 @@ class Landing extends Component {
             <Divider />
             <InternSurvival />
             <Divider />
-            <InstragramInset />
+            <PhotoInset link="https://www.instagram.com/vmimr" headerPhoto="https://protectyoungeyes.com/wp-content/uploads/2015/04/2475.new-instagram-text-logo.png" mainPhoto="https://scontent-sea1-1.cdninstagram.com/vp/2da7cf4e0dbfbc92a3dfdffeb0c251ab/5C037949/t51.2885-15/sh0.08/e35/s640x640/39248344_1036318689861743_8502475382677569536_n.jpg" />
           </Container>
         </div>
       );
