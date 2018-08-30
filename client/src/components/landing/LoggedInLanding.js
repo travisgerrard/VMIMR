@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
-import { Divider, Grid, Header } from 'semantic-ui-react';
-import jwt_decode from 'jwt-decode';
+import React, { Component } from "react";
+import { Divider, Grid, Header } from "semantic-ui-react";
+import jwt_decode from "jwt-decode";
 
-import UpComing from './UpComing';
-import LearningLanding from './LearningLanding';
-import InternSurvival from '../conferences/InternSurvivalTopLevel';
-import ConferenceLanding from './ConferenceLanding';
-import PhotoInset from '../PhotoInset';
+import UpComing from "./UpComing";
+import LearningLanding from "./LearningLanding";
+import InternSurvival from "../conferences/InternSurvivalTopLevel";
+import ConferenceLanding from "./ConferenceLanding";
+import PhotoInset from "../PhotoInset";
 
 const ADJECTIVES = [
-  'awesome',
-  'excellent',
-  'outstanding',
-  'impressive',
-  'remarkable',
-  'wonderful',
-  'formidable',
-  'exceptional',
-  'extraordinary',
-  'amazing',
-  'marvelous',
-  'astonishing',
-  'astounding',
+  "awesome",
+  "excellent",
+  "outstanding",
+  "impressive",
+  "remarkable",
+  "wonderful",
+  "formidable",
+  "exceptional",
+  "extraordinary",
+  "amazing",
+  "marvelous",
+  "astonishing",
+  "astounding"
 ];
 
 const fontStyle = {
-  fontFamily: 'Lato',
-  fontStyle: 'normal',
+  fontFamily: "Lato",
+  fontStyle: "normal"
 };
 class LoggedInLanding extends Component {
   adjectiveMaker = () => {
@@ -35,9 +35,10 @@ class LoggedInLanding extends Component {
 
   // Lets create a 3 content grid...
   render() {
-    var currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
-    var name = currentUser.name.split(' ')[1];
-    const scheduleImage = "http://res.cloudinary.com/dehixvgdv/image/upload/v1535561149/Schedules/ConferenceSchedule.png";
+    var currentUser = jwt_decode(localStorage.getItem("VMIMRToken"));
+    var name = currentUser.name.split(" ")[1];
+    const scheduleImage =
+      "https://s3-us-west-2.amazonaws.com/vmimr/ConferenceSchedule.png";
 
     return (
       <div style={{ marginTop: 20, marginLeft: 10, marginRight: 10 }}>
@@ -46,7 +47,7 @@ class LoggedInLanding extends Component {
             Hey there Dr. {name}, you're <b>{this.adjectiveMaker()}</b>!
           </Header>
         </div>
-        <Grid stackable columns={3} >
+        <Grid stackable columns={3}>
           <Grid.Column>
             <InternSurvival />
           </Grid.Column>
@@ -68,8 +69,11 @@ class LoggedInLanding extends Component {
             />
           </Grid.Column>
           <Grid.Column>
-            <PhotoInset link="https://www.instagram.com/vmimr" headerPhoto="https://protectyoungeyes.com/wp-content/uploads/2015/04/2475.new-instagram-text-logo.png" mainPhoto="https://scontent-sea1-1.cdninstagram.com/vp/2da7cf4e0dbfbc92a3dfdffeb0c251ab/5C037949/t51.2885-15/sh0.08/e35/s640x640/39248344_1036318689861743_8502475382677569536_n.jpg" />
-
+            <PhotoInset
+              link="https://www.instagram.com/vmimr"
+              headerPhoto="https://protectyoungeyes.com/wp-content/uploads/2015/04/2475.new-instagram-text-logo.png"
+              mainPhoto="https://scontent-sea1-1.cdninstagram.com/vp/2da7cf4e0dbfbc92a3dfdffeb0c251ab/5C037949/t51.2885-15/sh0.08/e35/s640x640/39248344_1036318689861743_8502475382677569536_n.jpg"
+            />
           </Grid.Column>
         </Grid>
 

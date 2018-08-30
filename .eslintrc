@@ -2,6 +2,7 @@
   "extends": [
     "airbnb",
     "prettier",
+    "react-app",
     "prettier/react"
   ],
   "parser": "babel-eslint",
@@ -10,7 +11,7 @@
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "impliedStrict": true,
-      "classes": true,
+      "classes": true
     }
   },
   "env": {
