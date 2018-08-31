@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { Query } from 'react-apollo';
-import { Loader, Modal } from 'semantic-ui-react';
+import React, { Component } from "react";
+import { Query } from "react-apollo";
+import { Loader, Modal } from "semantic-ui-react";
 
-import GET_ROTATION_LEARNING from '../../queries/ListOfLearningWithTag';
-import LEARNING_TO_EDIT from '../../queries/SelectedLearning';
+import GET_ROTATION_LEARNING from "../../queries/ListOfLearningWithTag";
+import LEARNING_TO_EDIT from "../../queries/SelectedLearning";
 
-import DisplayConditionCards from '../conditionGraphQl/DisplayConditionCards';
-import EditCondition from '../conditionGraphQl/EditCondition';
+import DisplayConditionCards from "../conditionGraphQl/DisplayConditionCards";
+import EditCondition from "../conditionGraphQl/EditCondition";
 
 class LastThreeLearnings extends Component {
   state = {
-    learningIdToEdit: '',
-    editingLearning: false,
+    learningIdToEdit: "",
+    editingLearning: false
   };
 
   // Setter for initiationg editing of learning
@@ -22,9 +22,7 @@ class LastThreeLearnings extends Component {
 
   // Setter for finalizing the editing of learning
   doneEditingLearning = () => {
-    console.log('this ran');
-
-    this.setState({ learningIdToEdit: '' });
+    this.setState({ learningIdToEdit: "" });
     this.setState({ editingLearning: false });
   };
 
@@ -40,7 +38,7 @@ class LastThreeLearnings extends Component {
 
           if (data.listOfLearningWithTag.length) {
             return (
-              <div style={{ backgroundColor: '#FDFDFD' }}>
+              <div style={{ backgroundColor: "#FDFDFD" }}>
                 <DisplayConditionCards
                   numItemsPerRow={true}
                   learnings={data.listOfLearningWithTag}

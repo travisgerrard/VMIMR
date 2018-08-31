@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const graphql = require('graphql');
+const mongoose = require("mongoose");
+const graphql = require("graphql");
 const {
   GraphQLList,
   GraphQLID,
@@ -9,625 +9,640 @@ const {
   GraphQLFloat,
   GraphQLError,
   GraphQLBoolean,
-  GraphQLNonNull,
+  GraphQLNonNull
 } = graphql;
 
-require('../models/user');
-require('../models/provider');
-require('../models/rotation');
-require('../models/condition');
-require('../models/conditionLearning');
-require('../models/eastgate');
-require('../models/casePresentation');
-require('../models/mutlipleChoiceQuestion');
-require('../models/survey');
+require("../models/user");
+require("../models/provider");
+require("../models/rotation");
+require("../models/condition");
+require("../models/conditionLearning");
+require("../models/eastgate");
+require("../models/casePresentation");
+require("../models/mutlipleChoiceQuestion");
+require("../models/survey");
 
-const User = mongoose.model('users');
-const Rotation = mongoose.model('Rotation');
-const Provider = mongoose.model('Provider');
-const Condition = mongoose.model('conditions');
-const ConditionLearning = mongoose.model('conditionLearnings');
-const Eastgate = mongoose.model('Eastgate');
-const CasePresentation = mongoose.model('CasePresentation');
-const MultipleChoiceQuestion = mongoose.model('MulitpleChoiceQuestion');
-const Survey = mongoose.model('Survey');
+const User = mongoose.model("users");
+const Rotation = mongoose.model("Rotation");
+const Provider = mongoose.model("Provider");
+const Condition = mongoose.model("conditions");
+const ConditionLearning = mongoose.model("conditionLearnings");
+const Eastgate = mongoose.model("Eastgate");
+const CasePresentation = mongoose.model("CasePresentation");
+const MultipleChoiceQuestion = mongoose.model("MulitpleChoiceQuestion");
+const Survey = mongoose.model("Survey");
 
-const passport = require('passport');
-const requireAuth = passport.authenticate('jwt', { session: false });
+const passport = require("passport");
+const requireAuth = passport.authenticate("jwt", { session: false });
 
 var UserType = new GraphQLObjectType({
-  name: 'UserType',
+  name: "UserType",
   fields: () => ({
     id: {
       type: GraphQLID,
-      description: 'ID for given user',
+      description: "ID for given user"
     },
     name: {
       type: GraphQLString,
-      description: 'The user name',
+      description: "The user name"
     },
     username: {
       type: GraphQLString,
-      description: 'Cerner login',
+      description: "Cerner login"
     },
     email: {
       type: GraphQLString,
-      description: 'VM Email address',
+      description: "VM Email address"
     },
     phoneNumber: {
       type: GraphQLString,
-      description: 'User Phone number',
+      description: "User Phone number"
     },
     pushToken: {
       type: GraphQLString,
-      description: 'token to identify user for push notifications....',
+      description: "token to identify user for push notifications...."
     },
     creationTime: {
       type: GraphQLString,
-      description: 'When user was created...',
+      description: "When user was created..."
     },
     lastSignInTime: {
       type: GraphQLString,
-      description: 'Date of last signin',
+      description: "Date of last signin"
     },
     admin: {
       type: GraphQLBoolean,
-      description: 'Is user an admin?',
+      description: "Is user an admin?"
     },
     eastgate: {
       type: GraphQLBoolean,
-      description: 'does user goto eastgate?',
+      description: "does user goto eastgate?"
     },
     visible: {
       type: GraphQLBoolean,
-      description: 'Should this user be taggable in learning?',
-    },
-  }),
+      description: "Should this user be taggable in learning?"
+    }
+  })
 });
 
 var ProviderType = new GraphQLObjectType({
-  name: 'providerType',
+  name: "providerType",
   fields: () => ({
     id: {
       type: GraphQLID,
-      description: 'ID for provider',
+      description: "ID for provider"
     },
     name: {
       type: GraphQLString,
-      description: 'The provider name',
+      description: "The provider name"
     },
     generalInfo: {
       type: GraphQLString,
-      description: 'General info about provider',
+      description: "General info about provider"
     },
     associatedRotation: {
       type: GraphQLID,
-      description: 'ID of rotation that provider was created from',
+      description: "ID of rotation that provider was created from"
     },
     _creator: {
       type: GraphQLID,
-      description: 'The id for the user who created the provider',
-    },
-  }),
+      description: "The id for the user who created the provider"
+    }
+  })
 });
 
 var RotationType = new GraphQLObjectType({
-  name: 'rotationType',
+  name: "rotationType",
   fields: () => ({
     id: {
       type: GraphQLID,
-      description: 'ID for rotation',
+      description: "ID for rotation"
     },
     title: {
       type: GraphQLString,
-      description: 'Rotation title',
+      description: "Rotation title"
     },
     generalInfo: {
       type: GraphQLString,
-      description: 'Genral info regarding a rotation',
+      description: "Genral info regarding a rotation"
     },
     dbname: {
       type: GraphQLString,
-      description: 'what learning is stored as under given condition',
+      description: "what learning is stored as under given condition"
     },
     providers: {
       type: GraphQLList(ProviderType),
-      description: 'List of providers associated with rotation',
+      description: "List of providers associated with rotation"
     },
     _creator: {
       type: GraphQLID,
-      description: 'Creator of this rotation',
-    },
-  }),
+      description: "Creator of this rotation"
+    }
+  })
 });
 
 var ConditionType = new GraphQLObjectType({
-  name: 'conditionType',
+  name: "conditionType",
   fields: () => ({
     id: {
       type: GraphQLID,
-      description: 'ID for condition',
+      description: "ID for condition"
     },
     condition: {
       type: GraphQLString,
-      description: 'Title of condition',
+      description: "Title of condition"
     },
     tags: {
       type: GraphQLList(GraphQLString),
-      description: 'Rotations linked to a condition',
+      description: "Rotations linked to a condition"
     },
     _learnings: {
       type: GraphQLList(ConditionLearningType),
-      description: 'A conditions associated learning',
+      description: "A conditions associated learning"
     },
     dateCreated: {
       type: GraphQLString,
-      description: 'Date condition created',
+      description: "Date condition created"
     },
     dateUpdated: {
       type: GraphQLString,
-      description: 'Date that condition was last updated',
+      description: "Date that condition was last updated"
     },
     _creator: {
       type: GraphQLID,
-      description: 'Creator of this condition',
-    },
-  }),
+      description: "Creator of this condition"
+    }
+  })
 });
 
 var ConditionLearningType = new GraphQLObjectType({
-  name: 'conditionLearningType',
+  name: "conditionLearningType",
   fields: () => ({
     id: {
       type: GraphQLID,
-      description: 'ID for conditionLearning',
+      description: "ID for conditionLearning"
     },
     whatWasLearned: {
       type: GraphQLString,
-      description: 'The markdown text of what was learned',
+      description: "The markdown text of what was learned"
     },
     tags: {
       type: GraphQLList(GraphQLString),
-      description: 'list of tags associated with learning',
+      description: "list of tags associated with learning"
     },
     usersTagged: {
       type: GraphQLList(UserType),
-      description: 'Users tagged in learning',
+      description: "Users tagged in learning"
     },
     dateField: {
       type: GraphQLString,
-      description: 'User entered date for info',
+      description: "User entered date for info"
     },
     seenWith: {
       type: GraphQLString,
       description:
-        'User entered field for attending that learning is associated with',
+        "User entered field for attending that learning is associated with"
     },
     dateCreated: {
       type: GraphQLString,
-      description: 'Computer gen date, when created',
+      description: "Computer gen date, when created"
     },
     dateUpdated: {
       type: GraphQLString,
-      description: 'Computer gen date, when mst recently updated',
+      description: "Computer gen date, when mst recently updated"
     },
     dotPhrase: {
       type: GraphQLBoolean,
       description:
-        'Aspiration field to determine if learning should be used as a dot phrase',
+        "Aspiration field to determine if learning should be used as a dot phrase"
     },
     _condition: {
       type: ConditionType,
-      description: 'The condition that this learning is associated with',
+      description: "The condition that this learning is associated with"
     },
     _creator: {
       type: UserType,
-      description: 'User who created this learning',
-    },
-  }),
+      description: "User who created this learning"
+    }
+  })
 });
 
 var EastgateType = new GraphQLObjectType({
-  name: 'eastgateType',
+  name: "eastgateType",
   fields: () => ({
     id: {
       type: GraphQLID,
-      description: 'ID for eastgateType',
+      description: "ID for eastgateType"
     },
     sectionTitle: {
       type: GraphQLString,
-      description: 'The title of a eastgate section',
+      description: "The title of a eastgate section"
     },
     sectionContent: {
       type: GraphQLString,
-      description: 'Eastgate manual section content',
+      description: "Eastgate manual section content"
     },
     sectionIndex: {
       type: GraphQLFloat,
-      description: 'Where this section fits into the manual',
+      description: "Where this section fits into the manual"
     },
     _creator: {
       type: UserType,
-      description: 'User who created this section of the manual',
-    },
-  }),
+      description: "User who created this section of the manual"
+    }
+  })
 });
 
 var CasePresentationType = new GraphQLObjectType({
-  name: 'casePresentationType',
+  name: "casePresentationType",
   fields: () => ({
     id: {
       type: GraphQLID,
-      description: 'ID for casePresentationType',
+      description: "ID for casePresentationType"
     },
     _presentor: {
       type: UserType,
-      description: 'Presentor of this presentation',
+      description: "Presentor of this presentation"
     },
     title: {
       type: GraphQLString,
-      description: 'the title of the presentation',
+      description: "the title of the presentation"
     },
     presentationType: {
       type: GraphQLString,
-      description: 'Types: morning, case, specialist, primaryCare, general',
+      description: "Types: morning, case, specialist, primaryCare, general"
     },
     presentationDate: {
       type: GraphQLString,
-      description: 'the date one which a presentation was given',
+      description: "the date one which a presentation was given"
     },
     hpi: {
       type: GraphQLString,
-      description: 'hpi',
+      description: "hpi"
     },
     ros: {
       type: GraphQLString,
-      description: 'ros',
+      description: "ros"
     },
     pmh: {
       type: GraphQLString,
-      description: 'pmh',
+      description: "pmh"
     },
     physicalExam: {
       type: GraphQLString,
-      description: 'physicalExam',
+      description: "physicalExam"
     },
     wbc: {
       type: GraphQLString,
-      description: 'wbc',
+      description: "wbc"
     },
     hgb: {
       type: GraphQLString,
-      description: 'hgb',
+      description: "hgb"
     },
     plt: {
       type: GraphQLString,
-      description: 'plt',
+      description: "plt"
     },
     Na: {
       type: GraphQLString,
-      description: 'Na',
+      description: "Na"
     },
     K: {
       type: GraphQLString,
-      description: 'K',
+      description: "K"
     },
     Cl: {
       type: GraphQLString,
-      description: 'Cl',
+      description: "Cl"
     },
     HC02: {
       type: GraphQLString,
-      description: 'HC02',
+      description: "HC02"
     },
     BUN: {
       type: GraphQLString,
-      description: 'BUN',
+      description: "BUN"
     },
     Cr: {
       type: GraphQLString,
-      description: 'Cr',
+      description: "Cr"
     },
     Glu: {
       type: GraphQLString,
-      description: 'Glu',
+      description: "Glu"
     },
     AP: {
       type: GraphQLString,
-      description: 'AP',
+      description: "AP"
     },
     ALT: {
       type: GraphQLString,
-      description: 'ALT',
+      description: "ALT"
     },
     AST: {
       type: GraphQLString,
-      description: 'AST',
+      description: "AST"
     },
     Tbili: {
       type: GraphQLString,
-      description: 'Tbili',
+      description: "Tbili"
     },
     additionalLabs: {
       type: GraphQLString,
-      description: 'additionalLabs',
+      description: "additionalLabs"
     },
     imaging: {
       type: GraphQLString,
-      description: 'imaging',
+      description: "imaging"
     },
     summAssessment: {
       type: GraphQLString,
-      description: 'summAssessment',
+      description: "summAssessment"
     },
     embedPresentationSting: {
       type: GraphQLString,
-      description: 'embedPresentationSting',
+      description: "embedPresentationSting"
     },
     slideTextForSearch: {
       type: GraphQLString,
-      description: 'slideTextForSearch',
+      description: "slideTextForSearch"
     },
     tags: {
       type: GraphQLList(GraphQLString),
-      description: 'list of tags associated with case',
+      description: "list of tags associated with case"
     },
     ddx: {
       type: GraphQLList(GraphQLString),
-      description: 'list of tags associated with case',
+      description: "list of tags associated with case"
     },
     questions: {
       type: GraphQLList(MultipleChoiceQuestionType),
-      description: 'list of quetsions associated with this case',
-    },
-  }),
+      description: "list of quetsions associated with this case"
+    }
+  })
 });
 
 var MultipleChoiceQuestionType = new GraphQLObjectType({
-  name: 'multipleChoiceQuestionType',
+  name: "multipleChoiceQuestionType",
   fields: () => ({
     id: {
       type: GraphQLID,
-      description: 'ID for multiple choice question',
+      description: "ID for multiple choice question"
     },
     questionStem: {
       type: GraphQLString,
-      description: 'Question stem',
+      description: "Question stem"
     },
     questionAnswerText: {
       type: GraphQLString,
-      description: 'What is shown when the answer is revealed',
+      description: "What is shown when the answer is revealed"
     },
     options: {
       type: GraphQLList(GraphQLString),
-      description: 'List of possible answers',
+      description: "List of possible answers"
     },
     answers: {
       type: GraphQLList(GraphQLString),
-      description: 'Answers to the multiple choice question',
+      description: "Answers to the multiple choice question"
     },
     _creator: {
       type: GraphQLID,
-      description: 'User who created this question',
+      description: "User who created this question"
     },
     _case: {
       type: GraphQLID,
-      description: 'the case that this question is associated with',
-    },
-  }),
+      description: "the case that this question is associated with"
+    }
+  })
 });
 
 var SurveyType = new GraphQLObjectType({
-  name: 'surveyType',
+  name: "surveyType",
   fields: () => ({
     id: {
       type: GraphQLID,
-      description: 'ID for survey',
+      description: "ID for survey"
     },
     _surveyTaker: {
       type: GraphQLID,
-      description: 'ID for user who submitted survey',
+      description: "ID for user who submitted survey"
     },
     valueOne: {
       type: GraphQLString,
-      description: 'The value of the first 0-10 question',
+      description: "The value of the first 0-10 question"
     },
     valueTwo: {
       type: GraphQLString,
-      description: 'The value of the second 0-10 question',
+      description: "The value of the second 0-10 question"
     },
     valueThree: {
       type: GraphQLString,
-      description: 'The value of the third 0-10 question',
+      description: "The value of the third 0-10 question"
     },
     valueFour: {
       type: GraphQLString,
-      description: 'The value of free text question',
+      description: "The value of free text question"
     },
     dateCreated: {
       type: GraphQLString,
-      description: 'the date that the survey was answered',
-    },
-  }),
+      description: "the date that the survey was answered"
+    }
+  })
 });
 
 var listOfAllCasePresentations = {
   type: GraphQLList(CasePresentationType),
-  description: 'List of all the case presentations',
+  description: "List of all the case presentations",
   resolve: (parentValues, args, req) => {
     return CasePresentation.find()
       .populate({
-        path: 'questions',
-        model: 'MulitpleChoiceQuestion',
+        path: "questions",
+        model: "MulitpleChoiceQuestion"
       })
-      .populate({ path: '_presentor', model: 'users' })
-      .sort('-presentationDate');
+      .populate({ path: "_presentor", model: "users" })
+      .sort("-presentationDate");
+  }
+};
+
+var ConferencesForRotation = {
+  type: GraphQLList(CasePresentationType),
+  description: "List of all the case presentations",
+  args: {
+    rotation: { type: GraphQLString }
   },
+  resolve: (parentValues, { rotation }, req) => {
+    console.log("The rotation is ", rotation);
+
+    return CasePresentation.find({ tags: { $in: [rotation] } })
+      .populate({ path: "_presentor", model: "users" })
+      .sort("-presentationDate");
+  }
 };
 
 var selectedCasePresentation = {
   type: CasePresentationType,
-  description: 'Selected case presentations',
+  description: "Selected case presentations",
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLID }
   },
   async resolve(parentValues, { id }, req) {
     return await CasePresentation.findById(id)
       .populate({
-        path: 'questions',
-        model: 'MulitpleChoiceQuestion',
+        path: "questions",
+        model: "MulitpleChoiceQuestion"
       })
-      .populate({ path: '_presentor', model: 'users' });
-  },
+      .populate({ path: "_presentor", model: "users" });
+  }
 };
 
 var currentUser = {
   type: UserType,
-  description: 'The Current User',
+  description: "The Current User",
   resolve: (parentValues, args, req) => {
     return req.user;
-  },
+  }
 };
 
 var listOfUsers = {
   type: GraphQLList(UserType),
-  description: 'List of all the users',
+  description: "List of all the users",
   resolve: (parentValues, args, req) => {
     return User.find();
-  },
+  }
 };
 
 var listOfUsersThatAreVisible = {
   type: GraphQLList(UserType),
-  description: 'List of all the users',
+  description: "List of all the users",
   async resolve(parentValues, args, req) {
     var user = await User.find({
       $or: [
         {
-          visible: 'true',
+          visible: "true"
         },
         {
-          visible: true,
-        },
-      ],
+          visible: true
+        }
+      ]
     });
 
     return user;
-  },
+  }
 };
 
 var userWithId = {
   type: UserType,
-  description: 'User with respeictive ID',
+  description: "User with respeictive ID",
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLID }
   },
   async resolve(parentValues, { id }, req) {
     return await User.findById(id);
-  },
+  }
 };
 
 var listOfProviders = {
   type: GraphQLList(ProviderType),
-  description: 'list of all providers',
+  description: "list of all providers",
   resolve: (parentValues, args, req) => {
     return Provider.find();
-  },
+  }
 };
 
 var listOfEastgateManual = {
   type: GraphQLList(EastgateType),
-  description: 'list of all eastgate stuff to create manual',
+  description: "list of all eastgate stuff to create manual",
   resolve: (parentValues, args, req) => {
-    return Eastgate.find().populate({ path: '_creator', model: 'users' });
-  },
+    return Eastgate.find().populate({ path: "_creator", model: "users" });
+  }
 };
 
 var returnRotation = {
   type: RotationType,
-  description: 'Info regarding specific rotation',
+  description: "Info regarding specific rotation",
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLID }
   },
   async resolve(parentValues, { id }, req) {
-    return await Rotation.findById(id).populate('providers');
-  },
+    return await Rotation.findById(id).populate("providers");
+  }
 };
 
 var listOfRotations = {
   type: GraphQLList(RotationType),
-  description: 'List of all rotations',
+  description: "List of all rotations",
   resolve: (parentValues, args, req) => {
     return Rotation.find();
-  },
+  }
 };
 
 var listOfConditions = {
   type: GraphQLList(ConditionType),
-  description: 'List of all conditions',
+  description: "List of all conditions",
   resolve: (parentValues, args, req) => {
     var conditions = Condition.find().populate({
-      path: '_learnings',
-      model: 'conditionLearnings',
+      path: "_learnings",
+      model: "conditionLearnings",
       populate: {
-        path: 'usersTagged',
-        model: 'users',
-      },
+        path: "usersTagged",
+        model: "users"
+      }
     });
 
     return conditions;
-  },
+  }
 };
 
 var listOfPersonalLearning = {
   type: GraphQLList(ConditionLearningType),
   description:
-    'List of learning which your created or in which you are tagged or which you liked',
+    "List of learning which your created or in which you are tagged or which you liked",
   args: {
     id: { type: GraphQLID },
-    searchTerm: { type: GraphQLString },
+    searchTerm: { type: GraphQLString }
   },
   resolve: (parentValues, { id, searchTerm }, req) => {
     var learnings = ConditionLearning.find({
       $or: [
         {
-          usersTagged: id,
+          usersTagged: id
         },
-        { _creator: id },
-      ],
+        { _creator: id }
+      ]
     })
-      .populate({ path: '_condition', model: 'conditions' })
-      .populate({ path: '_creator', model: 'users' })
-      .populate({ path: 'usersTagged', model: 'users' })
-      .sort('-dateUpdated');
+      .populate({ path: "_condition", model: "conditions" })
+      .populate({ path: "_creator", model: "users" })
+      .populate({ path: "usersTagged", model: "users" })
+      .sort("-dateUpdated");
     return learnings;
-  },
+  }
 };
 
 var listOfLearningWithTag = {
   type: GraphQLList(ConditionLearningType),
-  description: 'Most recent learning regarding a rotation',
+  description: "Most recent learning regarding a rotation",
   args: {
     id: { type: GraphQLID },
-    rotation: { type: GraphQLString },
+    rotation: { type: GraphQLString }
   },
   resolve: (parentValues, { id, rotation }, req) => {
-    if (rotation === '') {
+    if (rotation === "") {
       var learnings = ConditionLearning.find({
         $or: [
           {
-            usersTagged: id,
+            usersTagged: id
           },
-          { _creator: id },
-        ],
+          { _creator: id }
+        ]
       })
         .limit(3)
         .sort({
-          dateUpdated: -1,
+          dateUpdated: -1
         })
-        .populate({ path: '_condition', model: 'conditions' })
-        .populate({ path: '_creator', model: 'users' })
-        .populate({ path: 'usersTagged', model: 'users' });
+        .populate({ path: "_condition", model: "conditions" })
+        .populate({ path: "_creator", model: "users" })
+        .populate({ path: "usersTagged", model: "users" });
 
       return learnings;
     }
@@ -635,71 +650,71 @@ var listOfLearningWithTag = {
     var learnings = ConditionLearning.find({
       $or: [
         {
-          usersTagged: id,
+          usersTagged: id
         },
-        { _creator: id },
+        { _creator: id }
       ],
-      tags: { $in: [rotation] },
+      tags: { $in: [rotation] }
     })
       .limit(3)
       .sort({
-        dateUpdated: -1,
+        dateUpdated: -1
       })
-      .populate({ path: '_condition', model: 'conditions' })
-      .populate({ path: '_creator', model: 'users' })
-      .populate({ path: 'usersTagged', model: 'users' });
+      .populate({ path: "_condition", model: "conditions" })
+      .populate({ path: "_creator", model: "users" })
+      .populate({ path: "usersTagged", model: "users" });
 
     return learnings;
-  },
+  }
 };
 
 var listOfAllLearning = {
   type: GraphQLList(ConditionLearningType),
-  description: 'List of all learning',
+  description: "List of all learning",
 
   resolve: (parentValues, args, req) => {
     var learnings = ConditionLearning.find()
       .populate({
-        path: '_condition',
-        model: 'conditions',
+        path: "_condition",
+        model: "conditions"
       })
-      .populate({ path: '_creator', model: 'users' })
-      .populate({ path: 'usersTagged', model: 'users' })
-      .sort('-dateUpdated');
+      .populate({ path: "_creator", model: "users" })
+      .populate({ path: "usersTagged", model: "users" })
+      .sort("-dateUpdated");
     return learnings;
-  },
+  }
 };
 
 var returnLearning = {
   type: ConditionLearningType,
-  description: 'Info regarding specific learning',
+  description: "Info regarding specific learning",
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLID }
   },
   async resolve(parentValues, { id }, req) {
     return await ConditionLearning.findById(id)
       .populate({
-        path: '_condition',
-        model: 'conditions',
+        path: "_condition",
+        model: "conditions"
       })
-      .populate({ path: '_creator', model: 'users' })
-      .populate({ path: 'usersTagged', model: 'users' });
-  },
+      .populate({ path: "_creator", model: "users" })
+      .populate({ path: "usersTagged", model: "users" });
+  }
 };
 
 var doseSurveyWithUserIdExist = {
   type: SurveyType,
-  description: 'doseSurveyWithUserIdExist',
+  description: "doseSurveyWithUserIdExist",
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLID }
   },
   async resolve(parentValues, { id }, req) {
     return await Survey.findOne({ _surveyTaker: id });
-  },
+  }
 };
 
 var RootQueryType = new GraphQLObjectType({
-  name: 'RootQuery',
+  name: "RootQuery",
   fields: () => ({
     currentUser,
     listOfUsers,
@@ -715,21 +730,22 @@ var RootQueryType = new GraphQLObjectType({
     returnLearning,
     listOfEastgateManual,
     listOfAllCasePresentations,
+    ConferencesForRotation,
     selectedCasePresentation,
-    doseSurveyWithUserIdExist,
-  }),
+    doseSurveyWithUserIdExist
+  })
 });
 
 var runMutation = {
   type: GraphQLString,
   resolve: (parentValues, args, context) => {
-    return 'GraphQL mutation OK';
-  },
+    return "GraphQL mutation OK";
+  }
 };
 
 var addUser = {
   type: UserType,
-  description: 'Add or modify a user',
+  description: "Add or modify a user",
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
     name: { type: new GraphQLNonNull(GraphQLString) },
@@ -737,13 +753,13 @@ var addUser = {
     email: { type: new GraphQLNonNull(GraphQLString) },
     admin: { type: new GraphQLNonNull(GraphQLBoolean) },
     eastgate: { type: new GraphQLNonNull(GraphQLBoolean) },
-    visible: { type: new GraphQLNonNull(GraphQLBoolean) },
+    visible: { type: new GraphQLNonNull(GraphQLBoolean) }
   },
   async resolve(
     parentValues,
-    { id, name, username, email, admin, eastgate, visible },
+    { id, name, username, email, admin, eastgate, visible }
   ) {
-    if (id === '12345') {
+    if (id === "12345") {
       var newUser = new User({
         name,
         username,
@@ -751,7 +767,7 @@ var addUser = {
         admin,
         eastgate,
         visible,
-        creationTime: Date.now(),
+        creationTime: Date.now()
       });
 
       await newUser.save(function(err) {
@@ -766,31 +782,31 @@ var addUser = {
     return await User.findByIdAndUpdate(
       id,
       { name, username, email, admin, eastgate, visible },
-      { new: true },
+      { new: true }
     );
-  },
+  }
 };
 
 var addEastgateManualSection = {
   type: EastgateType,
-  description: 'Adds a section to the eastgate manual',
+  description: "Adds a section to the eastgate manual",
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
     sectionTitle: { type: new GraphQLNonNull(GraphQLString) },
     sectionContent: { type: new GraphQLNonNull(GraphQLString) },
     sectionIndex: { type: new GraphQLNonNull(GraphQLFloat) },
-    _creator: { type: new GraphQLNonNull(GraphQLID) },
+    _creator: { type: new GraphQLNonNull(GraphQLID) }
   },
   async resolve(
     parentValues,
-    { id, sectionTitle, sectionContent, sectionIndex, _creator },
+    { id, sectionTitle, sectionContent, sectionIndex, _creator }
   ) {
-    if (id === '12345') {
+    if (id === "12345") {
       var newEastgateContent = new Eastgate({
         sectionTitle,
         sectionContent,
         sectionIndex,
-        _creator,
+        _creator
       });
 
       await newEastgateContent.save(function(err) {
@@ -805,16 +821,16 @@ var addEastgateManualSection = {
     return await Eastgate.findByIdAndUpdate(
       id,
       { sectionTitle, sectionContent, sectionIndex },
-      { new: true },
+      { new: true }
     );
-  },
+  }
 };
 
 var deleteEastgateManualSection = {
   type: EastgateType,
-  description: 'Delete eastgate content',
+  description: "Delete eastgate content",
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLID }
   },
   async resolve(parentValues, { id }, req) {
     return await Eastgate.findByIdAndRemove(id, function(err, offer) {
@@ -822,30 +838,30 @@ var deleteEastgateManualSection = {
         throw err;
       }
     });
-  },
+  }
 };
 
 var addProvider = {
   type: ProviderType,
   description:
-    'Creates or updates a provider. If provider is added it updates the rotation so it knows the provider is attached to it',
+    "Creates or updates a provider. If provider is added it updates the rotation so it knows the provider is attached to it",
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
     name: { type: new GraphQLNonNull(GraphQLString) },
     associatedRotation: { type: new GraphQLNonNull(GraphQLID) },
     generalInfo: { type: GraphQLString },
-    _creator: { type: new GraphQLNonNull(GraphQLID) },
+    _creator: { type: new GraphQLNonNull(GraphQLID) }
   },
   async resolve(
     parentValues,
-    { id, name, associatedRotation, generalInfo, _creator },
+    { id, name, associatedRotation, generalInfo, _creator }
   ) {
-    if (id === '12345') {
+    if (id === "12345") {
       var newProvider = new Provider({
         name,
         associatedRotation,
         generalInfo,
-        _creator,
+        _creator
       });
 
       await newProvider.save(function(err) {
@@ -857,7 +873,7 @@ var addProvider = {
       await Rotation.findByIdAndUpdate(
         associatedRotation,
         { $push: { providers: newProvider._id } },
-        { new: true },
+        { new: true }
       );
 
       return newProvider;
@@ -867,27 +883,27 @@ var addProvider = {
       id,
       {
         name,
-        generalInfo,
+        generalInfo
       },
-      { new: true },
+      { new: true }
     );
-  },
+  }
 };
 
 var deleteProvider = {
   type: ProviderType,
-  description: 'Delete a provider',
+  description: "Delete a provider",
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLID }
   },
   async resolve(parentValues, { id }, req) {
     var providerToBeDeleted = await Provider.findById(id).populate({
-      path: 'associatedRotation',
-      model: 'Rotation',
+      path: "associatedRotation",
+      model: "Rotation"
     });
 
     var rotationAssociatedWithProvider = await Rotation.findById(
-      providerToBeDeleted.associatedRotation.id,
+      providerToBeDeleted.associatedRotation.id
     );
 
     rotationAssociatedWithProvider.providers.pull(id);
@@ -900,14 +916,14 @@ var deleteProvider = {
     });
 
     return providerToBeDeleted;
-  },
+  }
 };
 
 var addRotation = {
   type: RotationType,
   args: {
     title: { type: new GraphQLNonNull(GraphQLString) },
-    _creator: { type: new GraphQLNonNull(GraphQLID) },
+    _creator: { type: new GraphQLNonNull(GraphQLID) }
   },
   async resolve(parentValues, { title, _creator }) {
     var newRotation = new Rotation({ title, _creator });
@@ -919,7 +935,7 @@ var addRotation = {
     });
 
     return newRotation;
-  },
+  }
 };
 
 var addCasePresentation = {
@@ -927,14 +943,14 @@ var addCasePresentation = {
   args: {
     _creator: { type: new GraphQLNonNull(GraphQLID) },
     presentationDate: { type: new GraphQLNonNull(GraphQLString) },
-    _presentor: { type: new GraphQLNonNull(GraphQLID) },
+    _presentor: { type: new GraphQLNonNull(GraphQLID) }
   },
   async resolve(parentValues, { _creator, presentationDate, _presentor }) {
     var newCasePresentation = new CasePresentation({
       _creator,
       presentationDate,
       _presentor,
-      title: 'No Title',
+      title: "No Title"
     });
 
     await newCasePresentation.save(function(err) {
@@ -944,7 +960,7 @@ var addCasePresentation = {
     });
 
     return newCasePresentation;
-  },
+  }
 };
 
 var updateCasePresentation = {
@@ -979,7 +995,7 @@ var updateCasePresentation = {
     embedPresentationSting: { type: GraphQLString },
     slideTextForSearch: { type: GraphQLString },
     tags: { type: GraphQLList(GraphQLString) },
-    ddx: { type: GraphQLList(GraphQLString) },
+    ddx: { type: GraphQLList(GraphQLString) }
   },
   async resolve(
     parentValues,
@@ -1016,12 +1032,12 @@ var updateCasePresentation = {
       meds,
       medSurgHx,
       social,
-      ddx,
-    },
+      ddx
+    }
   ) {
     var caseToBeUpdated = await CasePresentation.findOneAndUpdate(
       {
-        _id: id,
+        _id: id
       },
       {
         $set: {
@@ -1056,20 +1072,20 @@ var updateCasePresentation = {
           meds,
           medSurgHx,
           social,
-          ddx,
-        },
+          ddx
+        }
       },
-      { new: true },
+      { new: true }
     )
       .populate({
-        path: 'questions',
-        model: 'MulitpleChoiceQuestion',
+        path: "questions",
+        model: "MulitpleChoiceQuestion"
       })
-      .populate({ path: '_presentor', model: 'users' });
+      .populate({ path: "_presentor", model: "users" });
     await caseToBeUpdated.save();
 
     return caseToBeUpdated;
-  },
+  }
 };
 
 var addQuestionToCase = {
@@ -1081,7 +1097,7 @@ var addQuestionToCase = {
     questionStem: { type: new GraphQLNonNull(GraphQLString) },
     questionAnswerText: { type: new GraphQLNonNull(GraphQLString) },
     options: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
-    answers: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) },
+    answers: { type: new GraphQLNonNull(GraphQLList(GraphQLString)) }
   },
   async resolve(
     parentValues,
@@ -1092,17 +1108,17 @@ var addQuestionToCase = {
       questionStem,
       questionAnswerText,
       options,
-      answers,
-    },
+      answers
+    }
   ) {
-    if (questionId === '12345') {
+    if (questionId === "12345") {
       var newQuestion = new MultipleChoiceQuestion({
         _case,
         _creator,
         questionStem,
         questionAnswerText,
         options,
-        answers,
+        answers
       });
 
       await newQuestion.save(function(err) {
@@ -1114,7 +1130,7 @@ var addQuestionToCase = {
       await CasePresentation.findByIdAndUpdate(
         _case,
         { $push: { questions: newQuestion._id } },
-        { new: true },
+        { new: true }
       );
 
       return newQuestion;
@@ -1127,12 +1143,12 @@ var addQuestionToCase = {
           questionStem,
           questionAnswerText,
           options,
-          answers,
+          answers
         },
-        { new: true },
+        { new: true }
       );
     }
-  },
+  }
 };
 
 var updateRotation = {
@@ -1140,13 +1156,13 @@ var updateRotation = {
   args: {
     id: { type: GraphQLID },
     title: { type: GraphQLString },
-    generalInfo: { type: GraphQLString },
+    generalInfo: { type: GraphQLString }
   },
   async resolve(parentValues, args) {
     var { id } = args;
 
     return await Rotation.findByIdAndUpdate(id, args, { new: true });
-  },
+  }
 };
 
 var addLearning = {
@@ -1158,15 +1174,15 @@ var addLearning = {
     date: { type: new GraphQLNonNull(GraphQLString) },
     userTags: { type: GraphQLList(GraphQLString) },
     wwl: { type: new GraphQLNonNull(GraphQLString) },
-    id: { type: new GraphQLNonNull(GraphQLID) },
+    id: { type: new GraphQLNonNull(GraphQLID) }
   },
   async resolve(
     parentValues,
     { condition, tags, attending, date, userTags, wwl, id },
-    req,
+    req
   ) {
     var conditionExists = await Condition.findOne({
-      condition,
+      condition
     });
 
     if (conditionExists == null) {
@@ -1174,7 +1190,7 @@ var addLearning = {
         tags,
         condition,
         _creator: id,
-        dateCreated: Date.now(),
+        dateCreated: Date.now()
       });
     }
 
@@ -1190,11 +1206,11 @@ var addLearning = {
       dateCreated: Date.now(),
       dateUpdated: Date.now(),
       _condition: conditionExists._id,
-      _creator: id,
+      _creator: id
     })
-      .populate({ path: '_condition', model: 'conditions' })
-      .populate({ path: '_creator', model: 'users' })
-      .populate({ path: 'usersTagged', model: 'users' });
+      .populate({ path: "_condition", model: "conditions" })
+      .populate({ path: "_creator", model: "users" })
+      .populate({ path: "usersTagged", model: "users" });
 
     await conditionLearningNew.save();
 
@@ -1203,23 +1219,23 @@ var addLearning = {
     await conditionExists.save();
 
     return conditionLearningNew;
-  },
+  }
 };
 
 var deleteLearning = {
   type: ConditionLearningType,
-  description: 'Delete specific learning',
+  description: "Delete specific learning",
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLID }
   },
   async resolve(parentValues, { id }, req) {
     var learningToBeDeleted = await ConditionLearning.findById(id).populate({
-      path: '_condition',
-      model: 'conditions',
+      path: "_condition",
+      model: "conditions"
     });
 
     var conditionAsociatedWithLearning = await Condition.findById(
-      learningToBeDeleted._condition.id,
+      learningToBeDeleted._condition.id
     );
 
     // If there is only one learning point asscoated with a given conditions, then we will delete the condtiion as well
@@ -1230,7 +1246,7 @@ var deleteLearning = {
           if (err) {
             throw err;
           }
-        },
+        }
       );
     } else {
       // Just take the ID asscoated with a given learning out of the array
@@ -1245,12 +1261,12 @@ var deleteLearning = {
     });
 
     return learningToBeDeleted;
-  },
+  }
 };
 
 var updateLearning = {
   type: ConditionLearningType,
-  description: 'Update specific learning',
+  description: "Update specific learning",
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
     condition: { type: new GraphQLNonNull(GraphQLString) },
@@ -1259,20 +1275,20 @@ var updateLearning = {
     date: { type: new GraphQLNonNull(GraphQLString) },
     userTags: { type: GraphQLList(GraphQLString) },
     wwl: { type: new GraphQLNonNull(GraphQLString) },
-    userId: { type: new GraphQLNonNull(GraphQLID) },
+    userId: { type: new GraphQLNonNull(GraphQLID) }
   },
   async resolve(
     parentValues,
     { condition, tags, attending, date, userTags, wwl, id, userId },
-    req,
+    req
   ) {
     var learningToBeUpdated = await ConditionLearning.findById(id).populate({
-      path: '_condition',
-      model: 'conditions',
+      path: "_condition",
+      model: "conditions"
     });
 
     var conditionToModify = await Condition.findById(
-      learningToBeUpdated._condition.id,
+      learningToBeUpdated._condition.id
     );
 
     if (condition !== learningToBeUpdated._condition.condition) {
@@ -1286,7 +1302,7 @@ var updateLearning = {
           tags,
           condition,
           _creator: userId,
-          dateCreated: Date.now(),
+          dateCreated: Date.now()
         });
         conditionToModify._learnings.push(id);
 
@@ -1296,7 +1312,7 @@ var updateLearning = {
 
     var learningToUpdate = await ConditionLearning.findOneAndUpdate(
       {
-        _id: id,
+        _id: id
       },
       {
         $set: {
@@ -1306,34 +1322,34 @@ var updateLearning = {
           seenWith: attending,
           usersTagged: userTags,
           dateUpdated: Date.now(),
-          _condition: conditionToModify._id,
-        },
+          _condition: conditionToModify._id
+        }
       },
-      { new: true },
+      { new: true }
     )
-      .populate({ path: '_condition', model: 'conditions' })
-      .populate({ path: '_creator', model: 'users' })
-      .populate({ path: 'usersTagged', model: 'users' });
+      .populate({ path: "_condition", model: "conditions" })
+      .populate({ path: "_creator", model: "users" })
+      .populate({ path: "usersTagged", model: "users" });
     await learningToUpdate.save();
 
     return learningToUpdate;
-  },
+  }
 };
 
 var submitSurvey = {
   type: SurveyType,
-  description: 'Submit a survey',
+  description: "Submit a survey",
   args: {
     valueOne: { type: new GraphQLNonNull(GraphQLString) },
     valueTwo: { type: new GraphQLNonNull(GraphQLString) },
     valueThree: { type: new GraphQLNonNull(GraphQLString) },
     valueFour: { type: new GraphQLNonNull(GraphQLString) },
-    id: { type: new GraphQLNonNull(GraphQLID) },
+    id: { type: new GraphQLNonNull(GraphQLID) }
   },
   async resolve(
     parentValues,
     { valueOne, valueTwo, valueThree, valueFour, id },
-    req,
+    req
   ) {
     var newSurvey = new Survey({
       valueOne,
@@ -1341,19 +1357,19 @@ var submitSurvey = {
       valueThree,
       valueFour,
       _surveyTaker: id,
-      dateCreated: Date.now(),
+      dateCreated: Date.now()
     });
     await newSurvey.save();
 
     return newSurvey;
-  },
+  }
 };
 
 var deleteConference = {
   type: CasePresentationType,
-  description: 'Delete a conference',
+  description: "Delete a conference",
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLID }
   },
   async resolve(parentValues, { id }, req) {
     var conferenceToDelete = await CasePresentation.findByIdAndRemove(
@@ -1362,18 +1378,18 @@ var deleteConference = {
         if (err) {
           throw err;
         }
-      },
+      }
     );
 
     return conferenceToDelete;
-  },
+  }
 };
 
 var deleteQuestion = {
   type: MultipleChoiceQuestionType,
-  description: 'Delete a multiple choice question',
+  description: "Delete a multiple choice question",
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLID }
   },
   async resolve(parentValues, { id }, req) {
     var questionToDelete = await MultipleChoiceQuestion.findByIdAndRemove(
@@ -1382,14 +1398,14 @@ var deleteQuestion = {
         if (err) {
           throw err;
         }
-      },
+      }
     );
     return questionToDelete;
-  },
+  }
 };
 
 var MutationType = new GraphQLObjectType({
-  name: 'Mutation',
+  name: "Mutation",
   fields: () => ({
     runMutation,
     addUser,
@@ -1407,11 +1423,11 @@ var MutationType = new GraphQLObjectType({
     updateCasePresentation,
     submitSurvey,
     deleteConference,
-    deleteQuestion,
-  }),
+    deleteQuestion
+  })
 });
 
 module.exports = new GraphQLSchema({
   query: RootQueryType,
-  mutation: MutationType,
+  mutation: MutationType
 });

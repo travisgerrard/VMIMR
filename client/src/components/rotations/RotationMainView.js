@@ -1,25 +1,26 @@
 // The top level of the rotation view
 // Handles displaying general info...
 
-import React, { Component } from 'react';
-import { Query, withApollo } from 'react-apollo';
-import { Container, Button, Modal } from 'semantic-ui-react';
-import jwt_decode from 'jwt-decode';
+import React, { Component } from "react";
+import { Query, withApollo } from "react-apollo";
+import { Container, Button, Modal, Divider } from "semantic-ui-react";
+import jwt_decode from "jwt-decode";
 
-import SELECTED_ROTATION from '../../queries/SelectedRotation';
+import SELECTED_ROTATION from "../../queries/SelectedRotation";
 
-import RotationGeneralInfo from './RotationGeneralInfo';
-import RotationProviders from './RotationProviders';
-import AddConditionFromRotation from '../conditionGraphQl/AddConditionFromRotation';
-import LastThreeLearnings from './LastThreeLearnings';
+import RotationGeneralInfo from "./RotationGeneralInfo";
+import RotationProviders from "./RotationProviders";
+import AddConditionFromRotation from "../conditionGraphQl/AddConditionFromRotation";
+import LastThreeLearnings from "./LastThreeLearnings";
+import RotationConferences from "./RotationConferences";
 
 class RotationMainView extends Component {
   state = {
-    showLearningModal: false,
+    showLearningModal: false
   };
 
   addLearning = () => {
-    console.log('Adding learning...');
+    console.log("Adding learning...");
     this.setState({ showLearningModal: true });
   };
 
@@ -35,16 +36,19 @@ class RotationMainView extends Component {
     return (
       <Query query={SELECTED_ROTATION} variables={{ id: this.props.id }}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
+          if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
 
-          const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
+          const currentUser = jwt_decode(localStorage.getItem("VMIMRToken"));
 
           const { id } = currentUser;
 
           if (data.returnRotation === null) return <div>Pick a rotation</div>;
 
           const { generalInfo, title, providers, dbname } = data.returnRotation;
+          console.log(data.returnRotation);
+
+          console.log(dbname);
 
           return (
             <Container>
@@ -63,7 +67,7 @@ class RotationMainView extends Component {
               />
               <br />
               <h4>
-                {title} learnings:{' '}
+                {title} learnings:{" "}
                 {this.state.showLearningModal ? (
                   <Modal open={this.state.showLearningModal} size="large">
                     <Modal.Header>Add learning</Modal.Header>
@@ -90,9 +94,9 @@ class RotationMainView extends Component {
                 currentUser={currentUser}
                 title={title}
               />
-
-              <h4>General Comments</h4>
-              <p>Will put in general comments section regarding the rotation</p>
+              <Divider />
+              <h1>Conferences regarding this rotation</h1>
+              <RotationConferences rotation={dbname} />
             </Container>
           );
         }}
