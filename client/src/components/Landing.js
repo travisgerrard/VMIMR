@@ -1,49 +1,49 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 //import LastFiveConditions from './landing/LastFiveConditions';
 //import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
-import LandingPage from "./landing/LoggedInLanding";
+import LandingPage from './landing/LoggedInLanding';
 
 //import Conditions from './conditions/ConditionTopLevelView';
-import { Container, Divider } from "semantic-ui-react";
-import Signin from "./auth/Signin";
+import { Container, Divider } from 'semantic-ui-react';
+import Signin from './auth/Signin';
 //import SigninApollo from './auth/SignInApollo';
-import InternSurvival from "./conferences/InternSurvivalTopLevel";
+import InternSurvival from './conferences/InternSurvivalTopLevel';
 
-import PhotoInset from "./PhotoInset";
+import PhotoInset from './PhotoInset';
 
 const lineOne = {
-  fontFamily: "Lato",
-  fontStyle: "normal",
-  lineHeight: "normal",
-  fontSize: "36px",
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  lineHeight: 'normal',
+  fontSize: '36px',
   padding: 3,
-  margin: 3
+  margin: 3,
 };
 const lineTwo = {
-  fontFamily: "Lato",
-  fontStyle: "normal",
-  lineHeight: "normal",
-  fontSize: "28px",
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  lineHeight: 'normal',
+  fontSize: '28px',
   padding: 5,
-  margin: 5
+  margin: 5,
 };
 const lineThree = {
-  fontFamily: "Lato",
-  fontStyle: "normal",
-  lineHeight: "normal",
-  fontSize: "16px",
+  fontFamily: 'Lato',
+  fontStyle: 'normal',
+  lineHeight: 'normal',
+  fontSize: '16px',
   padding: 5,
-  margin: 5
+  margin: 5,
 };
 
 class Landing extends Component {
   renderTheHomePage = () => {
     var landingPage;
-    if (localStorage.getItem("VMIMRToken") !== null) {
+    if (localStorage.getItem('VMIMRToken') !== null) {
       landingPage = <LandingPage />;
     } else {
       const scheduleImage =
-        "https://s3-us-west-2.amazonaws.com/vmimr/ConferenceSchedule.png";
+        'https://s3-us-west-2.amazonaws.com/vmimr/ConferenceSchedule.png+';
 
       landingPage = (
         <div>
