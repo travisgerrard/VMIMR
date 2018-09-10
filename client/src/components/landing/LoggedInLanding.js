@@ -38,7 +38,7 @@ class LoggedInLanding extends Component {
     var currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
     var name = currentUser.name.split(' ')[1];
     const scheduleImage =
-      'https://s3-us-west-2.amazonaws.com/vmimr/ConferenceSchedule.png+';
+      'https://s3-us-west-2.amazonaws.com/vmimr/ConferenceSchedule.png';
 
     return (
       <div style={{ marginTop: 20, marginLeft: 10, marginRight: 10 }}>

@@ -43,7 +43,7 @@ class Landing extends Component {
       landingPage = <LandingPage />;
     } else {
       const scheduleImage =
-        'https://s3-us-west-2.amazonaws.com/vmimr/ConferenceSchedule.png+';
+        'https://s3-us-west-2.amazonaws.com/vmimr/ConferenceSchedule.png';
 
       landingPage = (
         <div>
