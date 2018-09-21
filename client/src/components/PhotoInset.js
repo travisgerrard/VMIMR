@@ -1,42 +1,91 @@
 import React, { Component } from 'react';
 import { Image } from 'semantic-ui-react';
+import jwt_decode from 'jwt-decode';
+
+import { Query, Mutation } from 'react-apollo';
+
+import PICTURE_URL from '../queries/pictureURL';
+import SET_PICTURE_URL from '../mutations/setPictureURLForName';
 
 class InstagramInset extends Component {
-  render() {
-    return (
-      <div
-        style={{
-          background: '#FFF',
-          border: '0',
-          borderRadius: '3px',
-          boxShadow: '0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)',
-          marginRight: 'auto',
-          marginLeft: 'auto',
-          maxWidth: '600px',
-          minWidth: '326px',
-          padding: '0',
-          width: '99.375%',
-        }}
-      >
-        <div style={{ padding: '8px' }}>
-          <a
-            href={this.props.link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              alt="instagram"
-              src={this.props.headerPhoto}
-              style={{ width: '40%' }}
-            />
-          </a>
 
-          <Image
-            src={this.props.mainPhoto}
-            fluid
-          />
-        </div>
-      </div>
+
+  textInputIfAdmin = (pictureURL) => {
+    let currentUser = '';
+    if (localStorage.getItem('VMIMRToken')) {
+      currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
+    }
+    const admin = currentUser.admin;
+
+    console.log(pictureURL);
+    
+    if (admin) {
+      return (
+        <Mutation
+          mutation={SET_PICTURE_URL}
+        >
+          {mutationName => (
+            <div>
+              <input
+          type="text"
+          value={pictureURL ? pictureURL.url : '12345'}
+          onChange={e => mutationName({
+            variables: {
+              name: this.props.name,
+              url: e.target.value,
+              id: pictureURL ? pictureURL.id : '12345'
+            }
+          })}
+        />
+            </div>
+          )}
+        </Mutation>
+      );
+    }
+  };
+  
+  render() {
+    
+    return (
+      <Query query={PICTURE_URL} variables={{ name: this.props.name }}>
+        {({ loading, error, data }) => {
+          if (loading) return "Loading...";
+          if (error) return `Error! ${error.message}`;
+          console.log(data);
+          const {pictureURL} = data;
+          
+          return (
+            <div
+            style={{
+              background: '#FFF',
+              border: '0',
+              borderRadius: '3px',
+              boxShadow: '0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)',
+              marginRight: 'auto',
+              marginLeft: 'auto',
+              maxWidth: '600px',
+              minWidth: '326px',
+              padding: '0',
+              width: '99.375%',
+            }}
+          >
+            <div style={{ padding: '8px' }}>
+              <a href={this.props.link} target="_blank" rel="noopener noreferrer">
+                <img
+                  alt="instagram"
+                  src={this.props.headerPhoto}
+                  style={{ width: '40%' }}
+                />
+              </a>
+    
+              <Image src={pictureURL ? pictureURL.url : ''} fluid />
+              {this.textInputIfAdmin(pictureURL)}
+            </div>
+          </div>
+          );
+        }}
+      </Query>
+      
     );
   }
 }
