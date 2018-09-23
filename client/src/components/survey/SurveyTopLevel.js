@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Segment, Button, Message } from 'semantic-ui-react';
-import jwt_decode from 'jwt-decode';
+import { id } from '../Utils';
 
 import OneToTenQuestion from './OneToTenQuestion';
 import OpenEndedQuestion from './OpenEndedQuestion';
@@ -15,8 +15,6 @@ class SurveyTopLevel extends Component {
   };
 
   submitClicked = () => {
-    const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
-
     const { valueOne, valueTwo, valueThree, valueFour } = this.state;
     if (valueOne === '' || valueTwo === '' || valueThree === '') {
       this.setState({
@@ -30,7 +28,7 @@ class SurveyTopLevel extends Component {
           valueTwo,
           valueThree,
           valueFour,
-          id: currentUser.id,
+          id: id(),
         },
       });
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Menu, Input } from 'semantic-ui-react';
 import { Query, withApollo, graphql } from 'react-apollo';
-import jwt_decode from 'jwt-decode';
+import { id, admin } from '../Utils';
 
 import GET_LIST_OF_ROTATIONS from '../../queries/ListOfRotations';
 import ADD_ROTATION from '../../mutations/AddRotation';
@@ -55,13 +55,11 @@ class RotationTopLevelView extends Component {
   };
 
   addRotation = () => {
-    const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
-
     this.props
       .mutate({
         variables: {
           title: this.state.rotationInput,
-          _creator: currentUser.id,
+          _creator: id(),
         },
         refetchQueries: [{ query: GET_LIST_OF_ROTATIONS }],
       })
@@ -79,8 +77,7 @@ class RotationTopLevelView extends Component {
   };
 
   addRotationInput = () => {
-    const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
-    if (currentUser.admin) {
+    if (admin()) {
       return (
         <Menu.Item>
           <Input

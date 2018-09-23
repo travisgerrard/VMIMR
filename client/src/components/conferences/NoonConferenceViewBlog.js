@@ -10,19 +10,13 @@ import {
 import { Query } from 'react-apollo';
 import { withRouter, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-import jwt_decode from 'jwt-decode';
+import { admin } from '../Utils';
 
 import Questions from './Questions';
 
 import SELECTED_CASE_PRESENTATIONS from '../../queries/SelectedCasePresentation';
 class NoonConferenceViewBlog extends Component {
   render() {
-    let currentUser = '';
-    if (localStorage.getItem('VMIMRToken')) {
-      currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
-    }
-    const admin = currentUser.admin;
-
     const {
       title,
       _presentor,
@@ -46,7 +40,7 @@ class NoonConferenceViewBlog extends Component {
         <Card fluid>
           <Card.Content>
             <Image floated="right">
-              {admin && (
+              {admin() && (
                 <span>
                   <Link to={`/Conference/${id}`}>
                     <Icon

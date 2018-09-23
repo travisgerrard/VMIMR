@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Divider, Grid, Header } from 'semantic-ui-react';
-import jwt_decode from 'jwt-decode';
+import { currentUser } from '../Utils';
 
 import UpComing from './UpComing';
 import LearningLanding from './LearningLanding';
@@ -35,8 +35,7 @@ class LoggedInLanding extends Component {
 
   // Lets create a 3 content grid...
   render() {
-    var currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
-    var name = currentUser.name.split(' ')[1];
+    var name = currentUser().name.split(' ')[1];
     const scheduleImage =
       'https://s3-us-west-2.amazonaws.com/vmimr/ConferenceSchedule.png';
 
@@ -55,7 +54,7 @@ class LoggedInLanding extends Component {
             <ConferenceLanding />
           </Grid.Column>
           <Grid.Column>
-            <LearningLanding currentUser={currentUser} />
+            <LearningLanding currentUser={currentUser()} />
           </Grid.Column>
         </Grid>
         <Divider />

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Container, Loader, Message, Modal } from 'semantic-ui-react';
 import { Query, withApollo } from 'react-apollo';
 import _ from 'lodash';
-import jwt_decode from 'jwt-decode';
+import { id, currentUser } from '../Utils';
 
 import GET_ALL_LEARNING from '../../queries/ListOfAllLearning';
 import GET_PERSONAL_LEARNING from '../../queries/ListOfPersonalLearning';
@@ -155,12 +155,11 @@ class ConditionTopLevelViewGQL extends Component {
   };
 
   displayLearning = () => {
-    const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
     if (this.state.sortActiveItem === 'Your Personal Learning') {
       return (
         <Query
           query={GET_PERSONAL_LEARNING}
-          variables={{ id: currentUser.id }}
+          variables={{ id: id() }}
           fetchPolicy="network-only"
         >
           {({ loading, error, data }) => {
@@ -193,7 +192,7 @@ class ConditionTopLevelViewGQL extends Component {
             const filteredQuery = this.filterQuery(data.listOfAllLearning);
 
             return (
-              <div>{this.isAddingCondition(filteredQuery, currentUser)}</div>
+              <div>{this.isAddingCondition(filteredQuery, currentUser())}</div>
             );
           }}
         </Query>

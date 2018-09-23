@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Loader } from 'semantic-ui-react';
 import { Query, Mutation } from 'react-apollo';
 import _ from 'lodash';
-import jwt_decode from 'jwt-decode';
-
+import { id } from '../Utils';
 import EastgateManual from './EastgateManual';
 
 import GET_ALL_EASTGATE_CONTENT from '../../queries/ListOfEastgateContent';
@@ -16,8 +15,6 @@ class EastgateTopLevelView extends Component {
   };
 
   contentSection = eastgateContent => {
-    const currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
-
     return (
       <Mutation
         mutation={ADD_OR_UPDATE_EASTGATE_CONTENT}
@@ -43,7 +40,7 @@ class EastgateTopLevelView extends Component {
                   content={eastgateContent}
                   addContent={addContent}
                   deleteContent={deleteContent}
-                  currentUserId={currentUser.id}
+                  currentUserId={id()}
                   loading={loading}
                   data={data}
                   error={error}

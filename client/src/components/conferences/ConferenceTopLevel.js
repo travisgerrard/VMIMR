@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import _ from 'lodash';
-import jwt_decode from 'jwt-decode';
+import { admin, id } from '../Utils';
 import moment from 'moment';
 import { Button, Loader, Container, Input } from 'semantic-ui-react';
 
@@ -55,12 +55,6 @@ class ConferenceTopLevel extends Component {
   };
 
   renderList = () => {
-    let currentUser = '';
-    if (localStorage.getItem('VMIMRToken')) {
-      currentUser = jwt_decode(localStorage.getItem('VMIMRToken'));
-    }
-    const admin = currentUser.admin;
-
     return (
       <Mutation
         mutation={ADD_CASE_PRESENTATION}
@@ -68,15 +62,15 @@ class ConferenceTopLevel extends Component {
       >
         {(addCasePresentation, { data, loading, error }) => (
           <div>
-            {admin && (
+            {admin() && (
               <Button
                 onClick={() =>
                   addCasePresentation({
                     // 'No Title' is added in the schema....
                     variables: {
-                      id: currentUser.id,
+                      id: id(),
                       presentationDate: moment().format('MM/DD/YY'),
-                      _presentor: currentUser.id,
+                      _presentor: id(),
                     },
                   })
                 }
