@@ -36,8 +36,6 @@ class LoggedInLanding extends Component {
   // Lets create a 3 content grid...
   render() {
     var name = currentUser().name.split(' ')[1];
-    const scheduleImage =
-      'https://s3-us-west-2.amazonaws.com/vmimr/ConferenceSchedule.png';
 
     return (
       <div style={{ marginTop: 20, marginLeft: 10, marginRight: 10 }}>
@@ -62,9 +60,7 @@ class LoggedInLanding extends Component {
         <Grid stackable columns={2}>
           <Grid.Column>
             <PhotoInset
-              link={scheduleImage}
               headerPhoto="http://files.constantcontact.com/6f3956be401/f4017f76-fc6d-4977-b6e7-dc02ac5ebff8.jpg?a=1128943245496"
-              mainPhoto={scheduleImage}
               name="schedule"
             />
           </Grid.Column>
@@ -72,18 +68,18 @@ class LoggedInLanding extends Component {
             <PhotoInset
               link="https://www.instagram.com/vmimr"
               headerPhoto="https://protectyoungeyes.com/wp-content/uploads/2015/04/2475.new-instagram-text-logo.png"
-              mainPhoto="https://scontent-sea1-1.cdninstagram.com/vp/2da7cf4e0dbfbc92a3dfdffeb0c251ab/5C037949/t51.2885-15/sh0.08/e35/s640x640/39248344_1036318689861743_8502475382677569536_n.jpg"
               name="instagram"
             />
           </Grid.Column>
         </Grid>
 
         <Divider />
-
-        <UpComing name={name} />
       </div>
     );
   }
 }
 
 export default LoggedInLanding;
+
+// The schedule => Hard to keep updated and not often used.
+// <UpComing name={name} />

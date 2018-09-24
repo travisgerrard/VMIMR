@@ -61,7 +61,7 @@ class InstagramInset extends Component {
             >
               <div style={{ padding: '8px' }}>
                 <a
-                  href={this.props.link}
+                  href={this.props.link ? this.props.link : pictureURL.url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
