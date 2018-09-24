@@ -2,7 +2,7 @@ import jwt_decode from 'jwt-decode';
 
 export const admin = () => {
   if (localStorage.getItem('VMIMRToken')) {
-    return jwt_decode(localStorage.getItem('VMIMRToken'));
+    return jwt_decode(localStorage.getItem('VMIMRToken')).admin;
   }
   return false;
 };

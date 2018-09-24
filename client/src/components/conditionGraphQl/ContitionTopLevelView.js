@@ -94,6 +94,8 @@ class ConditionTopLevelViewGQL extends Component {
 
   // Decideds what user should see depending on if user is creating/editing learning or looking for past learing
   isAddingCondition = (queryDataToDisplay, currentUser) => {
+    console.log(currentUser);
+
     return (
       <div>
         <SearchBox
@@ -176,7 +178,7 @@ class ConditionTopLevelViewGQL extends Component {
                     content={`It looks like you have not created or been tagged in any learning yet. Click "All Learning" above to show all the learning that has been created by others users.`}
                   />
                 )}
-                {this.isAddingCondition(filteredQuery, currentUser)}
+                {this.isAddingCondition(filteredQuery, currentUser())}
               </div>
             );
           }}
