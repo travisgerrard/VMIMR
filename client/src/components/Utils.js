@@ -9,7 +9,7 @@ export const admin = () => {
 
 export const id = () => {
   if (localStorage.getItem('VMIMRToken')) {
-    return jwt_decode(localStorage.getItem('VMIMRToken'));
+    return jwt_decode(localStorage.getItem('VMIMRToken')).id;
   }
   return '';
 };
