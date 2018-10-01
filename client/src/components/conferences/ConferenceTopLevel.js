@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import _ from 'lodash';
 import { admin, id } from '../Utils';
@@ -10,6 +10,7 @@ import ADD_CASE_PRESENTATION from '../../mutations/AddCasePresentation';
 import LIST_ALL_CASE_PRESENTATIONS from '../../queries/ListOfAllCasePresentations';
 
 import NoonConferenceView from './NoonConferenceView';
+import AddConference from './AddConference';
 
 class ConferenceTopLevel extends Component {
   state = {
@@ -56,74 +57,57 @@ class ConferenceTopLevel extends Component {
 
   renderList = () => {
     return (
-      <Mutation
-        mutation={ADD_CASE_PRESENTATION}
-        refetchQueries={[{ query: LIST_ALL_CASE_PRESENTATIONS }]}
-      >
-        {(addCasePresentation, { data, loading, error }) => (
-          <div>
-            {admin() && (
-              <Button
-                onClick={() =>
-                  addCasePresentation({
-                    // 'No Title' is added in the schema....
-                    variables: {
-                      id: id(),
-                      presentationDate: moment().format('MM/DD/YY'),
-                      _presentor: id(),
-                    },
-                  })
-                }
-                style={{ marginBottom: 20 }}
-              >
-                Add Post
-              </Button>
-            )}
+      <Fragment>
+        <Query query={LIST_ALL_CASE_PRESENTATIONS}>
+          {({ loading, error, data }) => {
+            if (loading) return <Loader active inline="centered" />;
+            if (error) return `Error! ${error.message}`;
 
-            <Query query={LIST_ALL_CASE_PRESENTATIONS}>
-              {({ loading, error, data }) => {
-                if (loading) return <Loader active inline="centered" />;
-                if (error) return `Error! ${error.message}`;
+            if (data.listOfAllCasePresentations.length > 0) {
+              var presentations = data.listOfAllCasePresentations.slice();
 
-                if (data.listOfAllCasePresentations.length > 0) {
-                  var presentations = data.listOfAllCasePresentations.slice();
+              const filteredQuery = this.filterQuery(presentations);
 
-                  const filteredQuery = this.filterQuery(presentations);
+              return (
+                <div>
+                  <SortConferenceCards
+                    handleItemClick={this.handleSortItemClick}
+                    activeItem={this.state.sortActiveItem}
+                  />
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: '1fr 11fr',
+                    }}
+                  >
+                    <AddConference />
 
-                  return (
-                    <div>
-                      <SortConferenceCards
-                        handleItemClick={this.handleSortItemClick}
-                        activeItem={this.state.sortActiveItem}
+                    <Input
+                      style={{ marginBottom: 10 }}
+                      type="text"
+                      placeholder="Search Confereces"
+                      icon="search"
+                      value={this.state.searchTerm}
+                      onChange={e =>
+                        this.handleSearchTermChanged(e.target.value)
+                      }
+                    />
+                  </div>
+                  {filteredQuery.map(casePresentation => {
+                    return (
+                      <NoonConferenceView
+                        key={casePresentation.id}
+                        presentationData={casePresentation}
                       />
-                      <Input
-                        style={{ marginBottom: 10 }}
-                        type="text"
-                        fluid
-                        placeholder="Search Confereces"
-                        icon="search"
-                        value={this.state.searchTerm}
-                        onChange={e =>
-                          this.handleSearchTermChanged(e.target.value)
-                        }
-                      />
-                      {filteredQuery.map(casePresentation => {
-                        return (
-                          <NoonConferenceView
-                            key={casePresentation.id}
-                            presentationData={casePresentation}
-                          />
-                        );
-                      })}
-                    </div>
-                  );
-                }
-                return <div />;
-              }}
-            </Query>
-          </div>
-        )}
-      </Mutation>
+                    );
+                  })}
+                </div>
+              );
+            }
+            return <div />;
+          }}
+        </Query>
+      </Fragment>
     );
   };
 

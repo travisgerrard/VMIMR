@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import LIST_ALL_CASE_PRESENTATIONS from '../../queries/ListOfAllCasePresentations';
 
 import NoonConferenceView from '../conferences/NoonConferenceView';
+import AddConference from '../conferences/AddConference';
 
 const titleStyle = {
   fontFamily: 'Lato',
@@ -33,6 +34,14 @@ class ConferenceLanding extends Component {
           <Link to="/Conference" style={{ color: 'black' }}>
             Latests Conferences
           </Link>
+          <AddConference
+            homepage
+            style={{
+              position: 'absolute',
+              right: '2rem',
+              cursor: 'pointer',
+            }}
+          />
         </Segment>
         <Segment style={sectionStyle}>
           <Query query={LIST_ALL_CASE_PRESENTATIONS}>

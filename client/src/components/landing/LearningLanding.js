@@ -51,15 +51,22 @@ class LearningLanding extends Component {
               />
             </Modal>
           ) : (
-              <span
-                onClick={() => this.addLearning()}
-                style={{ position: 'absolute', right: '2rem', cursor: 'pointer' }}
-              >
-                +
+            <span
+              onClick={() => this.addLearning()}
+              style={{ position: 'absolute', right: '2rem', cursor: 'pointer' }}
+            >
+              +
             </span>
-            )}
+          )}
         </Segment>
-        <Segment style={{ paddingTop: 0, paddingLeft: 7, paddingRight: 7, paddingBottom: 2 }}>
+        <Segment
+          style={{
+            paddingTop: 0,
+            paddingLeft: 7,
+            paddingRight: 7,
+            paddingBottom: 2,
+          }}
+        >
           <LastThreeLearnings
             userId={this.props.currentUser.id}
             dbname={''}
