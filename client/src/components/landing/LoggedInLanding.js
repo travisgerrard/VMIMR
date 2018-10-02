@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Divider, Grid, Header } from 'semantic-ui-react';
 import { currentUser } from '../Utils';
 
-import UpComing from './UpComing';
+//import UpComing from './UpComing';
 import LearningLanding from './LearningLanding';
 import InternSurvival from '../conferences/InternSurvivalTopLevel';
 import ConferenceLanding from './ConferenceLanding';

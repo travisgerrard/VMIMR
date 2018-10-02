@@ -15,12 +15,12 @@ import ModifyUser from './users/ModifyUser';
 import Messages from './messages';
 import ConditionPage from './conditions/rotation/ConditionPage';
 import ConferenceList from './conferences/ConferenceTopLevel';
-import NoonConferenceAdmin from './conferences/NoonConference';
+import NoonConferenceAdmin from './conferences/NoonConferenceWrapper';
 import NoonConferenceView from './conferences/NoonConferenceView';
 import ConditionTopLevelViewGQL from './conditionGraphQl/ContitionTopLevelView';
 import Eastgate from './eastgate/EastgateTopLevelView';
 import LoggedInLanding from './landing/LoggedInLanding';
-import MasterSchedule from './landing/MasterScheduleView';
+//import MasterSchedule from './landing/MasterScheduleView';
 import SurveyTopLevel from './survey/SurveyTopLevel';
 import ListFormatter from './patientParser/patientParser';
 import InternSurvivalTopLevel from './conferences/InternSurvivalTopLevel';
@@ -87,10 +87,7 @@ class App extends Component {
             component={RequireAuth(NoonConferenceAdmin)}
           />
           <Route path={`/eastgate`} component={RequireAuth(Eastgate)} />
-          <Route
-            path={`/masterSchedule`}
-            component={RequireAuth(MasterSchedule)}
-          />
+
           <Route path={'/survey'} component={RequireAuth(SurveyTopLevel)} />
           <Route path={`/listFormatter`} component={ListFormatter} />
           <Route path={`/survivalGuide`} component={InternSurvivalTopLevel} />

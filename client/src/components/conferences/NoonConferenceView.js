@@ -11,7 +11,7 @@ import { Query } from 'react-apollo';
 import { withRouter, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import jwt_decode from 'jwt-decode';
-import NoonConference from './NoonConference';
+import NoonConference from './NoonConferenceWrapper';
 
 import Questions from './Questions';
 

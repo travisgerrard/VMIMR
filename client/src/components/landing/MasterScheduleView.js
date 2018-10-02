@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import { Loader } from 'semantic-ui-react';
 import _ from 'lodash';
 
-import UpComing from './UpComing';
+//import UpComing from './UpComing';
 
 import LIST_ALL_USERS_THAT_ARE_VISIBLE from '../../queries/ListOfAllUsersThatAreVisible';
 
@@ -27,7 +27,7 @@ class MasterScheduleView extends Component {
               {listOfUsers.map(user => {
                 var name = user.text.split(' ')[1];
 
-                return <UpComing name={name} />;
+                return <div />;
               })}
             </div>
           );
@@ -38,3 +38,5 @@ class MasterScheduleView extends Component {
 }
 
 export default MasterScheduleView;
+
+//                 return <UpComing name={name} />;

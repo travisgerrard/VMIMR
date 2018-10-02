@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Query, Mutation } from 'react-apollo';
+import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
-import { Loader } from 'semantic-ui-react';
 import { stateFromMarkdown } from 'draft-js-import-markdown';
 import { stateToMarkdown } from 'draft-js-export-markdown';
 import { EditorState } from 'draft-js';
@@ -156,187 +155,130 @@ class NoonConference extends Component {
   };
 
   componentDidMount = () => {
-    if (this.props.viewOnly) {
-      if (this.state.initialUpdate) {
-        // set initial state with value from mutation
-        this.setInitalState(this.props.presentationData);
-      }
-    }
+    // set initial state
+    this.setInitalState(this.props.presentationData);
   };
 
   render() {
-    if (this.props.viewOnly) {
-      return (
-        <NoonConferenceInput
-          updateConferenceInputState={(name, value) =>
-            this.updateConferenceInputState(name, value)
-          }
-          editorState3={this.state.hpi}
-          editorState2={this.state.ros}
-          editorState4={this.state.pmh}
-          editorState={this.state.physicalExam}
-          ddx={this.state.ddx}
-          ddxValue={this.state.ddxValue}
-          imaging={this.state.imaging}
-          summAssessment={this.state.summAssessment}
-          wbc={this.state.wbc}
-          hgb={this.state.hgb}
-          plt={this.state.plt}
-          Na={this.state.Na}
-          K={this.state.K}
-          Cl={this.state.Cl}
-          HC02={this.state.HC02}
-          BUN={this.state.BUN}
-          Cr={this.state.Cr}
-          Glu={this.state.Glu}
-          AP={this.state.AP}
-          ALT={this.state.ALT}
-          AST={this.state.AST}
-          Tbili={this.state.Tbili}
-          additionalLabs={this.state.additionalLabs}
-        />
-      );
-    } else {
-      return (
-        <div>
-          <Query
-            query={SELECTED_CASE_PRESENTATIONS}
-            variables={{ id: this.props.match.params.id }}
-          >
-            {({ loading, error, data }) => {
-              if (loading) return <Loader active inline="centered" />;
-              if (error) return `Error! ${error.message}`;
+    const { presentationData } = this.props;
 
-              const { selectedCasePresentation } = data;
+    // set initial state with value from mutation
 
-              // set initial state with value from mutation
-              if (this.state.initialUpdate) {
-                this.setInitalState(selectedCasePresentation);
-              }
+    const questionsForConference = presentationData.questions;
+    const conferenceId = presentationData.id;
 
-              const questionsForConference = selectedCasePresentation.questions;
-              const conferenceId = selectedCasePresentation.id;
-              return (
-                <Mutation
-                  mutation={UPDATE_CASE_PRESENTATION}
-                  refetchQueries={[
-                    {
-                      query: SELECTED_CASE_PRESENTATIONS,
-                      variables: { id: conferenceId },
-                    },
-                  ]}
-                  onCompleted={() => this.props.history.push('/Conference')}
-                >
-                  {updateCasePresentation => (
-                    <div>
-                      <PresentationType
-                        updateConferenceInputState={(name, value) =>
-                          this.updateConferenceInputState(name, value)
-                        }
-                        presentationType={this.state.presentationType}
+    return (
+      <div>
+        <Mutation
+          mutation={UPDATE_CASE_PRESENTATION}
+          refetchQueries={[
+            {
+              query: SELECTED_CASE_PRESENTATIONS,
+              variables: { id: conferenceId },
+            },
+          ]}
+          onCompleted={() => this.props.history.push('/Conference')}
+        >
+          {updateCasePresentation => (
+            <div>
+              <PresentationType
+                updateConferenceInputState={(name, value) =>
+                  this.updateConferenceInputState(name, value)
+                }
+                presentationType={this.state.presentationType}
+              />
+              {this.state.presentationType === 'case' && (
+                <NoonConferenceInput
+                  updateConferenceInputState={(name, value) =>
+                    this.updateConferenceInputState(name, value)
+                  }
+                  editorState3={this.state.hpi}
+                  editorState2={this.state.ros}
+                  editorState4={this.state.pmh}
+                  editorState={this.state.physicalExam}
+                  ddx={this.state.ddx}
+                  ddxValue={this.state.ddxValue}
+                  imaging={this.state.imaging}
+                  summAssessment={this.state.summAssessment}
+                  wbc={this.state.wbc}
+                  hgb={this.state.hgb}
+                  plt={this.state.plt}
+                  Na={this.state.Na}
+                  K={this.state.K}
+                  Cl={this.state.Cl}
+                  HC02={this.state.HC02}
+                  BUN={this.state.BUN}
+                  Cr={this.state.Cr}
+                  Glu={this.state.Glu}
+                  AP={this.state.AP}
+                  ALT={this.state.ALT}
+                  AST={this.state.AST}
+                  Tbili={this.state.Tbili}
+                  additionalLabs={this.state.additionalLabs}
+                />
+              )}
+              <Mutation
+                mutation={ADD_QUESTION}
+                refetchQueries={[
+                  {
+                    query: SELECTED_CASE_PRESENTATIONS,
+                    variables: { id: conferenceId },
+                  },
+                ]}
+              >
+                {addQuestionToCase => (
+                  <Mutation
+                    mutation={DeleteQuestion}
+                    refetchQueries={[
+                      {
+                        query: SELECTED_CASE_PRESENTATIONS,
+                        variables: { id: conferenceId },
+                      },
+                    ]}
+                  >
+                    {deleteQuestion => (
+                      <Questions
+                        questions={questionsForConference}
+                        caseId={conferenceId}
+                        abilityToEdit={true}
+                        addQuestionToCase={addQuestionToCase}
+                        deleteQuestion={deleteQuestion}
                       />
-                      {this.state.presentationType === 'case' && (
-                        <NoonConferenceInput
-                          updateConferenceInputState={(name, value) =>
-                            this.updateConferenceInputState(name, value)
-                          }
-                          editorState3={this.state.hpi}
-                          editorState2={this.state.ros}
-                          editorState4={this.state.pmh}
-                          editorState={this.state.physicalExam}
-                          ddx={this.state.ddx}
-                          ddxValue={this.state.ddxValue}
-                          imaging={this.state.imaging}
-                          summAssessment={this.state.summAssessment}
-                          wbc={this.state.wbc}
-                          hgb={this.state.hgb}
-                          plt={this.state.plt}
-                          Na={this.state.Na}
-                          K={this.state.K}
-                          Cl={this.state.Cl}
-                          HC02={this.state.HC02}
-                          BUN={this.state.BUN}
-                          Cr={this.state.Cr}
-                          Glu={this.state.Glu}
-                          AP={this.state.AP}
-                          ALT={this.state.ALT}
-                          AST={this.state.AST}
-                          Tbili={this.state.Tbili}
-                          additionalLabs={this.state.additionalLabs}
-                        />
-                      )}
-                      <Mutation
-                        mutation={ADD_QUESTION}
-                        refetchQueries={[
-                          {
-                            query: SELECTED_CASE_PRESENTATIONS,
-                            variables: { id: conferenceId },
-                          },
-                        ]}
-                      >
-                        {addQuestionToCase => (
-                          <Mutation
-                            mutation={DeleteQuestion}
-                            refetchQueries={[
-                              {
-                                query: SELECTED_CASE_PRESENTATIONS,
-                                variables: { id: conferenceId },
-                              },
-                            ]}
-                          >
-                            {deleteQuestion => (
-                              <Questions
-                                questions={questionsForConference}
-                                caseId={conferenceId}
-                                abilityToEdit={true}
-                                addQuestionToCase={addQuestionToCase}
-                                deleteQuestion={deleteQuestion}
-                              />
-                            )}
-                          </Mutation>
-                        )}
-                      </Mutation>
-                      <Slides
-                        embedPresentationSting={
-                          this.state.embedPresentationSting
-                        }
-                        updateConferenceInputState={(name, value) =>
-                          this.updateConferenceInputState(name, value)
-                        }
-                        slideTextForSearch={this.state.slideTextForSearch}
-                      />
+                    )}
+                  </Mutation>
+                )}
+              </Mutation>
+              <Slides
+                embedPresentationSting={this.state.embedPresentationSting}
+                updateConferenceInputState={(name, value) =>
+                  this.updateConferenceInputState(name, value)
+                }
+                slideTextForSearch={this.state.slideTextForSearch}
+              />
 
-                      <Mutation
-                        mutation={DELETE_CASE_PRESENTATION}
-                        onCompleted={() => this.props.history.goBack()}
-                      >
-                        {deleteConference => (
-                          <CatagorizationForSaving
-                            updateConferenceInputState={(name, value) =>
-                              this.updateConferenceInputState(name, value)
-                            }
-                            _presentor={this.state._presentor}
-                            title={this.state.title}
-                            presentationDate={this.state.presentationDate}
-                            tags={this.state.tags}
-                            saveClicked={() =>
-                              this.saveClicked(updateCasePresentation)
-                            }
-                            deleteClicked={() =>
-                              this.deleteClicked(deleteConference)
-                            }
-                          />
-                        )}
-                      </Mutation>
-                    </div>
-                  )}
-                </Mutation>
-              );
-            }}
-          </Query>
-        </div>
-      );
-    }
+              <Mutation
+                mutation={DELETE_CASE_PRESENTATION}
+                onCompleted={() => this.props.history.goBack()}
+              >
+                {deleteConference => (
+                  <CatagorizationForSaving
+                    updateConferenceInputState={(name, value) =>
+                      this.updateConferenceInputState(name, value)
+                    }
+                    _presentor={this.state._presentor}
+                    title={this.state.title}
+                    presentationDate={this.state.presentationDate}
+                    tags={this.state.tags}
+                    saveClicked={() => this.saveClicked(updateCasePresentation)}
+                    deleteClicked={() => this.deleteClicked(deleteConference)}
+                  />
+                )}
+              </Mutation>
+            </div>
+          )}
+        </Mutation>
+      </div>
+    );
   }
 }
 

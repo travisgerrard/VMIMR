@@ -40,7 +40,6 @@ class InstagramInset extends Component {
         {({ loading, error, data }) => {
           if (loading) return 'Loading...';
           if (error) return `Error! ${error.message}`;
-          console.log(data);
           const { pictureURL } = data;
 
           return (

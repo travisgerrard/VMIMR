@@ -1,12 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { Query, Mutation } from 'react-apollo';
+import { Query } from 'react-apollo';
 import _ from 'lodash';
-import { admin, id } from '../Utils';
-import moment from 'moment';
-import { Button, Loader, Container, Input } from 'semantic-ui-react';
+import { Loader, Container, Input } from 'semantic-ui-react';
 
 import SortConferenceCards from './SortConferenceCards';
-import ADD_CASE_PRESENTATION from '../../mutations/AddCasePresentation';
 import LIST_ALL_CASE_PRESENTATIONS from '../../queries/ListOfAllCasePresentations';
 
 import NoonConferenceView from './NoonConferenceView';
