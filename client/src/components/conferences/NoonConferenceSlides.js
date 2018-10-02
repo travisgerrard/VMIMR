@@ -36,20 +36,6 @@ class NoonConferenceSlides extends Component {
               }
             />
           </Form>
-          <label
-            style={{ marginTop: 20 }}
-          >{`Text for search (copided from slideshare) `}</label>
-          <Form>
-            <Form.TextArea
-              value={this.props.slideTextForSearch}
-              onChange={e =>
-                this.props.updateConferenceInputState(
-                  'slideTextForSearch',
-                  e.target.value,
-                )
-              }
-            />
-          </Form>
         </Segment>
       </Container>
     );

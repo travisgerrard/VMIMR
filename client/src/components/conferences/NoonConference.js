@@ -123,42 +123,49 @@ class NoonConference extends Component {
     });
   };
 
+  setInitalState = data => {
+    _.forOwn(
+      data,
+      function(value, key) {
+        if (value !== null) {
+          //console.log(key, value);
+          if (
+            key === 'physicalExam' ||
+            key === 'ros' ||
+            key === 'hpi' ||
+            key === 'pmh'
+          ) {
+            this.setState({
+              [key]: EditorState.createWithContent(stateFromMarkdown(value)),
+            });
+          } else if (key === 'ddx') {
+            this.setState({
+              [key]: value.map(name => {
+                return { name, struckThrough: false };
+              }),
+            });
+          } else if (key === '_presentor') {
+            this.setState({ _presentor: value.id });
+          } else {
+            this.setState({ [key]: value });
+          }
+        }
+      }.bind(this),
+    );
+    this.setState({ initialUpdate: false });
+  };
+
+  componentDidMount = () => {
+    if (this.props.viewOnly) {
+      if (this.state.initialUpdate) {
+        // set initial state with value from mutation
+        this.setInitalState(this.props.presentationData);
+      }
+    }
+  };
+
   render() {
     if (this.props.viewOnly) {
-      // set initial state with value from mutation
-      if (this.state.initialUpdate) {
-        _.forOwn(
-          this.props.presentationData,
-          function(value, key) {
-            if (value !== null) {
-              //console.log(key, value);
-              if (
-                key === 'physicalExam' ||
-                key === 'ros' ||
-                key === 'hpi' ||
-                key === 'pmh'
-              ) {
-                this.setState({
-                  [key]: EditorState.createWithContent(
-                    stateFromMarkdown(value),
-                  ),
-                });
-              } else if (key === 'ddx') {
-                this.setState({
-                  [key]: value.map(name => {
-                    return { name, struckThrough: false };
-                  }),
-                });
-              } else if (key === '_presentor') {
-                this.setState({ _presentor: value.id });
-              } else {
-                this.setState({ [key]: value });
-              }
-            }
-          }.bind(this),
-        );
-        this.setState({ initialUpdate: false });
-      }
       return (
         <NoonConferenceInput
           updateConferenceInputState={(name, value) =>
@@ -200,44 +207,15 @@ class NoonConference extends Component {
               if (loading) return <Loader active inline="centered" />;
               if (error) return `Error! ${error.message}`;
 
+              const { selectedCasePresentation } = data;
+
               // set initial state with value from mutation
               if (this.state.initialUpdate) {
-                _.forOwn(
-                  data.selectedCasePresentation,
-                  function(value, key) {
-                    if (value !== null) {
-                      //console.log(key, value);
-                      if (
-                        key === 'physicalExam' ||
-                        key === 'ros' ||
-                        key === 'hpi' ||
-                        key === 'pmh'
-                      ) {
-                        this.setState({
-                          [key]: EditorState.createWithContent(
-                            stateFromMarkdown(value),
-                          ),
-                        });
-                      } else if (key === 'ddx') {
-                        this.setState({
-                          [key]: value.map(name => {
-                            return { name, struckThrough: false };
-                          }),
-                        });
-                      } else if (key === '_presentor') {
-                        this.setState({ _presentor: value.id });
-                      } else {
-                        this.setState({ [key]: value });
-                      }
-                    }
-                  }.bind(this),
-                );
-                this.setState({ initialUpdate: false });
+                this.setInitalState(selectedCasePresentation);
               }
 
-              const questionsForConference =
-                data.selectedCasePresentation.questions;
-              const conferenceId = data.selectedCasePresentation.id;
+              const questionsForConference = selectedCasePresentation.questions;
+              const conferenceId = selectedCasePresentation.id;
               return (
                 <Mutation
                   mutation={UPDATE_CASE_PRESENTATION}
